@@ -1,0 +1,61 @@
+name: AppFlowy
+version: "0.9.64-1"
+slug: appflowy
+description: >-
+  Vollständig selbst-gehostetes AppFlowy (Notizen & Team-Workspace) inklusive
+  eigener Postgres/pgvector-Datenbank, Redis, MinIO-Objektspeicher, GoTrue-Login
+  und AppFlowy Web. Kein weiteres Add-on nötig.
+url: https://github.com/AppFlowy-IO/AppFlowy
+arch:
+  - amd64
+  - aarch64
+startup: services
+boot: auto
+init: false
+hassio_api: false
+homeassistant_api: false
+host_network: false
+ingress: false
+webui: "http://[HOST]:[PORT:8099]/"
+ports:
+  8099/tcp: 8099
+ports_description:
+  8099/tcp: "AppFlowy Web / API / Admin-Konsole (/console)"
+options:
+  fqdn: ""
+  scheme: http
+  admin_email: "admin@example.com"
+  admin_password: ""
+  enable_signup: true
+  smtp_host: ""
+  smtp_port: 465
+  smtp_user: ""
+  smtp_password: ""
+  smtp_tls_kind: wrapper
+  smtp_admin_email: ""
+  oauth_google_enabled: false
+  oauth_google_client_id: ""
+  oauth_google_client_secret: ""
+  oauth_github_enabled: false
+  oauth_github_client_id: ""
+  oauth_github_client_secret: ""
+  log_level: info
+schema:
+  fqdn: str
+  scheme: list(http|https)
+  admin_email: str
+  admin_password: password
+  enable_signup: bool
+  smtp_host: str?
+  smtp_port: port?
+  smtp_user: str?
+  smtp_password: password?
+  smtp_tls_kind: list(wrapper|opportunistic)
+  smtp_admin_email: str?
+  oauth_google_enabled: bool
+  oauth_google_client_id: str?
+  oauth_google_client_secret: password?
+  oauth_github_enabled: bool
+  oauth_github_client_id: str?
+  oauth_github_client_secret: password?
+  log_level: list(error|warn|info|debug|trace)

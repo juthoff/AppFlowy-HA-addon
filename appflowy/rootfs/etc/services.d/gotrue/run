@@ -1,0 +1,34 @@
+#!/bin/bash
+source /etc/appflowy/env
+cd /opt/appflowy/gotrue || exit 1
+
+echo "[gotrue] waiting for postgres..."
+until PGPASSWORD="${POSTGRES_PASSWORD}" psql -h 127.0.0.1 -U postgres -d postgres -c 'select 1' >/dev/null 2>&1; do
+    sleep 1
+done
+
+export PORT=9999
+export GOTRUE_DB_DRIVER=postgres
+export DATABASE_URL="postgres://postgres:${POSTGRES_PASSWORD}@127.0.0.1:5432/postgres?search_path=auth"
+export GOTRUE_DB_MIGRATIONS_PATH="/opt/appflowy/gotrue/migrations"
+export API_EXTERNAL_URL="${APPFLOWY_BASE_URL}/gotrue"
+export GOTRUE_JWT_ADMIN_GROUP_NAME=supabase_admin
+export GOTRUE_SITE_URL="appflowy-flutter://"
+export GOTRUE_URI_ALLOW_LIST="**"
+export GOTRUE_RATE_LIMIT_EMAIL_SENT="${GOTRUE_RATE_LIMIT_EMAIL_SENT:-100}"
+export GOTRUE_MAILER_URLPATHS_CONFIRMATION=/gotrue/verify
+export GOTRUE_MAILER_URLPATHS_INVITE=/gotrue/verify
+export GOTRUE_MAILER_URLPATHS_RECOVERY=/gotrue/verify
+export GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE=/gotrue/verify
+
+echo "[gotrue] running migrations..."
+s6-setuidgid appflowy ./auth migrate
+
+if [ -n "${GOTRUE_ADMIN_EMAIL}" ] && [ -n "${GOTRUE_ADMIN_PASSWORD}" ]; then
+    echo "[gotrue] ensuring admin user ${GOTRUE_ADMIN_EMAIL} exists..."
+    OUT="$(s6-setuidgid appflowy ./auth admin createuser --admin --confirm "${GOTRUE_ADMIN_EMAIL}" "${GOTRUE_ADMIN_PASSWORD}" 2>&1)" || {
+        echo "$OUT" | grep -qi "already exists" || echo "[gotrue] createuser: $OUT"
+    }
+fi
+
+exec s6-setuidgid appflowy ./auth

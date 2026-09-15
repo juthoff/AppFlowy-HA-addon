@@ -1,0 +1,15 @@
+#!/bin/bash
+source /etc/appflowy/env
+
+echo "[appflowy_cloud] waiting for gotrue..."
+until curl -fsS "http://127.0.0.1:9999/health" >/dev/null 2>&1; do sleep 1; done
+echo "[appflowy_cloud] waiting for minio..."
+until curl -fsS "http://127.0.0.1:9000/minio/health/live" >/dev/null 2>&1; do sleep 1; done
+
+VENDOR=/opt/appflowy/vendor/appflowy_cloud
+export LD_LIBRARY_PATH="${VENDOR}/lib/lib:${VENDOR}/lib/usr-lib:${VENDOR}/lib/usr-lib/$(uname -m)-linux-gnu"
+export SSL_CERT_DIR="${VENDOR}/lib/ssl-certs"
+export PORT=8000
+
+exec s6-setuidgid appflowy env LD_LIBRARY_PATH="$LD_LIBRARY_PATH" SSL_CERT_DIR="$SSL_CERT_DIR" PORT="$PORT" \
+    "${VENDOR}/bin/appflowy_cloud"

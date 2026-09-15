@@ -1,0 +1,13 @@
+#!/bin/bash
+source /etc/appflowy/env
+export MINIO_ROOT_USER="${APPFLOWY_S3_ACCESS_KEY}"
+export MINIO_ROOT_PASSWORD="${APPFLOWY_S3_SECRET_KEY}"
+export MINIO_BROWSER_REDIRECT_URL="${APPFLOWY_BASE_URL}/minio"
+# /data is a Home Assistant-provided bind mount, so it's whatever is on the
+# host - never pre-populated from the image - and needs its subdirectory
+# created here at every start, not just assumed to exist.
+mkdir -p /data/minio
+chown appflowy:appflowy /data/minio
+exec s6-setuidgid appflowy minio server /data/minio \
+    --address 127.0.0.1:9000 \
+    --console-address 127.0.0.1:9001

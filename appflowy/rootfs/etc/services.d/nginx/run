@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "[nginx] waiting for backend services..."
+until curl -fsS "http://127.0.0.1:8000/health" >/dev/null 2>&1; do sleep 1; done
+until curl -fsS "http://127.0.0.1:9999/health" >/dev/null 2>&1; do sleep 1; done
+# admin_frontend has no bare "/" or "/health" route (404); it only serves
+# under its /console path prefix, where it responds with a 308 redirect.
+until curl -fsS "http://127.0.0.1:3000/console" >/dev/null 2>&1; do sleep 1; done
+
+exec nginx -g "daemon off;"

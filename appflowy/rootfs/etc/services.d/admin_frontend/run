@@ -1,0 +1,14 @@
+#!/bin/bash
+source /etc/appflowy/env
+
+echo "[admin_frontend] waiting for gotrue and appflowy_cloud..."
+until curl -fsS "http://127.0.0.1:9999/health" >/dev/null 2>&1; do sleep 1; done
+until curl -fsS "http://127.0.0.1:8000/health" >/dev/null 2>&1; do sleep 1; done
+
+VENDOR=/opt/appflowy/vendor/admin_frontend
+export LD_LIBRARY_PATH="${VENDOR}/lib/lib:${VENDOR}/lib/usr-lib:${VENDOR}/lib/usr-lib/$(uname -m)-linux-gnu"
+export PORT=3000
+cd "${VENDOR}" || exit 1
+
+exec s6-setuidgid appflowy env LD_LIBRARY_PATH="$LD_LIBRARY_PATH" PORT="$PORT" \
+    "${VENDOR}/bin/admin_frontend"

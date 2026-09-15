@@ -1,0 +1,11 @@
+build_from:
+  amd64: debian:bookworm-slim
+  aarch64: debian:bookworm-slim
+args:
+  APPFLOWY_WEB_REF: v0.1.18
+  GOTRUE_REF: "0.8.0"
+labels:
+  org.opencontainers.image.title: AppFlowy
+  org.opencontainers.image.description: "Self-hosted AppFlowy (last AGPL-3.0 release, 0.9.64)"
+  org.opencontainers.image.licenses: AGPL-3.0
+  org.opencontainers.image.source: https://github.com/AppFlowy-IO/AppFlowy-Cloud/tree/0.9.64

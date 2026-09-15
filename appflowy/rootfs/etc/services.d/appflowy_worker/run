@@ -1,0 +1,18 @@
+#!/bin/bash
+source /etc/appflowy/env
+
+echo "[appflowy_worker] waiting for postgres..."
+until PGPASSWORD="${POSTGRES_PASSWORD}" psql -h 127.0.0.1 -U postgres -d postgres -c 'select 1' >/dev/null 2>&1; do
+    sleep 1
+done
+echo "[appflowy_worker] waiting for minio..."
+until curl -fsS "http://127.0.0.1:9000/minio/health/live" >/dev/null 2>&1; do sleep 1; done
+
+VENDOR=/opt/appflowy/vendor/appflowy_worker
+export LD_LIBRARY_PATH="${VENDOR}/lib/lib:${VENDOR}/lib/usr-lib:${VENDOR}/lib/usr-lib/$(uname -m)-linux-gnu"
+export SSL_CERT_DIR="${VENDOR}/lib/ssl-certs"
+export APPFLOWY_WORKER_ENVIRONMENT=production
+export APPFLOWY_WORKER_IMPORT_TICK_INTERVAL=30
+
+exec s6-setuidgid appflowy env LD_LIBRARY_PATH="$LD_LIBRARY_PATH" SSL_CERT_DIR="$SSL_CERT_DIR" \
+    "${VENDOR}/bin/appflowy_worker"

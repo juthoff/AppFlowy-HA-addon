@@ -1,0 +1,5 @@
+#!/bin/bash
+PGBIN="$(pg_config --bindir 2>/dev/null || echo /usr/lib/postgresql/16/bin)"
+exec s6-setuidgid postgres "${PGBIN}/postgres" -D /data/postgres \
+    -c listen_addresses=127.0.0.1 \
+    -c unix_socket_directories=/run/postgresql
