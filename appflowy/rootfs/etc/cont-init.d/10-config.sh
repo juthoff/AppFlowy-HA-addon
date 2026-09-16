@@ -128,6 +128,14 @@ export APPFLOWY_WEB_URL="${BASE_URL}"
 export APPFLOWY_ENVIRONMENT="production"
 export RUST_LOG="${LOG_LEVEL}"
 export RUST_BACKTRACE="1"
+# Upstream default (60) opens 60 real Redis connections + threads for the
+# stream router - way oversized for a home/LAN deployment with a handful of
+# users on Pi-class hardware.
+export APPFLOWY_REDIS_WORKERS="4"
+# No AI provider key is configured by this add-on, so the indexer does
+# nothing useful anyway - but it still allocates buffers/threads on every
+# new collab document (e.g. during workspace creation) unless disabled.
+export APPFLOWY_INDEXER_ENABLED="false"
 
 export ADMIN_FRONTEND_REDIS_URL="redis://127.0.0.1:6379"
 export ADMIN_FRONTEND_GOTRUE_URL="http://127.0.0.1:9999"

@@ -84,3 +84,56 @@
   --maxmemory-policy allkeys-lru` (`rootfs/etc/services.d/redis/run`), und
   `APPFLOWY_DATABASE_MAX_CONNECTIONS` von 40 auf 15 gesenkt (`rootfs/etc/cont-init.d/10-config.sh`),
   passend für den typischen Heimnetz-Einsatz mit wenigen Nutzern.
+
+## 0.9.64-4
+
+- Nachfolge-Fix zu 0.9.64-3: Nach der dortigen Speicher-Anpassung trat der Absturz beim ersten
+  Login eines Kontos (egal ob Admin- oder neu angelegtes Konto, auf einer frisch initialisierten
+  Datenbank) weiterhin **jedes Mal** exakt an derselben Stelle auf - direkt nach dem Anlegen der
+  Nutzerrolle in `verify_token` (`src/biz/user/user_verify.rs`, Quellcode-Verifikation Tag
+  `0.9.64`), während appflowy_cloud im Anschluss die "Getting Started"-Vorlage für den neuen
+  Workspace anlegt (`initialize_workspace_for_user`). Anhand eines vollständigen, vom Nutzer
+  bereitgestellten Logs vom Container-Start bis zum Fehler ließ sich das eingrenzen: Der erste
+  Datenbank-Transaktionsblock (Nutzer anlegen) committet nachweislich erfolgreich (ein erneuter
+  Login-Versuch überspringt "create new user" bereits), aber der zweite Block (Vorlagen-Inhalte
+  anlegen) wird nie fertig - appflowy_cloud stirbt dabei lautlos (kein Rust-Panic-Trace trotz
+  `RUST_BACKTRACE=1`, kein reguläres Shutdown-Log), `s6` startet den Dienst neu. Ob Ursache
+  weiterhin Speicherdruck ist oder ein architekturspezifischer (aarch64) Absturz in der
+  CRDT-Kodierung, ließ sich aus dem Log allein nicht abschließend klären - das wird mit dem
+  Nutzer anhand des Arbeitsspeicher-Graphen (Einstellungen → System → Hardware) und der
+  Host-System-Logs weiter untersucht.
+- In der Zwischenzeit weitere, unabhängig von der Ursache sinnvolle Ressourcen-Reduktion in
+  `rootfs/etc/cont-init.d/10-config.sh`: appflowy_cloud öffnet für seinen Redis-Stream-Router
+  standardmäßig **60** eigene Redis-Verbindungen samt Threads (`APPFLOWY_REDIS_WORKERS`,
+  Quellcode-Verifikation in `src/config/config.rs`, Tag `0.9.64`) - für einen
+  Heimnetz-Einsatz mit wenigen Nutzern deutlich überdimensioniert, jetzt auf `4` gesenkt.
+  Außerdem wird der KI-Indexer (`APPFLOWY_INDEXER_ENABLED`) jetzt explizit deaktiviert, da
+  dieses Add-on ohnehin keinen OpenAI-/Azure-Schlüssel konfiguriert und der Indexer damit
+  wirkungslos ist, aber weiterhin bei jedem neuen Collab-Dokument Puffer/Threads reserviert.
+
+## 0.9.64-5
+
+- **Tatsächliche Ursache gefunden und behoben** für den in 0.9.64-3/-4 beschriebenen Absturz
+  beim ersten Login eines Kontos: Es war nie Speicherdruck. Der Nutzer bestätigte anhand des
+  Arbeitsspeicher-Verlaufs (Einstellungen → System → Hardware) und der Host-System-Logs, dass
+  weder eine Speicherspitze noch eine OOM-Meldung zum Absturzzeitpunkt auftrat. Recherche in
+  den (weiterhin lesbaren) GitHub-Issues des archivierten AppFlowy-Cloud-Repos ergab eine exakte
+  Übereinstimmung: [Issue #1623](https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623)
+  beschreibt denselben Absturz (Exit-Code 132 = SIGILL/"illegal instruction", kein Rust-Panic,
+  kein sauberes Shutdown-Log) beim Datei-Upload auf einem Raspberry Pi - Ursache: Das
+  appflowy_cloud-Release-Binary wurde mit CPU-Krypto-/AES-/SHA-Erweiterungen kompiliert, die der
+  jeweilige ARM-Kern nicht unterstützt; sobald Code diesen Instruktionspfad ausführt (bei uns:
+  jeder Datei- bzw. Collab-Upload zu MinIO über den appflowy_cloud/appflowy_worker-eigenen
+  `aws-sdk-s3`-Client, z.B. beim Anlegen der "Getting Started"-Vorlage für einen neuen
+  Account), stürzt der Prozess sofort und lautlos ab.
+- Fix: `appflowy_cloud` und `appflowy_worker` werden für `arm64` jetzt **aus dem Quellcode**
+  gebaut (Tag `0.9.64`, AGPL-3.0, exakt nach dem Build-Rezept aus AppFlowy-Clouds eigenem
+  Dockerfile: `cargo build --release`, `SQLX_OFFLINE=true`, `protobuf-compiler`/`lld`/`clang`),
+  statt wie bisher das vorgefertigte Docker-Hub-Image zu verwenden - mit
+  `RUSTFLAGS="-C target-feature=-crypto,-aes,-sha2,-sha3"` (der im Issue vorgeschlagene Fix), um
+  genau die CPU-Erweiterungen abzuschalten, die den Absturz auslösen. `amd64` ist von diesem
+  Problem nicht betroffen und bleibt beim vorgefertigten Image; `admin_frontend` nutzt den
+  betroffenen S3-Upload-Codepfad nicht und bleibt auf beiden Architekturen vorgefertigt.
+  Achtung: Da dieses Add-on ohne registrierten `image:`-Eintrag lokal auf dem Home-Assistant-Host
+  gebaut wird, läuft dieser Rust-Kompilierlauf jetzt beim Bauen/Aktualisieren direkt auf dem
+  Gerät selbst (z.B. dem Raspberry Pi) und dauert dadurch spürbar länger als zuvor.

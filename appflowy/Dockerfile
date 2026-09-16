@@ -4,12 +4,16 @@
 #
 # This packages the last AppFlowy-Cloud release published before the project
 # was relicensed to a commercial license (AppFlowy-IO/AppFlowy-Cloud, git tag
-# 0.9.64, released 2025-07-04, AGPL-3.0). appflowy_cloud / admin_frontend /
-# appflowy_worker are pulled from the exact, immutable Docker Hub digests of
-# that release (never touched since; verified via the Docker Hub API before
-# writing this file). gotrue and AppFlowy Web are rebuilt from source at the
-# matching upstream refs, because that is what the 0.9.64 docker-compose.yml
-# itself does. See NOTICE.md for the exact source of every component.
+# 0.9.64, released 2025-07-04, AGPL-3.0). On amd64, appflowy_cloud /
+# admin_frontend / appflowy_worker are pulled from the exact, immutable
+# Docker Hub digests of that release (never touched since; verified via the
+# Docker Hub API before writing this file). gotrue and AppFlowy Web are
+# rebuilt from source at the matching upstream refs, because that is what
+# the 0.9.64 docker-compose.yml itself does. On arm64, appflowy_cloud and
+# appflowy_worker are ALSO rebuilt from source (same tag/license), because
+# the prebuilt arm64 images crash on at least some Raspberry Pi CPUs - see
+# the comment above the appflowy-cloud-builder-arm64 stage below. See
+# NOTICE.md for the exact source of every component.
 ARG TARGETARCH
 
 # ---------------------------------------------------------------------------
@@ -43,13 +47,62 @@ RUN npm install -g pnpm@8.5.0 \
     && pnpm run build
 
 # ---------------------------------------------------------------------------
-# appflowy_cloud / admin_frontend / appflowy_worker: pinned upstream images
-# (exact digests of the appflowyinc/* images pushed together with the 0.9.64
-# release on 2025-07-04, i.e. before the relicense; Docker Hub confirms none
-# of these tags/digests were touched since)
+# appflowy_cloud / appflowy_worker on arm64: built from source (AGPL-3.0),
+# NOT the prebuilt image.
+#
+# The prebuilt aarch64 images SIGILL (exit code 132) on at least some
+# Raspberry Pi cores: they're compiled assuming CPU crypto/AES/SHA
+# extensions the Pi doesn't have, and the very first S3/MinIO upload (e.g.
+# creating a new account's default "Getting Started" workspace, or any file
+# upload) executes that instruction path and crashes the whole process -
+# confirmed against https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623
+# (same exit code, same "unsupported CPU instruction" diagnosis, same fix).
+# Disabling those extensions at compile time avoids it; amd64 has no such
+# instruction-set mismatch and keeps using the pinned prebuilt image below.
+# Build recipe replicated from AppFlowy-Cloud's own Dockerfile at this tag.
+# ---------------------------------------------------------------------------
+FROM rust:1.86-slim-bookworm AS appflowy-cloud-builder-arm64
+ARG APPFLOWY_CLOUD_REF="0.9.64"
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git ca-certificates pkg-config libssl-dev protobuf-compiler libprotobuf-dev lld clang \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+RUN git clone --depth 1 --branch ${APPFLOWY_CLOUD_REF} https://github.com/AppFlowy-IO/AppFlowy-Cloud.git .
+ENV SQLX_OFFLINE=true \
+    RUSTFLAGS="-C target-feature=-crypto,-aes,-sha2,-sha3"
+# appflowy_worker lives in a separate workspace member (services/appflowy-worker,
+# package name "appflowy-worker") - --workspace is required so cargo looks
+# across all members for both --bin targets, not just the root package.
+RUN cargo build --release --workspace --bin appflowy_cloud --bin appflowy_worker
+
+# Runtime shape matching the pinned prebuilt images exactly (both are built
+# from debian:bookworm-slim + openssl/ca-certificates/curl upstream), so the
+# COPY --from=..._src lines below keep working unchanged either way.
+FROM debian:bookworm-slim AS appflowy_cloud_arm64
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends openssl ca-certificates curl \
+    && update-ca-certificates \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=appflowy-cloud-builder-arm64 /app/target/release/appflowy_cloud /usr/local/bin/appflowy_cloud
+
+FROM debian:bookworm-slim AS appflowy_worker_arm64
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends openssl ca-certificates curl \
+    && update-ca-certificates \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=appflowy-cloud-builder-arm64 /app/target/release/appflowy_worker /usr/local/bin/appflowy_worker
+
+# ---------------------------------------------------------------------------
+# appflowy_cloud / admin_frontend / appflowy_worker on amd64: pinned upstream
+# images (exact digests of the appflowyinc/* images pushed together with the
+# 0.9.64 release on 2025-07-04, i.e. before the relicense; Docker Hub
+# confirms none of these tags/digests were touched since). admin_frontend
+# doesn't touch the S3 upload path that crashes on arm64, so it stays pinned
+# on both architectures.
 # ---------------------------------------------------------------------------
 FROM appflowyinc/appflowy_cloud@sha256:ded3da3a25fe7a76c28108adb9849b8aa0ce02b0da5898bc7dd58a09c00e5139 AS appflowy_cloud_amd64
-FROM appflowyinc/appflowy_cloud@sha256:0b0f11031b6787579148e3138f152485c12f8aba1c228cb5bbccde1a521e16d2 AS appflowy_cloud_arm64
 FROM appflowy_cloud_${TARGETARCH} AS appflowy_cloud_src
 
 FROM appflowyinc/admin_frontend@sha256:443d92faa034b002a1c71e6692245f7a3dcc352f55e4c6dcfdd4b1aa53eaf063 AS admin_frontend_amd64
@@ -57,7 +110,6 @@ FROM appflowyinc/admin_frontend@sha256:1e79dcf3efe6425228fef075afd7a11e344189da4
 FROM admin_frontend_${TARGETARCH} AS admin_frontend_src
 
 FROM appflowyinc/appflowy_worker@sha256:e9bcb9f712b2fb75318674fa874c0ef460d7b3b7487c99560f2b5ce5564991d2 AS appflowy_worker_amd64
-FROM appflowyinc/appflowy_worker@sha256:7986e875e4fc825c73de0bad7a58f464ae81019c6c6bdb2c3c0c5790df69b4f5 AS appflowy_worker_arm64
 FROM appflowy_worker_${TARGETARCH} AS appflowy_worker_src
 
 # ---------------------------------------------------------------------------
