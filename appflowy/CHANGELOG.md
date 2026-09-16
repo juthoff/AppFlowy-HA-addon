@@ -25,3 +25,28 @@
 - Build und Funktionstest (Docker, arm64) erfolgreich durchgeführt: alle Dienste starten
   fehlerfrei, `/`, `/console` (Redirect zu `/console/web/login`) und der GoTrue-Login
   (`/gotrue/token`) wurden verifiziert; Daten/Login überleben einen Container-Neustart.
+- Fix: appflowy_cloud parst `smtp_email` (Quellcode-Verifikation in `libs/mailer/src/sender.rs`,
+  Tag 0.9.64) direkt als Absenderadresse. Das Konfigurationsskript setzte dieses Feld bisher
+  fälschlich auf den SMTP-**Benutzernamen** statt auf eine echte Absenderadresse - bei
+  Anbietern mit einem nicht-E-Mail-förmigen SMTP-Benutzernamen (z.B. Resend, wo er zwingend
+  `resend` sein muss) schlug das Adress-Parsing fehl und E-Mail-Einladungen scheiterten. Nutzt
+  jetzt korrekt `smtp_admin_email` als Absenderadresse (wie von GoTrue an anderer Stelle
+  bereits gehandhabt).
+- `smtp_host` ist jetzt standardmäßig auf `smtp.resend.com` vorbelegt (Port 465/`wrapper`
+  passten als Default bereits). [Resend](https://resend.com) wurde als empfohlener
+  SMTP-Anbieter recherchiert: Signup verlangt nur eine E-Mail-Adresse, keine weiteren
+  persönlichen Daten oder Kreditkarte. API-Key und Absenderadresse (`smtp_admin_email`,
+  Domain muss bei Resend verifiziert sein) müssen weiterhin individuell in der
+  Add-on-Konfiguration eingetragen werden - sie sind bewusst **nicht** vorbelegt und landen
+  nicht im Repository.
+- Fix: Das Add-on war nur über `http://localhost:8099` nutzbar, nicht aber von anderen
+  Geräten im Netzwerk (z.B. über die Host-IP, wie es beim regulären Betrieb unter Home
+  Assistant der Normalfall ist) - die Seite lud zwar, Login/Admin-Konsole schlugen aber
+  fehl. Ursache: GoTrue (Quellcode-Verifikation in `internal/api/token.go`, Tag `0.8.0`)
+  setzt seine Session-Cookies fest verdrahtet mit dem `Secure`-Attribut. Browser
+  akzeptieren `Secure`-Cookies nur über eine als vertrauenswürdig geltende Verbindung;
+  `http://localhost` ist dafür eine Sonderausnahme, jede andere Adresse über reines HTTP
+  (LAN-IP, Hostname) nicht - und das Add-on spricht bewusst nie selbst HTTPS. Das
+  `Secure`-Attribut wird beim Bauen von GoTrue jetzt per `sed`-Patch entfernt (analog zum
+  bereits bestehenden Quellcode-Patch für AppFlowy Web im Dockerfile); ein Cookie ohne
+  `Secure` funktioniert unverändert auch hinter einem eigenen HTTPS-Reverse-Proxy.

@@ -27,7 +27,7 @@ options:
   admin_email: "admin@example.com"
   admin_password: ""
   enable_signup: true
-  smtp_host: ""
+  smtp_host: "smtp.resend.com"
   smtp_port: 465
   smtp_user: ""
   smtp_password: ""

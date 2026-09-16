@@ -19,7 +19,14 @@ FROM golang:1.22-alpine AS gotrue-builder
 ARG GOTRUE_REF="0.8.0"
 RUN apk add --no-cache git
 WORKDIR /go/src/supabase/auth
+# gotrue hardcodes the `Secure` flag on its session cookies (internal/api/token.go,
+# setCookieToken/clearCookieToken) with no config knob to disable it. This add-on never
+# terminates TLS itself, so any browser that isn't on "localhost" (e.g. any other device
+# on the LAN, reached via the host IP over plain HTTP) silently drops the cookie, breaking
+# login. A non-Secure cookie works fine over both HTTP and a user's own HTTPS-terminating
+# reverse proxy, so it's safe to disable unconditionally.
 RUN git clone --depth 1 --branch ${GOTRUE_REF} https://github.com/AppFlowy-IO/auth.git . \
+    && sed -i 's/Secure:   true,/Secure:   false,/' internal/api/token.go \
     && CGO_ENABLED=0 go build -o /out/auth .
 RUN cp -r /go/src/supabase/auth/migrations /out/migrations
 

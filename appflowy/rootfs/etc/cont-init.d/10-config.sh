@@ -97,7 +97,10 @@ export GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI="${BASE_URL}/gotrue/callback"
 export APPFLOWY_MAILER_SMTP_HOST="${SMTP_HOST}"
 export APPFLOWY_MAILER_SMTP_PORT="${SMTP_PORT}"
 export APPFLOWY_MAILER_SMTP_USERNAME="${SMTP_USER}"
-export APPFLOWY_MAILER_SMTP_EMAIL="${SMTP_USER}"
+# The "From:" address, not the SMTP auth username - some providers (e.g.
+# Resend) require a fixed, non-email SMTP username ("resend"), which would
+# fail to parse as a mailbox address if used here instead.
+export APPFLOWY_MAILER_SMTP_EMAIL="${SMTP_ADMIN_EMAIL}"
 export APPFLOWY_MAILER_SMTP_PASSWORD="${SMTP_PASSWORD}"
 export APPFLOWY_MAILER_SMTP_TLS_KIND="${SMTP_TLS_KIND}"
 

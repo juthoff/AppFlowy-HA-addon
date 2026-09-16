@@ -39,7 +39,7 @@ Echtzeit-Zusammenarbeit, Freigaben/Publish, Team-Workspaces, Import) ist vorhand
 | `scheme` | `http` oder `https` – **nur** relevant, wenn ein eigener Reverse Proxy mit TLS davorsteht. Das Add-on selbst spricht immer HTTP. |
 | `admin_email` / `admin_password` | Erstes Admin-Konto (Login über die Admin-Konsole oder die AppFlowy-App). |
 | `enable_signup` | Ob sich neue Nutzer selbst registrieren können. |
-| `smtp_*` | Optional – ohne SMTP funktioniert alles außer "Magic Link"-Login und E-Mail-Einladungen; Nutzer/Einladungen lassen sich dann nur über die Admin-Konsole verwalten. |
+| `smtp_*` | Optional – ohne SMTP funktioniert alles außer "Magic Link"-Login und E-Mail-Einladungen; Nutzer/Einladungen lassen sich dann nur über die Admin-Konsole verwalten. `smtp_host` ist bereits auf [Resend](https://resend.com) vorbelegt (kostenloser Plan, Signup nur mit E-Mail-Adresse, keine weiteren persönlichen Daten nötig); dort einen API-Key erzeugen und als `smtp_password` eintragen. **Wichtig:** `smtp_user` muss bei Resend wörtlich `resend` sein (keine E-Mail-Adresse) – die tatsächliche Absenderadresse wird über `smtp_admin_email` gesetzt, die zu einer in Resend verifizierten Domain gehören muss (ohne eigene Domain nur `onboarding@resend.dev`, sendet dann nur an die eigene Resend-Konto-Adresse). |
 | `oauth_google_*` / `oauth_github_*` | Optionaler Login über Google/GitHub. |
 | `log_level` | Rust-Log-Level der Kernel-Dienste. |
 
@@ -55,6 +55,14 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
 - Kein eingebautes TLS/HTTPS – dafür bei Bedarf einen eigenen Reverse Proxy (z. B. eigene
   Domain + Let's-Encrypt-Proxy) **vor** dieses Add-on stellen. Für reinen LAN-Betrieb ist das
   nicht nötig.
+- Das Login-Session-Cookie wird ohne `Secure`-Attribut gesetzt (nötig, damit der Zugriff über
+  die Host-IP im LAN per HTTP überhaupt funktioniert – Browser verwerfen `Secure`-Cookies
+  sonst außerhalb von `localhost` auf unverschlüsselten Verbindungen). Das Cookie wird dadurch
+  auch über unverschlüsseltes HTTP übertragen; wer denselben Netzwerkabschnitt mitlauschen kann
+  (offenes/kompromittiertes WLAN, bösartiges Gerät im selben LAN), könnte es abgreifen und die
+  Session übernehmen. Für ein vertrauenswürdiges Heimnetz ist das Risiko gering – wer das
+  Add-on über ein nicht vertrauenswürdiges Netz oder das Internet erreichbar macht, sollte
+  dafür unbedingt den oben genannten eigenen Reverse Proxy mit TLS davorsetzen.
 - KI-Chat-Funktion nicht enthalten (siehe oben).
 - Da AppFlowy-Cloud archiviert ist, bekommt diese Version keine Sicherheitsupdates mehr vom
   Hersteller. Für ein reines Heimnetz-Setup ist das Risiko gering, für einen öffentlich erreichbaren
