@@ -32,24 +32,20 @@ Echtzeit-Zusammenarbeit, Freigaben/Publish, Team-Workspaces, Import) ist vorhand
 - **Freier Speicherplatz**: Postgres-Datenbank und MinIO-Objektspeicher wachsen mit der Nutzung;
   auf `aarch64` kommen beim Bauen zusätzlich temporäre Rust-Build-Artefakte hinzu (siehe unten).
   Ein paar GB frei sollten vor einer (Erst-)Installation bzw. einem Update vorhanden sein.
-- **Build-Zeit auf `aarch64`** (z. B. Raspberry Pi): Für dieses Add-on ist kein vorgefertigtes
-  Image in einer Registry hinterlegt (`config.yaml` hat kein `image:`-Feld) – Home Assistant
-  Supervisor baut das komplette Docker-Image deshalb bei jeder Installation und bei jedem
-  Versions-Update **lokal auf dem Gerät selbst**. Seit Version `0.9.64-5` werden `appflowy_cloud`
-  und `appflowy_worker` auf `aarch64` zusätzlich direkt aus dem Rust-Quellcode gebaut (siehe
-  CHANGELOG.md), statt ein fertiges Binary zu verwenden – notwendig, um einen
-  CPU-Kompatibilitätsabsturz auf manchen ARM-Kernen zu vermeiden (siehe "Bekannte Probleme"
-  unten), macht den Build-Vorgang auf einem Raspberry Pi dadurch aber spürbar langsamer als
-  zuvor (potenziell 30+ Minuten statt weniger Minuten, abhängig von CPU-Takt, RAM und ob von
-  SD-Karte oder USB-SSD gebootet wird). Das betrifft nur die (Erst-)Installation bzw. ein
-  Versions-Update, nicht jeden regulären Neustart des Add-ons.
+- **Build-Zeit**: Ab Version `0.9.64-6` wird das Add-on-Image **vorgefertigt per GitHub Actions**
+  gebaut und nach [GHCR](https://ghcr.io) veröffentlicht (`image:`-Feld in `config.yaml`,
+  Workflow unter `.github/workflows/build.yaml`) – Home Assistant Supervisor lädt das fertige
+  Image dann nur noch herunter, statt es selbst zu bauen. Auf `aarch64` (z. B. Raspberry Pi)
+  werden `appflowy_cloud` und `appflowy_worker` dabei weiterhin aus dem Rust-Quellcode gebaut
+  (siehe CHANGELOG.md, Version `0.9.64-5`) – das passiert jetzt aber einmalig auf GitHubs
+  Build-Infrastruktur statt auf jedem einzelnen Home-Assistant-Gerät. In `0.9.64-5` (ohne
+  vorgefertigtes Image) lief dieser Rust-Kompilierlauf noch lokal auf dem Gerät selbst und
+  dauerte auf einem Raspberry Pi potenziell 30+ Minuten pro Installation/Update.
 
-Auf einem **Raspberry Pi 4 mit 8GB RAM** sollten sowohl der (einmalige, pro Version) Build als
-auch der laufende Betrieb komfortabel funktionieren: 8GB liegt deutlich über der empfohlenen
-Untergrenze für den laufenden Betrieb, und die 4 Cortex-A72-Kerne reichen für den Rust-Build aus
-– er dauert dort einfach länger als auf schnellerer Hardware. Für kürzere Build-Zeiten hilft vor
-allem eine schnelle Boot-SSD statt SD-Karte, da der Rust-Compiler sehr viele kleine Dateien
-liest/schreibt.
+Auf einem **Raspberry Pi 4 mit 8GB RAM** ist der laufende Betrieb damit unproblematisch: 8GB
+liegt deutlich über der empfohlenen Untergrenze, und da das Image jetzt vorgefertigt
+heruntergeladen statt lokal gebaut wird, spielt die CPU-Geschwindigkeit für Installation/Update
+kaum noch eine Rolle.
 
 ## Ersteinrichtung
 

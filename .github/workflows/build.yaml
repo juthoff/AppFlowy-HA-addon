@@ -1,0 +1,100 @@
+name: Build and publish add-on image
+
+# Builds the appflowy/ add-on's Docker image and publishes it to GHCR, so
+# Home Assistant Supervisor can pull a prebuilt image instead of compiling
+# everything (including appflowy_cloud/appflowy_worker from Rust source on
+# arm64) on every user's own device. Runs per-architecture builds on native
+# runners (no QEMU), then combines them into one multi-arch manifest.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "appflowy/**"
+  push:
+    branches: [main]
+    paths:
+      - "appflowy/**"
+  workflow_dispatch:
+
+env:
+  ARCHITECTURES: '["amd64", "aarch64"]'
+  IMAGE_NAME: appflowy
+
+permissions:
+  contents: read
+
+jobs:
+  init:
+    name: Initialize build
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Read add-on version from config.yaml
+        id: version
+        run: |
+          version=$(grep -m1 '^version:' appflowy/config.yaml | sed -E 's/version:[[:space:]]*"?([^"]+)"?/\1/')
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Get build matrix
+        id: matrix
+        uses: home-assistant/builder/actions/prepare-multi-arch-matrix@2026.09.0
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          image-name: ${{ env.IMAGE_NAME }}
+
+  build:
+    name: Build ${{ matrix.arch }} image
+    needs: init
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+      id-token: write # Cosign keyless signing (OIDC)
+      packages: write # Push to GHCR
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.init.outputs.matrix) }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Build image
+        uses: home-assistant/builder/actions/build-image@2026.09.0
+        with:
+          arch: ${{ matrix.arch }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          context: ./appflowy
+          image: ${{ matrix.image }}
+          image-tags: |
+            ${{ needs.init.outputs.version }}
+            latest
+          push: ${{ github.event_name != 'pull_request' }}
+          skip-existing: ${{ needs.init.outputs.version }}
+          version: ${{ needs.init.outputs.version }}
+
+  manifest:
+    name: Publish multi-arch manifest
+    needs: [init, build]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Cosign keyless signing (OIDC)
+      packages: write # Push to GHCR
+    steps:
+      - name: Publish multi-arch manifest
+        uses: home-assistant/builder/actions/publish-multi-arch-manifest@2026.09.0
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          image-name: ${{ env.IMAGE_NAME }}
+          image-tags: |
+            ${{ needs.init.outputs.version }}
+            latest
+          skip-existing: ${{ needs.init.outputs.version }}

@@ -137,3 +137,23 @@
   Achtung: Da dieses Add-on ohne registrierten `image:`-Eintrag lokal auf dem Home-Assistant-Host
   gebaut wird, läuft dieser Rust-Kompilierlauf jetzt beim Bauen/Aktualisieren direkt auf dem
   Gerät selbst (z.B. dem Raspberry Pi) und dauert dadurch spürbar länger als zuvor.
+
+## 0.9.64-6
+
+- Löst den in `0.9.64-5` neu entstandenen Nachteil (spürbar längere Build-Zeit direkt auf dem
+  Home-Assistant-Gerät, weil `appflowy_cloud`/`appflowy_worker` auf `aarch64` seitdem aus dem
+  Quellcode gebaut werden): Das komplette Add-on-Image wird jetzt per GitHub Actions
+  (`.github/workflows/build.yaml`) vorgefertigt gebaut und nach
+  [GHCR](https://ghcr.io/juthoff/appflowy) veröffentlicht - der Rust-Kompilierlauf für `aarch64`
+  läuft dabei weiterhin (mit denselben `RUSTFLAGS`, die den SIGILL-Fix aus `0.9.64-5`
+  ausmachen), aber einmalig auf GitHubs eigener Build-Infrastruktur statt auf jedem einzelnen
+  Nutzergerät. `config.yaml` verweist jetzt über ein `image:`-Feld auf dieses vorgefertigte
+  Image; Home Assistant Supervisor lädt es nur noch herunter, statt es selbst zu bauen.
+  Architektur: `amd64` und `aarch64` werden auf GitHubs jeweils nativen Runnern gebaut (kein
+  QEMU nötig, u.a. dank nativer `aarch64`-Runner), die beiden Architektur-Images werden
+  anschließend zu einem einzigen Multi-Arch-Manifest zusammengeführt und mit Cosign signiert.
+  **Wichtig (einmaliger manueller Schritt):** GitHub veröffentlicht neue Container-Pakete unter
+  einem persönlichen Account standardmäßig als **privat** - nach dem ersten erfolgreichen
+  Workflow-Lauf müssen die drei entstandenen Pakete (`amd64-appflowy`, `aarch64-appflowy`,
+  `appflowy`) unter github.com/juthoff im Reiter "Packages" jeweils manuell auf "Public"
+  gestellt werden, sonst kann Supervisor das Image nicht ohne Zugangsdaten herunterladen.

@@ -1,11 +1,12 @@
 name: AppFlowy
-version: "0.9.64-5"
+version: "0.9.64-6"
 slug: appflowy
 description: >-
   Vollständig selbst-gehostetes AppFlowy (Notizen & Team-Workspace) inklusive
   eigener Postgres/pgvector-Datenbank, Redis, MinIO-Objektspeicher, GoTrue-Login
   und AppFlowy Web. Kein weiteres Add-on nötig.
 url: https://github.com/AppFlowy-IO/AppFlowy
+image: "ghcr.io/juthoff/appflowy"
 arch:
   - amd64
   - aarch64
