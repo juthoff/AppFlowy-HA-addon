@@ -1,0 +1,20 @@
+# Nur für lokale Tests ohne Home-Assistant-Supervisor. Der Supervisor selbst startet
+# Add-ons nicht über Compose, sondern direkt per `docker run` mit den Angaben aus
+# appflowy/config.yaml. Dieses File bildet exakt dasselbe Setup nach: `/data` als
+# persistentes Volume (entspricht dem Bind-Mount des Supervisors) und Port 8099 wie in
+# `ports: 8099/tcp: 8099` / `host_network: false`.
+services:
+  appflowy:
+    build: ./appflowy
+    image: appflowy-addon-test
+    container_name: appflowy-test
+    ports:
+      - "8099:8099"
+    volumes:
+      - appflowy-test-data:/data
+    restart: unless-stopped
+
+volumes:
+  appflowy-test-data:
+    name: appflowy-test-data
+    external: true
