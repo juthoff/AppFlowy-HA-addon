@@ -19,13 +19,37 @@ liefen zeitlich nicht im Gleichschritt mit dem übrigen 0.9.64-Release, ein saub
 war daher nicht zuverlässig möglich. Alles andere (Notizen, Datenbanken, Kanban, Dokumente,
 Echtzeit-Zusammenarbeit, Freigaben/Publish, Team-Workspaces, Import) ist vorhanden.
 
-## Hardware-Empfehlung
+## Systemanforderungen
 
-Dieses Add-on bündelt PostgreSQL, Redis, MinIO, GoTrue, appflowy_cloud, appflowy_worker,
-admin_frontend und nginx in einem einzigen Container. Empfohlen werden mindestens **4GB RAM**
-auf dem Home-Assistant-Host. Auf kleineren Geräten (z. B. Raspberry Pi mit 2GB RAM) kann es unter
-Last (z. B. beim Anlegen eines neuen Kontos samt Workspace, oder beim Öffnen mehrerer Dokumente
-gleichzeitig) zu Speicherdruck kommen - siehe "Bekannte Probleme" unten.
+- **CPU-Architektur**: nur `amd64` und `aarch64` (kein 32-Bit-`armhf` – die Original-Images
+  unterstützen das nicht).
+- **RAM**: mindestens **4GB** auf dem Home-Assistant-Host, **8GB oder mehr ist komfortabel**.
+  Dieses Add-on bündelt PostgreSQL, Redis, MinIO, GoTrue, appflowy_cloud, appflowy_worker,
+  admin_frontend und nginx in einem einzigen Container – zusätzlich zu Home Assistant Core
+  selbst und eventuellen weiteren Add-ons auf demselben Gerät. Mit nur 2GB RAM (z. B. ältere/
+  kleinere Raspberry-Pi-Modelle) kann es unter Last (neues Konto samt Workspace anlegen,
+  mehrere Dokumente gleichzeitig öffnen) zu spürbarem Speicherdruck kommen.
+- **Freier Speicherplatz**: Postgres-Datenbank und MinIO-Objektspeicher wachsen mit der Nutzung;
+  auf `aarch64` kommen beim Bauen zusätzlich temporäre Rust-Build-Artefakte hinzu (siehe unten).
+  Ein paar GB frei sollten vor einer (Erst-)Installation bzw. einem Update vorhanden sein.
+- **Build-Zeit auf `aarch64`** (z. B. Raspberry Pi): Für dieses Add-on ist kein vorgefertigtes
+  Image in einer Registry hinterlegt (`config.yaml` hat kein `image:`-Feld) – Home Assistant
+  Supervisor baut das komplette Docker-Image deshalb bei jeder Installation und bei jedem
+  Versions-Update **lokal auf dem Gerät selbst**. Seit Version `0.9.64-5` werden `appflowy_cloud`
+  und `appflowy_worker` auf `aarch64` zusätzlich direkt aus dem Rust-Quellcode gebaut (siehe
+  CHANGELOG.md), statt ein fertiges Binary zu verwenden – notwendig, um einen
+  CPU-Kompatibilitätsabsturz auf manchen ARM-Kernen zu vermeiden (siehe "Bekannte Probleme"
+  unten), macht den Build-Vorgang auf einem Raspberry Pi dadurch aber spürbar langsamer als
+  zuvor (potenziell 30+ Minuten statt weniger Minuten, abhängig von CPU-Takt, RAM und ob von
+  SD-Karte oder USB-SSD gebootet wird). Das betrifft nur die (Erst-)Installation bzw. ein
+  Versions-Update, nicht jeden regulären Neustart des Add-ons.
+
+Auf einem **Raspberry Pi 4 mit 8GB RAM** sollten sowohl der (einmalige, pro Version) Build als
+auch der laufende Betrieb komfortabel funktionieren: 8GB liegt deutlich über der empfohlenen
+Untergrenze für den laufenden Betrieb, und die 4 Cortex-A72-Kerne reichen für den Rust-Build aus
+– er dauert dort einfach länger als auf schnellerer Hardware. Für kürzere Build-Zeiten hilft vor
+allem eine schnelle Boot-SSD statt SD-Karte, da der Rust-Compiler sehr viele kleine Dateien
+liest/schreibt.
 
 ## Ersteinrichtung
 
@@ -59,7 +83,6 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
 
 ## Bekannte Einschränkungen
 
-- Nur `amd64` und `aarch64` (kein 32-Bit-`armhf` – die Original-Images unterstützen das nicht).
 - Kein eingebautes TLS/HTTPS – dafür bei Bedarf einen eigenen Reverse Proxy (z. B. eigene
   Domain + Let's-Encrypt-Proxy) **vor** dieses Add-on stellen. Für reinen LAN-Betrieb ist das
   nicht nötig.
@@ -78,15 +101,22 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
 
 ## Bekannte Probleme
 
-- **Desktop-/Mobil-App meldet "Something went wrong. Please try again later."**: Dieses
-  Fehlerbild entsteht, wenn `appflowy_cloud` unter Speicherdruck vom Kernel beendet wird
-  (typischerweise auf einem Raspberry Pi mit 2GB RAM) - der Dienst startet dank `s6` zwar
-  innerhalb von 1-2 Sekunden automatisch neu, doch alle Anfragen, die genau in dieses Fenster
-  fallen (Login, Health-Check, Workspace laden), schlagen mit einem generischen Fehler fehl.
+- **Desktop-/Mobil-App meldet "Something went wrong. Please try again later." (behoben in
+  `0.9.64-5`)**: Auf manchen ARM-CPUs (u. a. beobachtet auf einem Raspberry Pi 4) stürzte
+  `appflowy_cloud` beim ersten Login eines Kontos ab, konkret beim Anlegen des Standard-
+  "Getting Started"-Workspace, sobald dabei zum ersten Mal Inhalte zu MinIO hochgeladen wurden.
   Zu erkennen im Add-on-Log an `[appflowy_cloud] waiting for gotrue...` / `waiting for
   minio...`, dem NICHT wie bei einem regulären Neustart ein `received graceful shutdown
-  signal` vorausgeht. Prüfen lässt sich Speicherdruck ohne SSH-Zugriff über Home Assistant
-  unter Einstellungen → System → Hardware (Arbeitsspeicher-Verlauf). Ab Version `0.9.64-3`
-  sind Postgres/Redis/appflowy_cloud bewusst speicherschonender konfiguriert (siehe
-  CHANGELOG.md); bleibt das Problem auf sehr knapp bemessener Hardware (z. B. 2GB-Pi)
-  dennoch bestehen, hilft nur mehr RAM oder zusätzlicher Swap auf dem Home-Assistant-Host.
+  signal` vorausgeht, und ganz ohne Rust-Panic-Trace. Ursache war **nicht** Speicherdruck
+  (das wurde durch Beobachtung des Arbeitsspeicher-Verlaufs unter Einstellungen → System →
+  Hardware sowie der Host-System-Logs ausgeschlossen), sondern ein CPU-Instruktionssatz-
+  Absturz (SIGILL, Exit-Code 132): Das vorgefertigte `appflowy_cloud`/`appflowy_worker`-Binary
+  war mit CPU-Krypto-/AES-/SHA-Erweiterungen kompiliert, die der jeweilige ARM-Kern nicht
+  unterstützt (siehe [Issue #1623](https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623)
+  im AppFlowy-Cloud-Repo für einen identischen Fall bei Datei-Uploads). Seit `0.9.64-5` werden
+  `appflowy_cloud`/`appflowy_worker` auf `aarch64` mit deaktivierten Krypto-Erweiterungen aus
+  dem Quellcode gebaut statt das vorgefertigte Image zu verwenden (siehe CHANGELOG.md und
+  "Systemanforderungen" oben zur dadurch spürbar längeren Build-Zeit auf `aarch64`).
+  Postgres/Redis/appflowy_cloud sind trotzdem seit `0.9.64-3`/`0.9.64-4` zusätzlich
+  speicherschonender konfiguriert – das war zwar nicht die eigentliche Ursache dieses
+  konkreten Fehlers, schadet auf kleiner Hardware aber nicht.
