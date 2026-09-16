@@ -4,10 +4,14 @@
 # created here at every start, not just assumed to exist.
 mkdir -p /data/redis
 chown redis:redis /data/redis
+# Capped to avoid unbounded growth on Pi-class hardware (2-4GB RAM, shared
+# with Home Assistant and the rest of this add-on's own services).
 exec s6-setuidgid redis redis-server \
     --bind 127.0.0.1 \
     --port 6379 \
     --dir /data/redis \
     --daemonize no \
     --save 60 1 \
-    --loglevel warning
+    --loglevel warning \
+    --maxmemory 128mb \
+    --maxmemory-policy allkeys-lru

@@ -1,5 +1,13 @@
 #!/bin/bash
 PGBIN="$(pg_config --bindir 2>/dev/null || echo /usr/lib/postgresql/16/bin)"
+# Defaults are sized for a real server; this add-on typically runs on a
+# Raspberry Pi (2-4GB RAM) alongside Home Assistant itself, sharing the box
+# with Redis/MinIO/GoTrue/appflowy_cloud in the same container - low memory
+# footprint here matters more than throughput.
 exec s6-setuidgid postgres "${PGBIN}/postgres" -D /data/postgres \
     -c listen_addresses=127.0.0.1 \
-    -c unix_socket_directories=/run/postgresql
+    -c unix_socket_directories=/run/postgresql \
+    -c shared_buffers=32MB \
+    -c max_connections=40 \
+    -c work_mem=4MB \
+    -c maintenance_work_mem=32MB

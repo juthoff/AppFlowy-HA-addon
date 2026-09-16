@@ -19,6 +19,14 @@ liefen zeitlich nicht im Gleichschritt mit dem übrigen 0.9.64-Release, ein saub
 war daher nicht zuverlässig möglich. Alles andere (Notizen, Datenbanken, Kanban, Dokumente,
 Echtzeit-Zusammenarbeit, Freigaben/Publish, Team-Workspaces, Import) ist vorhanden.
 
+## Hardware-Empfehlung
+
+Dieses Add-on bündelt PostgreSQL, Redis, MinIO, GoTrue, appflowy_cloud, appflowy_worker,
+admin_frontend und nginx in einem einzigen Container. Empfohlen werden mindestens **4GB RAM**
+auf dem Home-Assistant-Host. Auf kleineren Geräten (z. B. Raspberry Pi mit 2GB RAM) kann es unter
+Last (z. B. beim Anlegen eines neuen Kontos samt Workspace, oder beim Öffnen mehrerer Dokumente
+gleichzeitig) zu Speicherdruck kommen - siehe "Bekannte Probleme" unten.
+
 ## Ersteinrichtung
 
 1. **Passwort setzen**: Unter "Konfiguration" mindestens `admin_password` setzen (und optional
@@ -67,3 +75,18 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
 - Da AppFlowy-Cloud archiviert ist, bekommt diese Version keine Sicherheitsupdates mehr vom
   Hersteller. Für ein reines Heimnetz-Setup ist das Risiko gering, für einen öffentlich erreichbaren
   Server sollte man sich dessen bewusst sein.
+
+## Bekannte Probleme
+
+- **Desktop-/Mobil-App meldet "Something went wrong. Please try again later."**: Dieses
+  Fehlerbild entsteht, wenn `appflowy_cloud` unter Speicherdruck vom Kernel beendet wird
+  (typischerweise auf einem Raspberry Pi mit 2GB RAM) - der Dienst startet dank `s6` zwar
+  innerhalb von 1-2 Sekunden automatisch neu, doch alle Anfragen, die genau in dieses Fenster
+  fallen (Login, Health-Check, Workspace laden), schlagen mit einem generischen Fehler fehl.
+  Zu erkennen im Add-on-Log an `[appflowy_cloud] waiting for gotrue...` / `waiting for
+  minio...`, dem NICHT wie bei einem regulären Neustart ein `received graceful shutdown
+  signal` vorausgeht. Prüfen lässt sich Speicherdruck ohne SSH-Zugriff über Home Assistant
+  unter Einstellungen → System → Hardware (Arbeitsspeicher-Verlauf). Ab Version `0.9.64-3`
+  sind Postgres/Redis/appflowy_cloud bewusst speicherschonender konfiguriert (siehe
+  CHANGELOG.md); bleibt das Problem auf sehr knapp bemessener Hardware (z. B. 2GB-Pi)
+  dennoch bestehen, hilft nur mehr RAM oder zusätzlicher Swap auf dem Home-Assistant-Host.

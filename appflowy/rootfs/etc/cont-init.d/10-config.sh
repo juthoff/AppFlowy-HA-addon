@@ -118,7 +118,12 @@ export APPFLOWY_GOTRUE_JWT_SECRET="${GOTRUE_JWT_SECRET}"
 export APPFLOWY_GOTRUE_JWT_EXP="7200"
 export APPFLOWY_REDIS_URI="redis://127.0.0.1:6379"
 export APPFLOWY_ACCESS_CONTROL="true"
-export APPFLOWY_DATABASE_MAX_CONNECTIONS="40"
+# Lower than upstream's default (40) - this add-on typically serves a
+# handful of home/LAN users, and each pooled connection multiplies
+# Postgres' own work_mem usage on memory-constrained hardware (e.g. a
+# Raspberry Pi with 2-4GB RAM running the rest of this add-on's services
+# too).
+export APPFLOWY_DATABASE_MAX_CONNECTIONS="15"
 export APPFLOWY_WEB_URL="${BASE_URL}"
 export APPFLOWY_ENVIRONMENT="production"
 export RUST_LOG="${LOG_LEVEL}"

@@ -62,3 +62,25 @@
   Ein bloßes `/health` traf zudem mangels eigener Regel den Web-App-Catch-all und lieferte
   irreführend `200` mit der SPA statt einer echten Backend-Antwort. Beide Pfade werden
   jetzt per `location = ...` explizit auf `GET /health` bei appflowy_cloud weitergeleitet.
+
+## 0.9.64-3
+
+- Fix: Die Desktop-/Mobil-Apps meldeten "Something went wrong. Please try again later." beim
+  Verbinden und Einloggen, sowohl mit dem Admin-Konto als auch mit neu angelegten Konten -
+  reproduzierbar anhand eines vom Nutzer bereitgestellten Add-on-Logs. Ursache:
+  `appflowy_cloud` wurde wiederholt mitten in laufenden Anfragen beendet (Postgres protokolliert
+  dabei `unexpected EOF on client connection with an open transaction`, ohne vorausgehendes
+  `received graceful shutdown signal` und ohne Rust-Panic-Trace im Log) - das Muster eines von
+  außen (typischerweise dem Linux-OOM-Killer) beendeten Prozesses. `s6` startet den Dienst zwar
+  automatisch binnen 1-2 Sekunden neu, doch alle Anfragen in diesem Fenster (Login, Health-Check,
+  Workspace laden) schlagen mit einem generischen Fehler fehl - betroffen sind dadurch auch
+  gleichzeitige Anfragen anderer, an sich unbeteiligter Konten. Die Abstürze fielen konsistent mit
+  speicherintensiven Vorgängen zusammen (neues Konto samt Workspace anlegen, Dokumente per
+  WebSocket öffnen) auf einem Raspberry Pi mit 2-4GB RAM, auf dem dieses Add-on zusammen mit Home
+  Assistant selbst läuft. Postgres, Redis und appflowy_cloud liefen bisher ohne jede
+  Speicherbegrenzung (Postgres mit reinen Server-Standardwerten, Redis komplett unbegrenzt) - jetzt
+  konfiguriert: Postgres mit `shared_buffers=32MB`/`work_mem=4MB`/`maintenance_work_mem=32MB`
+  (`rootfs/etc/services.d/postgres/run`), Redis mit `--maxmemory 128mb
+  --maxmemory-policy allkeys-lru` (`rootfs/etc/services.d/redis/run`), und
+  `APPFLOWY_DATABASE_MAX_CONNECTIONS` von 40 auf 15 gesenkt (`rootfs/etc/cont-init.d/10-config.sh`),
+  passend für den typischen Heimnetz-Einsatz mit wenigen Nutzern.
