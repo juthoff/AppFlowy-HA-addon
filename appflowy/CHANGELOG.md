@@ -25,6 +25,9 @@
 - Build und Funktionstest (Docker, arm64) erfolgreich durchgeführt: alle Dienste starten
   fehlerfrei, `/`, `/console` (Redirect zu `/console/web/login`) und der GoTrue-Login
   (`/gotrue/token`) wurden verifiziert; Daten/Login überleben einen Container-Neustart.
+
+## 0.9.64-2
+
 - Fix: appflowy_cloud parst `smtp_email` (Quellcode-Verifikation in `libs/mailer/src/sender.rs`,
   Tag 0.9.64) direkt als Absenderadresse. Das Konfigurationsskript setzte dieses Feld bisher
   fälschlich auf den SMTP-**Benutzernamen** statt auf eine echte Absenderadresse - bei
