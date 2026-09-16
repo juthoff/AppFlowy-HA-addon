@@ -50,3 +50,12 @@
   `Secure`-Attribut wird beim Bauen von GoTrue jetzt per `sed`-Patch entfernt (analog zum
   bereits bestehenden Quellcode-Patch für AppFlowy Web im Dockerfile); ein Cookie ohne
   `Secure` funktioniert unverändert auch hinter einem eigenen HTTPS-Reverse-Proxy.
+- Fix: Die Desktop-/Mobil-Apps meldeten beim Verbinden mit dem Add-on
+  "Connection failed... Health check failed (HTTP 404)". Ursache: appflowy_cloud
+  registriert seinen Health-Check unprefixed als `GET /health` (Quellcode-Verifikation in
+  `src/application.rs`, Tag `0.9.64`), die Clients fragen ihn aber unter `/api/health` ab.
+  `nginx.conf` hatte dafür keine eigene Regel - die Anfrage lief über die generische
+  `/api`-Weiterleitung durch, unter der appflowy_cloud diese Route aber nicht kennt (404).
+  Ein bloßes `/health` traf zudem mangels eigener Regel den Web-App-Catch-all und lieferte
+  irreführend `200` mit der SPA statt einer echten Backend-Antwort. Beide Pfade werden
+  jetzt per `location = ...` explizit auf `GET /health` bei appflowy_cloud weitergeleitet.
