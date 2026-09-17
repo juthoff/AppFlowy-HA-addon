@@ -57,7 +57,9 @@ kaum noch eine Rolle.
 3. Im Browser `http://<home-assistant-ip>:8099/` öffnen → AppFlowy Web.
    Admin-Konsole: `http://<home-assistant-ip>:8099/console` (Login mit `admin_email`/`admin_password`).
 4. Für die Desktop-/Mobil-Apps von AppFlowy: beim Einrichten "Self-hosted" wählen und als
-   Server-URL `http://<home-assistant-ip>:8099` eintragen.
+   Server-URL `http://<home-assistant-ip>:8099` eintragen. **Wichtig:** Nur Apps der
+   0.9.x-Generation (Desktop `0.9.4`/`0.9.5`, Juli 2025) sind mit diesem Add-on kompatibel –
+   neuere Apps zeigen den Workspace leer bzw. nicht editierbar an, siehe "Bekannte Probleme".
 
 ## Konfigurationsoptionen
 
@@ -116,3 +118,40 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
   Postgres/Redis/appflowy_cloud sind trotzdem seit `0.9.64-3`/`0.9.64-4` zusätzlich
   speicherschonender konfiguriert – das war zwar nicht die eigentliche Ursache dieses
   konkreten Fehlers, schadet auf kleiner Hardware aber nicht.
+- **Desktop-/Mobil-App ab ca. 0.10: persönlicher Workspace leer bzw. nicht editierbar, `+` legt
+  keine Seite an (kein Fix möglich)**: Beobachtet mit AppFlowy Desktop `0.14.3` auf macOS. Der
+  Login klappt, der Workspace zeigt aber keine (oder nur alte) Seiten, Klick auf `+` scheint
+  nichts zu tun, und der Workspace wirkt schreibgeschützt – während ein anonymes/lokales Konto in
+  derselben App problemlos funktioniert. Das ist **kein Serverfehler**: Das Add-on-Log ist sauber;
+  aufschlussreich ist nur das nginx-Zugriffslog im Container (`/var/log/nginx/access.log`), das
+  voller `404` für Pfade wie `/api/workspace/<id>/view/<id>`, `.../view/<id>/navigation`,
+  `.../collab/<id>/permission`, `/api/server-info`, `.../workspace-profile`, `.../usage-and-limit`
+  oder `.../notifications` ist. Diese Endpunkte gibt es erst im **kommerziellen, nicht mehr
+  quelloffenen** AppFlowy-Cloud nach `0.9.64` (siehe "Warum diese Version?" oben) – neuere Apps
+  laden ihre Seitenleiste ausschließlich darüber. Das Anlegen einer Seite (`POST .../page-view`)
+  gelingt serverseitig sogar, die App kann den Seitenbaum danach aber nicht mehr zurücklesen und
+  zeigt die Seite deshalb nie an. Ein Nachbau der fehlenden Endpunkte in nginx ist nicht möglich
+  (die Antwortformate sind nur im geschlossenen Server definiert), und die App hat keinen
+  Fallback auf den alten Sync-Weg. **Abhilfe:** Entweder das mitgelieferte AppFlowy Web unter
+  `http://<home-assistant-ip>:8099/` nutzen, oder eine Desktop-/Mobil-App aus der Zeit des
+  `0.9.64`-Servers installieren – Desktop
+  [`0.9.4`](https://github.com/AppFlowy-IO/AppFlowy/releases/tag/0.9.4) bzw.
+  [`0.9.5`](https://github.com/AppFlowy-IO/AppFlowy/releases/tag/0.9.5) (Juli 2025) sind gegen
+  genau den Server-Stand gebaut, der in `0.9.64` enthalten ist. Vor einem Downgrade den
+  Datenordner der App für diesen Server wegräumen (macOS:
+  `~/Library/Application Support/com.appflowy.appflowy.flutter/data_<host>`, Windows:
+  `%APPDATA%\io.appflowy\AppFlowy\data_<host>`), weil die neuere App dort bereits ein
+  neueres lokales Datenschema angelegt hat. In der App anschließend angebotene Updates
+  **ablehnen** – der eingebaute Updater würde sonst wieder auf eine inkompatible Version
+  aktualisieren.
+  - **macOS**: `AppFlowy-0.9.5-macos-arm64.zip` (Apple Silicon) bzw. `...-x86_64.zip` (Intel) von
+    der Release-Seite laden, entpacken und `AppFlowy.app` nach `/Applications` verschieben.
+  - **Windows** (nur 64-Bit): `AppFlowy-0.9.5-windows-x86_64.exe` (Installer) oder `...-windows-x86_64.zip`
+    (portabel) von der Release-Seite laden. Alternativ per winget, das die alten Versionen
+    weiterhin führt – die zweite Zeile verhindert, dass `winget upgrade --all` wieder auf 0.14.x
+    hochzieht:
+
+    ```powershell
+    winget install --id AppFlowy.AppFlowy --version 0.9.5 --exact
+    winget pin add --id AppFlowy.AppFlowy --blocking
+    ```
