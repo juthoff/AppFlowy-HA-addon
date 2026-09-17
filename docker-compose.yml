@@ -3,6 +3,13 @@
 # appflowy/config.yaml. Dieses File bildet exakt dasselbe Setup nach: `/data` als
 # persistentes Volume (entspricht dem Bind-Mount des Supervisors) und Port 8099 wie in
 # `ports: 8099/tcp: 8099` / `host_network: false`.
+#
+# Der Supervisor würde `/data/options.json` normalerweise selbst aus den `options:`-
+# Defaults in appflowy/config.yaml erzeugen, bevor der Container startet. Ohne diesen
+# Schritt bricht `10-config.sh` beim ersten Start ab (jq findet keine Datei). Die Datei
+# docker-compose.options.json spiegelt daher genau diese Defaults (admin_email/
+# admin_password u.a.) und wird read-only nach /data/options.json gemountet - sie muss
+# von Hand synchron gehalten werden, falls sich die Defaults in config.yaml ändern.
 services:
   appflowy:
     build: ./appflowy
@@ -12,6 +19,7 @@ services:
       - "8099:8099"
     volumes:
       - appflowy-test-data:/data
+      - ./docker-compose.options.json:/data/options.json:ro
     restart: unless-stopped
 
 volumes:

@@ -1,0 +1,20 @@
+{
+  "fqdn": "",
+  "scheme": "http",
+  "admin_email": "admin@example.com",
+  "admin_password": "abcd1234!",
+  "enable_signup": true,
+  "smtp_host": "smtp.resend.com",
+  "smtp_port": 465,
+  "smtp_user": "",
+  "smtp_password": "",
+  "smtp_tls_kind": "wrapper",
+  "smtp_admin_email": "",
+  "oauth_google_enabled": false,
+  "oauth_google_client_id": "",
+  "oauth_google_client_secret": "",
+  "oauth_github_enabled": false,
+  "oauth_github_client_id": "",
+  "oauth_github_client_secret": "",
+  "log_level": "info"
+}
