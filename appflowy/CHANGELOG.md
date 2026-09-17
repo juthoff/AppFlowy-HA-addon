@@ -211,6 +211,10 @@
   Builder; `1.10.0` bräuchte Rust 1.89), erfüllt die Anforderung `^1.2.1` von
   `aws-smithy-checksums` und ist API-kompatibel (Semver 1.x). Der Build gibt die gepinnte
   Version aus `Cargo.lock` im Log aus.
+- **Auf einem Raspberry Pi 4 verifiziert** (Home Assistant OS, Add-on aus dem GHCR-Image
+  `0.9.64-8`): Erster Login des Admin-Kontos, Anlegen weiterer Konten und deren Login liefen
+  ohne Absturz durch – die erste Version dieses Add-ons, bei der das auf der echten Hardware
+  bestätigt wurde.
 - Diagnose-Verbesserung: Neue s6-`finish`-Skripte für `appflowy_cloud` und `appflowy_worker`
   loggen Exit-Code und Signal, wenn ein Dienst stirbt (`exited with code 256 (signal 4)` =
   SIGILL). Bisher war ein solcher Absturz nur indirekt am erneuten "waiting for gotrue..." zu
