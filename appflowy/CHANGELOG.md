@@ -157,3 +157,23 @@
   Workflow-Lauf müssen die drei entstandenen Pakete (`amd64-appflowy`, `aarch64-appflowy`,
   `appflowy`) unter github.com/juthoff im Reiter "Packages" jeweils manuell auf "Public"
   gestellt werden, sonst kann Supervisor das Image nicht ohne Zugangsdaten herunterladen.
+
+## 0.9.64-7
+
+- Nur Dokumentation, keine Änderung am Image. Neuer Eintrag unter "Bekannte Probleme" in
+  DOCS.md: Desktop-/Mobil-Apps ab ca. `0.10` (verifiziert mit Desktop `0.14.3` auf macOS)
+  zeigen den persönlichen Workspace eines angemeldeten Kontos leer bzw. schreibgeschützt an,
+  `+` legt scheinbar keine Seite an – ein anonymes/lokales Konto funktioniert dagegen. Ursache
+  ist **kein** Serverfehler, sondern eine Inkompatibilität: Neuere Apps laden die Seitenleiste
+  ausschließlich über HTTP-Endpunkte (`/api/workspace/<id>/view/<id>`, `.../navigation`,
+  `.../collab/<id>/permission`, `/api/server-info` u.a.), die es erst im kommerziellen,
+  nicht mehr quelloffenen AppFlowy-Cloud nach `0.9.64` gibt; nginx antwortet darauf mit `404`
+  (sichtbar in `/var/log/nginx/access.log` im Container). Das Anlegen einer Seite gelingt
+  serverseitig sogar, die App kann den Seitenbaum danach aber nicht zurücklesen. Ein Nachbau
+  in nginx ist nicht möglich, die App hat keinen Fallback. Abhilfe: das mitgelieferte AppFlowy
+  Web nutzen oder eine App aus der Zeit des `0.9.64`-Servers (Desktop `0.9.4`/`0.9.5`, Juli
+  2025 – gegen genau den in `0.9.64` enthaltenen Client-API-Stand gebaut; verifiziert mit
+  Desktop `0.9.5`: Login, Workspace-Anlage, Seitenbaum und Realtime-Sync fehlerfrei). DOCS.md
+  enthält dazu Download-/winget-Anleitung für macOS und Windows, die zu entfernenden lokalen
+  Datenordner und den Hinweis, In-App-Updates abzulehnen. "Ersteinrichtung" verweist jetzt auf
+  diese Versionsgrenze.
