@@ -50,26 +50,43 @@ RUN npm install -g pnpm@8.5.0 \
 # appflowy_cloud / appflowy_worker on arm64: built from source (AGPL-3.0),
 # NOT the prebuilt image.
 #
-# The prebuilt aarch64 images SIGILL (exit code 132) on at least some
-# Raspberry Pi cores: they're compiled assuming CPU crypto/AES/SHA
-# extensions the Pi doesn't have, and the very first S3/MinIO upload (e.g.
-# creating a new account's default "Getting Started" workspace, or any file
-# upload) executes that instruction path and crashes the whole process -
-# confirmed against https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623
-# (same exit code, same "unsupported CPU instruction" diagnosis, same fix).
-# Disabling those extensions at compile time avoids it; amd64 has no such
-# instruction-set mismatch and keeps using the pinned prebuilt image below.
-# Build recipe replicated from AppFlowy-Cloud's own Dockerfile at this tag.
+# The prebuilt aarch64 images SIGILL (exit code 132, no panic, no shutdown
+# log) on Raspberry Pi 4 class CPUs (BCM2711 / Cortex-A72: `fp asimd evtstrm
+# crc32 cpuid`, i.e. NO aes/pmull/sha3 extensions) on the very first S3/MinIO
+# upload - e.g. creating a new account's default "Getting Started" workspace
+# (any collab > APPFLOWY_SMALL_COLLAB_SIZE goes to S3) or any file upload.
+# Same crash as https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623.
+#
+# Root cause (verified in the crate source): aws-sdk-s3 -> aws-smithy-checksums
+# 0.63.3 -> crc-fast 1.2.1, which is what AppFlowy-Cloud 0.9.64's Cargo.lock
+# pins. crc-fast 1.2.1 has NO runtime CPU feature detection on aarch64: its
+# dispatcher unconditionally calls `#[target_feature(enable = "neon,aes")]`
+# code that executes PMULL. crc-fast >= 1.6.0 (PR #21) detects features at
+# runtime and falls back to a table implementation when `aes` is missing.
+# The `cargo update` below therefore pins crc-fast 1.9.0 (last release with
+# MSRV 1.81; 1.10.0 needs Rust 1.89), which aws-smithy-checksums' `^1.2.1`
+# requirement accepts. That pin is the actual fix and the only reason this
+# stage exists. NOTE: the RUSTFLAGS `-C target-feature=-...` approach
+# suggested in issue #1623 (and used by this add-on in 0.9.64-5..-7) does NOT
+# fix it - those features are already disabled by default on
+# aarch64-unknown-linux-gnu, and per-function `#[target_feature(enable=..)]`
+# attributes are unaffected by it.
+#
+# amd64 has no such instruction-set mismatch and keeps using the pinned
+# prebuilt image below. Build recipe otherwise replicated from
+# AppFlowy-Cloud's own Dockerfile at this tag.
 # ---------------------------------------------------------------------------
 FROM rust:1.86-slim-bookworm AS appflowy-cloud-builder-arm64
 ARG APPFLOWY_CLOUD_REF="0.9.64"
+ARG CRC_FAST_VERSION="1.9.0"
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git ca-certificates pkg-config libssl-dev protobuf-compiler libprotobuf-dev lld clang \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-RUN git clone --depth 1 --branch ${APPFLOWY_CLOUD_REF} https://github.com/AppFlowy-IO/AppFlowy-Cloud.git .
-ENV SQLX_OFFLINE=true \
-    RUSTFLAGS="-C target-feature=-crypto,-aes,-sha2,-sha3"
+RUN git clone --depth 1 --branch ${APPFLOWY_CLOUD_REF} https://github.com/AppFlowy-IO/AppFlowy-Cloud.git . \
+    && cargo update -p crc-fast --precise ${CRC_FAST_VERSION} \
+    && grep -A1 '^name = "crc-fast"' Cargo.lock
+ENV SQLX_OFFLINE=true
 # appflowy_worker lives in a separate workspace member (services/appflowy-worker,
 # package name "appflowy-worker") - --workspace is required so cargo looks
 # across all members for both --bin targets, not just the root package.
@@ -213,6 +230,6 @@ COPY rootfs/ /
 RUN set -eux; \
     chmod 755 /etc /etc/cont-init.d /etc/services.d /etc/nginx; \
     find /etc/services.d -mindepth 1 -maxdepth 1 -type d -exec chmod 755 {} \; ; \
-    chmod +x /etc/cont-init.d/*.sh /etc/services.d/*/run
+    chmod +x /etc/cont-init.d/*.sh /etc/services.d/*/run /etc/services.d/*/finish
 
 ENTRYPOINT ["/init"]

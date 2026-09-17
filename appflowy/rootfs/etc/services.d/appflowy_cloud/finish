@@ -1,0 +1,6 @@
+#!/bin/bash
+# s6-overlay v3 (legacy services.d): $1 = exit code (256 if killed by a signal),
+# $2 = signal number in that case. Logged so a silent death (e.g. SIGILL = signal 4
+# on CPUs lacking an instruction the binary uses) is visible in the add-on log
+# instead of only the "waiting for gotrue..." restart banner.
+echo "[appflowy_cloud] exited with code $1 (signal $2) - s6 will restart it"

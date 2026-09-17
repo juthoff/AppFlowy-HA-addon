@@ -99,25 +99,39 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
 
 ## Bekannte Probleme
 
-- **Desktop-/Mobil-App meldet "Something went wrong. Please try again later." (behoben in
-  `0.9.64-5`)**: Auf manchen ARM-CPUs (u. a. beobachtet auf einem Raspberry Pi 4) stürzte
-  `appflowy_cloud` beim ersten Login eines Kontos ab, konkret beim Anlegen des Standard-
-  "Getting Started"-Workspace, sobald dabei zum ersten Mal Inhalte zu MinIO hochgeladen wurden.
-  Zu erkennen im Add-on-Log an `[appflowy_cloud] waiting for gotrue...` / `waiting for
-  minio...`, dem NICHT wie bei einem regulären Neustart ein `received graceful shutdown
-  signal` vorausgeht, und ganz ohne Rust-Panic-Trace. Ursache war **nicht** Speicherdruck
-  (das wurde durch Beobachtung des Arbeitsspeicher-Verlaufs unter Einstellungen → System →
-  Hardware sowie der Host-System-Logs ausgeschlossen), sondern ein CPU-Instruktionssatz-
-  Absturz (SIGILL, Exit-Code 132): Das vorgefertigte `appflowy_cloud`/`appflowy_worker`-Binary
-  war mit CPU-Krypto-/AES-/SHA-Erweiterungen kompiliert, die der jeweilige ARM-Kern nicht
-  unterstützt (siehe [Issue #1623](https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623)
-  im AppFlowy-Cloud-Repo für einen identischen Fall bei Datei-Uploads). Seit `0.9.64-5` werden
-  `appflowy_cloud`/`appflowy_worker` auf `aarch64` mit deaktivierten Krypto-Erweiterungen aus
-  dem Quellcode gebaut statt das vorgefertigte Image zu verwenden (siehe CHANGELOG.md und
-  "Systemanforderungen" oben zur dadurch spürbar längeren Build-Zeit auf `aarch64`).
-  Postgres/Redis/appflowy_cloud sind trotzdem seit `0.9.64-3`/`0.9.64-4` zusätzlich
-  speicherschonender konfiguriert – das war zwar nicht die eigentliche Ursache dieses
-  konkreten Fehlers, schadet auf kleiner Hardware aber nicht.
+- **Erster Login eines Kontos schlägt fehl – Desktop-App "Something went wrong" / "Record not
+  found", Admin-Konsole erst beim zweiten Versuch (behoben in `0.9.64-8`, Raspberry Pi 4 und
+  andere ARM-CPUs ohne Krypto-Erweiterungen)**: `appflowy_cloud` stürzte bei jedem ersten
+  Upload nach MinIO ab – beim Anlegen des Standard-"Getting Started"-Workspace für ein neues
+  Konto (jeder Collab größer als 4 KB wandert nach MinIO), aber genauso bei jedem
+  Datei-Upload oder Snapshot. Zu erkennen im Add-on-Log an `[appflowy_cloud] waiting for
+  gotrue...` / `waiting for minio...` mitten im Betrieb, dem NICHT wie bei einem regulären
+  Neustart ein `received graceful shutdown signal` vorausgeht, ganz ohne Rust-Panic-Trace,
+  meist direkt nach einer Postgres-Zeile `unexpected EOF on client connection with an open
+  transaction`. Seit `0.9.64-8` steht zusätzlich eine Zeile `[appflowy_cloud] exited with code
+  256 (signal 4)` im Log (Signal 4 = SIGILL, "illegal instruction"). Ursache war **nicht**
+  Speicherdruck, sondern ein CPU-Instruktionssatz-Absturz, identisch zu
+  [Issue #1623](https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623) im
+  AppFlowy-Cloud-Repo: Der S3-Client (`aws-sdk-s3`) berechnet für jeden Upload eine
+  CRC32-Prüfsumme über die Rust-Bibliothek `crc-fast`, und die in AppFlowy-Cloud `0.9.64`
+  festgepinnte Version `1.2.1` prüft auf `aarch64` **nicht zur Laufzeit**, ob die CPU die
+  dafür genutzten PMULL-/AES-Instruktionen überhaupt hat – der BCM2711 des Raspberry Pi 4
+  (Cortex-A72, CPU-Flags nur `fp asimd evtstrm crc32 cpuid`) hat sie nicht. Der in
+  `0.9.64-5` eingebaute Versuch, das per `RUSTFLAGS="-C target-feature=-crypto,-aes,..."`
+  abzuschalten, konnte prinzipiell nicht wirken (diese Features sind auf
+  `aarch64-unknown-linux-gnu` ohnehin aus; die betroffenen Funktionen schalten sie per
+  Attribut selbst wieder ein) und war nie mit einem echten Erst-Login getestet worden. Seit
+  `0.9.64-8` wird beim Bauen für `aarch64` `crc-fast` auf `1.9.0` angehoben, das die
+  CPU-Fähigkeiten zur Laufzeit erkennt und ohne AES/PMULL auf eine Tabellen-Implementierung
+  ausweicht.
+  **Nach dem Update von `0.9.64-7` oder älter:** Ein Konto, dessen erster Login auf einer
+  betroffenen Version abgestürzt ist, bleibt dauerhaft kaputt (Benutzer und Workspace existieren
+  in der Datenbank, die Startseiten des Workspace haben MinIO aber nie erreicht – der Server
+  legt sie nicht nachträglich an; im Log wiederholt sich `failed to get collab ... from S3:
+  Record not found`, die App meldet "Record not found"). Abhilfe: Add-on **deinstallieren und
+  neu installieren** (löscht alle Add-on-Daten; bei einer frischen Installation ohne Inhalte
+  der einfachste Weg) – oder das Konto in der Admin-Konsole löschen und sich mit einer
+  **anderen** E-Mail-Adresse neu registrieren.
 - **Desktop-/Mobil-App ab ca. 0.10: persönlicher Workspace leer bzw. nicht editierbar, `+` legt
   keine Seite an (kein Fix möglich)**: Beobachtet mit AppFlowy Desktop `0.14.3` auf macOS. Der
   Login klappt, der Workspace zeigt aber keine (oder nur alte) Seiten, Klick auf `+` scheint
@@ -155,3 +169,14 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
     winget install --id AppFlowy.AppFlowy --version 0.9.5 --exact
     winget pin add --id AppFlowy.AppFlowy --blocking
     ```
+- **Desktop-App meldet "Record not found" bzw. "rocksdb dropped", obwohl der Server sauber
+  läuft**: Tritt auf, wenn dieselbe App-Installation vorher bei einem *anderen* AppFlowy-Server
+  angemeldet war (z. B. dem lokalen `docker-compose`-Test aus diesem Repository) und dessen
+  Sitzung noch lokal gespeichert ist. Im Add-on-Log zeigt sich das an `fail to decode token,
+  error:InvalidSignature` (Token vom anderen Server, anderes JWT-Secret), `Invalid Refresh
+  Token: Refresh Token Not Found` und einem Postgres-Fehler `violates foreign key constraint
+  "af_collab_temp_workspace_id_fkey"` mit einer Workspace-ID, die es auf diesem Server nicht
+  gibt (die App versucht, den Workspace des alten Servers hierher zu synchronisieren);
+  "rocksdb dropped" ist die lokale Datenbank der App, die während dieses Sitzungswechsels
+  geschlossen wird. Abhilfe: App beenden, den oben genannten `data_<host>`-Ordner für diesen
+  Server löschen, App starten und neu anmelden.

@@ -177,3 +177,54 @@
   enthält dazu Download-/winget-Anleitung für macOS und Windows, die zu entfernenden lokalen
   Datenordner und den Hinweis, In-App-Updates abzulehnen. "Ersteinrichtung" verweist jetzt auf
   diese Versionsgrenze.
+
+## 0.9.64-8
+
+- **Fix (wirklich) für den SIGILL-Absturz von `appflowy_cloud` auf dem Raspberry Pi 4** beim
+  ersten Login eines Kontos bzw. bei jedem ersten Upload nach MinIO (Symptome: Desktop-App
+  "Record not found", Admin-Konsole erst beim zweiten Login-Versuch, im Add-on-Log ein
+  `[appflowy_cloud] waiting for gotrue...` mitten im Betrieb ohne Panic-Trace, direkt nach
+  Postgres' `unexpected EOF on client connection with an open transaction`). Der Absturz trat
+  auch mit `0.9.64-6`/`-7` auf; der in `0.9.64-5` eingebaute "Fix" war nie mit einem echten
+  Erst-Login getestet worden und konnte prinzipiell nicht wirken.
+- Tatsächliche Ursache (im Quellcode der beteiligten Crates verifiziert): `aws-sdk-s3` →
+  `aws-smithy-checksums 0.63.3` → **`crc-fast 1.2.1`**, so in AppFlowy-Clouds `Cargo.lock` für
+  Tag `0.9.64` festgepinnt. `crc-fast 1.2.1` hat auf `aarch64` **keine
+  Laufzeit-Erkennung** der CPU-Fähigkeiten: `src/arch/mod.rs` springt immer in Funktionen mit
+  `#[target_feature(enable = "neon,aes")]`, die PMULL ausführen – auf dem BCM2711 des Pi 4
+  (Cortex-A72, CPU-Flags `fp asimd evtstrm crc32 cpuid`, kein `aes`/`pmull`/`sha3`) ist das
+  eine illegale Instruktion, der Prozess stirbt ohne jede Meldung (Exit-Code 132). Genau das
+  beschreibt [Issue #1623](https://github.com/AppFlowy-IO/AppFlowy-Cloud/issues/1623) (letzte
+  Logzeile dort: `applying Crc32 of the request body as a header`).
+- Warum `RUSTFLAGS="-C target-feature=-crypto,-aes,-sha2,-sha3"` aus `0.9.64-5` nichts
+  bewirkte: Diese Features sind auf `aarch64-unknown-linux-gnu` ohnehin standardmäßig aus, und
+  per-Funktion-Attribute `#[target_feature(enable = ...)]` werden davon nicht berührt; `crypto`
+  ist zudem gar kein gültiges Feature mehr (rustc-Warnung `unknown and unstable feature` im
+  Build-Log). Das GitHub-Actions-Image aus `0.9.64-6` hatte dieselben Flags gesetzt (im
+  aarch64-Job-Log geprüft) – es gab also keine Regression durch den CI-Build, der Fehler war
+  nur nie weg. Die `RUSTFLAGS`-Zeile ist entfernt.
+- Fix: Im `aarch64`-Quellcode-Build wird `crc-fast` per `cargo update -p crc-fast --precise
+  1.9.0` angehoben. Seit `crc-fast 1.6.0` (PR #21 "Improve runtime feature detection") wird die
+  Implementierung zur Laufzeit gewählt: ohne `aes` → `SoftwareTable`, also eine reine
+  Tabellen-Implementierung; auch der CRC32-"Fusion"-Schnellpfad wird nur auf CPUs mit
+  AES/PMULL betreten. `1.9.0` ist die letzte Version mit MSRV 1.81 (passt zu `rust:1.86` im
+  Builder; `1.10.0` bräuchte Rust 1.89), erfüllt die Anforderung `^1.2.1` von
+  `aws-smithy-checksums` und ist API-kompatibel (Semver 1.x). Der Build gibt die gepinnte
+  Version aus `Cargo.lock` im Log aus.
+- Diagnose-Verbesserung: Neue s6-`finish`-Skripte für `appflowy_cloud` und `appflowy_worker`
+  loggen Exit-Code und Signal, wenn ein Dienst stirbt (`exited with code 256 (signal 4)` =
+  SIGILL). Bisher war ein solcher Absturz nur indirekt am erneuten "waiting for gotrue..." zu
+  erkennen.
+- **Wichtig nach dem Update:** Ein Konto, dessen erster Login auf `0.9.64-7` oder älter den
+  Server zum Absturz gebracht hat, bleibt kaputt – Benutzer, Workspace und Berechtigungen
+  existieren, die Start-Collabs des Workspace haben MinIO aber nie erreicht und werden nicht
+  nachträglich angelegt (Log: wiederholt `failed to get collab ... from S3: Record not found`,
+  die App verbindet sich im Sekundentakt neu). Abhilfe siehe DOCS.md "Bekannte Probleme":
+  Add-on deinstallieren und neu installieren (löscht `/data`), oder Konto in der Konsole
+  löschen und mit anderer E-Mail neu registrieren.
+- Doku: Neuer Eintrag zu "Record not found" / "rocksdb dropped" in der Desktop-App, wenn
+  dieselbe App-Installation zuvor bei einem anderen AppFlowy-Server (z. B. dem lokalen
+  `docker-compose`-Test) angemeldet war – erkennbar an `fail to decode token,
+  error:InvalidSignature`, `Refresh Token Not Found` und einem Fremdschlüssel-Fehler auf
+  `af_collab` mit unbekannter Workspace-ID im Add-on-Log. Abhilfe: `data_<host>`-Ordner der App
+  löschen und neu anmelden.
