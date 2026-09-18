@@ -1,0 +1,1235 @@
+{
+ "kind": "pflanzen",
+ "name": "Pflanzen",
+ "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html",
+ "intro": [
+  {
+   "kind": "para",
+   "runs": [
+    "In Anno 1800 gibt es eine Vielzahl von Pflanzen-Items, die in botanischen Gärten ausgestellt oder für bestimmte Effekte genutzt werden können. Diese Pflanzen stammen aus verschiedenen Regionen der Welt und bieten einzigartige Vorteile."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Pflanzen-Kategorien"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Gewöhnliche Pflanzen – Häufig vorkommende Arten, die keine besonderen Eigenschaften besitzen."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Ungewöhnliche Pflanzen – Seltenere Pflanzen mit erhöhter Attraktivität und Sammlerwert."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Seltene Pflanzen – Exotische Gewächse mit hohen Attraktivitätswerten, die schwer zu finden sind."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Legendäre Pflanzen – Besonders wertvolle und begehrte Pflanzen mit einzigartigen Effekten für die Stadt."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Epische Pflanzen – Extrem seltene und beeindruckende Pflanzen mit außergewöhnlichen Effekten und höchster Attraktivität."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Herkunft und Erwerb"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Durch Expeditionen"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Von Händlern oder in der Weltausstellung"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Als Belohnung für Quests"
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Nutzen der Pflanzen"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Garten-Attraktivität steigern"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Tourismus fördern"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Besondere Boni freischalten (z. B. Produktivitätssteigerungen in Betrieben durch bestimmte Pflanzen-Effekte)"
+   ]
+  }
+ ],
+ "sets": [
+  {
+   "key": "s_36",
+   "name": "Amazonas",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_lianas_0_128_128.webp",
+   "description": [
+    "Eine Sammlung gigantischer, bunter und teilweise essbarer Pflanzen aus der Neuen Welt. Diese ungewöhnliche Sammlung könnte in Ihrer Bevölkerung ein Interesse am Obstanbau wecken.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 190"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Weinberg, Bananenplantage",
+     "effects": [
+      "Region: Die Alte Welt - Produktivität +25%, Trauben-Fruchtbarkeit bereitgestellt",
+      "Region: Die Neue Welt - Produktivität +25%, Bananen-Fruchtbarkeit bereitgestellt"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "288",
+     "name": "Affenleiter",
+     "description": "Entada gigas. Schwingen Sie sich an diesen robusten Affenleitern jodelnd durch den Regenwald.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_lianas_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "286",
+     "name": "Kautschukbaum",
+     "description": "Hevea Rigidifolia. Ein Wolfsmilchgewächs aus der neuen Welt, das harzhaltigen Gummi produziert.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_hevea_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "289",
+     "name": "Metaxya-Farn",
+     "description": "Metaxya Rostrata. Ein primitiver Farn, dessen abaxiale Sori in einheitlichen Linien angeordnet sind.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/item_metaxya_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "291",
+     "name": "Paranussbaum",
+     "description": "Bertholletia Excelsa. Ein gewaltiger, Nüsse tragender Baum aus dem Regenwald, der unter den frechen Kapuzineraffen sehr beliebt ist.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_brazil_nut_tree_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 172.400,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "287",
+     "name": "Riesenseerose",
+     "description": "Victoria Amazonica. „Viel breite glänzende Blätter, die schwimmen auf dem Teich und träumend schließt die Krone die Wasserrose bleich.”",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_giant_water_lily_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "290",
+     "name": "Rote Schlauchpflanze",
+     "description": "Sarracenia purpurea. Lockt unaufmerksame Insekten in den Verdauungssaft am Boden ihrer Schläuche.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_purple_pitcher_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_36"
+  },
+  {
+   "key": "s_37",
+   "name": "Anden",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_frailejones_0_128_128.webp",
+   "description": [
+    "Eine kleine Sammlung von Pflanzen, die in den trockenen Gebirgen der Neuen Welt überleben. Pflanzen aus den Anden haben die Fähigkeit, viel Wasser zu speichern. Sie zu studieren könnte Ihrer Bevölkerung dabei helfen, landwirtschaftliche Prozesse bezüglich dieser Pflanzen zu perfektionieren.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 90"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Getreidefarm, Kaffeeplantage, Hacienda-Kaffeeplantage",
+     "effects": [
+      "Region: Die Alte Welt - Produktivität +25%, Getreide-Fruchtbarkeit bereitgestellt",
+      "Region: Die Neue Welt - Produktivität +25%, Kaffee-Fruchtbarkeit bereitgestellt"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "292",
+     "name": "Espeletia",
+     "description": "Espeletia schultzii. Eine gelbe Bergblume, die gemeinsam mit den Kakteen oben im Páramo ein klösterliches Leben lebt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_frailejones_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "293",
+     "name": "Guayacan de Manizales",
+     "description": "Lafoensia acuminata. Seine Rinde ist nachweislich ein Allheilmittel unter den traditionellen Tonika des Regenwaldes.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_guayacan_de_manizales_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "294",
+     "name": "Riesenbromelie",
+     "description": "Puya raimondii. Ein übergroßes Bromeliengewächs, das zahlreiche königliche rot-weiße Blüten trägt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_queen_of_andes_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_37"
+  },
+  {
+   "key": "s_38",
+   "name": "Heilend",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_dandelion_0_128_128.webp",
+   "description": [
+    "Die wichtigsten Pflanzen aus Heilkräutergärten, wie sie einst von Monchen angebaut wurden. Traditionelle Heilpflanzen haben selbst in einer Zeit rasanter wissenschaftlicher Fortschritte eine wichtige Bedeutung. Mehr über sie zu lernen, konnte zur Entdeckung neuer Heilmittel führen und Menschen zu einer schnelleren Genesung verhelfen.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 30"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Krankenhäuser",
+     "effects": [
+      "Ärzte +2",
+      "Reichweite + 15%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "295",
+     "name": "Löwenzahn",
+     "description": "Taraxacum officinale. Wünschen Sie sich was und pusten Sie die weißen Puschel in die Lüfte.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_dandelion_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Heilkunst"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "297",
+     "name": "Pfefferminze",
+     "description": "Mentha balsamea. Hinterlässt ein erfrischendes Kribbeln auf der Zunge.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_peppermint_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Heilkunst"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "296",
+     "name": "Roter Fingerhut",
+     "description": "Digitalis purpurea. Einen Stängel der Fingerhut-Glocken zu pflücken verärgert die Feen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_foxglove_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Heilkunst"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_38"
+  },
+  {
+   "key": "s_39",
+   "name": "Heilig",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_sacred_lotus_0_128_128.webp",
+   "description": [
+    "Die himmlischen und verehrten Pflanzen aus den östlichen Dschungeln. Diese Oase heiliger Pflanzen aus weiter Ferne könnte Pilger anlocken, die diesen lebenden Gottheiten Opfergaben bringen wollen.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 170"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Kontore & Anlegestellen",
+     "effects": [
+      "Hafenaktivität +100%",
+      "Immer wenn es im Kontor zu einem passiven Handel kommt, besteht die Chance, 5 t Kaffeebohnen, Kakao, Bananen, Perlen, Filz, Brot, Trauben, Schokolade zu erhalten."
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "303",
+     "name": "Banyan-Feige",
+     "description": "Ficus Benghalensis. Tempel wurden unter dem gewaltigen Dach der heiligen Feige errichtet.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_banyan_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 188.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+50 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "300",
+     "name": "Champaka",
+     "description": "Magnolia champaca. Ihre duftenden Blüten werden gern verwendet, um Statuen von Göttinnen zu schmücken.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_magnolia_champaca_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "301",
+     "name": "Indisches Basilikum",
+     "description": "Ocimum tenuiflorum. Seine aromatischen violetten Blätter finden in der Religion und in der Medizin Anwendung.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_tulsi_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "298",
+     "name": "Japanische Blütenkirsche",
+     "description": "Prunus serrulata. Wolken aus anmutigen Blüten, unter denen man ein Picknick machen kann.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_cherry_blossom_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "302",
+     "name": "Lotusblume „Angel Wings”",
+     "description": "Nelumbo Nucifera „Angel Wings”. Die makellose Lotusblume, die sich über trüben Gewässern erhebt, symbolisiert in vielen Religionen die Reinheit von Herz und Verstand.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_sacred_lotus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.000,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "299",
+     "name": "Sternjasmin",
+     "description": "Jasminum multiflorum. Anders als bei seinem gewöhnlichen Cousin öffnen sich die Blüten dieses Sterns des Ostens im Winter.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_downy_jasmine_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_39"
+  },
+  {
+   "key": "s_40",
+   "name": "Nahost",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_blue_lotus_0_128_128.webp",
+   "description": [
+    "Schöne und zugleich zurückhaltende Pflanzen aus dem Nahen Osten. Die wilde, subtile Schönheit dieses Gartens könnte Ihren Einwohnern exotische Traume bescheren.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 150"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Paprikafarm, Zuckerrohrplantage, Hacienda- Zuckerrohrplantage",
+     "effects": [
+      "Region: Die Alte Welt - Produktivität +25%, Paprika-Fruchtbarkeit bereitgestellt",
+      "Region: Die Neue Welt - Produktivität +25%, Zuckerrohr-Fruchtbarkeit bereitgestellt"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "304",
+     "name": "Ackerwinde",
+     "description": "Convolvulus arvensis. Auch „Acker-Winde” genannt, was sie ziemlich treffend beschreibt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_vines_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "308",
+     "name": "Blaue Lotusblume",
+     "description": "Nymphaea Caerulea. Steingravuren zeigen den Sonnengott des Deltas, der jeden Morgen seiner Blüte entspringt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_blue_lotus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.000,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "305",
+     "name": "Papyrus",
+     "description": "Cyperus Papyrus. Daraus wurde einst Papier, aber auch Schiffe, Kleidung, ja sogar Nahrung hergestellt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/item_papyrus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "306",
+     "name": "Rhododendron",
+     "description": "Rhododendron. Eine Gattung bunt geblümter Sträucher, die so mannigfaltig ist, dass sich Botaniker auf keine Klassifizierung einigen können.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_rhododendron_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "309",
+     "name": "Roter Tigerlotus",
+     "description": "Nymphaea Lotus. Die hellroten Varietäten im Laub ähneln den Streifen eines Tigers.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_tiger_lotus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.000,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "307",
+     "name": "Wasserhyazinthe",
+     "description": "Eichhornia Crassipes. Ein überaus hartnäckiger Eindringling.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/item_water_hyacinth_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_40"
+  },
+  {
+   "key": "s_41",
+   "name": "Sargassosee",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_great_star_coral_0_128_128.webp",
+   "description": [
+    "Calypso-Palmen und bunte Korallen von den westlichen Inseln. In dieser azurblauen Meereslandschaft konnen Besucher friedliche Spaziergänge genießen und dabei völlig die Zeit vergessen. Dadurch könnten sie zu längeren Urlauben inspiriert werden.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 130"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Besucherhäfen",
+     "effects": [
+      "Mehr Besuche +10%",
+      "Attraktivität +50"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "314",
+     "name": "Geweihkoralle",
+     "description": "Acropora Cervicornis. Eine harte Koralle, die sich wie ein Baum ausstreckt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_staghorn_coral_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "311",
+     "name": "Königspalme",
+     "description": "Roystonea regia. Ihre gewaltigen Wedel fliegen in tropischen Stürmen einfach davon.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_palm_tree_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "312",
+     "name": "Kandelaberkoralle",
+     "description": "Dendrogyra cylindrus. Gestalten, die sich im Dunkel des Wassers aneinanderdrängen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_pillar_coral_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "310",
+     "name": "Kokospalme",
+     "description": "Cocos nucifera. Geben Sie Acht, dass Sie keine herunterfallende Frucht auf die Nuss bekommen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_coco_tree_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "315",
+     "name": "Steinkoralle",
+     "description": "Montastraea Cavernosa. Ihre kuppelformigen Kolonien könnten Trypophobie auslösen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_great_star_coral_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "313",
+     "name": "Strandflieder",
+     "description": "Limonium perezii. Er wächst in salzhaltigem Boden und sprenkelt Küsten mit seinen violetten Dolden.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_sea_lavender_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_41"
+  },
+  {
+   "key": "s_42",
+   "name": "Subalpin",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_rocky_mountain_fir_0_128_128.webp",
+   "description": [
+    "Die meistverbreiteten Pflanzen aus dem kalten Norden. Das Studieren borealer Flora könnte Ihren Einwohnern ein besseres Verständnis von Waldbiomen vermitteln.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 60"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Jagdhütte, Kautschukplantage, Hacienda-Kautschukplantage",
+     "effects": [
+      "Region: Die Alte Welt - Produktivität +25%, Jagdgründe bereitgestellt",
+      "Region: Die Neue Welt - Produktivität +25%, Kautschuk-Fruchtbarkeit bereitgestellt"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "316",
+     "name": "Felsengebirgs-Tanne",
+     "description": "Abies Lasiocarpa. Wächst nahe der Baumgrenze.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_rocky_mountain_fir_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "318",
+     "name": "Schnee-Eukalyptus",
+     "description": "Eucalyptus Pauciflora. Die creme- und kakaofarbene Rinde erinnert an verschmierte Spachtelmasse.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_snow_gum_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "317",
+     "name": "Zweiblütiger Steinbrech",
+     "description": "Saxifraga Oppositifolia. Schießt nach der Schneeschmelze zwischen den Felsen hervor.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_saxifraga_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_42"
+  },
+  {
+   "key": "s_43",
+   "name": "Sumpfgebiet",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_lilies_0_128_128.webp",
+   "description": [
+    "Einige Pflanzen, die meist in Sumpfgebieten zu finden sind. Sumpfpflanzen können giftig sein und Sümpfe sind der Lebensraum von Mücken und anderen Kreaturen, die von den Menschen als Ungeziefer angesehen werden. Ihre Einwohner könnten dazu bewegt werden, sich mehr um ihre Hygiene zu kümmern.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 60"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Wohnhäuser",
+     "effects": [
+      "Zufriedenheit +2",
+      "Krankheitsgefahr -50%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "321",
+     "name": "Echter Eibisch",
+     "description": "Althaea Officinalis. Die Wurzeln konnen mit Eiweiß zu einer „Pate de Guimauve” kombiniert werden, einem wahren Leckerbissen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/item_marsh_mallow_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Heilkunst"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "319",
+     "name": "Schilfrohr",
+     "description": "Phragmites australis. Flüstert an den Ufern von Flussmündungen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_reeds_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Heilkunst"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "320",
+     "name": "Seerose",
+     "description": "Nymphaea alba. Zumeist begleitet vom Gequake der Kröten.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_lilies_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Heilkunst"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_43"
+  },
+  {
+   "key": "s_44",
+   "name": "Verwunschen",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_jujube_0_128_128.webp",
+   "description": [
+    "Eine faszinierende Sammlung von Pflanzen mit dunklen, mysteriösen Eigenschaften. Die Wiederentdeckung dieser Hexenpflanzen und ihrer Nutzung durch die Menschen könnte für mehr gesellschaftlich akzeptierte Laster in der Stadt sorgen.",
+    "DLC: Botanica"
+   ],
+   "bonis": [
+    "Attraktivität: 160"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Hopfenplantage, Tabakplantage",
+     "effects": [
+      "Region: Die Alte Welt - Produktivität +25%, Hopfen-Fruchtbarkeit bereitgestellt",
+      "Region: Die Neue Welt - Produktivität +25%, Tabak-Fruchtbarkeit bereitgestellt"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "325",
+     "name": "Amerikanische Lotusblume",
+     "description": "Nelumbo Lutea. Ein Wald aus blättrigen Trompeten und weichen zitronenfarbenen Stempeln, die aus dem Wasserbett ragen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_star_bright_lotus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "322",
+     "name": "Hanf",
+     "description": "Cannabis sativa. Man kann es zu allem verweben; zu Leinenstoff, zu Seilen, sogar zu Kerzendochten …",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_hemp_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "326",
+     "name": "Indische Lotusblume",
+     "description": "Nelumbo Nucifera. Die gelben Blüten öffnen sich im Morgengrauen wie Sonnen an der Oberfläche des Teiches.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_perrys_giant_sunburst_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+40 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "323",
+     "name": "Mohn",
+     "description": "Papaver rhoeas. Strahlend rote Flecken zwischen den Weizenähren.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_poppy_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.075,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "324",
+     "name": "Wiesensalbei",
+     "description": "Salvia pratensis. Geschmückt mit seinen indigoblauen Blüten eignet er sich perfekt zum Würzen von Fleisch.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_salvia_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    },
+    {
+     "anchor": "327",
+     "name": "Ziziphus",
+     "description": "Ziziphus Lotus. Der Verzehr seiner Blüten und Früchte verursacht eine angenehme Benommenheit, die legendäre Seeleute dazu verführte, ihre heimatlichen Gefilde zu vergessen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_jujube_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 178.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+50 Glaube"
+     ],
+     "dlc": [
+      "Botanica"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/pflanzen.html#s_44"
+  }
+ ],
+ "loose": [
+  {
+   "anchor": "328",
+   "name": "Bogenhanf",
+   "description": "Sansevieria trifasciata. Seine Blätter sind scharf und steif, das Muster schlangenartig.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_mother_in_law_tongue_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 55.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "329",
+   "name": "Grannen-Schildfarn",
+   "description": "Polystichum polyblepharum. Seine Wedel sind anmutig gefächert und nach hinten gebogen, um Quasten zu formen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_tassel_ferns_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.750,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "330",
+   "name": "Gungurru",
+   "description": "Eucalyptus caesia. Ein Mallee aus den Trockengebieten, dessen kirschrote und Quasten-ähnliche Blüten herunter baumeln.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_gunguru_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.750,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "331",
+   "name": "Hades-Affodill",
+   "description": "Asphodelus Infernum. Felder aus ihren gespenstischen weißen Blüten begrüßen Neuankömmlinge auf ihrer Reise in die Unterwelt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_underworld_asphodelus_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 172.400,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "332",
+   "name": "Heidelbeere",
+   "description": "Vaccinium myrtillus. Färbt den Mund in einem süßen, tiefen Lila.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/item_blueberry_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.075,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "333",
+   "name": "Heilige Moly",
+   "description": "Nicht klassifiziert. Wenn man in ein Schwein verwandelt wurde, kann einen dieses Kraut in seine menschliche Gestalt zurückverwandeln.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_moly_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 172.400,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "334",
+   "name": "Holunder",
+   "description": "Sambucus nigra. Beliebt bei Kolibris und Waldsängern.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_elderberry_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gew?hnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.075,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "335",
+   "name": "Madeira-Natternkopf",
+   "description": "Echium candicans. Eine widerstandsfähige Pflanze, die verhältnismäßig wenig Wasser benotigt und in einem strahlenden Blau blüht.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_pride_of_madeira_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 55.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "336",
+   "name": "Magische Farnblüte",
+   "description": "Polypodiopsida Sonajalaõis. Eine beinahe mythische Perle der winterlichen Wälder, die sich nur Liebenden zur Sommersonnenwende zeigt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_fern_flower_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 172.400,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "337",
+   "name": "Mezoischer Hornzapfen",
+   "description": "Ceratozamia mexicana. Eine mezoische Kuriosität, die durch die hornartigen Zacken an ihren Zapfen charakterisiert wird.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_mexican_horn_cone_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 55.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "338",
+   "name": "Mondorchidee",
+   "description": "Phalaenopsis amabilis. Diese seltene und prächtige Orchidee erinnert an die Flügelhaube einer Nonne.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_orchids_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.750,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "339",
+   "name": "Pinker Zuckerbusch",
+   "description": "Protea Susannae. Wenn die Blätter dieser frechen und widerstandsfähigen Blume zerdrückt werden, sondern sie einen Geruch nach Eiern ab.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_protea_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.750,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "340",
+   "name": "Stanhopea Insignis",
+   "description": "Stanhopea insignis. Eine Orchidee aus fernen Gebieten, die sich zur Bestäubung ganz auf die Bienen verlässt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_spotted_stanhopea_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 55.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "341",
+   "name": "Strand-Grasnelke",
+   "description": "Armeria maritima. Die pinkfarbenen Blütenkugeln erinnern an Ballons, die an Steilküsten entlang schweben.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_thrift_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.600,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "342",
+   "name": "Strauchiges Brandkraut",
+   "description": "Phlomis fruticosa. Wurde nach den heiligen Ländern benannt, aus denen es stammt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_jerusalem_sage_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.750,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "343",
+   "name": "Titanwurz",
+   "description": "Amorphophallus Titanum. Manchmal auch als Leichenblume bekannt sieht diese nach Verwesung riechende Blume etwas anrüchig aus.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_titan_arum_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 172.400,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  },
+  {
+   "anchor": "344",
+   "name": "Wildprets Natternkopf",
+   "description": "Echium wildpretii. Dieser auffällige Natternkopf ist nur auf einigen wenigen Vulkaninseln in warmen Meeren heimisch.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/plants/icon_echium_wildpretii_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 172.400,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Botanica"
+   ]
+  }
+ ],
+ "loose_intro": []
+}

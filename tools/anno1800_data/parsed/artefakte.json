@@ -1,0 +1,2831 @@
+{
+ "kind": "artefakte",
+ "name": "Artefakte",
+ "url": "https://www.annoinfo.de/Anno_1800/artefakte.html",
+ "intro": [
+  {
+   "kind": "para",
+   "runs": [
+    "In Anno 1800 gibt es eine Vielzahl von Artefakt-Items, die in Museen ausgestellt oder für bestimmte Effekte genutzt werden können. Diese Artefakte stammen aus verschiedenen Kulturen und Epochen und bieten einzigartige Vorteile."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Artefakt-Kategorien"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Gewöhnliche Artefakte – Häufig vorkommende Objekte ohne besondere Eigenschaften."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Ungewöhnliche Artefakte – Seltenere Fundstücke mit höherem Sammlerwert."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Seltene Artefakte – Kostbare Antiquitäten mit hohen Attraktivitätswerten."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Legendäre Artefakte – Besonders wertvolle Relikte mit einzigartigen Effekten für die Stadt."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Epische Artefakte – Extrem seltene und beeindruckende Artefakte mit außergewöhnlichen Effekten und höchster Attraktivität."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Herkunft und Erwerb"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Durch Expeditionen"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Von Händlern oder in der Weltausstellung"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Als Belohnung für Quests"
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Nutzen der Artefakte"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Museums-Attraktivität steigern"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Tourismus fördern"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Besondere Boni freischalten (z. B. Einflusssteigerungen durch seltene Fundstücke)"
+   ]
+  }
+ ],
+ "sets": [
+  {
+   "key": "s_27",
+   "name": "Jura",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_t_rex_0_128_128.webp",
+   "description": [
+    "Bahnbrechende geologische Entdeckungen, die unseren Ursprung infrage stellen! Die Enthüllungen Ihres als freie Universität dienenden Museums könnten eine Verringerung der Kirchenbesuche zur Folge haben."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1800 (+20%)",
+    "Attraktivität: 260 (312 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Wohnhäuser",
+     "effects": [
+      "Einkommen +10%",
+      "Zufriedenheit +10"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "241",
+     "name": "Ammoniten",
+     "description": "Die versteinerten Gehäuse langst ausgestorbener Gattungen von Meeresmuscheln.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_fossils_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 18.550,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    },
+    {
+     "anchor": "244",
+     "name": "Apatosaurus",
+     "description": "Mosasaurus Hoffmanni. Wer hatte gedacht, dass einst so eine riesige Kreatur den Ozean durchstreift und sich mühelos Haie einverleibt hat.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_sauropodon_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 197.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "245",
+     "name": "Mosasaurus-Fossil",
+     "description": "Apatosaurus Ajax. Eine der größten Kreaturen, die der Planet je gesehen hat. Wie konnte sie ihr eigenes Gewicht tragen?",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_mosasaurus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 196.775,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "242",
+     "name": "Protoceratops-Eier",
+     "description": "Wer über diese versteinerten Eier gestolpert ist, hielt sie zunächst irrtümlich für die eines Riesenvogels.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_dinosaur_egg_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 74.775,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "243",
+     "name": "Stegosaurus",
+     "description": "Stegosaurus Armatus. Charakteristisch sind die dreieckigen Platten auf dem Rücken.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_stegosaurus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 68.950,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "246",
+     "name": "Tyrannosaurus Rex",
+     "description": "Tyrannosaurus Rex. Allein der Anblick seines Skeletts reicht aus, um das tapferste Schulkind in Angst und Schrecken zu versetzen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_t_rex_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 200.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_27"
+  },
+  {
+   "key": "s_35",
+   "name": "Versunkene Städte",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mayan_glyphs_0_128_128.webp",
+   "description": [
+    "Die kolossalen steinernen Ruinen verfallener Städte, verborgen unter dem Blätterdach des Dschungels der Neuen Welt. Mehr über diese Zivilisationen zu erfahren, könnte Ihnen dabei helfen, die lange verschollene goldene Stadt zu entdecken."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1701 (+50%)",
+    "Attraktivität: 270 (405 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Kontore & Anlegestellen",
+     "effects": [
+      "Hafenaktivität +100%",
+      "bei passivem Handel am Kontor besteht die Chance 5t Gold, Goldbarren oder Schmuck zu erhalten"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "280",
+     "name": "Mesoanische Glyphen",
+     "description": "Die mit kaum entzifferbaren Hieroglyphen geschmückten Steinfliesen einer versunkenen Stadt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mayan_glyphs_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 58.100,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "284",
+     "name": "Mesoanischer Hafen",
+     "description": "Der Hafen einer alten Küstenstadt, die mit der weit entfernten Alten Welt Jade und Türkise gehandelt haben könnte.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mayan_seaport_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 150.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "283",
+     "name": "Mesoanischer Kalender",
+     "description": "Ausgeklügeltes zyklisches Kalendersystem aus Stein, das das Ende der Welt in etwa zwei Jahrhunderten vorhersagt!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mayan_calendar_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 180.625,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Navigation"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "285",
+     "name": "Mesoanischer Tempel",
+     "description": "Der Tempel des Großen Jaguars. Einst ein wichtiger ritueller Ort und ein Tor zur Unterwelt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mayan_temple_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 156.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "281",
+     "name": "Mesoanisches Haus",
+     "description": "Ein schlichtes Haus kann ein Schatzgewölbe faszinierender Details darüber sein, wie wir früher gelebt haben.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mayan_house_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 50.125,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "282",
+     "name": "Takals Halskette",
+     "description": "Dies gehörte Pakal Sonnenschild, dem vergöttlichten Monarchen, der 50 Jahre regierte.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_necklace_epic_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 61.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Redegabe"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_35"
+  },
+  {
+   "key": "s_33",
+   "name": "Ursprung der Menschheit",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_neanderthaler_0_128_128.webp",
+   "description": [
+    "Die ersten Schritte, die unsere Vorfahren in der Wildnis prähistorischer Zeit unternommen haben, ausgestellt für die Öffentlichkeit. Wird wahrscheinlich das grundlegende Verständnis für das Sammeln lebensnotwendiger Ressourcen fördern."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1800 (+20%)",
+    "Attraktivität: 140 (168 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Fischereien, Nutztpflanzenfarmen, Tierhöfe und Jagdhütten",
+     "effects": [
+      "Produktivität +10%",
+      "Arbeitskräfte erforderlich -5%",
+      "Wartungskosten -5%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "271",
+     "name": "Altamira-Höhlenmalereien",
+     "description": "Frühe Zeichnungen von Bisons mit Ocker und Holzkohle, die so hervorragend erhalten sind, dass sie als Fälschungen bezeichnet wurden.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_prehistorical_painting_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.575,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "272",
+     "name": "Höhlenmalereien von Valojoulx",
+     "description": "Perfekt erhaltene Höhlenmalereien, welche die zahlreichen tierischen Gefährten unserer großen Vorfahren darstellen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_lascaux_painting_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 151.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "273",
+     "name": "Neanderthaler-Skelett",
+     "description": "Homo neanderthalensis.Diese in Kalkstein gefundenen Überreste sind eine Offenbarung in Bezug auf den Platz des Menschen in der Natur.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_neanderthaler_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 156.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_33"
+  },
+  {
+   "key": "s_31",
+   "name": "Totenkopf",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_sword_pirate_epic_0_128_128.webp",
+   "description": [
+    "Das goldene Zeitalter der Piraterie und aller mit ihr verbundenen Abenteuer. Die Romantik dieses verblassenden Zeitalters wird vermutlich die Herzen Ihrer Seeleute gewinnen."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1404 (+50%)",
+    "Attraktivität: 120 (180 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Kriegsschiffe",
+     "effects": [
+      "Bewegungsgeschwindigkeit +3%",
+      "Wartungskosten -5%",
+      "Schaden-Verlangsamung -10%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "265",
+     "name": "Barbarossas Knochen",
+     "description": "Das Skelett eines Königs unter Korsaren, den wir mit einer Ehrensalve unserer Kanonen grüßen, bevor wir zur See fahren.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_readbeard_skeletton_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 75.000,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    },
+    {
+     "anchor": "266",
+     "name": "Braunbarts Entermesser",
+     "description": "Ein furchterregendes Schwert, das zweifellos vom gefürchtetsten alten Kerl aller alten Kerle geführt wurde.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_sword_pirate_epic_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 72.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "267",
+     "name": "Verschollener Schatz von Ben Sahid",
+     "description": "Die zahlreichen und mannigfaltigen Schätze Ben Sahids, des größten Piraten aller Zeiten.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_coin_epic_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 72.075,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_31"
+  },
+  {
+   "key": "s_29",
+   "name": "Nordische Sagen",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_viking_valkyrie_helmet_0_128_128.webp",
+   "description": [
+    "Zeremontelle Gegenstände der nordischen Kultur, die früher einmal Furcht und Zerstörung an den Küsten der Alten Welt verbreitet hat. Ihre kriegerischen Fähigkeiten und Furchtlosigkeit könnten Ihre eigenen Truppen inspirieren."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2205 (+30%)",
+    "Attraktivität: 270 (351 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Kriegsschiffe",
+     "effects": [
+      "Trefferpunkte +5%",
+      "Ausgehender Schaden +3%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "255",
+     "name": "Altar von Uppsidaisi",
+     "description": "Opferaltar eines nordischen Tempels, wo den Gottern neun männliche Exemplare jeder lebenden Kreatur geopfert wurden.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_viking_uppsala_altar_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 161.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "254",
+     "name": "Drachenboot-Schnitzerei",
+     "description": "Ein gut erhaltenes Exemplar eines der alten Drachenboote, die einst die Meere des Nordens befuhren.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_viking_drakkar_carving_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 50.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "253",
+     "name": "Heimskringla",
+     "description": "Sagen über das Leben und die Heldentaten alter Könige des Nordens.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_ragnarsdrapa_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 17.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "256",
+     "name": "Ring der Nibelungen",
+     "description": "Einer nordischen Legende zufolge soll dieser Ring seinem Träger die Macht geben, über die Welt zu herrschen und die Alten Götter zu entmachten.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_viking_nibelungen_ring_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 194.425,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "257",
+     "name": "Sæmundar Edda",
+     "description": "Eine sagenhafte Sammlung epischer Gedichte, die uns als Fenster zum Leben und zur Mythologie der nordischen Völker dient.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_viking_edda_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "258",
+     "name": "Walkürenhelm",
+     "description": "Die plattierten Flügel erinnern an die mythologischen Reiter des Nordens, die auf dem Schlachtfeld lebten und starben.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_viking_valkyrie_helmet_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 158.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Glaube"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_29"
+  },
+  {
+   "key": "s_28",
+   "name": "Kulturen der Ägäis",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_scroll_anthology_myths_0_128_128.webp",
+   "description": [
+    "Die von den Stadtstaaten der Antike im ägälschen Raum hinterlassenen markanten religiösen Bauten und mythologischen Inschriften. Ihre Bevölkerung wird schon bald ihre berühmten Tragödien im Theater und im Museum sehen wollen."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1800 (+20%)",
+    "Attraktivität: 240 (288 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Varieté Museum und Funkturm",
+     "effects": [
+      "Attraktivität +5",
+      "Wartungskosten -20%",
+      "Varieté: Tooltip zeigt nun an welches Stück gespielt wird."
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "250",
+     "name": "Die Ilias",
+     "description": "Wahrhaftig ein Epos! Dieses mündlich überlieferte Gedicht schildert die Belagerung von Troja.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_scroll_anthology_myths_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 68.625,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "251",
+     "name": "Die Odyssee",
+     "description": "Der Listenreiche ersinnt viele Listen, um zu seiner geliebten Familie zurückzukehren.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_scroll_odyssey_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 70.125,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "248",
+     "name": "Dionysisches Mosaik",
+     "description": "Von der Betrachtung der Kreismuster aus Efeu oder Weinranken kann einem ebenso schwindlig werden wie von der Gastfreundschaft der Gottheit.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_corinthian_mosaik_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "247",
+     "name": "Enosichthon-Statue",
+     "description": "Eine klassische Statue des Meeresgottes, in Ägäischen Marmor gemeißelt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_statue_marble_statue_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.375,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "249",
+     "name": "Olympiatempel",
+     "description": "Zwischen Reliefs von Lapithen und Zentauren zu wandeln, versetzt einen zurück ins Ägäische Zeitalter.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_corinthian_olympean_remain_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 58.350,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "252",
+     "name": "Tempel des Poseidon",
+     "description": "Ein bemerkenswert gut erhaltenes Monuments des Goldenen Zeitalters der Agäis, das an Delfine und Fische denken lässt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_corinthian_temple_of_posseidon_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 187.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_28"
+  },
+  {
+   "key": "s_19",
+   "name": "Adlerreich",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_coin_common_0_128_128.webp",
+   "description": [
+    "Die volle Pracht des uralten Reichs des Südens, dessen Bauten und Infrastruktur ihrer Zeit weit voraus waren. Die Rekonstruktion seiner Geschichte kann das moderne Bauwesen beflügeln und Ihre Bevölkerung ermutigen, mehr zu ihrer Stadt beizutragen."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1800 (+20%)",
+    "Attraktivität: 130 (156 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Wohnhäuser",
+     "effects": [
+      "Einkommen +5%",
+      "Gefahren von Bränden, Krankheiten, Aufständen und Explosionen -10%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "210",
+     "name": "Augustus-Forum",
+     "description": "Ein letzter Überrest des ehemals schlagenden Herzens des Adlerreichs. Durch diese Hallen wanderten einst Senatoren und Kaiser.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_roman_forum_remains_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.275,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "208",
+     "name": "Imperiumsadler-Mosaik",
+     "description": "Die aus winzigen Steinkacheln zusammengesetzte Darstellung einer monumentalen Schlacht zwischen Ost und West.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_corinthian_mosaik_1_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 52.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "209",
+     "name": "Minerva-Heiligtum",
+     "description": "Teil eines dezenten Heiligtums, das zu Ehren einer Gottin der Strategie und Kriegführung errichtet wurde.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_roman_sanctuary_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 52.725,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Glaube"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_19"
+  },
+  {
+   "key": "s_26",
+   "name": "Huaca aus der neuen Welt",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mummy_nazcan_0_128_128.webp",
+   "description": [
+    "Die eindrucksvollen Überreste einer Grabstätte einer mysterlösen Zivilisation aus der Neuen Welt, für die Öffentlichkeit ausgegraben. Für jede führende Persönlichkeit, die sich verzaubern lassen möchte, ein unverzichtbares Besichtigungsziel."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1701 (+50%)",
+    "Attraktivität: 110 (165 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Besucherhäfen",
+     "effects": [
+      "Erhöht Besucherzahl um 5%",
+      "Erhöhte Chance das Spezialisten deine Insel besuchen"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "238",
+     "name": "Affenzahnamulett",
+     "description": "Dieser Affengott aus Nazca grinst Ihren Neid weg.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_monkey_amulet_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 25.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "240",
+     "name": "Juanita die Mumie",
+     "description": "Die letzte Ruhestätte der uralten Bewohner der schwarzen Wüste.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mummy_nazcan_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 66.350,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "-10 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "239",
+     "name": "Nazca-Grab",
+     "description": "Der im Eis gefundene, in ein Bündel Kleider gehüllte Leichnam eines Andenmädchens.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_nascan_tomb_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 72.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "-10 Glaube"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_26"
+  },
+  {
+   "key": "s_21",
+   "name": "Bronzezeit",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_celts_stonehenge_0_128_128.webp",
+   "description": [
+    "Eine urgeschichtliche Zivilisation aus dem Nordwesten der Alten Welt, die für ihre Steinkreise und magischen Wälder bekannt ist. Den Besuchern der Ausstellung könnte nun endlich die Ihren Steinbrüchen und Wäldern innewohnende Schönheit bewusst werden."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2070 (+30%)",
+    "Attraktivität: 250 (325 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Holzfäller, Jagdhütten und Steinbrüche",
+     "effects": [
+      "Produktivität +5%",
+      "Attraktivität +5",
+      "1 extra Produkt alle 10 Zyklen"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "218",
+     "name": "Brón-Dolmen",
+     "description": "Ein T-förmiges Hünengrab. Dem Glauben nach fanden hier reinigende Bestattungsriten statt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_celtic_dolmen_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 52.225,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "219",
+     "name": "Goidelischer Steinknoten",
+     "description": "Hoch anspruchsvolle Steinmeißeleien, ein Wahrzeichen goidelischer Rituale und Religion.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_celtic_carving_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 52.225,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "221",
+     "name": "Goidelischer Steinkreis",
+     "description": "Himmlische Energie schwingt zwischen diesen Ehrfurcht gebietenden Steinen, also nur zu, schnappen Sie sich einen Meißel und nehmen Sie etwas davon mit nach Hause!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_celtic_stonehenge_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 158.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "220",
+     "name": "Menhire",
+     "description": "Diese hohen Steine sind die Torwächter einer längst vergangenen Ära.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_celtic_menhirs_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 63.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "217",
+     "name": "Tara-Brosche",
+     "description": "Der Gipfel frühgoidelischer Metallverarbeitung mit ihren Filigranarbeiten aus vergoldetem Silber.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_necklace_rare_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 19.275,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Redegabe"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "222",
+     "name": "Weißzahn, das Schwert von Rhydderch",
+     "description": "Legendäre Klinge eines großzügigen goidelischen Herrschers, von der behauptet wird, von einer würdigen Person geschwungen, erstrahle die Klinge in feurigem Schein.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_celts_dyrnwyn_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 150.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_21"
+  },
+  {
+   "key": "s_32",
+   "name": "Trelawney-Schlacht",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_nadaskys_sword_0_128_128.webp",
+   "description": [
+    "Überreste des Tages, an dem zwei gewaltige Imperien am Kap von Trelawney aufeinandertrafen. Jedes verzunkene Objekt stellt ein Ehrengrabmal für jene dar, die auf beiden Seiten fielen. Die Diener des Patriotizmus und ihrer Pflichten sind auf ewig mit der See vereint. Die Erinnerungen an die ruhmreichen Tage können den Patriotismus Ihrer eigenen Bevölkerung in den schwersten Zeiten vielleicht beflügeln.",
+    "DLC: Gesunkene Schätze"
+   ],
+   "bonis": [
+    "Attraktivität: 120"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Kriegsschiffe",
+     "effects": [
+      "Schaden an Segelschiffen +20%",
+      "Unerschütterlich - Ihr Schiff fügt erhöten Schadenzu, wenn seine Trefferpunkte niedriger sind."
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "268",
+     "name": "Admiral Nadaskys Säbel",
+     "description": "Die Klinge eines großen Strategen. Zuletzt wurde sie hoch erhoben und in der südlichen Sonne glänzend gesehen, bevor die Flotte die feindlichen Linien durchbrach.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_nadaskys_sword_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Kampfkraft"
+     ],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "269",
+     "name": "Imperiale Galionsfigur",
+     "description": "Die eindrucksvolle Galionsfigur eines prächtigen königlichen Schiffs, das in der Schlacht von Trelawney gekämpft hat.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_empire_figurehead_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Glaube"
+     ],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "270",
+     "name": "Nadaskys Orden",
+     "description": "Nadaskys letzter Wunsch war, dass dieser Orden für seinen jungen Sohn geborgen wird, der schon immer davon geträumt hatte, ein Admiral zu werden - genau wie sein Vater …",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_nadaskys_medal_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_32"
+  },
+  {
+   "key": "s_20",
+   "name": "Atlantis",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_temple_of_posseidon_0_128_128.webp",
+   "description": [
+    "Die Geschichten waren tatsächlich wahr! Oder wie sonst Sollte man diese ertränkten Erinnerungen an eine vergessene Zeit erklären? Fragmente jener, die einst auf dem großen Kontinent hierunter lebten, liegen entlang der Meerenge. Wie die (höchst fragwürdige) Herkunft der Erdenzivilisation, hilft das Wissen aus den atlantischen Ruinen vielleicht Ihren Archäologen dabei, die Position anderer verlorener Städte aufzuspüren.",
+    "DLC: Gesunkene Schätze"
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2070 (+30%)",
+    "Attraktivität: 300 (390 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Bergungsschiff",
+     "effects": [
+      "Taucherglocke für Raritäten - Episch +5, Legendär +2",
+      "Erhöhte Chance, Artefakte zu finden - Museum +5"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "216",
+     "name": "Atlantische Tafel",
+     "description": "Eine Tafel, die so rätselhaft ist, dass ein Großteil der Museumsbesucher von Atlantis’ ehemaliger Existenz überzeugt sein wird, während sie wahre Gelehrte der Antike eher skeptisch stimmt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_tablet_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "213",
+     "name": "Gerichtshof",
+     "description": "Kein Gericht hätte die Überheblichkeit der Atlanter zügeln können, und so wurde es den Parzen uberlassen, das Volk zum Untergang in den ewigen Abgrund zu verurteilen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_colums_of_law_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "215",
+     "name": "Gipfel von Atlantis",
+     "description": "Dieses megalithische Gebilde ist ein weiterer Hinweis auf einen verlorenen Kontinent im Westen. Experten sagen, diese gestufte Pyramide könnte der Mittelpunkt atlantischer Rituale gewesen sein.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_yonaguni_pyramid_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "211",
+     "name": "Mauer von Atlantis",
+     "description": "Der Beweis für eine verloren geglaubte Zivilisation? Man sagt, das Königreich von Atlantis habe sich über einen riesigen und fruchtbaren Kontinent erstreckt, der den Legenden zufolge auf tragische Weise im Meer versunken sein soll.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_atlantis_wall_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "214",
+     "name": "Oreichalkos-Statue",
+     "description": "Eine aus einem so seltenen Material geschnitzte Statue, dass sie jahrhundertelang nur unter diesem Namen bekannt war. Es ist durchaus möglich, dass dies das letzte in der Natur vorkommende Exemplar dieses Minerals ist.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_orichalk_statue_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "212",
+     "name": "Tempel des Poseidon",
+     "description": "Dieser versunkene Schrein für Poseidon mit seinem Dreizack erscheint nun etwas paradox. Warum hat Poseidon seine Kinder nicht gerettet, wenn doch die Meere ihm gehorchen?",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_temple_of_posseidon_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_20"
+  },
+  {
+   "key": "s_30",
+   "name": "Relikte von Thule",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_polar_5_0_128_128.webp",
+   "description": [
+    "Ein tiefer Einblick in die Kultur der Inuit und ihrer Vorfahren, der ein Gefühl des Staunens und Friedens hervorruft. Eine erhellende Ausstellung, die eine Brücke zwischen zwei sehr unterschiedlichen Völkern schlägt.",
+    "DLC: Die Passage"
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2070 (+30%)",
+    "Attraktivität: 190 (247 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle kulturellen Gebäude",
+     "effects": [
+      "Themen: Taigawald, Polarkreis, Arktische Tundra, Nordische Saga, Bronzezeit, Relikte von Thule, Eingefroren, Subalpin",
+      "Attraktivität +20%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "259",
+     "name": "Gemeißelter Steinbär",
+     "description": "Diese kleine, präthulische Schnitzerei wurde in einem erstaunlich guten Zustand geborgen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_flying_bear_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 4.962,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Redegabe"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "263",
+     "name": "Igluit",
+     "description": "Traditionelle aus Eisblöcken gebaute Inuit-Wohnhäuser, die dank ihrer guten Isolierung die Wärme der Menschen im Inneren speichern.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_igluit_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.975,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "260",
+     "name": "Inunnguag Inuksuk",
+     "description": "Dieses Steingebilde wird oft mit den schlichteren Inuksuik verwechselt und erinnert an einen Menschen mit ausgebreiteten Armen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_inukshuk_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 19.275,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Redegabe"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "261",
+     "name": "Pirujagarvik Inuksuk",
+     "description": "Dieser pyramidenformige Inuksuk wurde erbaut, um eine geheime Vorratskammer voll Rentierfleisch zu markieren, das für den Winter dort aufbewahrt wurde.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_pirujaqarvik_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 19.825,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Redegabe"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "262",
+     "name": "Spielzeug-Qamutiik",
+     "description": "Die Miniaturversion eines traditionellen Inuit-Schlittens für Kinder mit Husky.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_qamutiik_toy_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 18.450,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "264",
+     "name": "Uummannag- Mumie",
+     "description": "Eine gut gekleidete, über 400 Jahre alte Inuit-Mumie. So gefriergetrocknet sieht sie aus als ware sie erst gestern gestorben.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_qilakitsoq_mummy_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_30"
+  },
+  {
+   "key": "s_22",
+   "name": "Eingefroren",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_mammoth_0_128_128.webp",
+   "description": [
+    "Von Bärenjungen bis hin zu Mastodanten, nichts kann den eiskalten Temperaturen der Arktis standhalten. Das Eis hat diese Ausstellungsstücke in nahezu perfektem Zustand konserviert.",
+    "DLC: Die Passage"
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1800 (+20%)",
+    "Attraktivität: 120 (144 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Nahrungs- und Getränkeproduktionsgebäude",
+     "effects": [
+      "Wartungskosten -20%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "225",
+     "name": "Eingefrorenes Wollhaarmammut",
+     "description": "Der Traum eines jeden Paläontologen. Etwas mitgenommen nach tausenden von Jahren im Eis, doch noch immer teilweise mit Haut und Fell bedeckt!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_mammoth_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 152.475,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+40 Glaube"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "223",
+     "name": "Sammlung von Relikten der verschollenen Expedition",
+     "description": "Eine Zusammenstellung scheinbar wertloser Gegenstände aller Art, die der Mannschaft der verschollenen Expedition gehörten.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_security_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 19.225,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "224",
+     "name": "Wolfswelpen- Mumie",
+     "description": "Dieser Wolfswelpe ist 50.000 Jahre alt und somit mindestens 10.000 Jahre älter als die ersten Haushunde!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_wolf_mummy_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.400,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_22"
+  },
+  {
+   "key": "s_25",
+   "name": "Götter des Deltas",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_hor_statue_0_128_128.webp",
+   "description": [
+    "Die Flussanbeter des schilfgesäumten Deltas haben uns reichhaltige Altertümer vererbt; in Stein gemeißelte Rätsel, alte Götter und die schattenhaften Schätze des Todes.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 130"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Rathäuser und Handelskammern",
+     "effects": [
+      "Attraktivität +30"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "236",
+     "name": "Hor-Statue",
+     "description": "Eine der wichtigsten Gottheiten aus dem Delta. Von diesem Himmelsgott in Falkengestalt stammten alle großen Anführer ab.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_hor_statue_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 58.350,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "235",
+     "name": "Statue von Anubis",
+     "description": "Eine Darstellung des Gottes des Todes und der Einbalsamierung im Delta. Hoffen wir, dass Ihr Herz weniger wiegt als eine Feder …",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_anpu_statue_0_128_132.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 72.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Glaube"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "237",
+     "name": "Tempel-von-Nafir-Diorama",
+     "description": "Ein der unvergleichlichen Königin Nafir geweihter Tempel, geschmückt mit Kolossen und Kunstwerken aus dem Delta.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_temple_of_nafir_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 195.575,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_25"
+  },
+  {
+   "key": "s_24",
+   "name": "Erbstücke des goldenen Reichs",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_mansa_musas_souvenir_0_128_128.webp",
+   "description": [
+    "Das Erbe des reichsten Menschen aller Zeiten, Masu Masu, dessen unermesslicher Reichtum außergewöhnliche Moscheen, Universitäten und Bibliotheken hervorgebracht hat.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 100"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Kontore & Anlegestellen",
+     "effects": [
+      "Hafenaktivität +20%",
+      "bei passivem Handel am Kontor besteht die Chance 5t Goldbarren oder Schmuck zu erhalten"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "233",
+     "name": "Masus Mappa mundi",
+     "description": "Der größte aller Atlanten, von Masu Masu in Auftrag gegeben. Sein Reich, das reichste aller bekannten Reiche, bildete das Zentrum.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_mappamundi_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 22.825,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Navigation"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "232",
+     "name": "Schmuck von Masu Masu",
+     "description": "Diese Goldperle war eines der opulentesten Erinnerungsstücke, die Masu Masu auf seiner Pilgerreise in die Heilige Stadt erstanden hat.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_mansa_musas_souvenir_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 18.200,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "234",
+     "name": "Tambakto-Diorama",
+     "description": "Masu Masus Stadtplan von Tambakto. Eine große Moschee und die erste Universität der Welt sind nur ein Bruchteil der Wunder dieser Stadt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_model_of_tambacto_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 62.625,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_24"
+  },
+  {
+   "key": "s_23",
+   "name": "Enbesas Wurzeln",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_lion_of_judah_0_128_128.webp",
+   "description": [
+    "Eine Sammlung aus Artefakten und Ruinen, die in enger Verbindung zu den Wurzeln und der Geschichte Enbesas stehen, voll von Löwen und den verkohlten Überresten der Vergangenheit.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 210"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Gelehrtenhäuser",
+     "effects": [
+      "Forschungspunkte pro Wohnhaus +1"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "228",
+     "name": "Arksum-Obelisk",
+     "description": "Eine Stele, die im antiken Aksum zur Abgrenzung von Grabfeldern errichtet wurde. Dies ist die letzte und höchste von allen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_obelixo_of_arksam_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 22.125,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Glaube",
+      "-5 Redegabe"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "231",
+     "name": "Die Bundeslade",
+     "description": "Von der Königin von Seba einst nach Enbesa gebracht, belegt sie, dass das Geschlecht der Kaiser von Enbesa bis zu König Selamawi zurückverfolgt werden kann.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_ark_of_the_covenant_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 186.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Glaube",
+      "+50 Kampfkraft"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "229",
+     "name": "Ghebbi-Diorama",
+     "description": "Festungsstadt und Sitz der Kaiser von Enbesa in längst vergangenen Zeiten, vor allem in späteren Jahren, zur Zeit des wahnsinnigen Sonnenkönigs Sûrya.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_fasil_ghebbi_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.850,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "230",
+     "name": "Kidusisches Kirchen-Diorama",
+     "description": "Aus dem massiven Fels von Kidusi Anitoni gehauen, als die Priester im 4. Jahrhundert den Hibiskus für sich entdeckten.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_church_kidusi_antoni_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 66.725,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "227",
+     "name": "Löwe von Selamawi",
+     "description": "Ein Symbol von Enbesa und seinem Kaiser sowie der Titel, der den Nachfahren von König Selamawi verliehen wurde.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_lion_of_judah_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 16.875,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube",
+      "+5 Redegabe"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "226",
+     "name": "Ruhm der Könige",
+     "description": "Ein uraltes Buch, das von der Pilgerreise der Konigin von Seba nach Enbesa berichtet, auf der sie die prächtige Lade trug.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_kebra_nagast_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.200,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_23"
+  },
+  {
+   "key": "s_34",
+   "name": "Vergessene Stämme",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_nuk_terracota_figure_0_128_128.webp",
+   "description": [
+    "Eine Sammlung aus Artefakten, die von kaum bekannten Kulturen des Südlichen Kantinents zusammengestellt wurden und einen Einblick in den Alltag dieser Völker gewähren.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 140"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Wohnhäuser",
+     "effects": [
+      "Bedürfnis-Bonus von Nähmaschinen, Fleischkonserven und Kaffee -5%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "275",
+     "name": "Bemalte Maske",
+     "description": "Eine mit einem Totengesicht bemalte Maske. Erinnert die Lebenden daran, welches Glück sie haben.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_giwoyo_mask_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.950,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Jagdglück"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "278",
+     "name": "Eindrucksvolle Terrakottafigur",
+     "description": "Welche Funktion diese Figur hatte, ist nicht bekannt, aber für ein Werk aus der Eisenzeit ist die Verarbeitung bemerkenswert.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_nuk_terracota_figure_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 20.450,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "277",
+     "name": "Figur von Mutter und Kind",
+     "description": "Zeigt, in welchem Maße Frauen für ihre Fruchtbarkeit, aber auch als Seherinnen und Hüterinnen der Seele verehrt werden.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_phemba_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 17.800,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "274",
+     "name": "Ring aus Rinder-Elfenbein",
+     "description": "Rinder haben diesen Schmuck selbst getragen, als Zeichen der Verehrung für ihre Art.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_bovine_ivory_ring_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 2.125,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "276",
+     "name": "Tierfigur",
+     "description": "Bastfäden hängen noch im rissigen Holz dieser bei Tänzen verwendeten Tierfigur.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_chiwara_figure_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.775,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "279",
+     "name": "Verzierte Lehmfliese",
+     "description": "Die alten westenbesanischen Städte waren von großen Lehmmauern umgeben, in die Szenen aus dem Alltagsleben geritzt wurden.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_yarobu_carving_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 19.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/artefakte.html#s_34"
+  }
+ ],
+ "loose": [
+  {
+   "anchor": "134",
+   "name": "Alte Frachtliste",
+   "description": "In der Antike war die Buchhaltung auch nicht viel anders als heute.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_scroll_common_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.525,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "135",
+   "name": "Angelaufene Silbermünzen",
+   "description": "Taschengeld für einen Prinzen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_coin_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.775,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "136",
+   "name": "Antiker Roman",
+   "description": "Ein tiefgründiges Werk der Fiktion und sehr originell für seine Zeit.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_book_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 7.225,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "137",
+   "name": "Aureus-Münzen",
+   "description": "Manche haben in ihrem ganzen Leben keinenBlick auf sie werfen können.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_coin_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 23.725,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "138",
+   "name": "Bemalte Steine",
+   "description": "Die Illustrationen schmücken riesige Steinwände.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_lined_stone_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.850,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "139",
+   "name": "Beschädigte Statue",
+   "description": "Soll eine uralte weibliche Gottheit darstellen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_statue_stone_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "140",
+   "name": "Bronzehelm",
+   "description": "Eine Delle verweist auf das Schicksal des ursprünglichen Besitzers.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_helmet_common_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.225,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "141",
+   "name": "Bronzeschwert",
+   "description": "Beinahe die gesamte Klinge ist von Rost zerfressen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_sword_common_1_64_64.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "142",
+   "name": "Das Kapaun-Zepter",
+   "description": "Die Bewohner des Empires werden durch den blendenden Glanz des imperalen Adlers gelähmt sein.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_sceptre_capon_restored_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Aufgaben-Item",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 0,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Gesunkene Schätze"
+   ]
+  },
+  {
+   "anchor": "143",
+   "name": "Kommodoreorden",
+   "description": "Der Orden eines hochrangigen Offiziers, der wahrscheinlich bei Trelawney sein Leben verloren hat.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_security_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 7.225,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Gesunkene Schätze"
+   ]
+  },
+  {
+   "anchor": "144",
+   "name": "Nachbildung der HMS Hades",
+   "description": "Ein akkurates Modell der echten HMS Hades, die mit der HMS Styx auf der Faithful-Expedition zerschellt ist.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_hms_terror_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 156.125,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Die Passage"
+   ]
+  },
+  {
+   "anchor": "145",
+   "name": "Alter Tabot von Waha Desher",
+   "description": "Die Lieder derer, die einst diesen Tabot hielten hallen noch immer in zeinem morzchen Holz nach. Feine Schnitzereien umrahmen seine Konturen: „Vers 2. Was wäre die Schönheit des Tages ohne die darauffolgende Nacht? Denjenigen, die im Schutz des Tages beten, bringt der Herr Trost, doch diejenigen, die in der schwindenden Abenddämmerung beten, werden Erleuchtung erlangen!”",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_africa_tabot_0_116_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 183.905,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Glaube",
+    "+10 Kampfkraft"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "146",
+   "name": "Arabesken-Schmuck",
+   "description": "Sternensicheln, durchsetzt mit Rauchquartz und Chrysopraswirbeln.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_necklace_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.900,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Redegabe"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "147",
+   "name": "Chroniken von Enbesa",
+   "description": "Eine sehr kreative Darstellung des mythischen Landes Sile’Amidos und der Gründung Enbesas.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_kebra_nagast_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.125,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Redegabe"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "148",
+   "name": "Chroniken von Enbesa",
+   "description": "Eine sehr kreative Darstellung des mythischen Landes Sile’Amidos und der Gründung Enbesas.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_kebra_nagast_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 19.740,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Redegabe"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "149",
+   "name": "Chroniken von Enbesa",
+   "description": "Eine sehr kreative Darstellung des mythischen Landes Sile’Amidos und der Gründung Enbesas.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_kebra_nagast_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 61.400,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Redegabe"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "150",
+   "name": "Chroniken von Enbesa",
+   "description": "Eine sehr kreative Darstellung des mythischen Landes Sile’Amidos und der Gründung Enbesas.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_kebra_nagast_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 181.400,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Redegabe"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "151",
+   "name": "Das Heilige Buch",
+   "description": "Das heiligste Buch in den Regalen der Heiligen in der Heiligen Stadt. Wir können also mit Bestimmtheit sagen, dass es göttlich ist.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_book_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 50.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Glaube"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "152",
+   "name": "Die heilige Bundeslade",
+   "description": "Die Legenden besagen, sie habe einen eigenen Willen. Jahrtausendelang stand sie stumm Wache bei der Königin, die Sie sehr schätzte, Aber nun … Manche sagen, Sie wollte nun gefunden werden und fürchten sich vor ihrer göttlichen Bestimmung.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/africa/icon_ark_of_the_covenant_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Aufgaben-Item",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 0,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "153",
+   "name": "Karte von Sile'Amidos",
+   "description": "Die Karte einer Insel, die von seltsamer Flora bedeckt ist. Die Existenz dieser Gattung wurde immer angezweifelt - aber hiermit wissen Sie es besser!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/item_treasuremap_st_03_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 160.800,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Navigation"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "154",
+   "name": "Lanze von Selamawi",
+   "description": "Der legendäre Speer aus dem enbesanischen Geschlecht der Elamais. Man sagt, sein mit Schnitzereien verzierter Schaft sei von Almair aus einem Teil der Bundeslade gefertigt worden. Dort 5oll geschrieben stehen: „Vers 1. Und wenn am westlichsten Schrein Gebete erklingen, soll ein neuer Schatten sich aus einem Ort formen, an dem diejenigen von oben und diejenigen von unten sich vereinen, und das Wort des Herrn soll den Ersten der Elamais im ewigen Schlaf dort festhalten.”",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_spear_of_the_salomonids_02_0_132_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 178.850,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Glaube",
+    "+10 Kampfkraft"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "155",
+   "name": "Phönix-Ei",
+   "description": "Das Ei eines Vogels aus einem Reich jenseits der Realität. Wenn man es in Feuer bettet, schlüpft es vielleicht.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_dinosaur_egg_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 168.900,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "156",
+   "name": "Schätze von Sile' Amidos",
+   "description": "Die zahlreichen und überbordenden Schätze aus einem Reich, an dessen Existenz niemand geglaubt hatte. Offenbar waren sie als Abenteurer nicht kühn genug!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_africa_kidusi_urn_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 152.175,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Redegabe"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "157",
+   "name": "Vase von Sile'Amidos",
+   "description": "Ein Lichtschimmer dringt sanft aus dem Inneren des Gefäßes - eine Erinnerung an die prächtigen Gärten von Sile’Amidos. Feine Gravuren verzieren den Deckel: „Vers 3. Fürchtet euch nicht vor dem Berg, sondern kommt voller Liebe zu ihm. Denn in diesem Hügelgrab leben die alten Tage in der Pracht großer Könige noch immer fort. Denjenigen, die im bescheidenen Schatten und in diskretem Abstand kommen, wird das Licht den Weg weisen.”",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_africa_kidusi_urn_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 184.125,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Glaube",
+    "+10 Kampfkraft"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "158",
+   "name": "Figur von Hueyaca",
+   "description": "Diese mesoanische Göttin ist alles andere als zahnlos. Kein Wunder, dass sich Margaret Hunt, die selbst Haare auf den Zähnen hat, von ihr angesprochen fühlte.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_statue_of_atoyaca_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Aufgaben-Item",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 143.750,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Aufstieg der neuen Welt"
+   ]
+  },
+  {
+   "anchor": "159",
+   "name": "Quipu",
+   "description": "Jedes Band ist ein Rätsel: ein verknotetes Stück Geschichte. Von Malching hat es Paloma vor der Nase weggeschnappt. oh … das ist schon ein paar Jahre her.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_quipu_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Aufgaben-Item",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 131.475,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Aufstieg der neuen Welt"
+   ]
+  },
+  {
+   "anchor": "160",
+   "name": "Simon Saramentos Schwert",
+   "description": "Der erste Streich der Revolution wurde mit dieser Klinge ausgeführt. doch das grausame Schicksal gab Sie in die Hände unserer Feinde unter der Führung von Admiral Silva.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_isabels_brothers_sword_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Aufgaben-Item",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 120.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Aufstieg der neuen Welt"
+   ]
+  },
+  {
+   "anchor": "161",
+   "name": "Feldtagebuch für Kräuterkundige",
+   "description": "Wenn Wissen in der Gefahr erlangt wird, sich plötzlich zu übergeben, vorübergehend blind zu werden, das Dritte Auge zu erlangen oder das ultimative Risotto-Rezept zu kreieren, weiß man es erst wirklich zu schätzen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_herbarium_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Heilkunst"
+   ],
+   "dlc": [
+    "Reich der Lüfte"
+   ]
+  },
+  {
+   "anchor": "162",
+   "name": "Prominenten-Briefmarke",
+   "description": "Diese Darstellung einer beliebten Schausptelerin mit ihrem äußerst modischen Hut erlangte Berühmtheit, nachdem besagter Hut wiederum von diverzen Schurken der Sieben Meere getragen wurde. Die meisten Piraten sind angeblich passionierte Briefmarkensammler.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_firstclass_stamp_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 52.225,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Reich der Lüfte"
+   ]
+  },
+  {
+   "anchor": "163",
+   "name": "Silberdrache",
+   "description": "Eine Münze aus reinem Silber aus den Häfen des Ostens. Sie wurde gegossen und nicht geprägt. um das fliegende Ungeheuer abzubilden.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_silver_coin_good_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.900,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Redegabe"
+   ],
+   "dlc": [
+    "Reich der Lüfte"
+   ]
+  },
+  {
+   "anchor": "164",
+   "name": "Verdrehte Briefmarke",
+   "description": "Diese Briefmarke wurde zu Ehren eines Kriminalbeamten entworfen, der durch seine akribische Gründlichkeit zahlreiche unlösbar geglaubte Fälle aufklären konnte - doch dieser berühmte Fehldruck zeigt zein Gesicht Spiegelverkehrt, was den Sammlerwert ins Unermessliche gesteigert hat.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_priority_stamp_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 20.350,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Reich der Lüfte"
+   ]
+  },
+  {
+   "anchor": "165",
+   "name": "Der von-Malching-Famlilienwimpel",
+   "description": "Als neu eingesetzter Baron braucht Carl diesen zerfledderten alten Lumpen nicht mehr.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_fabric_recolor_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Heilkunst"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "166",
+   "name": "Diamant",
+   "description": "Ein besonders großes und glänzendes Exemplar des begehrenswertesten Felsens der Welt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_gem_diamond_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 66.500,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "167",
+   "name": "Die Kunst der Medizin",
+   "description": "Ein Traktat über medizinische Praktikanten anatomischer und physiologischer Art.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_book_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 22.150,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+30 Heilkunst"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "168",
+   "name": "Die Ringe der Könige",
+   "description": "Eine Runenfantazie über Ringe, Schlachten um Mittelerde und die wachsende Freundschaft zwischen zwei entenfüßigen Homunkult.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_journal_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 53.575,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "169",
+   "name": "Die verfluchte Mumie von Cabot",
+   "description": "Eine mächtige, jedoch düstere Präsenz entströmt den Leinenbandagen. Kein Wunder, dass Bente 5ie loswerden wollte.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_cursedmummy_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 72.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "-10 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "170",
+   "name": "Ein altes Medaillon",
+   "description": "Das Geschenk eines Handwerkers. „Das habe ich auf dem Dachboden gefunden. Ich halte das für ein wirklich schönes Beispiel für Handwerkskunst. Denken Sie an uns, wenn Sie es ansehen!”",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_gem_pyrite_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 64.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "171",
+   "name": "Ein schimmernder Stein",
+   "description": "Das Geschenk einer Obrera. „Ich habe diesen wunderbaren Stein gefunden. Der könnte wertvoll sein, meinen Sie nicht?”",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_gem_diamond_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 71.500,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "172",
+   "name": "Eisenhelm",
+   "description": "Intakt. Vielleicht starb dieser Krieger eines natürlichen Todes?",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_helmet_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 7.225,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "173",
+   "name": "Eisenschild",
+   "description": "Ein massiver Schild, der im Grab eines Krieges gefunden wurde.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_shield_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.700,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "174",
+   "name": "Eisenschwert",
+   "description": "Dieses Schwert war unter den Habseligkeiten eines gefallenen Kriegers.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_sword_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 7.500,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "175",
+   "name": "Erleuchtetes Manuskript",
+   "description": "",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_scroll_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 0,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "176",
+   "name": "Familienerbstück der Harlowes",
+   "description": "Ein Anhänger, den ihr Vater Benjamin einst trug. Er bedeutet Anne mehr als Sie je zugeben würde und da sie ihn Ihnen anvertraut, müssen Sie etwas ganz Besonderes sein.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_necklace_harlow_family_heirloom_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 23.125,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube",
+    "+5 Redegabe"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "177",
+   "name": "Farbenfrohes Banner",
+   "description": "Unter Glas, um die lebendigen Farben des Gewebes zu konservieren.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_fabric_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Heilkunst"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "178",
+   "name": "Gasparovs Truhe der Schande",
+   "description": "Zwischen zerknüllten Blaupausen und Skizzen befinden sich die abscheulich geformten Prototypen dieser Statue. Artur bittet Sie, die Kiste an einer Stelle zu versenken, an der das Wasser besonders tief ist.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_reward_4_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Geschick"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "179",
+   "name": "Goldener Kriegshelm",
+   "description": "Ein üppig vergoldeter Kopfschmuck mit eingravierten Kriegsszenen, die sein Träger vielleicht selbst erlebt hat.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_helmet_epic_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 50.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "180",
+   "name": "Hölzerner Ring",
+   "description": "Seine strahlende Lebensfarbe ist verblasst.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_wooden_ring_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.100,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "181",
+   "name": "Hölzerner Schild",
+   "description": "Was ein armer Soldat besaß, um sich zu verteidigen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_shield_common_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.050,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "182",
+   "name": "Jade-Perle",
+   "description": "Das weiche grüne Leuchten dieses polierten Edelsteins lässt den katserlichen Osten wiederaufleben.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_gem_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.975,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "183",
+   "name": "Königlicher Goldring",
+   "description": "Passt nur auf den schlanken Finger der rechtmäßigen Erbin eines vergessenen Königreichs.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_ring_epic_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 50.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Redegabe"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "184",
+   "name": "Kupferring",
+   "description": "Vielleicht der verrostete Ring eines angesehenen Wollhändlers?",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_ring_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "185",
+   "name": "Leichentuch des Großen Königs",
+   "description": "Die Authentizität izt angemessen dürftig nachgewiesen, aber wenn es das ist, was es zu sein behauptet wird ?",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_fabric_epic_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 71.400,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+25 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "186",
+   "name": "Morticromicron",
+   "description": "Schon allein das Öffnen dieses okkulten Wälzers lässt die Anwesenden erschaudern. Angeblich wurde der Autor in einem Wachtraum zu diesem Werk inspiriert, was wohl sein tiefes, dunkles und beunruhigendes Talent erklärt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_tablet_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 166.666,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "-30 Glaube",
+    "+50 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "187",
+   "name": "Mumienbandagen",
+   "description": "Die Mumie selbst ist weg. Glauben Sie das …? Nein, gewiss nicht!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mummy_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "-10 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "188",
+   "name": "Primitiver Schleier",
+   "description": "Die Jahrhunderte haben den genauen Verwendungszweck verschleiert.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_fabric_comon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.675,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Heilkunst"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "189",
+   "name": "Pyritkristalle",
+   "description": "Pyrit ist ein Mineral von unheimlich geometrischer Geologie.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_gem_pyrite_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "190",
+   "name": "Quarzkristalle",
+   "description": "Ein halbedles Mineral von transparenter Schönheit.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_gem_quartz_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.375,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "191",
+   "name": "Register des Sklavenbesitzers",
+   "description": "Es ist bedrückend, all die Ungerechtigkeit zu sehen, die darin steckt. Der Name „La Fortune” erscheint mehr als einmal.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_journal_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.375,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "192",
+   "name": "Rostige Sesterzen",
+   "description": "Nur von historischem Wert.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_coin_common_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.675,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "193",
+   "name": "Schaukelpferd",
+   "description": "Ein Spielzeugpferd, das vermutlich für ein kleines Kind hergestellt wurde, obwohl jemand hart damit umgegangen sein muss, wenn man sich den Riss so ansieht.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_statue_stone_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.400,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "194",
+   "name": "Schlichte Kette",
+   "description": "Für heutige Verhältnisse ist es eine bescheidene Halskette, damals jedoch …",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_necklace_common_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.925,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "195",
+   "name": "Schneidezahn des verrückten Affens",
+   "description": "Alonso wollte Ihnen mit Zähnen das Wort SÜNDER in Großbuchstaben mitten auf die Stirn gravieren, aber Sie konnten gerade noch rechtzeitig gehen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_monkey_amulet_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 59.125,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "196",
+   "name": "Seidentuch",
+   "description": "In dieses zarte Gewebe wurden verschlungene Muster gewebt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_fabric_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 20.350,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Heilkunst"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "197",
+   "name": "Silberhelm",
+   "description": "Ein zeremonieller silberner Kopfschmuck von großer Schönheit, aber unbekannter Herkunft.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_helmet_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 20.025,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "198",
+   "name": "Silberkette",
+   "description": "Der Anhänger ist über die Jahrhunderte verloren gegangen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_necklace_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.900,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Redegabe"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "199",
+   "name": "Silberring",
+   "description": "Ein alter silberner Ring mit einer Inschrift nicht entzifferbaren Ursprungs.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_ring_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 15.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Redegabe"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "200",
+   "name": "Silberschild",
+   "description": "Ein Zeremonienschild, in dem man sein Gesicht sehen kann - nur kämpfen Sie nicht damit.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_shield_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 19.325,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "201",
+   "name": "Silberschwert",
+   "description": "Ein Zeremonienschwert aus Silber, das eindeutig nur dekorativen Zwecken gedient hat.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_museum_sword_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 22.350,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "202",
+   "name": "Steinerne Statue",
+   "description": "Eine elegante Statue, die leider irgendwann verunstaltet wurde.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_statue_broken_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.500,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "203",
+   "name": "Unvorteilhaftes Porträt von Artur",
+   "description": "Artur wollte wirklich ein Porträt von sich malen lassen, aber als er sah, wie viel Grau der Künstler benutzt, hat er sich schnell umentschieden.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_ebony_wood_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.375,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "204",
+   "name": "Verrottende Mumie",
+   "description": "Ein bislang noch nicht identifizierter männlicher oder weiblicher Monarch des oberen Deltas.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_mummy_rare_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.325,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "-10 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "205",
+   "name": "Volkserzählungen",
+   "description": "Weise alte Geschichten des Volkes.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_book_comon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.500,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "206",
+   "name": "Wertvolle Kronjuwelen",
+   "description": "Prinzessin Qing hat sie Ihnen übergeben, da sie Ihrer Majestät nicht gefielen. Auch wenn die Königin ihnen vermutlich nicht ihre ungeteilte Aufmerksamkeit geschenkt hat.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_ring_epic_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 63.250,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Redegabe"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "207",
+   "name": "Zwanzigtausend Tage um die Mitte der Erde herum",
+   "description": "Eine fantastische Sage über die Tiefe, die aufgrund der Detailverliebtheit und wissenschaftlichen Gewissenhaftigkeit in allen Meeresangelegenheiten glaubhaft erscheint. Möge es der erste vieler Erfolge in diesem neuen und bodenlosen Genre sein!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/museum/icon_book_uncommon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 50.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Moral"
+   ],
+   "dlc": []
+  }
+ ],
+ "loose_intro": []
+}

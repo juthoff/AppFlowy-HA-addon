@@ -1,0 +1,300 @@
+{
+ "waren": [
+  {
+   "kind": "heading",
+   "runs": [
+    "Warenübersicht für Anno 1800"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Hier findet ihr eine umfassende Übersicht über alle Waren in Anno 1800, von Grundressourcen bis zu Luxusgütern. Jede Ware ist in ihrer jeweiligen Produktionskette und ihrem Nutzen dargestellt, was hilft, Produktionsprozesse besser zu planen und die Bedürfnisse der Bevölkerung in den verschiedenen Regionen – Alte Welt und Kap Trelawney, Neue Welt, Enbesa und Arktis – zu erfüllen. Die Warenübersicht ist ein wertvolles Tool, um die optimale Versorgung und Entwicklung der Stadt sicherzustellen."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    {
+     "text": "Konsumgüter",
+     "href": "#5"
+    }
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Waren, die direkt von der Bevölkerung konsumiert werden, wie Kleidung, Nahrung und Getränke."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    {
+     "text": "Baumaterialien",
+     "href": "#6"
+    }
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Materialien, die für den Bau von Gebäuden und Infrastruktur benötigt werden, wie Holzbretter, Ziegelsteine oder Stahlträger."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    {
+     "text": "Rohstoffe",
+     "href": "#7"
+    }
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Grundlegende Materialien, die für die Weiterverarbeitung genutzt werden, wie Lehm, Kohle oder Perlen."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    {
+     "text": "Agrarprodukte",
+     "href": "#8"
+    }
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Pflanzenbasierte Waren wie Getreide, Kartoffeln oder Indigo, die in Farmen oder Plantagen produziert werden."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    {
+     "text": "Zwischenprodukte",
+     "href": "#9"
+    }
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Verarbeitete Waren, die als Bestandteil anderer Produkte benötigt werden, z. B. Glas, Filz oder Wachskerzen."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    {
+     "text": "Strategische Ressourcen",
+     "href": "#10"
+    }
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Wichtige Güter für militärische und industrielle Zwecke, wie Öl, Benzin oder Strom."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    {
+     "text": "Post",
+     "href": "#11"
+    }
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Ein spezielles Ressourcensystem, das für den Nachrichtenaustausch zwischen Regionen genutzt wird."
+   ]
+  }
+ ],
+ "gebaeude": [
+  {
+   "kind": "heading",
+   "runs": [
+    "Gebäudeübersicht für Anno 1800"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Hier findet ihr eine umfassende Übersicht über alle Gebäude in Anno 1800. Jede Gebäudeart spielt eine wichtige Rolle für die Stadtentwicklung und das wirtschaftliche Wachstum. Eine sinnvolle Platzierung und Optimierung sind entscheidend für den Erfolg."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Wohngebäude"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Beherbergen die Bevölkerung und bestimmen die Anzahl verfügbarer Arbeitskräfte."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Produktionsgebäude"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Stellen Waren her und sind essenziell für die Wirtschaft und das Bevölkerungswachstum."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Versorgungsgebäude"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Stellen grundlegende Dienste bereit, wie Marktplätze, Feuerwehr und Polizei."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Kulturelle Gebäude"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Verbessern die Attraktivität der Stadt, z. B. Museen oder Zoos."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Handels- und Lagergebäude"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Ermöglichen den Handel und die Lagerung von Waren, wie Kontore oder Depots."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Militärische Gebäude"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Verteidigen die Stadt und sichern Handelsrouten, z. B. Küstenbefestigungen oder Werften."
+   ]
+  }
+ ],
+ "zivilisation": [
+  {
+   "kind": "para",
+   "runs": [
+    "In Anno 1800 gibt es mehrere Zivilisationsstufen, von Bauern bis hin zu Investoren, die jeweils spezifische Grund- und Luxusbedürfnisse haben. Das Erfüllen dieser Bedürfnisse steigert die Lebensqualität und fördert den Fortschritt zur nächsten Zivilisationsstufe. Jede Stufe bringt eigene Anforderungen und Möglichkeiten, darunter neue Gebäude und Produktionsketten. Dieses System bildet das Herzstück des Städtebaus und beeinflusst die Stadtplanung und das Ressourcenmanagement entscheidend, da es Balance und strategisches Vorausdenken verlangt, um eine erfolgreiche und wachsende Stadt zu schaffen."
+   ]
+  }
+ ],
+ "produktionsketten": [
+  {
+   "kind": "heading",
+   "runs": [
+    "Produktionsketten für die Alte Welt und Kap Trelawney"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Hier findest du eine Übersicht der optimalen Produktionsketten für die Alte Welt und Kap Trelawney aus dem DLC Gesunkene Schätze in Anno 1800. Eine gut geplante Produktionskette ist essenziell, um Ressourcen optimal zu nutzen und die Stadt wirtschaftlich stabil auszubauen."
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Wenn ihr euch die Ketten ausdrucken wollt, könnt ihr hier die PDF für die ",
+    {
+     "text": "Alte Welt",
+     "href": "https://www.annoinfo.de/Anno_1800/downloads.html#69"
+    },
+    " herunterladen."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Ressourcenfluss"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Jede Produktionskette beginnt mit der Rohstoffgewinnung und endet mit dem fertigen Produkt. Ein effizienter Transport und Lagerhaltung sind entscheidend für den reibungslosen Ablauf."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Produktionsverhältnisse"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Die optimale Anzahl an Produktionsgebäuden sollte so gewählt werden, dass Rohstoffe nicht verschwendet werden und keine Engpässe entstehen."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Transport und Logistik"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Marktplätze, Lagerhäuser und Straßenlayout beeinflussen, wie effizient Waren transportiert und verteilt werden. Ein intelligentes Netzwerk verhindert Staus und Verzögerungen."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Arbeitskräfte und Balance"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Unterschiedliche Produktionen erfordern verschiedene Arbeitskräfte. Die Balance zwischen Bevölkerungswachstum und Produktion ist entscheidend."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Spezialisierung und Optimierung"
+   ]
+  },
+  {
+   "kind": "para",
+   "runs": [
+    "Durch Spezialisierung können Städte bestimmte Waren effizienter produzieren. Optimierung durch Einfluss und Items kann die Effizienz weiter steigern."
+   ]
+  }
+ ]
+}

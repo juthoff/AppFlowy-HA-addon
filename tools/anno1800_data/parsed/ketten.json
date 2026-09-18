@@ -1,0 +1,3170 @@
+[
+ {
+  "key": "produktionsketten",
+  "name": "Alte Welt",
+  "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html",
+  "chains": [
+   {
+    "key": "produktionsketten#1",
+    "name": "Holzbretter",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wooden_planks.webp",
+    "region": "Alte Welt",
+    "level": "Bauern",
+    "description": [
+     "Die Produktion von Holzbrettern beginnt in der Holzfällerhütte, wo Holz geschlagen wird. Anschließend wird das Holz zum Sägewerk transportiert, wo es in Holzbretter verarbeitet wird."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Alte Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 20,00 Credits",
+     "Bauern: - 15 Bauern"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:15 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Holzbretter.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#1"
+   },
+   {
+    "key": "produktionsketten#2",
+    "name": "Fische",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fish.webp",
+    "region": "Alte Welt",
+    "level": "Bauern",
+    "description": [
+     "Die Produktion von Fischen beginnt in der Fischerei, wo Fischer frische Fische fangen und sie für den Verkauf und die Verwendung bereitstellen."
+    ],
+    "voraussetzung": "50 Bauer",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 40,00 Credits",
+     "Bauern: - 25 Bauern"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Fische.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#2"
+   },
+   {
+    "key": "produktionsketten#3",
+    "name": "Arbeitskleidung",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_working_cloth.webp",
+    "region": "Alte Welt",
+    "level": "Bauern",
+    "description": [
+     "Die Herstellung von Arbeitskleidung beginnt auf der Schäferei, wo Wolle von Schafen gewonnen wird. Die Wolle wird zur Weberei transportiert, wo sie zu Arbeitskleidung verarbeitet wird.",
+     "Es dauert 30 Sekunden, um aus 1 Tonne Wolle 1 Tonne Arbeitskleidung herzustellen, die Produktionsrate beträgt also 2 Tonnen Arbeitskleidung pro Minute. Die Produktivität kann durch Anpassung der Arbeitsbedingungen, der verwendeten Gegenstände und der Elektrizität verändert werden."
+    ],
+    "voraussetzung": "100 Bauer",
+    "region_text": "Alte Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 70,00 Credits",
+     "Bauern: - 60 Bauern"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Arbeitskleidung.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#3"
+   },
+   {
+    "key": "produktionsketten#4",
+    "name": "Schnaps",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_schnapps_4.webp",
+    "region": "Alte Welt",
+    "level": "Bauern",
+    "description": [
+     "Die Schnapsproduktion beginnt auf dem Kartoffelhof, wo Kartoffeln angebaut werden. Diese Kartoffeln werden zur Schnapsbrennerei transportiert und dort zu Schnaps verarbeitet."
+    ],
+    "voraussetzung": "100 Bauer",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 60,00 Credits",
+     "Bauern: - 70 Bauern"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Schnaps.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#4"
+   },
+   {
+    "key": "produktionsketten#5",
+    "name": "Ziegelsteine",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bricks.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Produktion von Ziegelsteinen beginnt in einer Lehmgrube, wo Lehm abgebaut wird. Der Lehm wird dann zu zwei Ziegeleien transportiert, wo er zu Ziegeln geformt und gebrannt wird, um hochwertige Ziegelsteine herzustellen."
+    ],
+    "voraussetzung": "1 Arbeiter",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 50,00 Credits",
+     "Arbeiter: - 100 Arbeiter"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Ziegelei.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#5"
+   },
+   {
+    "key": "produktionsketten#6",
+    "name": "Wurst",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_meat_sausage.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Wurstproduktion startet in der Schweinezucht, wo Schweine gezüchtet werden. Diese Schweine gelangen zur Metzgerei, wo sie zu Wurst verarbeitet werden."
+    ],
+    "voraussetzung": "1 Arbeiter",
+    "region_text": "Alte Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 120,00 Credits",
+     "Bauern: - 30 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Attraktivität: - 8 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Wurst.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#6"
+   },
+   {
+    "key": "produktionsketten#7",
+    "name": "Segel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sail.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Produktion von Segeln beginnt in der Schäferei, wo Wolle von Schafen gewonnen wird. Diese Wolle wird zur Segelweberei transportiert und dort zu Segeln verarbeitet."
+    ],
+    "voraussetzung": "150 Arbeiter",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 95,00 Credits",
+     "Bauern: - 10 Bauern",
+     "Arbeiter: - 50 Arbeiter"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Segel.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#7"
+   },
+   {
+    "key": "produktionsketten#8",
+    "name": "Brot",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bread.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Brotproduktion beginnt auf zwei Getreidefarmen, wo Getreide angebaut wird. Das Getreide gelangt zur Mühle, wo es zu Mehl gemahlen wird. Dieses Mehl wird dann in zwei Bäckereien verwendet, um frisches Brot herzustellen."
+    ],
+    "voraussetzung": "150 Arbeiter",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 210,00 Credits",
+     "Bauern: - 50 Bauern",
+     "Arbeiter: - 100 Arbeiter"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Brot.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#8"
+   },
+   {
+    "key": "produktionsketten#9",
+    "name": "Stahlträger",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_beams.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Produktion von Stahlträgern beginnt in einer Kohlemine, wo Kohle abgebaut wird, und einer Eisenerzmine, wo Eisenerz gewonnen wird. Kohle und Eisenerz werden in zwei Hochofenanlagen kombiniert, um Eisen herzustellen. Dieses Eisen wird dann zur Weiterverarbeitung in drei Stahlwerken gebracht, wo es zu Stahlträgern verarbeitet wird."
+    ],
+    "voraussetzung": "300 Arbeiter",
+    "region_text": "Alte Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 890,00 Credits",
+     "Arbeiter: - 870 Arbeiter",
+     "Attraktivität: - 50 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:45 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Stahltraeger.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#9"
+   },
+   {
+    "key": "produktionsketten#10",
+    "name": "Kanonen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_weapons.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Herstellung von Kanonen beginnt mit Kohleabbau in einer Kohlemine und Eisenerzgewinnung in einer Eisenerzmine. Kohle und Eisenerz werden in zwei Hochofenanlagen kombiniert, um Eisen herzustellen. Dieses Eisen wird dann in sechs Kanonengießereien zu Kanonen verarbeitet."
+    ],
+    "voraussetzung": "300 Arbeiter",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.190,00 Credits",
+     "Arbeiter: - 570 Arbeiter",
+     "Attraktivität: - 50 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Kanonen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#10"
+   },
+   {
+    "key": "produktionsketten#11",
+    "name": "Seife",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_soap_2.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Seifenproduktion beginnt mit zwei Schweinezuchten, wo Schweine gezüchtet werden. Die Schweine gelangen zu zwei Wasenmeistereien, wo Talg gewonnen wird. Dieser Talg wird dann in einer Siederei zur Herstellung von Seife verwendet."
+    ],
+    "voraussetzung": "300 Arbeiter",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 210,00 Credits",
+     "Bauern: - 60 Bauern",
+     "Arbeiter: - 130 Arbeiter",
+     "Attraktivität: - 21 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Seife.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#11"
+   },
+   {
+    "key": "produktionsketten#12",
+    "name": "Bier",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_beer.webp",
+    "region": "Alte Welt",
+    "level": "Arbeiter",
+    "description": [
+     "Die Bierproduktion beginnt auf zwei Getreidefarmen, wo Getreide angebaut wird. Das Getreide gelangt zur Mälzerei, wo es zu Malz verarbeitet wird. Dazu kommen drei Hopfenfarmen, die Hopfen liefern. Malz und Hopfen werden in zwei Brauereien kombiniert, um Bier herzustellen."
+    ],
+    "voraussetzung": "500 Arbeiter",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 650,00 Credits",
+     "Bauern: - 100 Bauern",
+     "Arbeiter: - 175 Arbeiter"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Bier.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#12"
+   },
+   {
+    "key": "produktionsketten#13",
+    "name": "Fenster",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_glass_window_3.webp",
+    "region": "Alte Welt",
+    "level": "Handwerker",
+    "description": [
+     "Die Produktion von Fenstern beginnt mit zwei Quarzgruben, wo Quarz abgebaut wird. Dieser Quarz wird in zwei Glashütten zu Glas geschmolzen. Gleichzeitig wird in einer Holzfällerhütte Holz gewonnen. Das Glas und Holz werden in vier Fensterfabriken kombiniert, um Fenster herzustellen."
+    ],
+    "voraussetzung": "1 Handwerker",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.250,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Handwerker: - 600 Handwerker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Fenster.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#13"
+   },
+   {
+    "key": "produktionsketten#14",
+    "name": "Fleischkonserven",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_canned_goulash.webp",
+    "region": "Alte Welt",
+    "level": "Handwerker",
+    "description": [
+     "Die Produktion von Fleischkonserven beginnt mit 8 Paprikafarmen, die Paprika anbauen, und 8 Rinderfarmen, die Fleisch liefern. Paprika und Fleisch werden in 8 Großküchen zu Gulasch verarbeitet. Zusätzlich wird Eisenerz aus einer Mine gewonnen. Das Gulasch wird dann in 6 Konservenfabriken mit Eisenerz kombiniert, um Fleischkonserven herzustellen."
+    ],
+    "voraussetzung": "1 Handwerker",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.650,00 Credits",
+     "Bauern: - 240 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Handwerker: - 1.050 Handwerker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Fleischkonserven.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#14"
+   },
+   {
+    "key": "produktionsketten#15",
+    "name": "Nähmaschinen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sewing_machine.webp",
+    "region": "Alte Welt",
+    "level": "Handwerker",
+    "description": [
+     "Die Herstellung von Nähmaschinen beginnt mit einer Kohlemine für Kohle und einer Eisenerzmine für Eisenerz. Diese werden in zwei Hochofenanlagen zu Eisen verarbeitet. Gleichzeitig wird Holz in einer Holzfällerhütte gewonnen. Das Eisen und Holz werden in zwei Nähmaschinenfabriken kombiniert, um Nähmaschinen herzustellen."
+    ],
+    "voraussetzung": "250 Handwerker",
+    "region_text": "Alte Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.310,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Arbeiter: - 300 Arbeiter",
+     "Handwerker: - 300 Handwerker",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Naehmaschinen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#15"
+   },
+   {
+    "key": "produktionsketten#16",
+    "name": "Pelzmäntel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fur_coats.webp",
+    "region": "Alte Welt",
+    "level": "Handwerker",
+    "description": [
+     "Die Produktion von Pelzmänteln beginnt mit 2 Baumwollplantagen, die Baumwolle anbauen. Die Baumwolle wird in einer Baumwollweberei zu Baumwollstoff verarbeitet (beides nur in der Neuen Welt möglich). Gleichzeitig werden in 2 Jagdhütten Felle gesammelt. Der Baumwollstoff und die Felle werden in einer Schneiderei zu Pelzmänteln verarbeitet."
+    ],
+    "voraussetzung": "900 Handwerker",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 620,00 Credits",
+     "Bauern: - 30 Bauern",
+     "Handwerker: - 200 Handwerker",
+     "Jornaleros: - 30 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Pelzmaentel.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#16"
+   },
+   {
+    "key": "produktionsketten#17",
+    "name": "Stahlbeton",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_reinforced_concrete.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieure",
+    "description": [
+     "Die Herstellung von Stahlbeton beginnt mit einer Kohlemine für Kohle und einer Eisenerzmine für Eisenerz. Diese Rohstoffe werden in zwei Hochofenanlagen zu Eisen verarbeitet. Gleichzeitig wird in zwei Minen Zement gewonnen. Das Eisen und der Zement werden in vier Betonwerken verarbeitet, um hochwertigen Stahlbeton herzustellen."
+    ],
+    "voraussetzung": "1 Ingenieure",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.400,00 Credits",
+     "Arbeiter: - 350 Arbeiter",
+     "Ingenieure: - 300 Ingenieure",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Stahlbeton.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#17"
+   },
+   {
+    "key": "produktionsketten#18",
+    "name": "Brillen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_glasses.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieure",
+    "description": [
+     "Die Produktion von Brillen beginnt mit zwei Quarzgruben, in denen Quarz abgebaut wird, der dann in zwei Glashütten zu Glas verarbeitet wird. Gleichzeitig wird Kupfer aus einer Kupfermine und Zink aus einer Zinkmine gewonnen. Diese Rohstoffe werden in zwei Messinghütten zu Messing kombiniert. Schließlich wird Glas mit Messing in drei Brillenfabriken kombiniert, um Brillen herzustellen."
+    ],
+    "voraussetzung": "1 Ingenieure",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 4.220,00 Credits",
+     "Arbeiter: - 125 Arbeiter",
+     "Handwerker: - 100 Handwerker",
+     "Ingenieure: - 300 Ingenieure",
+     "Attraktivität: - 20 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Brillen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#18"
+   },
+   {
+    "key": "produktionsketten#19",
+    "name": "Schwere Geschütze",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_advanced_weaponry.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieure",
+    "description": [
+     "Die Produktion von schweren Geschützen beginnt mit 4 Schweinezuchten, die Schweine liefern, welche in 4 Wasenmeistereien zu Talg verarbeitet werden, und 8 Salpeterwerken, die Salpeter produzieren. Talg und Salpeter werden in 4 Dynamitfabriken zu Dynamit verarbeitet. Gleichzeitig werden Kohle und Eisenerz in jeweils einer Mine abgebaut. Diese Rohstoffe werden in 2 Hochofenanlagen zu Eisen verarbeitet. Schließlich werden Dynamit und Eisen in 4 Geschützfabriken kombiniert, um schwere Geschütze herzustellen. Die Geschützfabriken benötigen zwingend Strom um zu funktionieren."
+    ],
+    "voraussetzung": "500 Ingenieure",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 17.420,00 Credits",
+     "Bauern: - 120 Bauern",
+     "Arbeiter: - 660 Arbeiter",
+     "Ingenieure: - 2.000 Ingenieure",
+     "Attraktivität: - 92 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 02:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Geschuetze.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#19"
+   },
+   {
+    "key": "produktionsketten#20",
+    "name": "Hochräder",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_high_wheeler.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieure",
+    "description": [
+     "Die Produktionskette für Hochräder besteht aus 1 Kohlemine, die Kohle fördert, 1 Eisenerzmine, die Eisenerz abbaut, 2 Hochofenanlagen, die Kohle und Eisenerz in Eisen umwandeln, 4 Kautschukplantagen (nur in der neuen Welt baubar), die Kautschuk produzieren. Kautschuk und Eisen werden dann in einer Hochradwerkhalle zu Hochrädern verarbeitet. Beachte, dass diese Produktion Strom benötigt."
+    ],
+    "voraussetzung": "500 Ingenieure",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.600,00 Credits",
+     "Arbeiter: - 200 Arbeiter",
+     "Ingenieure: - 150 Ingenieure",
+     "Jornaleros: - 40 Jornaleros",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Hochraeder.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#20"
+   },
+   {
+    "key": "produktionsketten#21",
+    "name": "Dampfmaschine",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_steam_machine.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieure",
+    "description": [
+     "Die Produktion von Dampfmaschinen erfordert 1 Kohlemine (Kohle), 1 Eisenerzmine (Eisenerz), 2 Hochofenanlagen (Eisen), 2 Kupferminen (Kupfer), 2 Zinkminen (Zink), 4 Messinghütten (Messing), und schließlich 3 Motorenfabriken, die Messing und Eisen zu Dampfmaschinen verarbeiten. Achte darauf, dass Strom für diese Produktion notwendig ist."
+    ],
+    "voraussetzung": "500 Ingenieure",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 7.700,00 Credits",
+     "Arbeiter: - 500 Arbeiter",
+     "Ingenieure: - 750 Ingenieure",
+     "Attraktivität: - 80 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Dampfmaschinen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#21"
+   },
+   {
+    "key": "produktionsketten#22",
+    "name": "Taschenuhren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pocket_watch.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieure",
+    "description": [
+     "Die Herstellung von Taschenuhren erfordert eine komplexe Produktionskette. Zunächst benötigst du 2 Quarzgruben, um Quarz abzubauen, der dann in 2 Glashütten zu Glas verarbeitet wird. Um Gold zu gewinnen, benötigst du 1 Kohlemine für Kohle und 10 Goldminen (die nur in der neuen Welt möglich sind) für Golderz. Das Golderz wird in 4 Goldschmieden zu Gold umgewandelt. Die eigentliche Herstellung der Taschenuhren erfolgt durch die Kombination von Glas und Gold in 3 Uhrenwerkstätten. Dabei ist es wichtig zu beachten, dass diese Produktionskette Strom benötigt, um zu funktionieren."
+    ],
+    "voraussetzung": "1.000 Ingenieure",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 10.190,00 Credits",
+     "Arbeiter: - 100 Arbeiter",
+     "Handwerker: - 200 Handwerker",
+     "Ingenieure: - 950 Ingenieure",
+     "Obreros: - 1.000 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Taschenuhren.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#22"
+   },
+   {
+    "key": "produktionsketten#23",
+    "name": "Glühbirnen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_light_bulb.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieure",
+    "description": [
+     "Für die Herstellung von Glühbirnen benötigst du 2 Quarzgruben (für Quarz), 2 Glashütten (für Glas) und 1 Kohlemine (für Kohle). Dann produzieren 4 Glühfadenfabriken Glühfäden. Diese werden mit Glas in 4 Glühbirnenfabriken zu Glühbirnen verarbeitet. Die Stromnutzung ist optional."
+    ],
+    "voraussetzung": "1.750 Ingenieure",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 7.390,00 Credits",
+     "Arbeiter: - 100 Arbeiter",
+     "Handwerker: - 200 Handwerker",
+     "Ingenieure: - 1.200 Ingenieure"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Gluehbirnen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#23"
+   },
+   {
+    "key": "produktionsketten#24",
+    "name": "Fahrstühle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_elevator.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieur Hochhäuser",
+    "description": [
+     "Die Herstellung von Fahrstühlen im „Dächer der Stadt” - DLC erfordert zunächst die Produktion von Dampfmaschinen, die aus Eisen und Messing in 3 Motorfabriken hergestellt werden. Diese Dampfmaschinen werden dann zusammen mit Eisen und Holzfurnier in einer Fertigungsstraße zu Fahrstühlen montiert. Bitte beachte, dass für diesen Prozess Strom erforderlich ist."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 11.610,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Arbeiter: - 1.300 Arbeiter",
+     "Ingenieure: - 1.350 Ingenieure",
+     "Attraktivität: - 95 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Fahrstuehle.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#24"
+   },
+   {
+    "key": "produktionsketten#25",
+    "name": "Kaugummi",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bubble_gum.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieur Hochhäuser",
+    "description": [
+     "Um Kaugummi herzustellen, benötigst du in der neuen Welt eine Zuckerrohrplantage (für Zuckerrohr) und eine Zuckerraffinerie (für Zucker). Außerdem benötigst du 2 Kautschukplantagen (für Kautschuk) und einen Obstgarten (für Zimt). Die eigentliche Herstellung von Kaugummi erfolgt durch die Kombination von Zucker, Kautschuk und Zimt in einer Chemiefabrik. Diese Produktionskette ermöglicht die Herstellung von leckerem Kaugummi."
+    ],
+    "voraussetzung": "1 Level 2 Hochhaus",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 915,00 Credits",
+     "Jornaleros: - 65 Jornaleros",
+     "Obreros: - 175 Obreros",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Kaugummi.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#25"
+   },
+   {
+    "key": "produktionsketten#26",
+    "name": "Schreibmaschine",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_typewriter.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieur Hochhäuser",
+    "description": [
+     "Die Produktionskette für Schreibmaschinen beginnt mit der Herstellung von Ethanol, Quarz und Harz. Diese Rohstoffe werden in zwei Chemiefabriken verarbeitet, um Farben und Lacke herzustellen. Gleichzeitig werden Kohle und Eisenerz in zwei Hochofenanlagen eingeschmolzen, um Eisen zu produzieren. Kupfer und Zink werden in vier Messinghütten miteinander kombiniert, um Messing herzustellen. Schließlich werden die Farben und Lacke, das Eisen und das Messing in einer Fertigungsstraße zusammengeführt, um Schreibmaschinen herzustellen."
+    ],
+    "voraussetzung": "1 Level 3 Hochhaus",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 6.550,00 Credits",
+     "Bauern: - 70 Bauern",
+     "Arbeiter: - 1.050 Arbeiter",
+     "Ingenieure: - 200 Ingenieure",
+     "Jornaleros: - 45 Jornaleros",
+     "Obreros: - 250 Obreros",
+     "Attraktivität: - 95 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Schreibmaschinen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#26"
+   },
+   {
+    "key": "produktionsketten#27",
+    "name": "Violinen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_violin.webp",
+    "region": "Alte Welt",
+    "level": "Ingenieur Hochhäuser",
+    "description": [
+     "Die Produktion von Violinen beginnt mit der Herstellung von Ethanol, Quarz und Harz, die in zwei Chemiefabriken zu Farben und Lacken verarbeitet werden. Gleichzeitig werden Kohle und Eisenerz in zwei Hochofenanlagen eingeschmolzen, um Eisen zu produzieren. Parallel dazu werden in zwei Baumschulen Kirschbaumholz gezogen. Schließlich werden die Farben und Lacke, das Eisen und das Kirschbaumholz in einer Manufaktur miteinander kombiniert, um Violinen herzustellen."
+    ],
+    "voraussetzung": "1 Level 3 Hochhaus",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 6.450,00 Credits",
+     "Bauern: - 140 Bauern",
+     "Arbeiter: - 350 Arbeiter",
+     "Handwerker: - 2.600 Handwerker",
+     "Ingenieure: - 200 Ingenieure",
+     "Jornaleros: - 45 Jornaleros",
+     "Obreros: - 250 Obreros",
+     "Attraktivität: - 50 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Violinen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#27"
+   },
+   {
+    "key": "produktionsketten#28",
+    "name": "Konfitüre",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_jam_1.webp",
+    "region": "Alte Welt",
+    "level": "Touristen",
+    "description": [
+     "Die Produktionskette für Konfitüre aus dem DLC „Reisezeit” ist simpel, In einem Obstgarten werden die Früchte angebaut und dann direkt zur Herstellung der Konfitüre verwendet."
+    ],
+    "voraussetzung": "300 Touristen",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 50,00 Credits",
+     "Bauern: - 35 Bauern"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Konfituere.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#28"
+   },
+   {
+    "key": "produktionsketten#29",
+    "name": "Shampoo",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_shampoo.webp",
+    "region": "Alte Welt",
+    "level": "Touristen",
+    "description": [
+     "Die Produktionskette für Shampoo (DLC Reisezeit) beginnt mit zwei Schweinezuchten, die Schweine liefern. Diese werden in zwei Wasenmeistereien zu Talg verarbeitet und in einer Siederei zu Seife umgewandelt. In jeweils einem Obstgarten (bau nur in Neuer Welt möglich) werden Kokosöl und Zimt angebaut. Schließlich werden Seife, Kokosöl und Zimt in einer Chemiefabrik kombiniert, um Shampoo herzustellen."
+    ],
+    "voraussetzung": "850 Touristen",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.110,00 Credits",
+     "Bauern: - 60 Bauern",
+     "Arbeiter: - 130 Arbeiter",
+     "Ingenieure: - 100 Ingenieure",
+     "Jornaleros: - 70 Jornaleros",
+     "Attraktivität: - 31 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Shampoo.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#29"
+   },
+   {
+    "key": "produktionsketten#30",
+    "name": "Limonade",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_lemonade.webp",
+    "region": "Alte Welt",
+    "level": "Touristen",
+    "description": [
+     "Die Produktionskette für Limonade (DLC Reisezeit) beginnt mit einer Zuckerrohrplantage, die Zuckerrohr liefert. Dieses wird in einer Zuckerraffinerie zu Zucker verarbeitet. Gleichzeitig werden in einem Obstgarten Zitrusfrüchte angebaut. Vier Salpeterwerke produzieren Salpeter. Schließlich werden Zucker, Zitrusfrüchte und Salpeter in einer Chemiefabrik zu Limonade verarbeitet."
+    ],
+    "voraussetzung": "1.250 Touristen",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.865,00 Credits",
+     "Arbeiter: - 100 Arbeiter",
+     "Ingenieure: - 100 Ingenieure",
+     "Jornaleros: - 45 Jornaleros",
+     "Obreros: - 50 Obreros",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Limonade.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#30"
+   },
+   {
+    "key": "produktionsketten#31",
+    "name": "Souvenirs",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_souvenir.webp",
+    "region": "Alte Welt",
+    "level": "Touristen",
+    "description": [
+     "Die Produktionskette für Souvenirs (DLC Reisezeit) beginnt mit einer Quarzgrube, die Quarz liefert. Dieser wird in einer Glashütte zu Glas verarbeitet. Eine Baumwollplantage liefert Baumwolle, während vier Baumschulen Kampfer produzieren. Schließlich werden Glas, Baumwolle und Kampfer in einer Chemiefabrik kombiniert, um Souvenirs herzustellen."
+    ],
+    "voraussetzung": "2.000 Touristen",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.080,00 Credits",
+     "Arbeiter: - 25 Arbeiter",
+     "Handwerker: - 100 Handwerker",
+     "Ingenieure: - 100 Ingenieure",
+     "Jornaleros: - 45 Jornaleros",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Souvenirs.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#31"
+   },
+   {
+    "key": "produktionsketten#32",
+    "name": "Sekt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_champagne.webp",
+    "region": "Alte Welt",
+    "level": "Investoren",
+    "description": [
+     "Die Produktionskette für Sekt beginnt mit einer Quarzgrube, die Quarz liefert, der in einer Glashütte zu Glas verarbeitet wird. Vier Weinberge liefern Weintrauben, die in einer Sektkelterei zu Sekt verarbeitet werden, indem sie mit Glas kombiniert werden."
+    ],
+    "voraussetzung": "1 Investor",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.020,00 Credits",
+     "Bauern: - 40 Bauern",
+     "Arbeiter: - 25 Arbeiter",
+     "Handwerker: - 250 Handwerker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Sekt.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#32"
+   },
+   {
+    "key": "produktionsketten#33",
+    "name": "Schmuck",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_jewelry.webp",
+    "region": "Alte Welt",
+    "level": "Investoren",
+    "description": [
+     "Die Produktionskette für Schmuck beginnt mit einer Kohlemine, die Kohle fördert, und 10 Goldminen, die Golderz schürfen. Diese werden in 4 Goldschmelzen zu Gold verarbeitet. 6 Perlenfarmen in der neuen Welt liefern die Perlen. Schließlich werden Gold und Perlen in 2 Goldschmieden zu Schmuck verarbeitet."
+    ],
+    "voraussetzung": "1.750 Investoren",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 10.700,00 Credits",
+     "Arbeiter: - 300 Arbeiter",
+     "Handwerker: - 300 Handwerker",
+     "Ingenieure: - 500 Ingenieure",
+     "Jornaleros: - 50 Jornaleros",
+     "Obreros: - 1.000 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Schmuck.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#33"
+   },
+   {
+    "key": "produktionsketten#34",
+    "name": "Phonographen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_phonographs.webp",
+    "region": "Alte Welt",
+    "level": "Investoren",
+    "description": [
+     "Die Produktionskette für Phonographen beginnt mit einem Holzfäller, der Holz beschafft. Dieses Holz wird dann in 4 Kunstschreinereien zu Holzfurnier verarbeitet. Gleichzeitig werden in 2 Kupferminen Kupfer und in 2 Zinkminen Zink abgebaut. Diese beiden Metalle werden in 4 Messinghütten zu Messing verarbeitet. Schließlich werden das Holzfurnier und das Messing in 4 Phonographenfabriken zu Phonographen zusammengebaut. Beachten Sie, dass für die Phonographenfabriken Strom erforderlich ist, um die Maschinen anzutreiben und die Produktion aufrechtzuerhalten."
+    ],
+    "voraussetzung": "3.000 Investoren",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 11.410,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Arbeiter: - 200 Arbeiter",
+     "Ingenieure: - 1.200 Ingenieure",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 02:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Phonographen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#34"
+   },
+   {
+    "key": "produktionsketten#35",
+    "name": "Dampfwagen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_steam_carriage.webp",
+    "region": "Alte Welt",
+    "level": "Investoren",
+    "description": [
+     "Die Produktion von Dampfwagen beginnt mit der Herstellung von Dampfmaschinen durch die Kombination von Eisen und Messing in 3 Motorenfabriken. Gleichzeitig werden in 8 Kutschen-Werkhallen Holz und Kautschuk zu Fahrgestellen verarbeitet. Die Dampfmaschinen und Fahrgestelle werden dann in 2 Dampfwagenfabriken zusammengebaut, wobei Strom für diesen Prozess erforderlich ist, um die Dampfwagen herzustellen."
+    ],
+    "voraussetzung": "5.000 Investoren",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 23.410,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Arbeiter: - 500 Arbeiter",
+     "Ingenieure: - 2.950 Ingenieure",
+     "Jornaleros: - 40 Jornaleros",
+     "Attraktivität: - 100 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Dampfwagen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#35"
+   },
+   {
+    "key": "produktionsketten#36",
+    "name": "Cognac",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cognac.webp",
+    "region": "Alte Welt",
+    "level": "Investor Hochhäuser",
+    "description": [
+     "Für die Herstellung von Cognac in den „Dächer der Stadt”-DLC benötigen Sie eine Zuckerrohrplantage für Zuckerrohr, eine Zuckerraffinerie, um Zucker herzustellen, vier Weinberge für Wein und einen Obstgarten mit Kirschbaumholz. Diese Zutaten werden in zwei Manufakturen kombiniert, um Cognac herzustellen."
+    ],
+    "voraussetzung": "1 Level 3 Hochhäuser",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.065,00 Credits",
+     "Bauern: - 75 Bauern",
+     "Handwerker: - 1.300 Handwerker",
+     "Jornaleros: - 10 Jornaleros",
+     "Obreros: - 50 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Cognac.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#36"
+   },
+   {
+    "key": "produktionsketten#37",
+    "name": "Kekse",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cookie.webp",
+    "region": "Alte Welt",
+    "level": "Investor Hochhäuser",
+    "description": [
+     "In dem „Dächer der Stadt”-DLC benötigen Sie für die Herstellung von Keksen 4 Schweinezuchten für Schweine, die in 4 Wasenmeistereien zu Talg verarbeitet werden. Außerdem benötigen Sie 4 Getreidefarmen für Getreide, das in 2 Mühlen zu Mehl verarbeitet wird, sowie 2 Obstgärten für Zitrusfrüchte. Diese Zutaten werden in einer Fertigungsstraße unter Verwendung von Strom kombiniert, um Kekse herzustellen."
+    ],
+    "voraussetzung": "15 Level 3 Hochhäuser",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.200,00 Credits",
+     "Bauern: - 380 Bauern",
+     "Arbeiter: - 500 Arbeiter",
+     "Jornaleros: - 70 Jornaleros",
+     "Attraktivität: - 37 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Kekse.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#37"
+   },
+   {
+    "key": "produktionsketten#38",
+    "name": "Ethanol",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ethanol.webp",
+    "region": "Alte Welt",
+    "level": "Investor Hochhäuser",
+    "description": [
+     "Die Produktion von Ethanol beginnt mit einer Holzfällerhütte, die Holz beschafft, und vier Maisplantagen, die Mais anbauen. Das Holz und der Mais werden dann in zwei Chemie-Fabriken kombiniert, um Ethanol herzustellen."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.710,00 Credits",
+     "Jornaleros: - 45 Jornaleros",
+     "Obreros: - 250 Obreros",
+     "Attraktivität: - 20 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Ethanol.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#38"
+   },
+   {
+    "key": "produktionsketten#40",
+    "name": "Farben & Lacke",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_lacquer.webp",
+    "region": "Alte Welt",
+    "level": "Investor Hochhäuser",
+    "description": [
+     "Die Produktion von Farben & Lacken erfordert die Umwandlung von Holz und Mais in Ethanol in zwei Chemiefabriken. Zusätzlich werden in zwei Quarzgruben Quarz und in zwei Baumschulen Harz gewonnen. Diese Komponenten werden in zwei weiteren Chemiefabriken zu Farben & Lacken verarbeitet."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 3.650,00 Credits",
+     "Bauern: - 70 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Ingenieure: - 200 Ingenieure",
+     "Jornaleros: - 45 Jornaleros",
+     "Obreros: - 250 Obreros",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Farben_Lacke.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#40"
+   },
+   {
+    "key": "produktionsketten#41",
+    "name": "Billiard Tisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_billard.webp",
+    "region": "Alte Welt",
+    "level": "Investor Hochhäuser",
+    "description": [
+     "Um einen Billardtisch herzustellen, beginnen Sie mit der Herstellung von Zelluloid aus Ethanol, Kampfer und Baumwolle in zwei Chemiefabriken. Alpakas liefern das Filzmaterial, das in zwei Filzfabriken weiterverarbeitet wird. Darüber hinaus benötigen Sie Kirschbaumholz aus zwei Baumschulen. Schließlich kombinieren Sie Zelluloid, Filz und Kirschbaumholz in vier Manufakturen, um den Billardtisch herzustellen."
+    ],
+    "voraussetzung": "15 Level 4 Hochhäuser",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 5.960,00 Credits",
+     "Bauern: - 70 Bauern",
+     "Handwerker: - 2.600 Handwerker",
+     "Jornaleros: - 195 Jornaleros",
+     "Obreros: - 500 Obreros",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Billiardtische.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#41"
+   },
+   {
+    "key": "produktionsketten#42",
+    "name": "Spielwaren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_toys.webp",
+    "region": "Alte Welt",
+    "level": "Investor Hochhäuser",
+    "description": [
+     "Die Herstellung von Spielwaren beginnt mit der Produktion von Farben & Lacken aus Ethanol, Quarz und Harz in zwei Chemiefabriken. Zelluloid wird aus Ethanol, Kampfer und Baumwolle in zwei weiteren Chemiefabriken hergestellt. Alpakas liefern das Filzmaterial, das in zwei Filzfabriken verarbeitet wird. Schließlich werden Farben & Lacke, Zelluloid und Filz in vier Manufakturen kombiniert, um die Spielwaren herzustellen."
+    ],
+    "voraussetzung": "15 Level 5 Hochhäuser",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 9.510,00 Credits",
+     "Bauern: - 70 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Handwerker: - 2.600 Handwerker",
+     "Ingenieure: - 200 Ingenieure",
+     "Jornaleros: - 240 Jornaleros",
+     "Obreros: - 750 Obreros",
+     "Attraktivität: - 80 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Spielwaren.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#42"
+   },
+   {
+    "key": "produktionsketten#43",
+    "name": "Lederstiefel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_leather_shoes.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Die Herstellung von Lederstiefeln erfordert eine Sanga-Farm in Enbesa zur Zucht von Sanga-Rindern, deren Leder dann von einem Schuster zu Lederstiefeln verarbeitet wird."
+    ],
+    "voraussetzung": "1 Gelehrter",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 360,00 Credits",
+     "Handwerker: - 150 Handwerker",
+     "Hirten: - 20 Hirten"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Lederstiefel.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#43"
+   },
+   {
+    "key": "produktionsketten#44",
+    "name": "Maßanzüge",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_suits.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Um Maßanzüge herzustellen, benötigen Sie in der Neuen Welt 2 Baumwollplantagen für Baumwolle und eine Baumwollweberei, um Baumwollstoff herzustellen. In Enbesa benötigen Sie 2 Flachsfarmen für Flachs und eine Leinenweberei, um Leinenstoff herzustellen. Diese beiden Stoffe werden dann in 2 Schneidergeschäften zu Maßanzügen verarbeitet."
+    ],
+    "voraussetzung": "300 Gelehrte",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 960,00 Credits",
+     "Handwerker: - 400 Handwerker",
+     "Jornaleros: - 30 Jornaleros",
+     "Hirten: - 35 Hirten"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Massanzuege.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#44"
+   },
+   {
+    "key": "produktionsketten#45",
+    "name": "Telefone",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_telephones.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Die Produktion von Telefonen beginnt mit einer Kohlemine für Kohle, die in 4 Glühfadenfabriken zu Glühfäden verarbeitet wird. Eine Holzfällerhütte beschafft Holz, das in 4 Kunstschreinereien zu Holzfurnier wird. Die Glühfäden und Holzfurniere werden in 3 Telefonfabriken unter Verwendung von Strom zu Telefonen zusammengebaut."
+    ],
+    "voraussetzung": "4.000 Gelehrte",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 9.560,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Ingenieure: - 1.650 Ingenieure"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:45 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Telefone.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#45"
+   },
+   {
+    "key": "produktionsketten#46",
+    "name": "Kaffee (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_alternative_chain_coffee.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Mit dem „DLC Land der Löwen” ist es nun möglich in der Alten Welt Kaffee herzustellen, dafür benötigen Sie 2 Getreidefarmen, um Getreide anzubauen, das in einer Mälzerei zu Malz verarbeitet wird. Das Malz wird dann in einer fortgeschrittlichen Kafferösterei (mit Strom) zu Kaffee geröstet."
+    ],
+    "voraussetzung": "1 Gelehrter / Forschung",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 3.690,00 Credits",
+     "Bauern: - 40 Bauern",
+     "Arbeiter: - 25 Arbeiter",
+     "Ingenieure: - 150 Ingenieure"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Kaffee_alte_welt.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#46"
+   },
+   {
+    "key": "produktionsketten#47",
+    "name": "Rum (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_alternative_chain_rum.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Dank des DLCs „DLC Land der Löwen” ist die Produktion von Rum nun in der Alten Welt möglich. Sie benötigen eine Kohlemine für Kohle und zwei Kartoffelhöfe für Kartoffeln. Diese beiden Zutaten werden in zwei fortgeschrittlichen Rumbrennereien, für die Strom erforderlich ist, zu Rum verarbeitet."
+    ],
+    "voraussetzung": "1 Gelehrter / Forschung",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 6.090,00 Credits",
+     "Bauern: - 40 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Ingenieure: - 260 Ingenieure"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Rum_alte_welt.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#47"
+   },
+   {
+    "key": "produktionsketten#48",
+    "name": "Baumwollstoff (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_alternative_chain_cotton.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Auch die Produktion von Baumwolle ist mit dem DLC „Land der Löwen” nun in der Alten Welt möglich. Hierfür benötigen Sie 2 Schaffarmen zur Gewinnung von Wolle und eine Holzfällerhütte zur Beschaffung von Holz. Diese Materialien werden in 2 fortgeschrittlichen Baumwollwebereien (mit Strom) zu Baumwolle verarbeitet."
+    ],
+    "voraussetzung": "1 Gelehrter / Forschung",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 6.650,00 Credits",
+     "Bauern: - 25 Bauern",
+     "Ingenieure: - 280 Ingenieure"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Baumwollstoff_alte_welt.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#48"
+   },
+   {
+    "key": "produktionsketten#49",
+    "name": "Bomben (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_bomb_b_ori.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Die Produktionskette für Bomben erfordert eine sorgfältige Rohstoffverarbeitung. Beginnen Sie mit 4 Schweinezuchten zur Gewinnung von Schweinen, die in 4 Wasenmeistereien zu Talg verarbeitet werden. Gleichzeitig benötigen Sie 8 Salpeterwerke (mit Strom) zur Salpeterherstellung, der dann mit Talg in 4 Dynamitfabriken zu Dynamit verarbeitet wird. Weiterhin benötigen Sie eine Kohlemine zur Kohlegewinnung und eine Eisenerzmine zur Erzgewinnung, die in 2 Hochofen zu Eisen umgewandelt werden. Der erneut benötigte Salpeter wird in 8 Salpeterwerken (mit Strom) hergestellt. Schließlich kombinieren Sie Dynamit, Eisen und Salpeter in 4 Bombenfabriken, um Bomben herzustellen. Bitte beachten Sie die Sicherheitsaspekte bei der Herstellung von Explosivstoffen."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 15.020,00 Credits",
+     "Bauern: - 120 Bauern",
+     "Arbeiter: - 3.060 Arbeiter",
+     "Ingenieure: - 1.000 Ingenieure",
+     "Attraktivität: - 82 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Bomben.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#49"
+   },
+   {
+    "key": "produktionsketten#50",
+    "name": "Seeminen (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_seamines_ori.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Die Produktion von Seeminen erfordert eine gut durchdachte Produktionskette. Beginnen Sie mit 4 Schweinezuchten zur Gewinnung von Schweinen, die in 4 Wasenmeistereien zu Talg verarbeitet werden. Gleichzeitig benötigen Sie 8 Salpeterwerke (mit Strom) zur Salpeterherstellung, der dann mit Talg in 4 Dynamitfabriken zu Dynamit verarbeitet wird. Weiterhin benötigen Sie eine Kohlemine zur Kohlegewinnung und eine Eisenerzmine zur Erzgewinnung, die in 2 Hochofen zu Eisen umgewandelt werden. Zusätzlich benötigen Sie 2 Kupferminen zur Kupfergewinnung. Das Dynamit, Eisen und Kupfer werden dann in 4 Seeminenfabriken kombiniert, um Seeminen herzustellen. Diese Produktionskette ermöglicht die Herstellung von Seeminen für verschiedene Zwecke."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 11.520,00 Credits",
+     "Bauern: - 120 Bauern",
+     "Arbeiter: - 2.910 Arbeiter",
+     "Ingenieure: - 1.000 Ingenieure",
+     "Attraktivität: - 82 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Seeminen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#50"
+   },
+   {
+    "key": "produktionsketten#51",
+    "name": "Flugblätter (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_pamphlets_ori.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Die Produktionskette für Flugblätter ist einfach gestaltet. Sie benötigen 4 Baumwollplantagen zur Gewinnung von Baumwolle und 1 Holzfällerhütte zur Holzgewinnung. Diese Rohstoffe werden dann in 4 Flugblattdruckereien kombiniert, um Flugblätter herzustellen."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.430,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Arbeiter: - 2.200 Arbeiter",
+     "Jornaleros: - 40 Jornaleros",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Flugblaetter.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#51"
+   },
+   {
+    "key": "produktionsketten#52",
+    "name": "Hilfspakete (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_care_packages_ori.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Die Produktionskette für Hilfspakete erfordert eine sorgfältige Verarbeitung verschiedener Rohstoffe. Zuerst benötigen Sie 8 Großküchen zur Herstellung von Gulasch. Dann wird Eisenerz mit Gulasch in 6 Konservenfabriken zu Fleischkonserven verarbeitet. Für die Herstellung von Schokolade benötigen Sie Zucker aus einer Zuckerraffinerie und Kakao von 4 Kakaoplantagen, die in 2 Schokoladenfabriken verarbeitet werden. Zusätzlich benötigen Sie Kartoffeln von 2 Kartoffelhöfen, die in 2 Schnapsbrennereien zu Schnaps verarbeitet werden. Schließlich kombinieren Sie Fleischkonserven, Schokolade und Schnaps in 4 Hilfspaketefabriken, um Hilfspakete zu erstellen. Diese Produktionskette ermöglicht die Herstellung von verpackten Hilfspaketen für verschiedene Zwecke."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 5.320,00 Credits",
+     "Bauern: - 380 Bauern",
+     "Arbeiter: - 2.250 Arbeiter",
+     "Handwerker: - 1.050 Handwerker",
+     "Jornaleros: - 60 Jornaleros",
+     "Obreros: - 300 Obreros",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Hilfspakete.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#52"
+   },
+   {
+    "key": "produktionsketten#53",
+    "name": "Löschwasser (alte Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_water_ori.webp",
+    "region": "Alte Welt",
+    "level": "Gelehrte",
+    "description": [
+     "Die Produktion von Löschwasser erfolgt einfach und direkt in einer Löschwasserfabrik."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Alte Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 600,00 Credits",
+     "Arbeiter: - 550 Arbeiter",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/alte_welt/Loeschwasser.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#53"
+   }
+  ],
+  "intro": [
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsketten für die Alte Welt und Kap Trelawney"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Hier findest du eine Übersicht der optimalen Produktionsketten für die Alte Welt und Kap Trelawney aus dem DLC Gesunkene Schätze in Anno 1800. Eine gut geplante Produktionskette ist essenziell, um Ressourcen optimal zu nutzen und die Stadt wirtschaftlich stabil auszubauen."
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Wenn ihr euch die Ketten ausdrucken wollt, könnt ihr hier die PDF für die ",
+     {
+      "text": "Alte Welt",
+      "href": "https://www.annoinfo.de/Anno_1800/downloads.html#69"
+     },
+     " herunterladen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Ressourcenfluss"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Jede Produktionskette beginnt mit der Rohstoffgewinnung und endet mit dem fertigen Produkt. Ein effizienter Transport und Lagerhaltung sind entscheidend für den reibungslosen Ablauf."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsverhältnisse"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die optimale Anzahl an Produktionsgebäuden sollte so gewählt werden, dass Rohstoffe nicht verschwendet werden und keine Engpässe entstehen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Transport und Logistik"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Marktplätze, Lagerhäuser und Straßenlayout beeinflussen, wie effizient Waren transportiert und verteilt werden. Ein intelligentes Netzwerk verhindert Staus und Verzögerungen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Arbeitskräfte und Balance"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Unterschiedliche Produktionen erfordern verschiedene Arbeitskräfte. Die Balance zwischen Bevölkerungswachstum und Produktion ist entscheidend."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Spezialisierung und Optimierung"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Durch Spezialisierung können Städte bestimmte Waren effizienter produzieren. Optimierung durch Einfluss und Items kann die Effizienz weiter steigern."
+    ]
+   }
+  ]
+ },
+ {
+  "key": "produktionsketten-2",
+  "name": "Neue Welt",
+  "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html",
+  "chains": [
+   {
+    "key": "produktionsketten-2#54",
+    "name": "Holzbretter (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wooden_planks.webp",
+    "region": "Neue Welt",
+    "level": "Jornaleros",
+    "description": [
+     "Die Produktion von Holzbrettern beginnt in der Holzfällerhütte, wo Holz geschlagen wird. Anschließend wird das Holz zum Sägewerk transportiert, wo es in Holzbretter verarbeitet wird."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 20,00 Credits",
+     "Jornaleros: - 30 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:15 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Holzbretter.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#54"
+   },
+   {
+    "key": "produktionsketten-2#55",
+    "name": "Gebackene Bananen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fried_bananas.webp",
+    "region": "Neue Welt",
+    "level": "Jornaleros",
+    "description": [
+     "Zur Herstellung von gebackenen Bananen benötigen Sie eine Bananenplantage zur Gewinnung von Bananen und eine Fischölfabrik, muss an Küste gebaut werden, um Fische in Fischöl zu verarbeiten. Die Bananen werden dann in einer Küche mit Hilfe von Fischöl zu gebackenen Bananen zubereitet."
+    ],
+    "voraussetzung": "50 Jornaleros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 25,00 Credits",
+     "Jornaleros: - 50 Jornaleros",
+     "Attraktivität: - 5 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Gebackene_Bananen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#55"
+   },
+   {
+    "key": "produktionsketten-2#56",
+    "name": "Segel (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sail.webp",
+    "region": "Neue Welt",
+    "level": "Jornaleros",
+    "description": [
+     "Um Segel herzustellen, benötigen Sie 2 Baumwollplantagen zur Gewinnung von Baumwolle. Diese Baumwolle wird dann in einer Baumwollweberei zu Baumwollstoff verarbeitet, und schließlich wird der Baumwollstoff in einer Segelweberei zu Segeln weiterverarbeitet."
+    ],
+    "voraussetzung": "100 Jornaleros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 35,00 Credits",
+     "Jornaleros: - 50 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Segel.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#56"
+   },
+   {
+    "key": "produktionsketten-2#57",
+    "name": "Rum (Neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_rum_barrel.webp",
+    "region": "Neue Welt",
+    "level": "Jornaleros",
+    "description": [
+     "Die Produktion von Rum beginnt mit einer Holzfällerhütte zur Beschaffung von Holz und zwei Zuckerrohrplantagen zur Gewinnung von Zuckerrohr. Das Holz und das Zuckerrohr werden in zwei Rumbrennereien zu Rum verarbeitet."
+    ],
+    "voraussetzung": "100 Jornaleros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 120,00 Credits",
+     "Jornaleros: - 90 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Rum.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#57"
+   },
+   {
+    "key": "produktionsketten-2#58",
+    "name": "Ponchos",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_poncho.webp",
+    "region": "Neue Welt",
+    "level": "Jornaleros",
+    "description": [
+     "Die Herstellung von Ponchos erfordert eine Alpakafarm zur Gewinnung von Alpakawolle und eine Ponchoweberei, um aus der Alpakawolle Ponchos herzustellen."
+    ],
+    "voraussetzung": "200 Jornaleros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 20,00 Credits",
+     "Jornaleros: - 40 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Ponchos.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#58"
+   },
+   {
+    "key": "produktionsketten-2#39",
+    "name": "Zelluloid",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_celluloid.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Zur Herstellung von Zelluloid werden Holz und Mais in zwei Chemiefabriken zu Ethanol verarbeitet. Außerdem werden in zwei Baumschulen Kampfer und in vier Baumwollplantagen Baumwolle produziert. Diese Zutaten werden in zwei weiteren Chemiefabriken zu Zelluloid verarbeitet."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 3.430,00 Credits",
+     "Jornaleros: - 155 Jornaleros",
+     "Obreros: - 500 Obreros",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Zelluloid.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#39"
+   },
+   {
+    "key": "produktionsketten-2#59",
+    "name": "Ziegelsteine (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bricks.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Produktion von Ziegelsteinen beginnt in einer Lehmgrube, wo Lehm abgebaut wird. Der Lehm wird dann zu zwei Ziegeleien transportiert, wo er zu Ziegeln geformt und gebrannt wird, um hochwertige Ziegelsteine herzustellen."
+    ],
+    "voraussetzung": "1 Obrero",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 50,00 Credits",
+     "Obreros: - 200 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Ziegelei.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#59"
+   },
+   {
+    "key": "produktionsketten-2#60",
+    "name": "Tortillas",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_burrito.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Für die Herstellung von Tortillas benötigen Sie 2 Maisplantagen zur Gewinnung von Mais und 2 Rinderfarmen zur Gewinnung von Fleisch. Diese beiden Zutaten werden in einer Tortillabäckerei zu Tortillas verarbeitet."
+    ],
+    "voraussetzung": "1 Obrero",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 200,00 Credits",
+     "Jornaleros: - 60 Jornaleros",
+     "Obreros: - 100 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Tortillas.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#60"
+   },
+   {
+    "key": "produktionsketten-2#61",
+    "name": "Kaffee (Neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_coffe_cup.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Herstellung von Kaffee erfordert 2 Kaffeeplantagen zur Gewinnung von Kaffeebohnen und eine Kaffeerösterei, um die Kaffeebohnen zu Kaffee zu verarbeiten."
+    ],
+    "voraussetzung": "300 Obreros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 200,00 Credits",
+     "Jornaleros: - 20 Jornaleros",
+     "Obreros: - 150 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Kaffee.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#61"
+   },
+   {
+    "key": "produktionsketten-2#62",
+    "name": "Melonen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bowler_hat.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Um Melonen herzustellen, benötigen Sie 2 Baumwollplantagen zur Gewinnung von Baumwolle, die in einer Baumwollweberei zu Baumwollstoff verarbeitet wird. Außerdem benötigen Sie eine Alpakafarm zur Gewinnung von Alpakawolle, die in einer Filzfabrik zu Filz verarbeitet wird. Diese beiden Materialien werden dann in einer Hutmacherei zu Melonen weiterverarbeitet."
+    ],
+    "voraussetzung": "600 Obreros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 85,00 Credits",
+     "Jornaleros: - 50 Jornaleros",
+     "Obreros: - 20 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Melonen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#62"
+   },
+   {
+    "key": "produktionsketten-2#63",
+    "name": "Zigarren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cigars.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Herstellung von Zigarren erfordert eine Holzfällerhütte zur Gewinnung von Holz, das in 4 Kunstschreinereien zu Holzfurnier verarbeitet wird. Zudem benötigen Sie 8 Tabakplantagen zur Gewinnung von Tabak. Die Kombination von Holzfurnier und Tabak erfolgt in 2 Zigarrenmanufakturen, um Zigarren herzustellen."
+    ],
+    "voraussetzung": "1.000 Obreros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.110,00 Credits",
+     "Jornaleros: - 90 Jornaleros",
+     "Obreros: - 750 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Zigarren.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#63"
+   },
+   {
+    "key": "produktionsketten-2#64",
+    "name": "Schokolade",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_chocolate.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Produktion von Schokolade erfordert eine Zuckerrohrplantage zur Gewinnung von Zuckerrohr, das in einer Zuckerraffinerie zu Zucker verarbeitet wird. Zudem benötigen Sie 2 Kakaoplantagen zur Gewinnung von Kakao. Diese beiden Zutaten werden in einer Schokoladenfabrik zu Schokolade kombiniert."
+    ],
+    "voraussetzung": "1.500 Obreros / 1.750 Investoren",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 75,00 Credits",
+     "Jornaleros: - 30 Jornaleros",
+     "Obreros: - 150 Obreros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Schokolade.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#64"
+   },
+   {
+    "key": "produktionsketten-2#65",
+    "name": "Chilisauce (Hacienda)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tabasco_sauce.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Mit dem DLC „Keim der Hoffnung” verlangen die Obreros nun Chilisauce. Die Herstellung erfordert eine Hacienda-Farm zur Gewinnung von Chilis, die dann in zwei Hacienda-Brauereien zu Chilisauce verarbeitet werden."
+    ],
+    "voraussetzung": "1 Obrero",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 125,00 Credits",
+     "Jornaleros: - 70 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 02:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Hacienda_Chilisauce.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#65"
+   },
+   {
+    "key": "produktionsketten-2#66",
+    "name": "Atole (Hacienda)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_atole.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Produktionskette für Atole besteht aus 2 Hacienda Farmen, die Mais anbauen, und 2 Zuckerrohrplantagen für Zuckerrohr. Diese Rohstoffe, Mais und Zuckerrohr, werden dann in 2 Hacienda Brauereien verarbeitet, um Atole herzustellen. Beachten Sie, dass für diese Produktion das DLC „Keim der Hoffnung” benötigt wird."
+    ],
+    "voraussetzung": "1 Obrero",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 170,00 Credits",
+     "Jornaleros: - 90 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Hacienda_Atole.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#66"
+   },
+   {
+    "key": "produktionsketten-2#67",
+    "name": "Rum (Hacienda)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_rum_barrel.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Produktion von Rum ist dank des DLC „Keim der Hoffnung” nun in der Hacienda möglich. Sie benötigen eine Holzfällerhütte für Holz und 2 Hacienda Farmen, um Zuckerrohr anzubauen. Diese Rohstoffe werden in zwei Hacienda Brauereien kombiniert, um Rum herzustellen."
+    ],
+    "voraussetzung": "1 Obrero",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 150,00 Credits",
+     "Jornaleros: - 90 Jornaleros",
+     "Attraktivität: - 20 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Hacienda_Rum.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#67"
+   },
+   {
+    "key": "produktionsketten-2#68",
+    "name": "Schnaps (Hacienda)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_schnapps_4.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Dank des DLC „Keim der Hoffnung” ist die Schnaps-Produktion nun in der Hacienda möglich. Sie benötigen 1x Hacienda Farm, um Kartoffeln anzubauen, und dann werden diese Kartoffeln in 2 Hacienda Brauereien verarbeitet, um Schnaps herzustellen."
+    ],
+    "voraussetzung": "1 Obrero",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 120,00 Credits",
+     "Jornaleros: - 70 Jornaleros",
+     "Attraktivität: - 20 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Hacienda_Schnaps.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#68"
+   },
+   {
+    "key": "produktionsketten-2#69",
+    "name": "Bier (Hacienda)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_beer.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Herstellung von Bier ist dank des DLC „Keim der Hoffnung” nun auch in der Hacienda, in der neuen Welt, möglich. Sie benötigen jeweils eine Hacienda Farm für Mais und Getreide. Diese Rohstoffe werden in einer Hacienda Brauerei zusammengeführt, um Bier herzustellen."
+    ],
+    "voraussetzung": "1 Obrero",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 85,00 Credits",
+     "Jornaleros: - 50 Jornaleros",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Hacienda_Bier.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#69"
+   },
+   {
+    "key": "produktionsketten-2#70",
+    "name": "Aluminium",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_aluminium.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Aluminium ist ein neues Baumaterial und erfordert das DLC „Aufstieg der neuen Welt” oder „Reich der Lüfte”. Sie benötigen 1 Bauxitmine, um Bauxit abzubauen, und 3 Köhlerhütten, um Kohle zu produzieren. Diese beiden Rohstoffe, Bauxit und Kohle, werden dann in einer Aluminiumschmelze kombiniert, um Aluminium herzustellen. Dieses Material ist vielseitig und für verschiedene Bauprojekte unverzichtbar."
+    ],
+    "voraussetzung": "250 Obreros / 1 Artista",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 5.320,00 Credits",
+     "Jornaleros: - 265 Jornaleros",
+     "Obreros: - 360 Obreros",
+     "Attraktivität: - 105 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 6t / min",
+     "Produktionszeit: 01:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Aluminium.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#70"
+   },
+   {
+    "key": "produktionsketten-2#71",
+    "name": "Helium",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_helium.webp",
+    "region": "Neue Welt",
+    "level": "Obreros",
+    "description": [
+     "Die Produktionskette für Helium, das für Luftschiffe benötigt wird, ist im DLC „Reich der Lüfte” verfügbar. Sie beginnt mit 2 Fischölfabriken, die Fischöl produzieren, und 8 Salpeterwerken, die Salpeter herstellen. Diese beiden Rohstoffe, Fischöl und Salpeter, werden dann in zwei Industriellen Ölpressen miteinander kombiniert, um Schmiermittel herzustellen. Schließlich werden 2 Lehmgruben genutzt, um Lehm abzubauen, der mit den Schmiermitteln in einer Helium-Bohranlage verarbeitet wird, um Helium zu gewinnen."
+    ],
+    "voraussetzung": "600 Obreros",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 5.030,00 Credits",
+     "Arbeiter: - 200 Arbeiter",
+     "Jornaleros: - 160 Jornaleros",
+     "Obreros: - 320 Obreros",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:15 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Helium.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#71"
+   },
+   {
+    "key": "produktionsketten-2#72",
+    "name": "Nähmaschinen (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sewing_machine.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktion von Nähmaschinen ist mit dem DLC „Aufstieg der neuen Welt” nun auch in der neuen Welt möglich. Es werden 2 Bauxitminen für Bauxit benötigt, sowie 6 Köhlereien, um Kohle zu produzieren. Anschließend werden 18 Aluminiumschmelzhütten verwendet, um Aluminium herzustellen. Darüber hinaus benötigen Sie 3 Holzfällerhütten, um Holz zu gewinnen. Dann werden Aluminium und Holz in 6 Nähmaschinenfabriken kombiniert, um Nähmaschinen herzustellen."
+    ],
+    "voraussetzung": "1 Artista",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 13.670,00 Credits",
+     "Jornaleros: - 560 Jornaleros",
+     "Obreros: - 720 Obreros",
+     "Artistas: - 600 Artistas",
+     "Attraktivität: - 210 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 12t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Naehmaschinen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#72"
+   },
+   {
+    "key": "produktionsketten-2#73",
+    "name": "Fußbälle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ballsports.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Für die Produktion von Fußbällen für die Artistas im DLC „Aufstieg der neuen Welt” benötigen Sie 1 Nandu-Farm zur Gewinnung von Nanduleder und 2 Kautschukplantagen zur Kautschukherstellung. Diese Rohstoffe werden dann in einer Ballmanufaktur kombiniert, um Fußbälle herzustellen."
+    ],
+    "voraussetzung": "1 Artista",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 70,00 Credits",
+     "Jornaleros: - 60 Jornaleros"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Fussbaelle.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#73"
+   },
+   {
+    "key": "produktionsketten-2#74",
+    "name": "Mezcal",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_mezcal.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Um Mezcal für Artistas im DLC „Aufstieg der neuen Welt” herzustellen, benötigen Sie eine Zuckerrohrplantage für Zuckerrohr und eine Zuckerraffinerie zur Zuckerherstellung. Außerdem ist eine Baumschule für Zitrusfrüchte und ein Kräutergarten für Kräuter erforderlich. Diese Zutaten werden in einem Mezcal-Ausschank kombiniert, um Mezcal zu produzieren."
+    ],
+    "voraussetzung": "1 Artista",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 85,00 Credits",
+     "Jornaleros: - 55 Jornaleros",
+     "Obreros: - 50 Obreros",
+     "Artistas: - 25 Artistas"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Mezcal.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#74"
+   },
+   {
+    "key": "produktionsketten-2#75",
+    "name": "Jalea",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_jalea.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Für die Herstellung von Jalea für Artistas im DLC „Aufstieg der neuen Welt” benötigen Sie 2 Calamares-Fischereien, um Calamares zu fangen, 2 Maisfarmen zur Maisproduktion und einen Kräutergarten zur Gewinnung von Kräutern. Diese Zutaten werden dann in einer Jalea-Küche kombiniert, um Jalea herzustellen."
+    ],
+    "voraussetzung": "900 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 370,00 Credits",
+     "Jornaleros: - 80 Jornaleros",
+     "Artistas: - 25 Artistas",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Jalea.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#75"
+   },
+   {
+    "key": "produktionsketten-2#76",
+    "name": "Eiscreme",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_icecream_cone.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Um Eiscreme für Artistas herzustellen, benötigen Sie eine komplexe Produktionskette. Zuerst benötigen Sie 3 Zuckerrohrplantagen und 3 Zuckerraffinerien, um Zucker herzustellen. Dann benötigen Sie 6 Kakaoplantagen zur Kakaoerzeugung, der mit Zucker kombiniert wird, um Schokolade in 3 Schokoladenfabriken zu produzieren. Darüber hinaus benötigen Sie 3 Baumschulen zur Gewinnung von Zitrusfrüchten und eine Rinderfarm mit Strom zur Milchproduktion. Schließlich kombinieren Sie Schokolade, Zitrusfrüchte und Milch in 6 Eiscreme-Fabriken, um Eiscreme herzustellen."
+    ],
+    "voraussetzung": "1.800 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 700,00 Credits",
+     "Jornaleros: - 215 Jornaleros",
+     "Obreros: - 450 Obreros",
+     "Artistas: - 600 Artistas"
+    ],
+    "produktion": [
+     "Produktionsmenge: 6t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Eiscreme.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#76"
+   },
+   {
+    "key": "produktionsketten-2#77",
+    "name": "Feuerwehrzentrale",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/gebaeude/icon_fire_brigade_advanced.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Um Feuerwehrzentralen mit Feuerlöschern zu versorgen, benötigen Sie eine effiziente Produktionskette. Zuerst benötigen Sie 1 Eisenerzmine für Eisenerz und 2 Köhlerhütten zur Kohleherstellung. Das Eisenerz wird mit der Kohle in 2 Hochöfen zu Eisen verarbeitet. Darüber hinaus benötigen Sie 4 Kautschukplantagen zur Kautschukgewinnung. Das Eisen wird dann mit dem Kautschuk in 3 Magazinen kombiniert, um Feuerlöscher herzustellen. Diese Produktionseinheiten reichen aus, um 24 Feuerwehrzentralen zu versorgen und sind entscheidend für die Sicherheit Ihrer Stadt oder Region."
+    ],
+    "voraussetzung": "2.700 Artistas",
+    "region_text": "Alte Welt , Neue Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 3.640,00 Credits",
+     "Jornaleros: - 250 Jornaleros",
+     "Obreros: - 1.100 Obreros",
+     "Attraktivität: - 50 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:45 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Feuerwehrzentrale.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#77"
+   },
+   {
+    "key": "produktionsketten-2#78",
+    "name": "Parfüm",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_perfume.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Um Parfüm für Artistas herzustellen, benötigen Sie eine durchdachte Produktionskette. Beginnen Sie mit 1 Holzfällerhütte für Holz und 4 Maisfarmen zur Maisproduktion. Das Holz und der Mais werden in 2 Chemiefabriken zu Ethanol verarbeitet. Zusätzlich benötigen Sie 2 Orchideenzuchtbetriebe zur Orchideengewinnung und 2 Baumschulen zur Produktion von Kokosöl. Schließlich kombinieren Sie Ethanol, Orchideen und Kokosöl in 4 Parfümlabors, um Parfüm herzustellen. Diese Produktionskette ermöglicht die Herstellung von hochwertigem Parfüm für die anspruchsvollen Bedürfnisse der Artistas."
+    ],
+    "voraussetzung": "2.700 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.420,00 Credits",
+     "Jornaleros: - 140 Jornaleros",
+     "Obreros: - 250 Obreros",
+     "Artistas: - 600 Artistas",
+     "Attraktivität: - 20 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Parfuem.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#78"
+   },
+   {
+    "key": "produktionsketten-2#79",
+    "name": "Samba Schule",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/gebaeude/icon_samba_school.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktion von Kostümen für Samba-Schulen erfordert eine gut geplante Produktionskette. Beginnen Sie mit 4 Baumwollplantagen zur Gewinnung von Baumwolle, die dann in 2 Baumwollwebereien zu Baumwollstoff verarbeitet wird. Gleichzeitig benötigen Sie 4 Salpeterwerke zur Salpeterherstellung und eine Erzmine zur Erzgewinnung. Diese Rohstoffe werden in 2 Labors kombiniert, um Farbstoffe herzustellen. Außerdem benötigen Sie 2 Nandu-Farmen zur Gewinnung von Nandufedern. Schließlich werden Baumwollstoffe, Farbstoffe und Nandufedern in 4 Kostümhändlern kombiniert, um Kostüme herzustellen. Diese Produktionskette reicht aus, um 8 Samba-Schulen mit den benötigten Kostümen zu versorgen und die farbenfrohen und festlichen Paraden zu unterstützen."
+    ],
+    "voraussetzung": "2.700 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.870,00 Credits",
+     "Jornaleros: - 120 Jornaleros",
+     "Obreros: - 120 Obreros",
+     "Artistas: - 620 Artistas"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Samba-Schule.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#79"
+   },
+   {
+    "key": "produktionsketten-2#80",
+    "name": "Polizeihauptquartier",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/gebaeude/icon_police_advanced.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktionskette für Polizeiausrüstung zur Versorgung von Polizeihauptquartieren erfordert eine effiziente Rohstoffverarbeitung. Beginnen Sie mit 4 Baumwollplantagen zur Gewinnung von Baumwolle, die in 2 Baumwollwebereien zu Baumwollstoff verarbeitet wird. Weiterhin benötigen Sie eine Eisenerzmine und 2 Köhlereien, um Eisenerz und Kohle zu produzieren, die dann in 2 Hochöfen zu Eisen verarbeitet werden. Zusätzlich benötigen Sie eine Holzfällerhütte zur Holzgewinnung. Schließlich kombinieren Sie Baumwollstoff, Eisen und Holz in 4 Arsenalen, um Polizeiausrüstung herzustellen. Diese Produktionskette kann bis zu 24 Polizeihauptquartiere mit der benötigten Ausrüstung versorgen, um die Sicherheit und Ordnung aufrechtzuerhalten."
+    ],
+    "voraussetzung": "4.000 Artistas",
+    "region_text": "Alte Welt , Neue Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 4.190,00 Credits",
+     "Jornaleros: - 1.480 Jornaleros",
+     "Obreros: - 200 Obreros",
+     "Attraktivität: - 60 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Polizeihauptquartier.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#80"
+   },
+   {
+    "key": "produktionsketten-2#81",
+    "name": "Ventilatoren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ventilator.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktionskette für Ventilatoren für Artistas erfordert eine komplexe Verarbeitung von Rohstoffen. Beginnen Sie mit Kupfer und Kautschuk, die in 12 Kabelfabriken zu Kabeln verarbeitet werden. Dann benötigen Sie Baumwolle, Ethanol und Kampfer, um in 6 Chemiefabriken Zelluloid herzustellen. Kohle und Eisenerz werden in 6 Hochöfen zu Eisen verarbeitet. Die Kabel, Zelluloid und Eisen werden in 6 Motorenfabriken (mit Strom) zu Motoren zusammengefügt. Gleichzeitig benötigen Sie 2 Bauxitminen und 6 Köhlereien, um Bauxit und Kohle zu produzieren, die dann in 18 Aluminiumschmelzhütten zu Aluminium verarbeitet werden. Schließlich kombinieren Sie die Motoren und das Aluminium in 6 Ventilatorfabriken (mit Strom), um Ventilatoren herzustellen. Diese Produktionskette ermöglicht die Produktion von hochwertigen Ventilatoren für Artistas."
+    ],
+    "voraussetzung": "4.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 33.650,00 Credits",
+     "Arbeiter: - 150 Arbeiter",
+     "Jornaleros: - 1.760 Jornaleros",
+     "Obreros: - 5.520 Obreros",
+     "Artistas: - 900 Artistas",
+     "Attraktivität: - 390 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 12t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Ventilatoren.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#81"
+   },
+   {
+    "key": "produktionsketten-2#82",
+    "name": "Kino",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/gebaeude/icon_cinema.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktionskette für Filmrollen zur Versorgung von Kinos für Artistas ist effizient gestaltet. Zuerst benötigen Sie Baumwolle, Ethanol und Kampfer, die in 2 Chemiefabriken zu Zelluloid verarbeitet werden. Danach benötigen Sie 4 Salpeterwerke, für die Strom erforderlich ist, um Salpeter herzustellen. Das Zelluloid und der Salpeter werden in 8 Chemiefabriken zu Filmrollen kombiniert. Mit dieser Produktionskette können Sie genügend Filmrollen für 12 Kinos herstellen, um das kulturelle Erlebnis der Artistas zu unterstützen und Filme auf die Leinwände zu bringen."
+    ],
+    "voraussetzung": "4.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 11.050,00 Credits",
+     "Jornaleros: - 200 Jornaleros",
+     "Obreros: - 1.500 Obreros",
+     "Artistas: - 360 Artistas",
+     "Attraktivität: - 120 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Kino.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#82"
+   },
+   {
+    "key": "produktionsketten-2#83",
+    "name": "Städtisches Krankenhaus",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/gebaeude/icon_hospital_advanced.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktionskette für Medizin zur Versorgung des städtischen Krankenhauses ist gut durchdacht. Beginnen Sie mit 2 Orchideenzuchtbetrieben zur Orchideengewinnung. Holz und Mais werden in 2 Chemiefabriken zu Ethanol verarbeitet. Zudem benötigen Sie 2 Kräutergärten zur Kräutergewinnung. Die Orchideen, das Ethanol und die Kräuter werden in 3 Labors zu Medizin kombiniert. Diese Produktionskette kann bis zu 24 städtische Krankenhäuser mit Medizin versorgen und die Gesundheitsversorgung in der Stadt sicherstellen."
+    ],
+    "voraussetzung": "6.000 Artistas",
+    "region_text": "Alte Welt , Neue Welt , Kap Trelawney",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 4.730,00 Credits",
+     "Jornaleros: - 90 Jornaleros",
+     "Obreros: - 250 Obreros",
+     "Artistas: - 900 Artistas",
+     "Attraktivität: - 50 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:45 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Krankenhaus.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#83"
+   },
+   {
+    "key": "produktionsketten-2#84",
+    "name": "Motorroller",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_scooter.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktion von Motorrollern für Artistas erfordert eine komplexe Verarbeitung von Rohstoffen. Starten Sie mit Kupfer und Kautschuk, die in 4 Kabelfabriken zu Kabeln verarbeitet werden. Dann verwenden Sie Baumwolle, Ethanol und Kampfer in 6 Chemiefabriken, um Zelluloid herzustellen. Kohle und Eisenerz werden in 2 Hochöfen zu Eisen verarbeitet. Die Kabel, Zelluloid und Eisen werden in 6 Motorenfabriken (mit Strom) zu Motoren zusammengefügt. Sie benötigen auch 4 Salpeterwerke (mit Strom) und eine Erzmine zur Gewinnung von Salpeter und Erzen, die in 2 Labors zu Farbstoffen verarbeitet werden. Schließlich kombinieren Sie die Motoren und Farbstoffe in 6 Motorroller-Fabriken (mit Strom), zur Herstellung von hochwertigen Motorrollern für die Artistas."
+    ],
+    "voraussetzung": "6.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 8.690,00 Credits",
+     "Arbeiter: - 50 Arbeiter",
+     "Jornaleros: - 490 Jornaleros",
+     "Obreros: - 1.720 Obreros",
+     "Artistas: - 1.100 Artistas",
+     "Attraktivität: - 60 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Motorroller.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#84"
+   },
+   {
+    "key": "produktionsketten-2#85",
+    "name": "Bomben (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_bomb_b.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktionskette für Bomben erfordert eine sorgfältige Rohstoffverarbeitung. Beginnen Sie mit 4 Schweinezuchten zur Gewinnung von Schweinen, die in 4 Wasenmeistereien zu Talg verarbeitet werden. Gleichzeitig benötigen Sie 8 Salpeterwerke (mit Strom) zur Salpeterherstellung, der dann mit Talg in 4 Dynamitfabriken zu Dynamit verarbeitet wird. Weiterhin benötigen Sie eine Kohlemine zur Kohlegewinnung und eine Eisenerzmine zur Erzgewinnung, die in 2 Hochofen zu Eisen umgewandelt werden. Der erneut benötigte Salpeter wird in 8 Salpeterwerken (mit Strom) hergestellt. Schließlich kombinieren Sie Dynamit, Eisen und Salpeter in 4 Bombenfabriken, um Bomben herzustellen. Bitte beachten Sie die Sicherheitsaspekte bei der Herstellung von Explosivstoffen."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 15.020,00 Credits",
+     "Bauern: - 120 Bauern",
+     "Bauern: - 120 Bauern",
+     "Arbeiter: - 860 Arbeiter",
+     "Ingenieure: - 1.000 Ingenieure",
+     "Jornaleros: - 1.200 Jornaleros",
+     "Attraktivität: - 82 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Bomben.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#85"
+   },
+   {
+    "key": "produktionsketten-2#86",
+    "name": "Seeminen (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_seamines.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktion von Seeminen erfordert eine gut durchdachte Produktionskette. Beginnen Sie mit 4 Schweinezuchten zur Gewinnung von Schweinen, die in 4 Wasenmeistereien zu Talg verarbeitet werden. Gleichzeitig benötigen Sie 8 Salpeterwerke (mit Strom) zur Salpeterherstellung, der dann mit Talg in 4 Dynamitfabriken zu Dynamit verarbeitet wird. Weiterhin benötigen Sie eine Kohlemine zur Kohlegewinnung und eine Eisenerzmine zur Erzgewinnung, die in 2 Hochofen zu Eisen umgewandelt werden. Zusätzlich benötigen Sie 2 Kupferminen zur Kupfergewinnung. Das Dynamit, Eisen und Kupfer werden dann in 4 Seeminenfabriken kombiniert, um Seeminen herzustellen. Diese Produktionskette ermöglicht die Herstellung von Seeminen für verschiedene Zwecke."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 11.520,00 Credits",
+     "Bauern: - 120 Bauern",
+     "Bauern: - 120 Bauern",
+     "Arbeiter: - 710 Arbeiter",
+     "Ingenieure: - 1.000 Ingenieure",
+     "Jornaleros: - 1.200 Jornaleros",
+     "Attraktivität: - 82 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Seeminen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#86"
+   },
+   {
+    "key": "produktionsketten-2#87",
+    "name": "Flugblätter (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_pamphlets.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktionskette für Flugblätter ist einfach gestaltet. Sie benötigen 4 Baumwollplantagen zur Gewinnung von Baumwolle und 1 Holzfällerhütte zur Holzgewinnung. Diese Rohstoffe werden dann in 4 Flugblattdruckereien kombiniert, um Flugblätter herzustellen."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 2.430,00 Credits",
+     "Jornaleros: - 1.250 Jornaleros",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Flugblaetter.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#87"
+   },
+   {
+    "key": "produktionsketten-2#88",
+    "name": "Hilfspakete (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_care_packages.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktionskette für Hilfspakete erfordert eine sorgfältige Verarbeitung verschiedener Rohstoffe. Zuerst benötigen Sie 8 Großküchen zur Herstellung von Gulasch. Dann wird Eisenerz mit Gulasch in 6 Konservenfabriken zu Fleischkonserven verarbeitet. Für die Herstellung von Schokolade benötigen Sie Zucker aus einer Zuckerraffinerie und Kakao von 4 Kakaoplantagen, die in 2 Schokoladenfabriken verarbeitet werden. Zusätzlich benötigen Sie Kartoffeln von 2 Kartoffelhöfen, die in 2 Schnapsbrennereien zu Schnaps verarbeitet werden. Schließlich kombinieren Sie Fleischkonserven, Schokolade und Schnaps in 4 Hilfspaketefabriken, um Hilfspakete zu erstellen. Diese Produktionskette ermöglicht die Herstellung von verpackten Hilfspaketen für verschiedene Zwecke."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 5.320,00 Credits",
+     "Bauern: - 380 Bauern",
+     "Bauern: - 380 Bauern",
+     "Arbeiter: - 50 Arbeiter",
+     "Handwerker: - 1.050 Handwerker",
+     "Jornaleros: - 1.260 Jornaleros",
+     "Obreros: - 300 Obreros",
+     "Attraktivität: - 40 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Strom: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Hilfspakete.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#88"
+   },
+   {
+    "key": "produktionsketten-2#89",
+    "name": "Löschwasser (neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_water.webp",
+    "region": "Neue Welt",
+    "level": "Artistas",
+    "description": [
+     "Die Produktion von Löschwasser erfolgt einfach und direkt in einer Löschwasserfabrik."
+    ],
+    "voraussetzung": "600 Obreros / 4.000 Artistas",
+    "region_text": "Neue Welt",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 600,00 Credits",
+     "Jornaleros: - 300 Jornaleros",
+     "Attraktivität: - 10 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/neue_welt/Loeschwasser.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#89"
+   }
+  ],
+  "intro": [
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsketten für die Neue Welt"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Hier findest du eine Übersicht der optimalen Produktionsketten für die Neue Welt in Anno 1800. Eine gut geplante Produktionskette ist essenziell, um Ressourcen optimal zu nutzen und die Stadt wirtschaftlich stabil auszubauen."
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Wenn ihr euch die Ketten ausdrucken wollt, könnt ihr hier die PDF für die ",
+     {
+      "text": "Neue Welt",
+      "href": "https://www.annoinfo.de/Anno_1800/downloads.html#70"
+     },
+     " herunterladen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Ressourcenfluss"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Jede Produktionskette beginnt mit der Rohstoffgewinnung und endet mit dem fertigen Produkt. Ein effizienter Transport und Lagerhaltung sind entscheidend für den reibungslosen Ablauf."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsverhältnisse"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die optimale Anzahl an Produktionsgebäuden sollte so gewählt werden, dass Rohstoffe nicht verschwendet werden und keine Engpässe entstehen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Transport und Logistik"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Marktplätze, Lagerhäuser und Straßenlayout beeinflussen, wie effizient Waren transportiert und verteilt werden. Ein intelligentes Netzwerk verhindert Staus und Verzögerungen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Arbeitskräfte und Balance"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Unterschiedliche Produktionen erfordern verschiedene Arbeitskräfte. Die Balance zwischen Bevölkerungswachstum und Produktion ist entscheidend."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Spezialisierung und Optimierung"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Durch Spezialisierung können Städte bestimmte Waren effizienter produzieren. Optimierung durch Einfluss und Items kann die Effizienz weiter steigern."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Exporte und Handelsrouten"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die Neue Welt produziert wertvolle Exportgüter wie Kaffee, Rum und Baumwolle, die für die Alte Welt unerlässlich sind. Effiziente Handelsrouten stellen sicher, dass diese Waren ohne Verzögerung transportiert werden."
+    ]
+   }
+  ]
+ },
+ {
+  "key": "produktionsketten-3",
+  "name": "Arktis",
+  "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html",
+  "chains": [
+   {
+    "key": "produktionsketten-3#90",
+    "name": "Holzbretter (Arktis)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wooden_planks.webp",
+    "region": "Arktis",
+    "level": "Entdecker",
+    "description": [
+     "Die Produktion von Holzbrettern beginnt in der Holzfällerhütte, wo Holz geschlagen wird. Anschließend wird das Holz zum Sägewerk transportiert, wo es in Holzbretter verarbeitet wird."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Arktis",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 40,00 Credits",
+     "Entdecker: - 20 Entdecker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:15 min",
+     "Wärme: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/arktis/Holzbretter.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#90"
+   },
+   {
+    "key": "produktionsketten-3#91",
+    "name": "Wärme",
+    "icon": "https://www.annoinfo.de/images/anno_1800/icons/misc/icon_heating_2.webp",
+    "region": "Arktis",
+    "level": "Entdecker",
+    "description": [
+     "In der Arktis ist die Wärmeerzeugung eine Herausforderung. Um die benötigte Wärme in einem Umkreis von 19 Kacheln um deinen Heizofen aufrechtzuerhalten, ist es wichtig sicherzustellen, dass du ausreichend Brennmaterial, wie Kohle aus der Köhlerei, bereitstellst. Dies ermöglicht es dem Heizofen, genug Wärme zu erzeugen, um die umliegenden Gebäude und Bereiche in dem arktischen Gebiet des DLC’s „Die Passage” zu beheizen."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Arktis",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 20,00 Credits",
+     "Entdecker: - 30 Entdecker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 0t / min",
+     "Produktionszeit: 0 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/arktis/Waerme.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#91"
+   },
+   {
+    "key": "produktionsketten-3#92",
+    "name": "Pemmikan",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pemmican.webp",
+    "region": "Arktis",
+    "level": "Entdecker",
+    "description": [
+     "In der arktischen DLC „Die Passage” benötigst du Pemmikan. Du startest mit einer Walfängerei, die Walöl produziert, und einer Rentier Jagdhütte, die Rentierfleisch liefert. Kombiniere Walöl und Rentierfleisch in einer Pemmikan Räucherei, um Pemmikan herzustellen. Achte darauf, dass ausreichend Wärme vorhanden ist, um die Produktion aufrechtzuerhalten."
+    ],
+    "voraussetzung": "100 Entdecker",
+    "region_text": "Arktis",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 175,00 Credits",
+     "Entdecker: - 85 Entdecker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 01:00 min",
+     "Wärme: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/arktis/Pemmikan.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#92"
+   },
+   {
+    "key": "produktionsketten-3#93",
+    "name": "Schlafsäcke",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sleeping_bags.webp",
+    "region": "Arktis",
+    "level": "Entdecker",
+    "description": [
+     "Für die Schlafsack-Produktion benötigst du in einer arktischen Umgebung eine Robbenfängerei (Robbenfelle) und vier Gänsefarmen (Gänsefedern). Diese kombinierst du in einer Schlafsackfabrik, wobei Wärme erforderlich ist, um Schlafsäcke herzustellen."
+    ],
+    "voraussetzung": "250 Entdecker",
+    "region_text": "Arktis",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 570,00 Credits",
+     "Entdecker: - 260 Entdecker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Wärme: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/arktis/Schlafsaecke.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#93"
+   },
+   {
+    "key": "produktionsketten-3#94",
+    "name": "Öllampen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_oil_lamps.webp",
+    "region": "Arktis",
+    "level": "Entdecker",
+    "description": [
+     "Um Öllampen herzustellen, benötigst du Wärme, damit die Gebäude produzieren können. Starte mit der Messingherstellung in der alten Welt oder am Kap. Und zwar mit einer Kupfermine für Kupfer und einer Zinkmine für Zink. Kombiniere Kupfer und Zink in zwei Messinghütten, und verwende dann das Messing zusammen mit Walöl aus zwei Walfängereien in zwei Öllampenfabriken, um Öllampen zu produzieren."
+    ],
+    "voraussetzung": "500 Entdecker",
+    "region_text": "Arktis",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.550,00 Credits",
+     "Arbeiter: - 100 Arbeiter",
+     "Entdecker: - 200 Entdecker",
+     "Attraktivität: - 20 Attraktivität"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Wärme: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/arktis/Oellampen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#94"
+   },
+   {
+    "key": "produktionsketten-3#95",
+    "name": "Parkas",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fur_parka.webp",
+    "region": "Arktis",
+    "level": "Techniker",
+    "description": [
+     "Um Parkas herzustellen, benötigst du in einer Umgebung, in der Wärme verfügbar ist, eine Robbenfängerei (für Robbenfelle) und eine Bärenjagdhütte (für Bärenfelle). Kombiniere Robbenfelle und Bärenfelle in drei Parkafabriken, um Parkas zu produzieren."
+    ],
+    "voraussetzung": "300 Techniker",
+    "region_text": "Arktis",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.370,00 Credits",
+     "Entdecker: - 140 Entdecker",
+     "Techniker: - 240 Techniker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:30 min",
+     "Wärme: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/arktis/Parkas.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#95"
+   },
+   {
+    "key": "produktionsketten-3#96",
+    "name": "Hundeschlitten",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sled.webp",
+    "region": "Arktis",
+    "level": "Techniker",
+    "description": [
+     "In der letzten Produktionskette der Arktis, um Hundeschlitten herzustellen, beginne mit zwei Robbenfängereien, um Robbenfelle zu erhalten, und einer Holzfällerhütte, um Holz zu produzieren. Kombiniere dann Robbenfelle und Holz in vier Schlittenfabriken, um Schlitten herzustellen. Um Huskys zu züchten, benötigst du acht Huskyfarmen. Die Schlitten und Huskys werden in den Schlittenfabriken zusammengeführt, um Hundeschlitten zu produzieren. Dies ermöglicht es dir, in der arktischen Umgebung effizient zu reisen und zu überleben. Achte darauf, dass genügend Wärme vorhanden ist, um diese Produktionskette aufrechtzuerhalten."
+    ],
+    "voraussetzung": "750 Techniker",
+    "region_text": "Arktis",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 5.720,00 Credits",
+     "Entdecker: - 50 Entdecker",
+     "Techniker: - 1.360 Techniker"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Wärme: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/arktis/Hundeschlitten.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#96"
+   }
+  ],
+  "intro": [
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsketten für die Arktis"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Hier findest du eine Übersicht der optimalen Produktionsketten für die Arktis aus dem DLC Die Passage in Anno 1800. Eine gut geplante Produktionskette ist essenziell, um Ressourcen optimal zu nutzen und die Siedlung unter den extremen Bedingungen wirtschaftlich stabil zu halten."
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Wenn ihr euch die Ketten ausdrucken wollt, könnt ihr hier die PDF für die ",
+     {
+      "text": "Arktis",
+      "href": "https://www.annoinfo.de/Anno_1800/downloads.html#71"
+     },
+     " herunterladen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Ressourcenfluss"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "In der Arktis sind Ressourcen begrenzt und müssen effizient genutzt werden. Eine gute Planung der Produktionsketten ist entscheidend, um Versorgungsausfälle zu vermeiden."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsverhältnisse"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Aufgrund der harschen Umweltbedingungen ist die Produktionsrate in der Arktis oft geringer als in anderen Regionen. Es ist wichtig, ein Gleichgewicht zwischen Produktion und Verbrauch zu finden."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Transport und Logistik"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Der Transport in der Arktis ist herausfordernd. Versorgungslager und Handelsrouten müssen gut organisiert sein, da Nachschublieferungen aus anderen Regionen oft nötig sind."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Arbeitskräfte und Balance"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die Bevölkerung in der Arktis ist kleiner und benötigt spezielle Güter, um unter den extremen Bedingungen zu überleben. Die Balance zwischen Produktion und Versorgung ist kritisch."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Spezialisierung und Optimierung"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die Arktis bietet einzigartige Produktionsmöglichkeiten wie Robbenfarmen und Husky-Transport. Durch Spezialisierung können Ressourcen effizienter genutzt werden."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Exporte und Handelsrouten"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die Arktis ist stark von Importen aus der Alten und Neuen Welt abhängig. Effiziente Handelsrouten stellen sicher, dass benötigte Güter wie Kohle und Schnapps rechtzeitig eintreffen."
+    ]
+   }
+  ]
+ },
+ {
+  "key": "produktionsketten-4",
+  "name": "Enbesa",
+  "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html",
+  "chains": [
+   {
+    "key": "produktionsketten-4#97",
+    "name": "Wanza Holz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wansa_wood.webp",
+    "region": "Enbesa",
+    "level": "Hirten",
+    "description": [
+     "In Enbesa, im DLC „Land der Löwen”, benötigst du eine Wanza Holzfällerhütte, um Wanzaholz zu produzieren. Dieses Holz dient als Baumaterial für den Ausbau und Fortschritt in Enbesa."
+    ],
+    "voraussetzung": "—",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 15,00 Credits",
+     "Hirten: - 15 Hirten"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:15 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Wanza_Holz.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#97"
+   },
+   {
+    "key": "produktionsketten-4#98",
+    "name": "Ziegenmilch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_goat_milk.webp",
+    "region": "Enbesa",
+    "level": "Hirten",
+    "description": [
+     "In Enbesa werden Ziegenfarmen genutzt, um Ziegenmilch zu produzieren. Diese Milch dient als Grundnahrungsmittel und ist ein wichtiger Bestandteil der Ernährung der Hirten in dieser Region."
+    ],
+    "voraussetzung": "50 Hirten",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 5,00 Credits",
+     "Hirten: - 30 Hirten"
+    ],
+    "produktion": [
+     "Produktionsmenge: 1t / min",
+     "Produktionszeit: 01:00 min",
+     "Wasser: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Ziegenmilch.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#98"
+   },
+   {
+    "key": "produktionsketten-4#99",
+    "name": "Gewänder",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_traditional_clothing.webp",
+    "region": "Enbesa",
+    "level": "Hirten",
+    "description": [
+     "In Enbesa werden Gewänder hergestellt, indem zunächst Flachs auf zwei Flachsfarmen angebaut wird. Der Flachs wird dann in einer Leinenweberei zu Leinenstoff verarbeitet, der schließlich in zwei Stickereien zu Gewändern weiterverarbeitet wird. Diese dienen den Hirten in Enbesa als Bekleidung."
+    ],
+    "voraussetzung": "150 Hirten",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 80,00 Credits",
+     "Hirten: - 115 Hirten"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Wasser: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Gewaender.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#99"
+   },
+   {
+    "key": "produktionsketten-4#100",
+    "name": "Trockenfleisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dried_meat.webp",
+    "region": "Enbesa",
+    "level": "Hirten",
+    "description": [
+     "Für die Produktion von Trockenfleisch, benötigst du zwei Sanga-Farmen zur Aufzucht von Sanga-Kühen und eine Saline zur Gewinnung von Salz. Kombiniere die Sanga-Kühe mit dem Salz in einem Trockenhaus, um Trockenfleisch herzustellen. Dieses dient als Nahrung für die Hirten in Enbesa."
+    ],
+    "voraussetzung": "300 Hirten",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 60,00 Credits",
+     "Hirten: - 105 Hirten"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Wasser: Optional"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Trockenfleisch.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#100"
+   },
+   {
+    "key": "produktionsketten-4#101",
+    "name": "Hibiskustee",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_hibiscus_tea.webp",
+    "region": "Enbesa",
+    "level": "Hirten",
+    "description": [
+     "In Enbesa, für die Herstellung von Hibiskustee, benötigst du zwei Hibiskusfarmen, um Hibiskusblüten zu ernten. Diese Blüten werden in drei Teewürzereien zu Hibiskustee verarbeitet. Dieser Tee ist ein Getränk für Hirten und die Ältesten in Enbesa, sowie für Gelehrte."
+    ],
+    "voraussetzung": "300 Hirten",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 210,00 Credits",
+     "Hirten: - 135 Hirten"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:30 min",
+     "Wasser: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Hibiskustee.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#101"
+   },
+   {
+    "key": "produktionsketten-4#102",
+    "name": "Lehmziegel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_mud_bricks.webp",
+    "region": "Enbesa",
+    "level": "Älteste",
+    "description": [
+     "In Enbesa werden Lehmziegel hergestellt, indem Lehm aus einer Lehmgrube und Tef von vier Tef-Farmen kombiniert werden. Diese Lehmziegel dienen als Baumaterial und sind von Bedeutung für die Ältesten in Enbesa, um ihre Gemeinschaft zu entwickeln und zu verbessern."
+    ],
+    "voraussetzung": "1 Ältester",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 260,00 Credits",
+     "Hirten: - 115 Hirten",
+     "Äleste: - 400 Älteste"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Wasser: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Lehmziegel.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#102"
+   },
+   {
+    "key": "produktionsketten-4#103",
+    "name": "Keramik",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ceramics.webp",
+    "region": "Enbesa",
+    "level": "Älteste",
+    "description": [
+     "Die Ältesten in Enbesa verlangen nach Keramik. Du kannst Keramik herstellen, indem du Lehm aus einer Lehmgrube und Indigo von vier Indigofarmen verwendest. Kombiniere Lehm und Indigo in zwei Keramikwerkstätten, um das geforderte Keramik herzustellen."
+    ],
+    "voraussetzung": "1 Ältester",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 320,00 Credits",
+     "Hirten: - 115 Hirten",
+     "Äleste: - 200 Älteste"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 00:30 min",
+     "Wasser: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Keramik.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#103"
+   },
+   {
+    "key": "produktionsketten-4#104",
+    "name": "Wandteppiche",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tapestries.webp",
+    "region": "Enbesa",
+    "level": "Älteste",
+    "description": [
+     "Zur Herstellung von Wandteppichen für die Ältesten, nutze zwei Flachsfarmen (für Flachs) und eine Leinenweberei (für Leinenstoff). Zusätzlich benötigst du zwei Indigofarmen (für Indigo). Kombiniere den Leinenstoff mit dem Indigo in einer Teppichknüpferei, um die gewünschten Wandteppiche herzustellen."
+    ],
+    "voraussetzung": "1 Ältester",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 280,00 Credits",
+     "Hirten: - 75 Hirten",
+     "Äleste: - 90 Älteste"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 00:30 min",
+     "Wasser: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Wandteppiche.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#104"
+   },
+   {
+    "key": "produktionsketten-4#105",
+    "name": "Meeresfrüchte Eintopf",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wat_stew.webp",
+    "region": "Enbesa",
+    "level": "Älteste",
+    "description": [
+     "In Enbesa, für die Herstellung von Meeresfrüchte-Eintopf als Nahrung für die Ältesten, benötigst du zwei Tef-Farmen für Tef und zwei Gewürzfarmen für Gewürze. Kombiniere Tef und Gewürze in einer Tef-Mühle, um Gewürzmehl herzustellen. Verwende dann zwei Hummerfischereien, um Hummer zu fangen, und füge sie mit dem Gewürzmehl zusammen in zwei Wat-Küchen, um den Meeresfrüchte-Eintopf herzustellen."
+    ],
+    "voraussetzung": "300 Älteste",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 545,00 Credits",
+     "Hirten: - 140 Hirten",
+     "Äleste: - 190 Älteste"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min",
+     "Wasser: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Meeresfruechte_Eintopf.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#105"
+   },
+   {
+    "key": "produktionsketten-4#106",
+    "name": "Tonpfeifen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tobacco_pipes.webp",
+    "region": "Enbesa",
+    "level": "Älteste",
+    "description": [
+     "Produziere Tonpfeifen für die Ältesten mit einer Lehmgrube (für Lehm) und acht Tabakplantagen (nur in der Neuen Welt möglich) für Tabak. Kombiniere Lehm und Tabak in sechs Pfeifenmachereien, um die Tonpfeifen herzustellen und den Genuss der Ältesten zu befriedigen."
+    ],
+    "voraussetzung": "300 Älteste",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.300,00 Credits",
+     "Jornaleros: - 80 Jornaleros",
+     "Hirten: - 35 Hirten",
+     "Äleste: - 450 Älteste"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:30 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Tonpfeifen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#106"
+   },
+   {
+    "key": "produktionsketten-4#107",
+    "name": "Chroniken",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_scriptures.webp",
+    "region": "Enbesa",
+    "level": "Älteste",
+    "description": [
+     "Für die Herstellung von Chroniken zur Bewahrung von Wissen und Geschichte der Ältesten, benötigst du eine Holzfällerhütte (für Holz) und eine Papiermühle um das Papier aus dem Holz zu gewinnen. Verwende vier Indigofarmen (für Indigo) und kombiniere Papier und Indigo in vier Buchmalereien, um die Chroniken zu erstellen."
+    ],
+    "voraussetzung": "600 Älteste",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.165,00 Credits",
+     "Bauern: - 5 Bauern",
+     "Bauern: - 5 Bauern",
+     "Hirten: - 80 Hirten",
+     "Äleste: - 485 Älteste"
+    ],
+    "produktion": [
+     "Produktionsmenge: 4t / min",
+     "Produktionszeit: 01:00 min",
+     "Wasser: Erforderlich"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Chroniken.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#107"
+   },
+   {
+    "key": "produktionsketten-4#108",
+    "name": "Laternen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_lanterns.webp",
+    "region": "Enbesa",
+    "level": "Älteste",
+    "description": [
+     "Um Laternen für die Ältesten zu produzieren, beginnst du mit einer Imkerei, die Bienenwachs liefert, und zwei Baumwollplantagen in der Neuen Welt, um Baumwolle zu ernten. Das Bienenwachs und die Baumwolle werden in einer Kerzenzieherei kombiniert, um Wachskerzen herzustellen. Weiterhin benötigst du eine Quarzgrube, um Quarz abzubauen, der in einer Glashütte zu Glas verarbeitet wird. Die Wachskerzen und das Glas werden schließlich in zwei Laternenmachereien verwendet, um die Laternen herzustellen, die von den Ältesten in Enbesa geschätzt werden."
+    ],
+    "voraussetzung": "1.000 Älteste",
+    "region_text": "Enbesa",
+    "baukosten": [],
+    "unterhalt": [
+     "Unterhalt: - 1.020,00 Credits",
+     "Arbeiter: - 25 Arbeiter",
+     "Handwerker: - 100 Handwerker",
+     "Jornaleros: - 20 Jornaleros",
+     "Hirten: - 30 Hirten",
+     "Äleste: - 180 Älteste"
+    ],
+    "produktion": [
+     "Produktionsmenge: 2t / min",
+     "Produktionszeit: 01:00 min"
+    ],
+    "diagram": "https://www.annoinfo.de/images/anno_1800/produktionsketten/enbesa/Laternen.webp",
+    "url": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#108"
+   }
+  ],
+  "intro": [
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsketten für Enbesa"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Hier findest du eine Übersicht der optimalen Produktionsketten für die Enbesa aus dem DLC Land der Löwen in Anno 1800. Eine gut geplante Produktionskette ist essenziell, um Ressourcen optimal zu nutzen und die Siedlung unter den besonderen klimatischen Bedingungen wirtschaftlich stabil zu halten."
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Wenn ihr euch die Ketten ausdrucken wollt, könnt ihr hier die PDF für die ",
+     {
+      "text": "Enbesa",
+      "href": "https://www.annoinfo.de/Anno_1800/downloads.html#72"
+     },
+     " herunterladen."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Ressourcenfluss"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "In Enbesa sind fruchtbares Land und Wasser entscheidende Ressourcen. Eine kluge Planung der Bewässerung und Landwirtschaft ist essenziell für die Produktion."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Produktionsverhältnisse"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die landwirtschaftliche Produktion muss in Balance mit der Bevölkerung stehen. Bewässerte Felder und Arbeitskräfte sind entscheidend für die Effizienz."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Transport und Logistik"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die Infrastruktur in Enbesa ist auf Handelsrouten und gut verteilte Lagerhäuser angewiesen, um eine stabile Versorgung zu gewährleisten."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Arbeitskräfte und Balance"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Die Bevölkerung in Enbesa benötigt spezifische Güter wie Ziegenmilch und Gewänder. Die Balance zwischen Landwirtschaft und Handwerk ist wichtig."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Spezialisierung und Optimierung"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Enbesa bietet einzigartige Produktionsmöglichkeiten wie die Papierherstellung und Hirtenwirtschaft. Durch Spezialisierung können diese effizienter genutzt werden."
+    ]
+   },
+   {
+    "kind": "heading",
+    "runs": [
+     "Exporte und Handelsrouten"
+    ]
+   },
+   {
+    "kind": "para",
+    "runs": [
+     "Enbesa ist in viele globale Handelsnetzwerke eingebunden. Exportgüter wie Tonpfeifen oder Chroniken sind wichtige Handelswaren."
+    ]
+   }
+  ]
+ }
+]

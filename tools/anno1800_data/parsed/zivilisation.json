@@ -1,0 +1,4455 @@
+[
+ {
+  "name": "Alte Welt",
+  "icon": "https://www.annoinfo.de/images/anno_1800/icons/worlds/icon_session_moderate.webp",
+  "levels": [
+   {
+    "name": "Bauern",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_bauern.webp",
+    "dlc": [],
+    "description": [
+     "In Anno 1800 bilden die Bauern die erste Zivilisationsstufe der Alten Welt – das Fundament deiner Stadt. Ihre Häuser erfordern wenige Ressourcen und bieten Platz für die einfache, aber essenzielle Arbeitskraft in Landwirtschaft, Fischerei und Brennereien. Um ihre Zufriedenheit zu sichern und Aufstiegsmöglichkeiten zu schaffen, brauchen Bauern vor allem einen Marktplatz, Fisch und Arbeitskleidung. Luxusgüter wie Wirtshaus und Schnaps verbessern zusätzlich das Wohlbefinden. Die Bauern liefern nicht nur Nahrungsmittel, sondern auch wichtige Rohstoffe, die den Grundstein für eine wachsende und prosperierende Stadt legen."
+    ],
+    "baukosten": [
+     {
+      "count": "2",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Marktplatz",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/1.html",
+          "building_id": 1,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Bauern"
+         },
+         {
+          "name": "Arbeitskleidung",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#40",
+          "building_id": null,
+          "ware": "waren_konsumgueter#40",
+          "dlc": [],
+          "condition": "100 Bauern",
+          "effect": "+2 Bauern"
+         },
+         {
+          "name": "Fisch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#38",
+          "building_id": null,
+          "ware": "waren_konsumgueter#38",
+          "dlc": [],
+          "condition": "50 Bauern",
+          "effect": "+3 Bauern"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Wirtshaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/246.html",
+          "building_id": 246,
+          "ware": null,
+          "dlc": [],
+          "condition": "150 Bauern",
+          "effect": "+12 Zufriedenheit"
+         },
+         {
+          "name": "Schnaps",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#39",
+          "building_id": null,
+          "ware": "waren_konsumgueter#39",
+          "dlc": [],
+          "condition": "100 Bauern",
+          "effect": "+8 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "500 Handwerker",
+          "effect": "+1 Bauern"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+1 Bauern"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+3 Bauern"
+         }
+        ]
+       },
+       {
+        "label": "Speisen & Getränke",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Mehl",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#188",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#188",
+          "dlc": [],
+          "condition": "150 Arbeiter",
+          "effect": "+1 Bauern"
+         },
+         {
+          "name": "Zucker",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#203",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#203",
+          "dlc": [],
+          "condition": "500 Handwerker",
+          "effect": "+1 Bauern"
+         },
+         {
+          "name": "Konfitüre",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#54",
+          "building_id": null,
+          "ware": "waren_konsumgueter#54",
+          "dlc": [
+           "Reisezeit"
+          ],
+          "condition": "300 Touristen",
+          "effect": "+2 Bauern"
+         }
+        ]
+       },
+       {
+        "label": "Gesundheit",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Seife",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#43",
+          "building_id": null,
+          "ware": "waren_konsumgueter#43",
+          "dlc": [],
+          "condition": "300 Arbeiter",
+          "effect": "+1 Bauern"
+         },
+         {
+          "name": "Kräuter",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#182",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#182",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+2 Bauern"
+         },
+         {
+          "name": "Hibiskusblüten",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#173",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#173",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "300 Hirten",
+          "effect": "+3 Bauern"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Bauern"
+   },
+   {
+    "name": "Arbeiter",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_arbeiter.webp",
+    "dlc": [],
+    "description": [
+     "Die zweite Zivilisationsstufe, die Arbeiter treiben die Industrialisierung voran. Durch das upgraden von Bauerhäusern mit Holzbrettern enstehen Arbeiterhäuser, sie fassen bis zu 20 Einwohner. Arbeiter übernehmen anspruchsvollere Tätigkeiten in Bäckereien, Brauereien und Stahlwerken. Ihre Grundbedürfnisse umfassen Fisch, Arbeitskleidung, Wurst und Seife, während Bier und eine Kirche die Zufriedenheit weiter steigern. Sie sind essenziell für die industrielle Produktion und liefern Materialien für höhere Bevölkerungsstufen. Ihr Beitrag sichert das Wachstum und den Fortschritt deiner Stadt."
+    ],
+    "baukosten": [
+     {
+      "count": "6",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Marktplatz",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/1.html",
+          "building_id": 1,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Arbeiter"
+         },
+         {
+          "name": "Schule",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/248.html",
+          "building_id": 248,
+          "ware": null,
+          "dlc": [],
+          "condition": "750 Arbeiter",
+          "effect": "+2 Arbeiter"
+         },
+         {
+          "name": "Fisch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#38",
+          "building_id": null,
+          "ware": "waren_konsumgueter#38",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Arbeiter"
+         },
+         {
+          "name": "Arbeitskleidung",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#40",
+          "building_id": null,
+          "ware": "waren_konsumgueter#40",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Arbeiter"
+         },
+         {
+          "name": "Wurst",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#41",
+          "building_id": null,
+          "ware": "waren_konsumgueter#41",
+          "dlc": [],
+          "condition": "1 Arbeiter",
+          "effect": "+3 Arbeiter"
+         },
+         {
+          "name": "Brot",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#42",
+          "building_id": null,
+          "ware": "waren_konsumgueter#42",
+          "dlc": [],
+          "condition": "150 Arbeiter",
+          "effect": "+3 Arbeiter"
+         },
+         {
+          "name": "Seife",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#43",
+          "building_id": null,
+          "ware": "waren_konsumgueter#43",
+          "dlc": [],
+          "condition": "300 Arbeiter",
+          "effect": "+2 Arbeiter"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Wirtshaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/246.html",
+          "building_id": 246,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Zufriedenheit"
+         },
+         {
+          "name": "Kirche",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/247.html",
+          "building_id": 247,
+          "ware": null,
+          "dlc": [],
+          "condition": "150 Arbeiter",
+          "effect": "+7 Zufriedenheit"
+         },
+         {
+          "name": "Schnaps",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#39",
+          "building_id": null,
+          "ware": "waren_konsumgueter#39",
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Bier",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#44",
+          "building_id": null,
+          "ware": "waren_konsumgueter#44",
+          "dlc": [],
+          "condition": "500 Arbeiter",
+          "effect": "+3 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "500 Handwerker",
+          "effect": "+2 Arbeiter"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+3 Arbeiter"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+5 Arbeiter"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Hochräder",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#50",
+          "building_id": null,
+          "ware": "waren_konsumgueter#50",
+          "dlc": [],
+          "condition": "500 Ingenieure",
+          "effect": "+4 Arbeiter"
+         },
+         {
+          "name": "Fussbälle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#95",
+          "building_id": null,
+          "ware": "waren_konsumgueter#95",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+3 Arbeiter"
+         },
+         {
+          "name": "Tonpfeifen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#70",
+          "building_id": null,
+          "ware": "waren_konsumgueter#70",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "300 Älteste",
+          "effect": "+3 Arbeiter"
+         }
+        ]
+       },
+       {
+        "label": "Speisen & Getränke",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "500 Handwerker",
+          "effect": "+2 Arbeiter"
+         },
+         {
+          "name": "Chilisauce",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#94",
+          "building_id": null,
+          "ware": "waren_konsumgueter#94",
+          "dlc": [],
+          "condition": "1 Obrero",
+          "effect": "+1 Arbeiter"
+         },
+         {
+          "name": "Rindfleisch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#144",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#144",
+          "dlc": [],
+          "condition": "1 Handwerker",
+          "effect": "+2 Arbeiter"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Arbeiter"
+   },
+   {
+    "name": "Handwerker",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_handwerker.webp",
+    "dlc": [],
+    "description": [
+     "In Anno 1800 sind die Handwerker die dritte Bevölkerungsstufe in der Alten Welt und bilden die gebildete Mittelschicht. Sie sind in spezialisiertem Handwerk, Industrie und Handel tätig. Ihr Aufstieg erfordert eine Schule und bringt den Zugang zu wichtigen Produktionsgütern wie Stahl und Fenstern. Ihre Grundbedürfnisse umfassen Brot, Seife und Fleischkonserven, während Luxusgüter wie Bier und Rum ihre Zufriedenheit steigern. Handwerker ermöglichen zudem den Bau kultureller Gebäude und die Entsendung von Expeditionen, was den Fortschritt der Stadt vorantreibt."
+    ],
+    "baukosten": [
+     {
+      "count": "12",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "2",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     },
+     {
+      "count": "2",
+      "name": "Stahlträger",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#105",
+      "ware": "waren_baumaterialien#105"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Schule",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/248.html",
+          "building_id": 248,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Handwerker"
+         },
+         {
+          "name": "Universität",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/250.html",
+          "building_id": 250,
+          "ware": null,
+          "dlc": [],
+          "condition": "1.500 Handwerker",
+          "effect": "+2 Handwerker"
+         },
+         {
+          "name": "Wurst",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#41",
+          "building_id": null,
+          "ware": "waren_konsumgueter#41",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Handwerker"
+         },
+         {
+          "name": "Seife",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#43",
+          "building_id": null,
+          "ware": "waren_konsumgueter#43",
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Handwerker"
+         },
+         {
+          "name": "Brot",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#42",
+          "building_id": null,
+          "ware": "waren_konsumgueter#42",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Handwerker"
+         },
+         {
+          "name": "Fleischkonserven",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#45",
+          "building_id": null,
+          "ware": "waren_konsumgueter#45",
+          "dlc": [],
+          "condition": "1 Handwerker",
+          "effect": "+4 Handwerker"
+         },
+         {
+          "name": "Nähmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#46",
+          "building_id": null,
+          "ware": "waren_konsumgueter#46",
+          "dlc": [],
+          "condition": "250 Handwerker",
+          "effect": "+2 Handwerker"
+         },
+         {
+          "name": "Pelzmäntel",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#48",
+          "building_id": null,
+          "ware": "waren_konsumgueter#48",
+          "dlc": [],
+          "condition": "900 Handwerker",
+          "effect": "+2 Handwerker"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Kirche",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/247.html",
+          "building_id": 247,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+7 Zufriedenheit"
+         },
+         {
+          "name": "Varieté",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/249.html",
+          "building_id": 249,
+          "ware": null,
+          "dlc": [],
+          "condition": "250 Handwerker",
+          "effect": "+6 Zufriedenheit"
+         },
+         {
+          "name": "Bier",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#44",
+          "building_id": null,
+          "ware": "waren_konsumgueter#44",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "500 Handwerker",
+          "effect": "+4 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "500 Handwerker",
+          "effect": "+5 Handwerker"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+6 Handwerker"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+14 Handwerker"
+         }
+        ]
+       },
+       {
+        "label": "Kunsthandwerk",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Wolle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#140",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#140",
+          "dlc": [],
+          "condition": "",
+          "effect": "+1 Handwerker"
+         },
+         {
+          "name": "Lehm",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_rohstoffe.html#127",
+          "building_id": null,
+          "ware": "waren_rohstoffe#127",
+          "dlc": [],
+          "condition": "",
+          "effect": "+1 Handwerker"
+         },
+         {
+          "name": "Papier",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#212",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#212",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "600 Älteste",
+          "effect": "+5 Handwerker"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Fussbälle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#95",
+          "building_id": null,
+          "ware": "waren_konsumgueter#95",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+2 Handwerker"
+         },
+         {
+          "name": "Parfüm",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#99",
+          "building_id": null,
+          "ware": "waren_konsumgueter#99",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "2.700 Artistas",
+          "effect": "+4 Handwerker"
+         },
+         {
+          "name": "Motorroller",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#101",
+          "building_id": null,
+          "ware": "waren_konsumgueter#101",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "6.000 Artistas",
+          "effect": "+7 Handwerker"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Handwerker"
+   },
+   {
+    "name": "Ingenieure",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_ingenieure.webp",
+    "dlc": [],
+    "description": [
+     "Die Ingenieure sind die vierte Bevölkerungsstufe in der Alten Welt und repräsentieren die technologische Elite. Sie sind in fortschrittlicher Industrie, Maschinenbau und Elektrizität tätig. Ihr Aufstieg erfordert eine Universität und ermöglicht den Zugang zu modernen Produktionsgütern wie Dampfmotoren und Elektrizität. Ihre Grundbedürfnisse umfassen Kaffee, Brillen und Glühbirnen während Luxusgüter wie Bankdienstleistungen und Taschenuhren ihre Zufriedenheit steigern. Ingenieure eröffnen neue technologische Möglichkeiten, den Bau von Hochöfen und Kraftwerken sowie den Zugang zu fortschrittlichen Verkehrsmitteln."
+    ],
+    "baukosten": [
+     {
+      "count": "20",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "5",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     },
+     {
+      "count": "4",
+      "name": "Stahlträger",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#105",
+      "ware": "waren_baumaterialien#105"
+     },
+     {
+      "count": "2",
+      "name": "Fenster",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#107",
+      "ware": "waren_baumaterialien#107"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Universität",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/250.html",
+          "building_id": 250,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Ingenieure"
+         },
+         {
+          "name": "Fleischkonserven",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#45",
+          "building_id": null,
+          "ware": "waren_konsumgueter#45",
+          "dlc": [],
+          "condition": "",
+          "effect": "+12 Ingenieure"
+         },
+         {
+          "name": "Nähmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#46",
+          "building_id": null,
+          "ware": "waren_konsumgueter#46",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Ingenieure"
+         },
+         {
+          "name": "Pelzmäntel",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#48",
+          "building_id": null,
+          "ware": "waren_konsumgueter#48",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Ingenieure"
+         },
+         {
+          "name": "Brillen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#49",
+          "building_id": null,
+          "ware": "waren_konsumgueter#49",
+          "dlc": [],
+          "condition": "1 Ingenieur",
+          "effect": "+4 Ingenieure"
+         },
+         {
+          "name": "Kaffee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#52",
+          "building_id": null,
+          "ware": "waren_konsumgueter#52",
+          "dlc": [],
+          "condition": "1.000 Ingenieure",
+          "effect": "+2 Ingenieure"
+         },
+         {
+          "name": "Energie",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_ressourcen.html#224",
+          "building_id": null,
+          "ware": "waren_ressourcen#224",
+          "dlc": [],
+          "condition": "1.750 Ingenieure",
+          "effect": "+2 Ingenieure"
+         },
+         {
+          "name": "Glühbirnen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#53",
+          "building_id": null,
+          "ware": "waren_konsumgueter#53",
+          "dlc": [],
+          "condition": "1.750 Ingenieure",
+          "effect": "+2 Ingenieure"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Varieté",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/249.html",
+          "building_id": 249,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Zufriedenheit"
+         },
+         {
+          "name": "Bank",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/251.html",
+          "building_id": 251,
+          "ware": null,
+          "dlc": [],
+          "condition": "3.000 Ingenieure",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Taschenuhren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#51",
+          "building_id": null,
+          "ware": "waren_konsumgueter#51",
+          "dlc": [],
+          "condition": "1.000 Ingenieure",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Hochräder",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#50",
+          "building_id": null,
+          "ware": "waren_konsumgueter#50",
+          "dlc": [],
+          "condition": "500 Ingenieure",
+          "effect": "+5 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+3 Ingenieure"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+7 Ingenieure"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+15 Ingenieure"
+         }
+        ]
+       },
+       {
+        "label": "Speisen & Getränke",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Schokolade",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#60",
+          "building_id": null,
+          "ware": "waren_konsumgueter#60",
+          "dlc": [],
+          "condition": "1.500 Obreros",
+          "effect": "+2 Ingenieure"
+         },
+         {
+          "name": "Mezcal",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#96",
+          "building_id": null,
+          "ware": "waren_konsumgueter#96",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+3 Ingenieure"
+         },
+         {
+          "name": "Eiscreme",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#98",
+          "building_id": null,
+          "ware": "waren_konsumgueter#98",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1.800 Artistas",
+          "effect": "+6 Ingenieure"
+         }
+        ]
+       },
+       {
+        "label": "Gesundheit",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Seife",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#43",
+          "building_id": null,
+          "ware": "waren_konsumgueter#43",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Ingenieure"
+         },
+         {
+          "name": "Shampoo",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#55",
+          "building_id": null,
+          "ware": "waren_konsumgueter#55",
+          "dlc": [
+           "Reisezeit"
+          ],
+          "condition": "850 Touristen",
+          "effect": "+5 Ingenieure"
+         },
+         {
+          "name": "Medizin",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#221",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#221",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "6.000 Artistas",
+          "effect": "+7 Ingenieure"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Ingenieure"
+   },
+   {
+    "name": "Ingenieur Hochhäuser",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_ingenieure.webp",
+    "dlc": [
+     "Dächer der Stadt"
+    ],
+    "description": [
+     "In Anno 1800 ermöglicht die Erweiterung \"Dächer der Stadt\" den Bau von Wolkenkratzern für Ingenieure und Investoren. Diese Hochhäuser bieten Platz für eine größere Anzahl von Einwohnern und können modular in bis zu drei Stufen für Ingenieure und fünf Stufen für Investoren erweitert werden. Der Bau von Wolkenkratzern erfordert eine gut ausgebaute Infrastruktur sowie den Zugang zu modernen Ressourcen wie Aufzügen und Stahlbeton. Mit dem Bau von Wolkenkratzern steigen die Bedürfnisse der Bewohner, einschließlich neuer Anforderungen wie Einkaufspassagen, die in drei Spezialisierungen verfügbar sind: Kaufhaus, Möbelhaus und Drogerie."
+    ],
+    "baukosten": [
+     {
+      "count": "",
+      "name": "500,00 Credits",
+      "href": null,
+      "ware": null
+     },
+     {
+      "count": "10",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "5",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     },
+     {
+      "count": "10",
+      "name": "Stahlträger",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#105",
+      "ware": "waren_baumaterialien#105"
+     },
+     {
+      "count": "5",
+      "name": "Fenster",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#107",
+      "ware": "waren_baumaterialien#107"
+     },
+     {
+      "count": "5",
+      "name": "Stahlbeton",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#108",
+      "ware": "waren_baumaterialien#108"
+     },
+     {
+      "count": "2",
+      "name": "Fahrstühle",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#118",
+      "ware": "waren_baumaterialien#118"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Universität",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/250.html",
+          "building_id": 250,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Fleischkonserven",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#45",
+          "building_id": null,
+          "ware": "waren_konsumgueter#45",
+          "dlc": [],
+          "condition": "",
+          "effect": "+12 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Nähmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#46",
+          "building_id": null,
+          "ware": "waren_konsumgueter#46",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Pelzmäntel",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#48",
+          "building_id": null,
+          "ware": "waren_konsumgueter#48",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Brillen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#49",
+          "building_id": null,
+          "ware": "waren_konsumgueter#49",
+          "dlc": [],
+          "condition": "1 Ingenieur",
+          "effect": "+4 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Kaffee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#52",
+          "building_id": null,
+          "ware": "waren_konsumgueter#52",
+          "dlc": [],
+          "condition": "1.000 Ingenieure",
+          "effect": "+2 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Energie",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_ressourcen.html#224",
+          "building_id": null,
+          "ware": "waren_ressourcen#224",
+          "dlc": [],
+          "condition": "1.750 Ingenieure",
+          "effect": "+2 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Glühbirnen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#53",
+          "building_id": null,
+          "ware": "waren_konsumgueter#53",
+          "dlc": [],
+          "condition": "1.750 Ingenieure",
+          "effect": "+2 Ingenieur Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Varieté",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/249.html",
+          "building_id": 249,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Zufriedenheit"
+         },
+         {
+          "name": "Bank",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/251.html",
+          "building_id": 251,
+          "ware": null,
+          "dlc": [],
+          "condition": "3.000 Ingenieure",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Taschenuhren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#51",
+          "building_id": null,
+          "ware": "waren_konsumgueter#51",
+          "dlc": [],
+          "condition": "1.000 Ingenieure",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Hochräder",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#50",
+          "building_id": null,
+          "ware": "waren_konsumgueter#50",
+          "dlc": [],
+          "condition": "500 Ingenieure",
+          "effect": "+5 Zufriedenheit"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 1",
+        "note": "(Einwohner)",
+        "needs": [
+         {
+          "name": "Kaufhaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/213.html",
+          "building_id": 213,
+          "ware": null,
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 1 Wolkenkratzer",
+          "effect": "+20 Ingenieur Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 2",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Einrichtungshaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/214.html",
+          "building_id": 214,
+          "ware": null,
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 2 Wolkenkratzer",
+          "effect": "+10 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Kaugummi",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#86",
+          "building_id": null,
+          "ware": "waren_konsumgueter#86",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 2 Wolkenkratzer",
+          "effect": "+10 Ingenieur Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 3",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Drogerie",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/215.html",
+          "building_id": 215,
+          "ware": null,
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 3 Wolkenkratzer",
+          "effect": "+5 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Schreibmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#87",
+          "building_id": null,
+          "ware": "waren_konsumgueter#87",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 3 Wolkenkratzer",
+          "effect": "+10 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Violinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#88",
+          "building_id": null,
+          "ware": "waren_konsumgueter#88",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 3 Wolkenkratzer",
+          "effect": "+5 Ingenieur Hochhäuser"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+3 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+7 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+15 Ingenieur Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Speisen & Getränke",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Schokolade",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#60",
+          "building_id": null,
+          "ware": "waren_konsumgueter#60",
+          "dlc": [],
+          "condition": "1.500 Obreros",
+          "effect": "+2 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Mezcal",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#96",
+          "building_id": null,
+          "ware": "waren_konsumgueter#96",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+3 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Eiscreme",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#98",
+          "building_id": null,
+          "ware": "waren_konsumgueter#98",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1.800 Artistas",
+          "effect": "+6 Ingenieur Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Gesundheit",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Seife",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#43",
+          "building_id": null,
+          "ware": "waren_konsumgueter#43",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Shampoo",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#55",
+          "building_id": null,
+          "ware": "waren_konsumgueter#55",
+          "dlc": [
+           "Reisezeit"
+          ],
+          "condition": "850 Touristen",
+          "effect": "+5 Ingenieur Hochhäuser"
+         },
+         {
+          "name": "Medizin",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#221",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#221",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "6.000 Artistas",
+          "effect": "+7 Ingenieur Hochhäuser"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Ingenieur Hochhäuser"
+   },
+   {
+    "name": "Touristen",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_touristen.webp",
+    "dlc": [
+     "Reisezeit"
+    ],
+    "description": [
+     "In der Anno 1800-Erweiterung \"Reisezeit\" werden Touristen als neue Bevölkerungsstufe eingeführt. Sie übernachten in Hotels und haben spezifische Bedürfnisse, darunter der Besuch von Restaurants, Cafés und Bars. Um diese Orte bequem zu erreichen, nutzen sie ein Bussystem mit Haltestellen. Zudem schätzen sie Sehenswürdigkeiten wie den Eisernen Turm, ein neues Monument im Spiel. Die Zufriedenheit der Touristen trägt zur Attraktivität und Wirtschaftskraft der Stadt bei."
+    ],
+    "baukosten": [
+     {
+      "count": "",
+      "name": "30.000,00 Credits",
+      "href": null,
+      "ware": null
+     },
+     {
+      "count": "120",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "95",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     },
+     {
+      "count": "80",
+      "name": "Stahlträger",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#105",
+      "ware": "waren_baumaterialien#105"
+     },
+     {
+      "count": "55",
+      "name": "Fenster",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#107",
+      "ware": "waren_baumaterialien#107"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Touristenhafen",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/263.html",
+          "building_id": 263,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+45 Touristen"
+         },
+         {
+          "name": "Bar",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/218.html",
+          "building_id": 218,
+          "ware": null,
+          "dlc": [],
+          "condition": "1.500 Touristen",
+          "effect": "+75 Touristen"
+         },
+         {
+          "name": "Restaurant",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/216.html",
+          "building_id": 216,
+          "ware": null,
+          "dlc": [],
+          "condition": "250 Touristen",
+          "effect": "+25 Touristen"
+         },
+         {
+          "name": "Der Eiserne Turm",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/219.html",
+          "building_id": 219,
+          "ware": null,
+          "dlc": [],
+          "condition": "4.000 Touristen",
+          "effect": "+80 Touristen"
+         },
+         {
+          "name": "Varieté",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/249.html",
+          "building_id": 249,
+          "ware": null,
+          "dlc": [],
+          "condition": "50 Touristen",
+          "effect": "+25 Touristen"
+         },
+         {
+          "name": "Café",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/217.html",
+          "building_id": 217,
+          "ware": null,
+          "dlc": [],
+          "condition": "550 Touristen",
+          "effect": "+55 Touristen"
+         },
+         {
+          "name": "Brot",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#42",
+          "building_id": null,
+          "ware": "waren_konsumgueter#42",
+          "dlc": [],
+          "condition": "30 Touristen",
+          "effect": "+55 Touristen"
+         },
+         {
+          "name": "Konfitüre",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#54",
+          "building_id": null,
+          "ware": "waren_konsumgueter#54",
+          "dlc": [],
+          "condition": "300 Touristen",
+          "effect": "+35 Touristen"
+         },
+         {
+          "name": "Shampoo",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#55",
+          "building_id": null,
+          "ware": "waren_konsumgueter#55",
+          "dlc": [],
+          "condition": "850 Touristen",
+          "effect": "+105 Touristen"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Schmuck",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#61",
+          "building_id": null,
+          "ware": "waren_konsumgueter#61",
+          "dlc": [],
+          "condition": "1.750 Touristen",
+          "effect": "+5 Zufriedenheit"
+         },
+         {
+          "name": "Limonade",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#56",
+          "building_id": null,
+          "ware": "waren_konsumgueter#56",
+          "dlc": [],
+          "condition": "1.750 Touristen",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Souvenirs",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#57",
+          "building_id": null,
+          "ware": "waren_konsumgueter#57",
+          "dlc": [],
+          "condition": "2.000 Touristen",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Pelzmäntel",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#48",
+          "building_id": null,
+          "ware": "waren_konsumgueter#48",
+          "dlc": [],
+          "condition": "50 Touristen",
+          "effect": "+3 Zufriedenheit"
+         }
+        ]
+       },
+       {
+        "label": "Hot Spots",
+        "note": "(Zufriedenheit)",
+        "needs": [
+         {
+          "name": "Botanischer Garten",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/54.html",
+          "building_id": 54,
+          "ware": null,
+          "dlc": [
+           "Botanica"
+          ],
+          "condition": "1.000 Ingenieure",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Weltausstellung",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/220.html",
+          "building_id": 220,
+          "ware": null,
+          "dlc": [],
+          "condition": "1.000 Touristen / 5.000 Investoren",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Skyline Tower",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/223.html",
+          "building_id": 223,
+          "ware": null,
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1.000 Touristen / 5.000 Investoren",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Zoo",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/52.html",
+          "building_id": 52,
+          "ware": null,
+          "dlc": [],
+          "condition": "325 Touristen",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Speicherstadt",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/301.html",
+          "building_id": 301,
+          "ware": null,
+          "dlc": [
+           "Speicherstadt"
+          ],
+          "condition": "450 Touristen",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Museum",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/76.html",
+          "building_id": 76,
+          "ware": null,
+          "dlc": [],
+          "condition": "500 Touristen",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Palast",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/302.html",
+          "building_id": 302,
+          "ware": null,
+          "dlc": [
+           "Paläste der Macht"
+          ],
+          "condition": "900 Touristen / 1 Investor",
+          "effect": "+3 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Phonographen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#62",
+          "building_id": null,
+          "ware": "waren_konsumgueter#62",
+          "dlc": [],
+          "condition": "3.000 Investoren",
+          "effect": "+17 Touristen"
+         },
+         {
+          "name": "Parfüm",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#99",
+          "building_id": null,
+          "ware": "waren_konsumgueter#99",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "2.700 Artistas",
+          "effect": "+26 Touristen"
+         }
+        ]
+       },
+       {
+        "label": "Speisen & Getränke",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Mezcal",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#96",
+          "building_id": null,
+          "ware": "waren_konsumgueter#96",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+20 Touristen"
+         },
+         {
+          "name": "Eiscreme",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#98",
+          "building_id": null,
+          "ware": "waren_konsumgueter#98",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1.800 Artistas",
+          "effect": "+25 Touristen"
+         }
+        ]
+       },
+       {
+        "label": "Wohlstand",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Melonen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#66",
+          "building_id": null,
+          "ware": "waren_konsumgueter#66",
+          "dlc": [],
+          "condition": "",
+          "effect": "+15 Touristen"
+         },
+         {
+          "name": "Lederstiefel",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#64",
+          "building_id": null,
+          "ware": "waren_konsumgueter#64",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1 Gelehrter",
+          "effect": "+22 Touristen"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Touristen"
+   },
+   {
+    "name": "Investoren",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_investoren.webp",
+    "dlc": [],
+    "description": [
+     "In Anno 1800 stellen die Investoren die höchste Bevölkerungsstufe in der Alten Welt dar und repräsentieren die wohlhabende Elite. Ihr Aufstieg erfordert die Erfüllung aller Bedürfnisse der Ingenieure, einschließlich Elektrizität und einer Universität, sowie den Bau einer Bank. Ihre Grundbedürfnisse umfassen exklusive Güter wie Champagner, Zigarren und Glühbirnen. Luxusbedürfnisse wie Schmuck und Motorwagen steigern ihre Zufriedenheit. Investoren ermöglichen den Bau der Weltausstellung, steigern den Einfluss des Spielers und eröffnen den Zugang zu fortschrittlichen Technologien und Gebäuden."
+    ],
+    "baukosten": [
+     {
+      "count": "30",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "9",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     },
+     {
+      "count": "7",
+      "name": "Stahlträger",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#105",
+      "ware": "waren_baumaterialien#105"
+     },
+     {
+      "count": "5",
+      "name": "Fenster",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#107",
+      "ware": "waren_baumaterialien#107"
+     },
+     {
+      "count": "3",
+      "name": "Stahlbeton",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#108",
+      "ware": "waren_baumaterialien#108"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Brillen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#49",
+          "building_id": null,
+          "ware": "waren_konsumgueter#49",
+          "dlc": [],
+          "condition": "",
+          "effect": "+16 Investoren"
+         },
+         {
+          "name": "Kaffee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#52",
+          "building_id": null,
+          "ware": "waren_konsumgueter#52",
+          "dlc": [],
+          "condition": "",
+          "effect": "+8 Investoren"
+         },
+         {
+          "name": "Energie",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_ressourcen.html#224",
+          "building_id": null,
+          "ware": "waren_ressourcen#224",
+          "dlc": [],
+          "condition": "",
+          "effect": "+8 Investoren"
+         },
+         {
+          "name": "Glühbirnen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#53",
+          "building_id": null,
+          "ware": "waren_konsumgueter#53",
+          "dlc": [],
+          "condition": "",
+          "effect": "+8 Investoren"
+         },
+         {
+          "name": "Sekt",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#58",
+          "building_id": null,
+          "ware": "waren_konsumgueter#58",
+          "dlc": [],
+          "condition": "1 Investor",
+          "effect": "+2 Investoren"
+         },
+         {
+          "name": "Schokolade",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#60",
+          "building_id": null,
+          "ware": "waren_konsumgueter#60",
+          "dlc": [],
+          "condition": "1.750 Investoren",
+          "effect": "+2 Investoren"
+         },
+         {
+          "name": "Dampfwagen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#63",
+          "building_id": null,
+          "ware": "waren_konsumgueter#63",
+          "dlc": [],
+          "condition": "5.000 Investoren",
+          "effect": "+4 Investoren"
+         },
+         {
+          "name": "Zigarren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#59",
+          "building_id": null,
+          "ware": "waren_konsumgueter#59",
+          "dlc": [],
+          "condition": "750 Investoren",
+          "effect": "+2 Investoren"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Bank",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/251.html",
+          "building_id": 251,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Clubhaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/252.html",
+          "building_id": 252,
+          "ware": null,
+          "dlc": [],
+          "condition": "750 Investoren",
+          "effect": "+5 Zufriedenheit"
+         },
+         {
+          "name": "Hochräder",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#50",
+          "building_id": null,
+          "ware": "waren_konsumgueter#50",
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Taschenuhren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#51",
+          "building_id": null,
+          "ware": "waren_konsumgueter#51",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Schmuck",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#61",
+          "building_id": null,
+          "ware": "waren_konsumgueter#61",
+          "dlc": [],
+          "condition": "1.750 Investoren",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Phonographen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#62",
+          "building_id": null,
+          "ware": "waren_konsumgueter#62",
+          "dlc": [],
+          "condition": "3.000 Investoren",
+          "effect": "+4 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+8 Investoren"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+12 Investoren"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+25 Investoren"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Parfüm",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#99",
+          "building_id": null,
+          "ware": "waren_konsumgueter#99",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "2.700 Artistas",
+          "effect": "+7 Investoren"
+         },
+         {
+          "name": "Ventilatoren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#100",
+          "building_id": null,
+          "ware": "waren_konsumgueter#100",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+10 Investoren"
+         },
+         {
+          "name": "Filmrolle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#218",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#218",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+5 Investoren"
+         }
+        ]
+       },
+       {
+        "label": "Wohlstand",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Pelzmäntel",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#48",
+          "building_id": null,
+          "ware": "waren_konsumgueter#48",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Investoren"
+         },
+         {
+          "name": "Bärenfelle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#168",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#168",
+          "dlc": [
+           "Die Passage"
+          ],
+          "condition": "100 Techniker",
+          "effect": "+6 Investoren"
+         },
+         {
+          "name": "Wandteppiche",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#69",
+          "building_id": null,
+          "ware": "waren_konsumgueter#69",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1 Ältester",
+          "effect": "+4 Investoren"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Investoren"
+   },
+   {
+    "name": "Investor Hochhäuser",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_investoren.webp",
+    "dlc": [
+     "Dächer der Stadt"
+    ],
+    "description": [
+     "In Anno 1800 ermöglicht die Erweiterung \"Dächer der Stadt\" den Bau von Wolkenkratzern für Ingenieure und Investoren. Diese Hochhäuser bieten Platz für eine größere Anzahl von Einwohnern und können modular in bis zu drei Stufen für Ingenieure und fünf Stufen für Investoren erweitert werden. Der Bau von Wolkenkratzern erfordert eine gut ausgebaute Infrastruktur sowie den Zugang zu modernen Ressourcen wie Aufzügen und Stahlbeton. Mit dem Bau von Wolkenkratzern steigen die Bedürfnisse der Bewohner, einschließlich neuer Anforderungen wie Einkaufspassagen, die in drei Spezialisierungen verfügbar sind: Kaufhaus, Möbelhaus und Drogerie."
+    ],
+    "baukosten": [
+     {
+      "count": "",
+      "name": "1.000,00 Credits",
+      "href": null,
+      "ware": null
+     },
+     {
+      "count": "10",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "5",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     },
+     {
+      "count": "15",
+      "name": "Stahlträger",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#105",
+      "ware": "waren_baumaterialien#105"
+     },
+     {
+      "count": "10",
+      "name": "Fenster",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#107",
+      "ware": "waren_baumaterialien#107"
+     },
+     {
+      "count": "5",
+      "name": "Stahlbeton",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#108",
+      "ware": "waren_baumaterialien#108"
+     },
+     {
+      "count": "5",
+      "name": "Fahrstühle",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#118",
+      "ware": "waren_baumaterialien#118"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Brillen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#49",
+          "building_id": null,
+          "ware": "waren_konsumgueter#49",
+          "dlc": [],
+          "condition": "",
+          "effect": "+16 Investor Hochhäuser"
+         },
+         {
+          "name": "Kaffee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#52",
+          "building_id": null,
+          "ware": "waren_konsumgueter#52",
+          "dlc": [],
+          "condition": "",
+          "effect": "+8 Investor Hochhäuser"
+         },
+         {
+          "name": "Energie",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_ressourcen.html#224",
+          "building_id": null,
+          "ware": "waren_ressourcen#224",
+          "dlc": [],
+          "condition": "",
+          "effect": "+8 Investor Hochhäuser"
+         },
+         {
+          "name": "Glühbirnen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#53",
+          "building_id": null,
+          "ware": "waren_konsumgueter#53",
+          "dlc": [],
+          "condition": "",
+          "effect": "+8 Investor Hochhäuser"
+         },
+         {
+          "name": "Sekt",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#58",
+          "building_id": null,
+          "ware": "waren_konsumgueter#58",
+          "dlc": [],
+          "condition": "1 Investor",
+          "effect": "+2 Investor Hochhäuser"
+         },
+         {
+          "name": "Schokolade",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#60",
+          "building_id": null,
+          "ware": "waren_konsumgueter#60",
+          "dlc": [],
+          "condition": "1.750 Investoren",
+          "effect": "+2 Investor Hochhäuser"
+         },
+         {
+          "name": "Dampfmaschine",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#109",
+          "building_id": null,
+          "ware": "waren_baumaterialien#109",
+          "dlc": [],
+          "condition": "5.000 Investoren",
+          "effect": "+4 Investor Hochhäuser"
+         },
+         {
+          "name": "Zigarren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#59",
+          "building_id": null,
+          "ware": "waren_konsumgueter#59",
+          "dlc": [],
+          "condition": "750 Investoren",
+          "effect": "+2 Investor Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Bank",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/251.html",
+          "building_id": 251,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Clubhaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/252.html",
+          "building_id": 252,
+          "ware": null,
+          "dlc": [],
+          "condition": "750 Investoren",
+          "effect": "+5 Zufriedenheit"
+         },
+         {
+          "name": "Hochräder",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#50",
+          "building_id": null,
+          "ware": "waren_konsumgueter#50",
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Taschenuhren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#51",
+          "building_id": null,
+          "ware": "waren_konsumgueter#51",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Schmuck",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#61",
+          "building_id": null,
+          "ware": "waren_konsumgueter#61",
+          "dlc": [],
+          "condition": "1.750 Investoren",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Phonographen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#62",
+          "building_id": null,
+          "ware": "waren_konsumgueter#62",
+          "dlc": [],
+          "condition": "3.000 Investoren",
+          "effect": "+4 Zufriedenheit"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 1",
+        "note": "(Einwohner)",
+        "needs": [
+         {
+          "name": "Kaufhaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/213.html",
+          "building_id": 213,
+          "ware": null,
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 1 Wolkenkratzer",
+          "effect": "+25 Investor Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 2",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Kekse",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#89",
+          "building_id": null,
+          "ware": "waren_konsumgueter#89",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "15x Level 2 Wolkenkratzer",
+          "effect": "+15 Investor Hochhäuser"
+         },
+         {
+          "name": "Kaugummi",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#86",
+          "building_id": null,
+          "ware": "waren_konsumgueter#86",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 2 Wolkenkratzer",
+          "effect": "+10 Investor Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 3",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Einrichtungshaus",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/214.html",
+          "building_id": 214,
+          "ware": null,
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "15x Level 3 Wolkenkratzer",
+          "effect": "+10 Investor Hochhäuser"
+         },
+         {
+          "name": "Cognac",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#90",
+          "building_id": null,
+          "ware": "waren_konsumgueter#90",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 3 Wolkenkratzer",
+          "effect": "+15 Investor Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 4",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Billiard Tisch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#91",
+          "building_id": null,
+          "ware": "waren_konsumgueter#91",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "15x Level 4 Wolkenkratzer",
+          "effect": "+15 Investor Hochhäuser"
+         },
+         {
+          "name": "Schreibmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#87",
+          "building_id": null,
+          "ware": "waren_konsumgueter#87",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 4 Wolkenkratzer",
+          "effect": "+10 Investor Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Bedürfnisse - Level 5",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Drogerie",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/215.html",
+          "building_id": 215,
+          "ware": null,
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "10x Level 5 Wolkenkratzer",
+          "effect": "+5 Investor Hochhäuser"
+         },
+         {
+          "name": "Spielwaren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#92",
+          "building_id": null,
+          "ware": "waren_konsumgueter#92",
+          "dlc": [],
+          "condition": "15x Level 5 Wolkenkratzer",
+          "effect": "+15 Investor Hochhäuser"
+         },
+         {
+          "name": "Violinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#88",
+          "building_id": null,
+          "ware": "waren_konsumgueter#88",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "1x Level 5 Wolkenkratzer",
+          "effect": "+5 Investor Hochhäuser"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+8 Investor Hochhäuser"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+12 Investor Hochhäuser"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+25 Investor Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Parfüm",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#99",
+          "building_id": null,
+          "ware": "waren_konsumgueter#99",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "2.700 Artistas",
+          "effect": "+7 Investor Hochhäuser"
+         },
+         {
+          "name": "Ventilatoren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#100",
+          "building_id": null,
+          "ware": "waren_konsumgueter#100",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+10 Investor Hochhäuser"
+         },
+         {
+          "name": "Filmrolle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#218",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#218",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+5 Investor Hochhäuser"
+         }
+        ]
+       },
+       {
+        "label": "Wohlstand",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Felle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#146",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#146",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Investor Hochhäuser"
+         },
+         {
+          "name": "Bärenfelle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#168",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#168",
+          "dlc": [
+           "Die Passage"
+          ],
+          "condition": "100 Techniker",
+          "effect": "+6 Investor Hochhäuser"
+         },
+         {
+          "name": "Wandteppiche",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#69",
+          "building_id": null,
+          "ware": "waren_konsumgueter#69",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1 Ã„ltester",
+          "effect": "+4 Investor Hochhäuser"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Investor Hochhäuser"
+   },
+   {
+    "name": "Gelehrte",
+    "region": "Alte Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_gelehrte.webp",
+    "dlc": [
+     "Land der Löwen"
+    ],
+    "description": [
+     "In der Anno 1800-Erweiterung \"Land der Löwen\" stellen die Gelehrten eine besondere Bevölkerungsgruppe dar, die durch den Bau des Forschungsinstituts freigeschaltet wird. Sie sind für die Generierung von Forschungspunkten verantwortlich, die zur Entwicklung neuer Technologien und zur Herstellung spezieller Gegenstände verwendet werden können. Gelehrtenhäuser bieten Platz für bis zu 120 Bewohner und erfordern die Erfüllung spezifischer Bedürfnisse, um ihre Zufriedenheit und Produktivität zu maximieren."
+    ],
+    "baukosten": [
+     {
+      "count": "10",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "15",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     },
+     {
+      "count": "12",
+      "name": "Stahlträger",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#105",
+      "ware": "waren_baumaterialien#105"
+     },
+     {
+      "count": "10",
+      "name": "Fenster",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#107",
+      "ware": "waren_baumaterialien#107"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Universität",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/250.html",
+          "building_id": 250,
+          "ware": null,
+          "dlc": [],
+          "condition": "1 Gelehrter",
+          "effect": "+12 Gelehrte , +1.20 Forschungspunkte"
+         },
+         {
+          "name": "Funkturm",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/253.html",
+          "building_id": 253,
+          "ware": null,
+          "dlc": [],
+          "condition": "7.000 Gelehrte",
+          "effect": "+12 Gelehrte , +1.20 Forschungspunkte"
+         },
+         {
+          "name": "Fleischkonserven",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#45",
+          "building_id": null,
+          "ware": "waren_konsumgueter#45",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1 Gelehrter",
+          "effect": "+17 Wärme , +1.20 Forschungspunkte"
+         },
+         {
+          "name": "Energie",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_ressourcen.html#224",
+          "building_id": null,
+          "ware": "waren_ressourcen#224",
+          "dlc": [],
+          "condition": "1.000 Gelehrte",
+          "effect": "+12 Gelehrte , +1.20 Forschungspunkte"
+         },
+         {
+          "name": "Meeresfrüchte-Eintopf",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#68",
+          "building_id": null,
+          "ware": "waren_konsumgueter#68",
+          "dlc": [],
+          "condition": "2.000 Gelehrte",
+          "effect": "+22 Gelehrte , +4.80 Forschungspunkte"
+         },
+         {
+          "name": "Maßanzüge",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#65",
+          "building_id": null,
+          "ware": "waren_konsumgueter#65",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "300 Gelehrte",
+          "effect": "+23 Gelehrte , +4.80 Forschungspunkte"
+         },
+         {
+          "name": "Telefone",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#71",
+          "building_id": null,
+          "ware": "waren_konsumgueter#71",
+          "dlc": [],
+          "condition": "4.000 Gelehrte",
+          "effect": "+20 Gelehrte , +2.40 Forschungspunkte"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Lederstiefel",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#64",
+          "building_id": null,
+          "ware": "waren_konsumgueter#64",
+          "dlc": [],
+          "condition": "1 Gelehrter",
+          "effect": "+3 Zufriedenheit , +3.60 Forschungspunkte"
+         },
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "1 Gelehrter",
+          "effect": "+2 Zufriedenheit , +2.40 Forschungspunkte"
+         },
+         {
+          "name": "Hibiskustee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#67",
+          "building_id": null,
+          "ware": "waren_konsumgueter#67",
+          "dlc": [],
+          "condition": "1.000 Gelehrte",
+          "effect": "+3 Zufriedenheit , +3.60 Forschungspunkte"
+         },
+         {
+          "name": "Wandteppiche",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#69",
+          "building_id": null,
+          "ware": "waren_konsumgueter#69",
+          "dlc": [],
+          "condition": "2.000 Gelehrte",
+          "effect": "+3 Zufriedenheit , +3.60 Forschungspunkte"
+         },
+         {
+          "name": "Melonen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#66",
+          "building_id": null,
+          "ware": "waren_konsumgueter#66",
+          "dlc": [],
+          "condition": "300 Gelehrte",
+          "effect": "+3 Zufriedenheit , +2.40 Forschungspunkte"
+         },
+         {
+          "name": "Tonpfeifen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#70",
+          "building_id": null,
+          "ware": "waren_konsumgueter#70",
+          "dlc": [],
+          "condition": "4.000 Gelehrte",
+          "effect": "+3 Zufriedenheit , +4.80 Forschungspunkte"
+         },
+         {
+          "name": "Phonographen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#62",
+          "building_id": null,
+          "ware": "waren_konsumgueter#62",
+          "dlc": [],
+          "condition": "7.000 Gelehrte, 3.000 Investoren",
+          "effect": "+3 Zufriedenheit , +2.40 Forschungspunkte"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+10 Gelehrte"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+15 Gelehrte"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+25 Gelehrte"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Filmrolle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#218",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#218",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+4 Gelehrte , +4.80 Forschungspunkte"
+         },
+         {
+          "name": "Ventilatoren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#100",
+          "building_id": null,
+          "ware": "waren_konsumgueter#100",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+5 Gelehrte , +2.40 Forschungspunkte"
+         },
+         {
+          "name": "Motorroller",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#101",
+          "building_id": null,
+          "ware": "waren_konsumgueter#101",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "6.000 Artistas",
+          "effect": "+7 Gelehrte , +3.60 Forschungspunkte"
+         }
+        ]
+       },
+       {
+        "label": "Forschung",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Salpeter",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_rohstoffe.html#134",
+          "building_id": null,
+          "ware": "waren_rohstoffe#134",
+          "dlc": [],
+          "condition": "500 Gelehrte",
+          "effect": "+4 Gelehrte , +1.20 Forschungspunkte"
+         },
+         {
+          "name": "Neue Welt Reporte",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#228",
+          "building_id": null,
+          "ware": "waren_post#228",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+5 Gelehrte , +4.80 Forschungspunkte"
+         },
+         {
+          "name": "Arktis Reporte",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#229",
+          "building_id": null,
+          "ware": "waren_post#229",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+5 Gelehrte , +9.99 Forschungspunkte"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Gelehrte"
+   }
+  ]
+ },
+ {
+  "name": "Neue Welt",
+  "icon": "https://www.annoinfo.de/images/anno_1800/icons/worlds/icon_session_southamerica.webp",
+  "levels": [
+   {
+    "name": "Jornaleros",
+    "region": "Neue Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_jornaleros.webp",
+    "dlc": [],
+    "description": [
+     "Die Jornaleros sind die erste Bevölkerungsstufe in der Neuen Welt in Anno 1800. Sie stellen einfache Landarbeiter dar, die in Plantagen, Minen und grundlegenden Produktionsbetrieben arbeiten. Ihre Grundbedürfnisse umfassen Gebackene Bananen und Ponchos, während Luxusgüter wie eine Kapelle und Rum ihre Zufriedenheit steigern. Sie sind essenziell für den Aufbau der Wirtschaft in der Neuen Welt und der erste Schritt zur Weiterentwicklung zu Obreros."
+    ],
+    "baukosten": [
+     {
+      "count": "1",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Marktplatz",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/286.html",
+          "building_id": 286,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Jornaleros"
+         },
+         {
+          "name": "Ponchos",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#73",
+          "building_id": null,
+          "ware": "waren_konsumgueter#73",
+          "dlc": [],
+          "condition": "200 Jornaleros",
+          "effect": "+2 Jornaleros"
+         },
+         {
+          "name": "Gebackene Bananen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#72",
+          "building_id": null,
+          "ware": "waren_konsumgueter#72",
+          "dlc": [],
+          "condition": "50 Jornaleros",
+          "effect": "+3 Jornaleros"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Kapelle",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/254.html",
+          "building_id": 254,
+          "ware": null,
+          "dlc": [],
+          "condition": "300 Jornaleros",
+          "effect": "+14 Zufriedenheit"
+         },
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "100 Jornaleros",
+          "effect": "+6 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+1 Jornaleros"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+3 Jornaleros"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+5 Jornaleros"
+         }
+        ]
+       },
+       {
+        "label": "Kunsthandwerk",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Arbeitskleidung",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#40",
+          "building_id": null,
+          "ware": "waren_konsumgueter#40",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Jornaleros"
+         },
+         {
+          "name": "Filz",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#202",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#202",
+          "dlc": [],
+          "condition": "600 Obreros",
+          "effect": "+1 Jornaleros"
+         },
+         {
+          "name": "Teff",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#174",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#174",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1 Ältester",
+          "effect": "+2 Jornaleros"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Strand",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/288.html",
+          "building_id": 288,
+          "ware": null,
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1.800 Artistas",
+          "effect": "+2 Jornaleros"
+         },
+         {
+          "name": "Kino",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/289.html",
+          "building_id": 289,
+          "ware": null,
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+2 Jornaleros"
+         },
+         {
+          "name": "Fussbälle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#95",
+          "building_id": null,
+          "ware": "waren_konsumgueter#95",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+2 Jornaleros"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Jornaleros"
+   },
+   {
+    "name": "Obreros",
+    "region": "Neue Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_obreras.webp",
+    "dlc": [],
+    "description": [
+     "In Anno 1800 stellen die Obreros die zweite Bevölkerungsstufe in der Neuen Welt dar. Sie sind ehemalige Jornaleros, die nun als Handwerker in den Städten leben und arbeiten. Ihre Grundbedürfnisse umfassen Tortillas, Kaffee und Melonen, während Luxusbedürfnisse wie die Boxarena und Zigarren ihre Zufriedenheit steigern. Durch die Erfüllung dieser Bedürfnisse können Obreros zu höheren Bevölkerungsstufen aufsteigen, was den Fortschritt und die Entwicklung deiner Stadt in der Neuen Welt fördert."
+    ],
+    "baukosten": [
+     {
+      "count": "3",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Marktplatz",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/286.html",
+          "building_id": 286,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Obreros"
+         },
+         {
+          "name": "Gebackene Bananen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#72",
+          "building_id": null,
+          "ware": "waren_konsumgueter#72",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Obreros"
+         },
+         {
+          "name": "Ponchos",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#73",
+          "building_id": null,
+          "ware": "waren_konsumgueter#73",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Obreros"
+         },
+         {
+          "name": "Tortillas",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#74",
+          "building_id": null,
+          "ware": "waren_konsumgueter#74",
+          "dlc": [],
+          "condition": "1 Obrero",
+          "effect": "+4 Obreros"
+         },
+         {
+          "name": "Nähmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#46",
+          "building_id": null,
+          "ware": "waren_konsumgueter#46",
+          "dlc": [],
+          "condition": "1.000 Obreros",
+          "effect": "+2 Obreros"
+         },
+         {
+          "name": "Kaffee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#52",
+          "building_id": null,
+          "ware": "waren_konsumgueter#52",
+          "dlc": [],
+          "condition": "300 Obreros",
+          "effect": "+2 Obreros"
+         },
+         {
+          "name": "Melonen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#66",
+          "building_id": null,
+          "ware": "waren_konsumgueter#66",
+          "dlc": [],
+          "condition": "600 Obreros",
+          "effect": "+2 Obreros"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Kapelle",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/254.html",
+          "building_id": 254,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+7 Zufriedenheit"
+         },
+         {
+          "name": "Boxarena",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/255.html",
+          "building_id": 255,
+          "ware": null,
+          "dlc": [],
+          "condition": "300 Obreros",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Zigarren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#59",
+          "building_id": null,
+          "ware": "waren_konsumgueter#59",
+          "dlc": [],
+          "condition": "1.000 Obreros",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Bier",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#44",
+          "building_id": null,
+          "ware": "waren_konsumgueter#44",
+          "dlc": [],
+          "condition": "600 Obreros",
+          "effect": "+4 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+4 Obreros"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+5 Obreros"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+7 Obreros"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Strand",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/288.html",
+          "building_id": 288,
+          "ware": null,
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.800 Artistas",
+          "effect": "+2 Obreros"
+         },
+         {
+          "name": "Samba Schule",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/290.html",
+          "building_id": 290,
+          "ware": null,
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "2.700 Artistas",
+          "effect": "+2 Obreros"
+         },
+         {
+          "name": "Motorroller",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#101",
+          "building_id": null,
+          "ware": "waren_konsumgueter#101",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "6.000 Artistas",
+          "effect": "+6 Obreros"
+         }
+        ]
+       },
+       {
+        "label": "Forschung",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Brillen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#49",
+          "building_id": null,
+          "ware": "waren_konsumgueter#49",
+          "dlc": [],
+          "condition": "",
+          "effect": "+1 Obreros"
+         },
+         {
+          "name": "Schreibmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#87",
+          "building_id": null,
+          "ware": "waren_konsumgueter#87",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "10.000 Ingenieure",
+          "effect": "+5 Obreros"
+         },
+         {
+          "name": "Chroniken",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#84",
+          "building_id": null,
+          "ware": "waren_konsumgueter#84",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1 Ältester",
+          "effect": "+3 Obreros"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Obreros"
+   },
+   {
+    "name": "Artistas",
+    "region": "Neue Welt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_artista.webp",
+    "dlc": [
+     "Aufstieg der neuen Welt"
+    ],
+    "description": [
+     "In der Anno 1800-Erweiterung \"Aufstieg der Neuen Welt\" werden die Artistas als dritte Bevölkerungsstufe in der Neuen Welt eingeführt. Sie stellen die wohlhabende und kulturell entwickelte Schicht dar. Um Artistas zu erhalten, müssen Obrero-Wohnhäuser mit erfüllten Bedürfnissen aufgewertet werden, was 6 Tonnen Holzbretter und 2 Tonnen Ziegelsteine erfordert. Die Artistas haben erweiterte Bedürfnisse und verlangen nach fortschrittlichen Gütern und Dienstleistungen. Ihre Zufriedenheit und Produktivität tragen maßgeblich zur Weiterentwicklung und zum Wohlstand deiner Städte in der Neuen Welt bei. Mit der Einführung der Artistas werden neue Produktionsketten und Gebäude freigeschaltet, die es ermöglichen, die komplexen Bedürfnisse dieser Bevölkerungsgruppe zu erfüllen und die Wirtschaft weiter auszubauen."
+    ],
+    "baukosten": [
+     {
+      "count": "6",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     },
+     {
+      "count": "2",
+      "name": "Ziegelsteine",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#103",
+      "ware": "waren_baumaterialien#103"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Strand",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/288.html",
+          "building_id": 288,
+          "ware": null,
+          "dlc": [],
+          "condition": "1.800 Artistas",
+          "effect": "+2 Artistas"
+         },
+         {
+          "name": "Tortillas",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#74",
+          "building_id": null,
+          "ware": "waren_konsumgueter#74",
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Artistas"
+         },
+         {
+          "name": "Kaffee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#52",
+          "building_id": null,
+          "ware": "waren_konsumgueter#52",
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Artistas"
+         },
+         {
+          "name": "Melonen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#66",
+          "building_id": null,
+          "ware": "waren_konsumgueter#66",
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Artistas"
+         },
+         {
+          "name": "Nähmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#46",
+          "building_id": null,
+          "ware": "waren_konsumgueter#46",
+          "dlc": [],
+          "condition": "",
+          "effect": "+5 Artistas"
+         },
+         {
+          "name": "Fussbälle",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#95",
+          "building_id": null,
+          "ware": "waren_konsumgueter#95",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Artistas"
+         },
+         {
+          "name": "Mezcal",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#96",
+          "building_id": null,
+          "ware": "waren_konsumgueter#96",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Artistas"
+         },
+         {
+          "name": "Parfüm",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#99",
+          "building_id": null,
+          "ware": "waren_konsumgueter#99",
+          "dlc": [],
+          "condition": "2.700 Artistas",
+          "effect": "+3 Artistas"
+         },
+         {
+          "name": "Ventilatoren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#100",
+          "building_id": null,
+          "ware": "waren_konsumgueter#100",
+          "dlc": [],
+          "condition": "4.000 Artistas",
+          "effect": "+3 Artistas"
+         },
+         {
+          "name": "Motorroller",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#101",
+          "building_id": null,
+          "ware": "waren_konsumgueter#101",
+          "dlc": [],
+          "condition": "6.000 Artistas",
+          "effect": "+5 Artistas"
+         },
+         {
+          "name": "Jalea",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#97",
+          "building_id": null,
+          "ware": "waren_konsumgueter#97",
+          "dlc": [],
+          "condition": "900 Artistas",
+          "effect": "+2 Artistas"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Boxarena",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/255.html",
+          "building_id": 255,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Samba Schule",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/290.html",
+          "building_id": 290,
+          "ware": null,
+          "dlc": [],
+          "condition": "2.700 Artistas",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Kino",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/289.html",
+          "building_id": 289,
+          "ware": null,
+          "dlc": [],
+          "condition": "4.000 Artistas",
+          "effect": "+6 Zufriedenheit"
+         },
+         {
+          "name": "Bier",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#44",
+          "building_id": null,
+          "ware": "waren_konsumgueter#44",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Zigarren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#59",
+          "building_id": null,
+          "ware": "waren_konsumgueter#59",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Eiscreme",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#98",
+          "building_id": null,
+          "ware": "waren_konsumgueter#98",
+          "dlc": [],
+          "condition": "1.800 Artistas",
+          "effect": "+4 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+4 Artistas"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+7 Artistas"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+12 Artistas"
+         }
+        ]
+       },
+       {
+        "label": "Vergnügen",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Laternen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#85",
+          "building_id": null,
+          "ware": "waren_konsumgueter#85",
+          "dlc": [
+           "Land der Löwen"
+          ],
+          "condition": "1.000 Älteste",
+          "effect": "+4 Artistas"
+         },
+         {
+          "name": "Schmuck",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#61",
+          "building_id": null,
+          "ware": "waren_konsumgueter#61",
+          "dlc": [],
+          "condition": "1.750 Investoren",
+          "effect": "+6 Artistas"
+         },
+         {
+          "name": "Souvenirs",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#57",
+          "building_id": null,
+          "ware": "waren_konsumgueter#57",
+          "dlc": [
+           "Reisezeit"
+          ],
+          "condition": "2.000 Touristen",
+          "effect": "+4 Artistas"
+         }
+        ]
+       },
+       {
+        "label": "Wohlstand",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Glühbirnen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#53",
+          "building_id": null,
+          "ware": "waren_konsumgueter#53",
+          "dlc": [],
+          "condition": "1.750 Ingenieure",
+          "effect": "+4 Artistas"
+         },
+         {
+          "name": "Sekt",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#58",
+          "building_id": null,
+          "ware": "waren_konsumgueter#58",
+          "dlc": [],
+          "condition": "1 Investor",
+          "effect": "+2 Artistas"
+         },
+         {
+          "name": "Billiard Tisch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#91",
+          "building_id": null,
+          "ware": "waren_konsumgueter#91",
+          "dlc": [
+           "Dächer der Stadt"
+          ],
+          "condition": "9.500 Investoren",
+          "effect": "+2 Artistas"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Artistas"
+   }
+  ]
+ },
+ {
+  "name": "Arktis",
+  "icon": "https://www.annoinfo.de/images/anno_1800/icons/worlds/icon_session_passage.webp",
+  "levels": [
+   {
+    "name": "Entdecker",
+    "region": "Arktis",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_entdecker.webp",
+    "dlc": [],
+    "description": [
+     "In der Anno 1800-Erweiterung \"Die Passage\" stellen die Entdecker die erste Bevölkerungsstufe in der Arktis dar. Sie sind Pioniere, die in die eisigen Regionen aufbrechen, um neue Gebiete zu erkunden und zu besiedeln. Ihre Grundbedürfnisse umfassen Pemmikan, Öllampen und den Zugang zu einer Kantine. Zusätzliche Bedürfnisse wie Wärme, Schlafsäcke und Schnaps erhöhen ihre Zufriedenheit. Die Entdecker leben in einfachen Unterkünften, die jeweils bis zu zehn Bewohner beherbergen können. Durch die Erfüllung ihrer Bedürfnisse können sie zu Technikern aufsteigen, was den weiteren Fortschritt in der Arktis ermöglicht."
+    ],
+    "baukosten": [
+     {
+      "count": "2",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Kantine",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/258.html",
+          "building_id": 258,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Entdecker"
+         },
+         {
+          "name": "Pemmican",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#75",
+          "building_id": null,
+          "ware": "waren_konsumgueter#75",
+          "dlc": [],
+          "condition": "100 Entdecker",
+          "effect": "+3 Entdecker"
+         },
+         {
+          "name": "Öllampen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#76",
+          "building_id": null,
+          "ware": "waren_konsumgueter#76",
+          "dlc": [],
+          "condition": "500 Entdecker",
+          "effect": "+3 Entdecker"
+         }
+        ]
+       },
+       {
+        "label": "Wärme",
+        "note": "(Wärme & Einkommen)",
+        "needs": [
+         {
+          "name": "Heizofen",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/260.html",
+          "building_id": 260,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+32 Wärme"
+         },
+         {
+          "name": "Schlafsäcke",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#77",
+          "building_id": null,
+          "ware": "waren_konsumgueter#77",
+          "dlc": [],
+          "condition": "250 Entdecker",
+          "effect": "+16 Wärme"
+         },
+         {
+          "name": "Schnaps",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#39",
+          "building_id": null,
+          "ware": "waren_konsumgueter#39",
+          "dlc": [],
+          "condition": "500 Entdecker",
+          "effect": "+12 Wärme"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "100 Techniker",
+          "effect": "+1 Entdecker"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+2 Entdecker"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1.000 Obreros",
+          "effect": "+4 Entdecker"
+         }
+        ]
+       },
+       {
+        "label": "Speisen & Getränke",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Brot",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#42",
+          "building_id": null,
+          "ware": "waren_konsumgueter#42",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Entdecker"
+         },
+         {
+          "name": "Talk",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#190",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#190",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Entdecker , +5 Wärme"
+         },
+         {
+          "name": "Chilisauce",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#94",
+          "building_id": null,
+          "ware": "waren_konsumgueter#94",
+          "dlc": [
+           "Keim der Hoffnung"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+3 Entdecker , +2 Wärme"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Entdecker"
+   },
+   {
+    "name": "Techniker",
+    "region": "Arktis",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_techniker.webp",
+    "dlc": [
+     "Die Passage"
+    ],
+    "description": [
+     "Die Techniker sind die zweite Bevölkerungsstufe in der Arktis in Anno 1800 und spielen eine Schlüsselrolle im technologischen Fortschritt. Sie entstehen durch das Aufwerten von Entdecker-Unterkünften und haben erweiterte Bedürfnisse wie Fleischkonserven, Hundeschlitten und Parkas. Techniker ermöglichen den Bau fortschrittlicher Gebäude und die Nutzung neuer Technologien, darunter Gasminen und Gaskraftwerke. Ihre Zufriedenheit und Produktivität sind essenziell für die erfolgreiche Entwicklung arktischer Siedlungen."
+    ],
+    "baukosten": [
+     {
+      "count": "6",
+      "name": "Holzbretter",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#102",
+      "ware": "waren_baumaterialien#102"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Kantine",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/258.html",
+          "building_id": 258,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Techniker"
+         },
+         {
+          "name": "Postamt",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/259.html",
+          "building_id": 259,
+          "ware": null,
+          "dlc": [],
+          "condition": "100 Techniker",
+          "effect": "+3 Techniker"
+         },
+         {
+          "name": "Pemmican",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#75",
+          "building_id": null,
+          "ware": "waren_konsumgueter#75",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Techniker"
+         },
+         {
+          "name": "Öllampen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#76",
+          "building_id": null,
+          "ware": "waren_konsumgueter#76",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Techniker"
+         },
+         {
+          "name": "Fleischkonserven",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#45",
+          "building_id": null,
+          "ware": "waren_konsumgueter#45",
+          "dlc": [],
+          "condition": "300 Techniker",
+          "effect": "+3 Techniker"
+         },
+         {
+          "name": "Hundeschlitten",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#79",
+          "building_id": null,
+          "ware": "waren_konsumgueter#79",
+          "dlc": [],
+          "condition": "750 Techniker",
+          "effect": "+4 Techniker"
+         }
+        ]
+       },
+       {
+        "label": "Wärme",
+        "note": "(Wärme & Einkommen)",
+        "needs": [
+         {
+          "name": "Heizofen",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/260.html",
+          "building_id": 260,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+32 Wärme"
+         },
+         {
+          "name": "Schlafsäcke",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#77",
+          "building_id": null,
+          "ware": "waren_konsumgueter#77",
+          "dlc": [],
+          "condition": "",
+          "effect": "+8 Wärme"
+         },
+         {
+          "name": "Schnaps",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#39",
+          "building_id": null,
+          "ware": "waren_konsumgueter#39",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Wärme"
+         },
+         {
+          "name": "Parkas",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#78",
+          "building_id": null,
+          "ware": "waren_konsumgueter#78",
+          "dlc": [],
+          "condition": "300 Techniker",
+          "effect": "+8 Wärme"
+         },
+         {
+          "name": "Kaffee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#52",
+          "building_id": null,
+          "ware": "waren_konsumgueter#52",
+          "dlc": [],
+          "condition": "750 Techniker",
+          "effect": "+6 Wärme"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kommunikation",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Lokale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#225",
+          "building_id": null,
+          "ware": "waren_post#225",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "",
+          "effect": "+3 Techniker"
+         },
+         {
+          "name": "Regionale Post",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#226",
+          "building_id": null,
+          "ware": "waren_post#226",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+6 Techniker"
+         },
+         {
+          "name": "Überseepost",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_post.html#227",
+          "building_id": null,
+          "ware": "waren_post#227",
+          "dlc": [
+           "Reich der Lüfte"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+10 Techniker"
+         }
+        ]
+       },
+       {
+        "label": "Wohlstand",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Rum",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#47",
+          "building_id": null,
+          "ware": "waren_konsumgueter#47",
+          "dlc": [],
+          "condition": "",
+          "effect": "+1 Techniker , +5 Wärme"
+         },
+         {
+          "name": "Dynamit",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#198",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#198",
+          "dlc": [],
+          "condition": "500 Ingenieure",
+          "effect": "+3 Techniker"
+         }
+        ]
+       },
+       {
+        "label": "Forschung",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Mezcal",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#96",
+          "building_id": null,
+          "ware": "waren_konsumgueter#96",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+2 Techniker , +5 Wärme"
+         },
+         {
+          "name": "Motoren",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#220",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#220",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "4.000 Artistas",
+          "effect": "+5 Techniker , +2 Wärme"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Techniker"
+   }
+  ]
+ },
+ {
+  "name": "Enbesa",
+  "icon": "https://www.annoinfo.de/images/anno_1800/icons/worlds/icon_session_landoflions.webp",
+  "levels": [
+   {
+    "name": "Hirten",
+    "region": "Enbesa",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_hirten.webp",
+    "dlc": [],
+    "description": [
+     "Die Hirten sind die erste Bevölkerungsstufe in Enbesa in Anno 1800 und leben von Landwirtschaft und Viehzucht. Sie benötigen Grundgüter wie Ziegenmilch, Gewänder und Trockenfleisch. Durch die Erfüllung ihrer Bedürfnisse können sie zu Ältesten aufsteigen. Ein zentrales Element ihrer Siedlungen ist das Bewässerungssystem, das trockene Gebiete fruchtbar macht und die Landwirtschaft verbessert."
+    ],
+    "baukosten": [
+     {
+      "count": "1",
+      "name": "Wanza Holz",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#116",
+      "ware": "waren_baumaterialien#116"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Marktplatz",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/287.html",
+          "building_id": 287,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Hirten"
+         },
+         {
+          "name": "Gewänder",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#81",
+          "building_id": null,
+          "ware": "waren_konsumgueter#81",
+          "dlc": [],
+          "condition": "150 Hirten",
+          "effect": "+2 Hirten"
+         },
+         {
+          "name": "Trockenfleisch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#82",
+          "building_id": null,
+          "ware": "waren_konsumgueter#82",
+          "dlc": [],
+          "condition": "300 Hirten",
+          "effect": "+2 Hirten"
+         },
+         {
+          "name": "Ziegenmilch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#80",
+          "building_id": null,
+          "ware": "waren_konsumgueter#80",
+          "dlc": [],
+          "condition": "50 Hirten",
+          "effect": "+3 Hirten"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Podium",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/256.html",
+          "building_id": 256,
+          "ware": null,
+          "dlc": [],
+          "condition": "150 Hirten",
+          "effect": "+8 Zufriedenheit"
+         },
+         {
+          "name": "Hibiskustee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#67",
+          "building_id": null,
+          "ware": "waren_konsumgueter#67",
+          "dlc": [],
+          "condition": "300 Hirten",
+          "effect": "+12 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kunsthandwerk",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Wanza Holz",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#116",
+          "building_id": null,
+          "ware": "waren_baumaterialien#116",
+          "dlc": [],
+          "condition": "",
+          "effect": "+1 Hirten"
+         },
+         {
+          "name": "Weizen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#142",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#142",
+          "dlc": [],
+          "condition": "",
+          "effect": "+1 Hirten"
+         },
+         {
+          "name": "Ponchos",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#73",
+          "building_id": null,
+          "ware": "waren_konsumgueter#73",
+          "dlc": [],
+          "condition": "200 Jornaleros",
+          "effect": "+2 Hirten"
+         }
+        ]
+       },
+       {
+        "label": "Speisen & Getränke",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Fleischkonserven",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#45",
+          "building_id": null,
+          "ware": "waren_konsumgueter#45",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Hirten"
+         },
+         {
+          "name": "Chilisauce",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#94",
+          "building_id": null,
+          "ware": "waren_konsumgueter#94",
+          "dlc": [
+           "Keim der Hoffnung"
+          ],
+          "condition": "1 Obrero",
+          "effect": "+2 Hirten"
+         },
+         {
+          "name": "Konfitüre",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#54",
+          "building_id": null,
+          "ware": "waren_konsumgueter#54",
+          "dlc": [
+           "Reisezeit"
+          ],
+          "condition": "300 Touristen",
+          "effect": "+1 Hirten"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Hirten"
+   },
+   {
+    "name": "Älteste",
+    "region": "Enbesa",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/zivilisation/icon_resident_aelteste.webp",
+    "dlc": [
+     "Land der Löwen"
+    ],
+    "description": [
+     "In der Anno 1800-Erweiterung \"Land der Löwen\" stellen die Ältesten die zweite Bevölkerungsstufe in Enbesa dar. Sie sind die kulturellen und spirituellen Führer ihrer Gemeinschaft und legen großen Wert auf Tradition und Bildung. Ihre Grundbedürfnisse umfassen unter anderem Meeresfrüchte-Eintopf, Keramik und den Zugang zu einem Kloster. Durch die Erfüllung dieser Bedürfnisse können sie ihre Zufriedenheit steigern und zum Wohlstand der Region beitragen. Zudem ermöglichen sie den Bau wichtiger Gebäude und die Weiterentwicklung der Siedlung."
+    ],
+    "baukosten": [
+     {
+      "count": "3",
+      "name": "Wanza Holz",
+      "href": "https://www.annoinfo.de/Anno_1800/waren_baumaterialien.html#116",
+      "ware": "waren_baumaterialien#116"
+     }
+    ],
+    "sections": [
+     {
+      "title": "Grundbedürfnisse",
+      "groups": [
+       {
+        "label": "Bedürfnisse",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Marktplatz",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/287.html",
+          "building_id": 287,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Älteste"
+         },
+         {
+          "name": "Ziegenmilch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#80",
+          "building_id": null,
+          "ware": "waren_konsumgueter#80",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Älteste"
+         },
+         {
+          "name": "Gewänder",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#81",
+          "building_id": null,
+          "ware": "waren_konsumgueter#81",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Älteste"
+         },
+         {
+          "name": "Trockenfleisch",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#82",
+          "building_id": null,
+          "ware": "waren_konsumgueter#82",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Älteste"
+         },
+         {
+          "name": "Keramik",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#83",
+          "building_id": null,
+          "ware": "waren_konsumgueter#83",
+          "dlc": [],
+          "condition": "1 Ã„ltester",
+          "effect": "+2 Älteste"
+         },
+         {
+          "name": "Laternen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#85",
+          "building_id": null,
+          "ware": "waren_konsumgueter#85",
+          "dlc": [],
+          "condition": "1.000 Ã„lteste",
+          "effect": "+3 Älteste"
+         },
+         {
+          "name": "Meeresfrüchte-Eintopf",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#68",
+          "building_id": null,
+          "ware": "waren_konsumgueter#68",
+          "dlc": [],
+          "condition": "300 Ã„lteste",
+          "effect": "+3 Älteste"
+         },
+         {
+          "name": "Chroniken",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#84",
+          "building_id": null,
+          "ware": "waren_konsumgueter#84",
+          "dlc": [],
+          "condition": "600 Ã„lteste",
+          "effect": "+2 Älteste"
+         }
+        ]
+       },
+       {
+        "label": "Luxus",
+        "note": "(Zufriedenheit & Einkommen)",
+        "needs": [
+         {
+          "name": "Podium",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/256.html",
+          "building_id": 256,
+          "ware": null,
+          "dlc": [],
+          "condition": "",
+          "effect": "+4 Zufriedenheit"
+         },
+         {
+          "name": "Kloster",
+          "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/257.html",
+          "building_id": 257,
+          "ware": null,
+          "dlc": [],
+          "condition": "1.000 Älteste",
+          "effect": "+3 Zufriedenheit"
+         },
+         {
+          "name": "Hibiskustee",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#67",
+          "building_id": null,
+          "ware": "waren_konsumgueter#67",
+          "dlc": [],
+          "condition": "",
+          "effect": "+6 Zufriedenheit"
+         },
+         {
+          "name": "Wandteppiche",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#69",
+          "building_id": null,
+          "ware": "waren_konsumgueter#69",
+          "dlc": [],
+          "condition": "1 Ältester",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Tonpfeifen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#70",
+          "building_id": null,
+          "ware": "waren_konsumgueter#70",
+          "dlc": [],
+          "condition": "300 Älteste",
+          "effect": "+2 Zufriedenheit"
+         },
+         {
+          "name": "Brillen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#49",
+          "building_id": null,
+          "ware": "waren_konsumgueter#49",
+          "dlc": [],
+          "condition": "600 Älteste",
+          "effect": "+3 Zufriedenheit"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Lebensqualität",
+      "groups": [
+       {
+        "label": "Kunsthandwerk",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Baumwollstoff",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_zwischenprodukte.html#201",
+          "building_id": null,
+          "ware": "waren_zwischenprodukte#201",
+          "dlc": [],
+          "condition": "",
+          "effect": "+3 Älteste"
+         },
+         {
+          "name": "Nähmaschinen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#46",
+          "building_id": null,
+          "ware": "waren_konsumgueter#46",
+          "dlc": [],
+          "condition": "250 Handwerker",
+          "effect": "+2 Älteste"
+         },
+         {
+          "name": "Gänsefedern",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#167",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#167",
+          "dlc": [
+           "Die Passage"
+          ],
+          "condition": "250 Entdecker",
+          "effect": "+2 Älteste"
+         }
+        ]
+       },
+       {
+        "label": "Gesundheit",
+        "note": "(Einwohner & Einkommen)",
+        "needs": [
+         {
+          "name": "Seife",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_konsumgueter.html#43",
+          "building_id": null,
+          "ware": "waren_konsumgueter#43",
+          "dlc": [],
+          "condition": "",
+          "effect": "+2 Älteste"
+         },
+         {
+          "name": "Kräuter",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#182",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#182",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "1 Artista",
+          "effect": "+3 Älteste"
+         },
+         {
+          "name": "Orchideen",
+          "href": "https://www.annoinfo.de/Anno_1800/waren_agrarprodukte.html#185",
+          "building_id": null,
+          "ware": "waren_agrarprodukte#185",
+          "dlc": [
+           "Aufstieg der neuen Welt"
+          ],
+          "condition": "2.700 Artistas",
+          "effect": "+3 Älteste"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "house": "",
+    "url": "https://www.annoinfo.de/Anno_1800/zivilisation.html#Älteste"
+   }
+  ]
+ }
+]

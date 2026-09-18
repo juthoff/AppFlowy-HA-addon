@@ -1,0 +1,2558 @@
+{
+ "kind": "tiere",
+ "name": "Tiere",
+ "url": "https://www.annoinfo.de/Anno_1800/tiere.html",
+ "intro": [
+  {
+   "kind": "para",
+   "runs": [
+    "In Anno 1800 gibt es eine Vielzahl von Tier-Items, die in Zoos ausgestellt oder für bestimmte Effekte genutzt werden können. Diese Tiere stammen aus verschiedenen Regionen der Welt und bieten einzigartige Vorteile."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Tier-Kategorien"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Gewöhnliche Tiere – Häufige Arten, die in vielen Regionen vorkommen und keine besonderen Eigenschaften besitzen."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Ungewöhnliche Tiere – Etwas seltenere Spezies mit leicht erhöhter Attraktivität und besonderem Sammlerwert."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Seltene Tiere – Exotische Arten mit hohen Attraktivitätswerten, die nur schwer zu finden sind."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Legendäre Tiere – Besonders wertvolle und begehrte Tiere mit einzigartigen Effekten für die Stadt."
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Epische Tiere – Extrem seltene und beeindruckende Kreaturen mit außergewöhnlichen Effekten und höchster Attraktivität."
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Herkunft und Erwerb"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Durch Expeditionen"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Von Händlern oder in der Weltausstellung"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Als Belohnung für Quests"
+   ]
+  },
+  {
+   "kind": "heading",
+   "runs": [
+    "Nutzen der Tiere"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Zoo-Attraktivität steigern"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Tourismus fördern"
+   ]
+  },
+  {
+   "kind": "bullet",
+   "runs": [
+    "Besondere Boni freischalten (z. B. Produktivitätssteigerungen in Betrieben durch bestimmte Tier-Effekte)"
+   ]
+  }
+ ],
+ "sets": [
+  {
+   "key": "s_3",
+   "name": "Ausgestorbene Arten",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_giant_deer_0_128_128.webp",
+   "description": [
+    "Nicht nur existieren diese märchenhaften Kreaturen tatsächlich, sondern sie haben dank lhrer Gastfreundschaft auch die Möglichkeit, der permanenten Ausrottung zu entgehen! Dass die Geschichten wahr sind, wird gewiss den Sinn für Romantik der Autoren in ihrer Stadt ansprechen."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1800 (+20%)",
+    "Attraktivität: 150 (180 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Zoos auf der Insel",
+     "effects": [
+      "Attraktivität +10%",
+      "Einwohner mit spezielle Aufgaben sammeln sich um die Zoos"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "61",
+     "name": "Kolponomos",
+     "description": "„Kolponomos clallamensis” Wenngleich ausgestorben, hat eine isolierte Enklave dieser mit dem Bären verwandten Jäger irgendwie überlebt!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_kolponomos_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 186.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "60",
+     "name": "Megaloceros",
+     "description": "„Megaloceros giganteus” Gigantisch! Das Geweih ist riesig! Dieser Hirsch ist aus der Vergangenheit zurückgekehrt!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_giant_deer_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 172.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "59",
+     "name": "Schattenwolf",
+     "description": "„Canis dirus” Wenngleich ausgestorben, ist der Biss dieses Wolfes stärker als der aller bekannten Hunderassen! Auf keinen Fall die Fütterung versäumen!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_dire_wolf_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 178.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Jagdglück"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_3"
+  },
+  {
+   "key": "s_4",
+   "name": "Dschungel des Ostens",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_tiger_0_128_128.webp",
+   "description": [
+    "Die im östlichen Subkontinent beheimatete Fauna, wie sie den Kaufleuten auf der Seidenstraße im Laufe der Jahrhunderte begegnet ist. Diese Ausstellung wird zweifellos gleichermaßen wohlhabende Besucher von weither anlocken, vielleicht sogar ihre exotischen Geschenke."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1404 (+50%)",
+    "Attraktivität: 150 (225 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Kontore & Anlegestellen",
+     "effects": [
+      "Hafenaktivität +100%",
+      "Bei passivem Handel Chance auf 5t Kaffeebohnen, Zuckerrohr, Tabak, Baumwolle, Kakao, Kautschuk, Bananen, Perlen, Schokolade, Kaffee, Gebackene Bananen, Tortillas oder Zucker."
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "62",
+     "name": "Axishirsch",
+     "description": "„Axis axis” Eine ungewöhnliche, für ihre Flecken bekannte, Hirschart.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_chital_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "67",
+     "name": "Elefant",
+     "description": "„Elephas maximus” Elefanten dieser Spezies haben in Gefangenschaft eine viel kürzere Lebenserwartung als in freier Wildbahn.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_asian_elephant_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 52.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "63",
+     "name": "Krokodil",
+     "description": "„Crocodylinae” Kleine Vögel säubern ihre Riesenzähne.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_crocodile_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 7.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "64",
+     "name": "Pfau",
+     "description": "„Pavo muticus” Ein Vogel mit einem schillernden Gefieder.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_peacock_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.775,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "66",
+     "name": "Tiger",
+     "description": "„Panthera tigris tigris” Vielleicht die schönste aller Kreaturen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_tiger_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 23.450,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Kampfkraft",
+      "+10 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "65",
+     "name": "Wilder Wasserbüffel",
+     "description": "„Bubulus arnee” Teilt seinen Lebensraum verständlicherweise ungern mit Tigern …",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_waterbuffalo_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 7.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_4"
+  },
+  {
+   "key": "s_17",
+   "name": "Taigawald",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_moose_0_128_128.webp",
+   "description": [
+    "Die Waldkreaturen der Taiga - eines kalten Nadelwaldes des Nordens. Tiere zu verstehen, die mit sehr wenig lange, harte Winter überleben können, ermutigt Ihre Bevölkerung, bei ihrem eigenen Konsum Zurückhaltung zu zeigen."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2205 (+30%)",
+    "Attraktivität: 70 (91 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Wohnhäuser",
+     "effects": [
+      "Bedürfnis-Bonus - Fisch -5%, Brot -5%, Fleischkonserven -5%, Wurst -5%, Schokolade -5%, Gebackene Bananen -5%, Tortillas -5%, Meeresfrüchte-Eintopf -5%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "129",
+     "name": "Braunbär",
+     "description": "„Ursus arctos” Ein großes Tier mit einem Bärenhunger auf Lachs.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_brown_bear_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.200,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "130",
+     "name": "Elch",
+     "description": "„Cervus canadensis„ Auch Wapiti genannt. Dieser Hirsch ist nicht ganz so groß wie ein Elch.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_elk_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 15.625,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "128",
+     "name": "Schwarzbär",
+     "description": "„Ursus americanus” Kann sechs Mal besser riechen als ein Hund.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_black_bear_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.875,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Kampfkraft"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_17"
+  },
+  {
+   "key": "s_7",
+   "name": "Großes Korallenriff",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_lionfish_0_128_128.webp",
+   "description": [
+    "Die Vielfalt der rings um das GroBe Korallenriff lebenden Tiere zu sehen, ist extrem lehrreich für Kinder, die, von den Definen unterhalten, die Komplexitäten des Lebens besser verstehen."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1404 (+50%)",
+    "Attraktivität: 130 (195 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Arbeiter-, Handwerker- und Obrero-Häuser sowie Hacienda-Unterkünfte für Obreros",
+     "effects": [
+      "Zufriedenheit +2",
+      "Attraktivität +2"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "77",
+     "name": "Grüne Meeresschildkröte",
+     "description": "„Chelonia mydas” Schwimmt um ihr Leben.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_turtle_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 2.125,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    },
+    {
+     "anchor": "82",
+     "name": "Großer Tümmler",
+     "description": "„Tursiops truncatus” Lacht und spielt ebenso gern wie wir.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_dolphin_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 16.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Glaube",
+      "+15 Navigation"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "81",
+     "name": "Kugelfisch",
+     "description": "„Tetraodontidae” Um ein Weibchen anzulocken, zeichnen die Männchen geometrische Muster in den Sand.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_balloonfish_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 22.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "79",
+     "name": "Mantarochen",
+     "description": "„Manta alfredi” Eine schöne und bizarre Unterwasserkreatur.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_mantaray_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 7.450,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "78",
+     "name": "Rotfeuerfisch",
+     "description": "„Pterois miles” Seine giftigen Stacheln schrecken Räuber ab!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_lionfish_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 7.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "80",
+     "name": "Seepferdchen",
+     "description": "„Hippocampoi” Pferde, die über Meere galoppieren.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_seahorses_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.125,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_7"
+  },
+  {
+   "key": "s_8",
+   "name": "Kordilleren",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_vulture_ver2_0_128_128.webp",
+   "description": [
+    "Diese aus den Hochgebirgen der Neuen Welt stammenden Tiere haben sich den felsigen Hängen und Bergwäldern angepasst. Das Alpaka und seine Vettern haben sich beispielsweise mit den menschlichen Bewohnern der Region angefreundet, für die sie seit Jahrhunderten als Lasttiere arbeiten."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1701 (+50%)",
+    "Attraktivität: 80 (120 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Bauern- und Jornalero Häuser sowie Hacienda-Unterkünfte für Jornaleros",
+     "effects": [
+      "Arbeitskräfte +10%",
+      "Einkommen pro Haus +10%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "83",
+     "name": "Alpaka",
+     "description": "„Vicugna pacos” Nicht zu verwechseln mit dem Lama, das viel spuckt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_alpacca_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.600,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Geschick"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "85",
+     "name": "Brillenbär",
+     "description": "„Tremarctos ornatus” Dieser introvertierte Bär häuft Zweige an, um so an Früchte zu gelangen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_spectacled_bear_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 58.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "84",
+     "name": "Kondor",
+     "description": "„Vultur gryphus” - Ein majestätischer Geier mit großer Spannweite.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_vulture_ver2_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 7.175,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "-10 Glaube"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_8"
+  },
+  {
+   "key": "s_11",
+   "name": "Nutztiere",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_sheep_0_128_128.webp",
+   "description": [
+    "Diese Nutztiere mögen für die meisten Besucher nichts Besonderes sein, aber es gibt immer noch viel über die Zucht und Pflege unserer domestizierten Arten zu lernen."
+   ],
+   "bonis": [
+    "Attraktivität: 60"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Tierhöfe",
+     "effects": [
+      "Produktivität +5%",
+      "Wartungskosten -10%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "99",
+     "name": "Hausschwein",
+     "description": "„Sus scrofa domesticus” Arme kleine Schweinchen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_pigs_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.725,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    },
+    {
+     "anchor": "96",
+     "name": "Huhn",
+     "description": "„Gallus gallus domesticus” Das ist ein Huhn.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_chicken_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.000,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    },
+    {
+     "anchor": "98",
+     "name": "Pferd",
+     "description": "„Equus ferus caballus” Wird in Handspannen gemessen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_horse_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.925,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Jagdglück",
+      "+10 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "95",
+     "name": "Rind",
+     "description": "„Bos taurus” Seit zehntausend Jahren unsere Verbündeten.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_cattle_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.175,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    },
+    {
+     "anchor": "100",
+     "name": "Schaf",
+     "description": "„Ovis aries” Weckt so ein wolliges Gefühl.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_sheep_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.800,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    },
+    {
+     "anchor": "97",
+     "name": "Ziege",
+     "description": "„Capra aegagrus hircus” Eine dickköpfige Sorte.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_goat_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Gewöhnlich",
+      "Attraktivität: +10 Attraktivität",
+      "Baukosten: 1.475,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_11"
+  },
+  {
+   "key": "s_13",
+   "name": "Räuber der Meere",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_swordfish_0_128_128.webp",
+   "description": [
+    "Diesen Kreaturen der Tiefe und Mördern der Ozeane möchten Sie gewiss nicht auf Augenhöhe begegnen. Ihre Aquarien mit maritimen Raubtieren können Ihrer Bevölkerung etwas über das Verhalten von unter Wasser lebenden Tieren beibringen."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2070 (+30%)",
+    "Attraktivität: 100 (130 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Küstenproduktionsgebäude",
+     "effects": [
+      "Produktivität +10%",
+      "Wartungskosten -10%",
+      "Arbeitskräfte -5%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "107",
+     "name": "Orka",
+     "description": "„Orcinus orca” Als Raubtier ebenso intelligent und rücksichtslos wie der Mensch.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_killerwhale_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.375,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "108",
+     "name": "Schwertfisch",
+     "description": "„Xiphias gladius” Ein seltener Schwertnasenkämpfer der Tiefe.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_swordfish_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 22.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "109",
+     "name": "Weißer Hai",
+     "description": "„Carcharodon carcharias” Dieser großer, zahnbewehrte Jäger mag ruhen, doch niemals schlafen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_shark_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 50.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Moral"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_13"
+  },
+  {
+   "key": "s_14",
+   "name": "Regenwald",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_puerto_rican_amazon_0_128_128.webp",
+   "description": [
+    "Die lebhaften Farben dieser aus dem Regenwald Stammenden Tiere haben in der Alten Welt keine Entsprechung. Gewiss werden 5ie die Modewelt in Ihrer Stadt inspirieren."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 1701 (+50%)",
+    "Attraktivität: 210 (315 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Handelskammern",
+     "effects": [
+      "Attraktivität +30"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "113",
+     "name": "Amazonasdelfin",
+     "description": "„Inia geoffrensis” Pink! Nicht verwachsene Halswirbel erlauben Kopfdrehungen bis zu 90 Grad.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_amazonas_dolphin_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 64.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube",
+      "+20 Navigation"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "115",
+     "name": "Iguaca",
+     "description": "„Amazona vittata” Wenn sich der Lebenspartner dieses Papageis verletzt, sucht er sich einen neuen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_puerto_rican_amazon_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 56.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "111",
+     "name": "Jaguar",
+     "description": "„Panthera onca” Tötet seine Beute mit einem einzigen kräftigen Biss in den Nacken.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_jaguar_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 25.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Gefechtskunde"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "112",
+     "name": "Pelikan",
+     "description": "„Pelicanus thagus” Ein großer Beutel filtert die Beute aus dem geschluckten Wasser.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_pelican_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 16.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Glaube"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "114",
+     "name": "Schwarzer Jaguar",
+     "description": "„Panthera onca” Eine schwarze Variante des Jaguars, die manchmal sogar Krokodile frisst.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_black_panther_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 75.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "110",
+     "name": "Schwarzer Kaiman",
+     "description": "„Melanosuchus niger” Jungtiere haben leuchtend gelbe Schuppen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_black_caiman_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Kampfkraft"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_14"
+  },
+  {
+   "key": "s_15",
+   "name": "Schneeflocken",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_albinos_fennec_0_128_128.webp",
+   "description": [
+    "Egal ob Depigmentierung, Mutation oder natürliche Anpassung: Diese Schneeweißen Geister bieten einen seltenen und wundersamen Anblick, wenn sie auf himmlischen Wolken herabschweben."
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2205 (+30%)",
+    "Attraktivität: 290 (377 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Zoos auf der Insel",
+     "effects": [
+      "Wartungskosten -50%",
+      "Attraktivität +20%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "116",
+     "name": "Albino-Alligator",
+     "description": "„Alligator sinensis” Eine weiß pigmentierte Echse des Ostens, die sehr auf den Schutz ihrer Eier bedacht ist!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_albino_crocodile_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 71.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "117",
+     "name": "Albino-Fennek",
+     "description": "„Vulpes zerda” Ein flinker, dämmerungsaktiver Wüsenbewohner mit weißem Fell und sehr langen Ohren.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_albinos_fennec_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 175.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Moral"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "121",
+     "name": "Albino-Gorilla",
+     "description": "„Gorilla gorilla gorilla” Da es ein Albino ist, sieht dieses reizende Männchen außergewöhnlich aus, ist allerdings etwas kurzsichtig.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_albino_gorilla_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 200.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "118",
+     "name": "Baiji",
+     "description": "„Lipotes vexillifer” Die Schutzgöttin der Fischer auf dem langen Fluss lässt sich kaum jemals blicken.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_white_flag_dolphin_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 150.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube",
+      "+25 Navigation"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "120",
+     "name": "Weißer Pfau",
+     "description": "„Pavo cristatus” Unser Bräutigam stellt seine Schleppe schon lange vor der Hochzeit zur Schau.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_albino_peacock_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 200.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Kampfkraft"
+     ],
+     "dlc": []
+    },
+    {
+     "anchor": "119",
+     "name": "Weißer Tiger",
+     "description": "„Panthera tigris tigris” Welche unsterblichen Hände oder Augen könnten beschließen, dass man noch ein Tüpfelchen Weiß benötigt?!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_white_tiger_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 200.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Kampfkraft"
+     ],
+     "dlc": []
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_15"
+  },
+  {
+   "key": "s_1",
+   "name": "Abgründige Tiefen",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_kraken_0_128_128.webp",
+   "description": [
+    "Diese durch Gräben eilenden albtraumhaften Monstositäten sind skurille Bewohner der Tiefe, von denen man sagt, sie seinen „versehentlich von der Oberfläche gefallen”. Sie werden die Besucher vor Furcht erschaudern lassen und zugleich faszinieren, während sie die Kenntnisse der Wissenschsaftler über die Fauna der Abgründe bereichern.",
+    "DLC: Gesunkene Schätze"
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2070 (+30%)",
+    "Attraktivität: 230 (299 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Bergungsschiff",
+     "effects": [
+      "Taucherglocke für Raritäten - Episch +5, Legendär +2",
+      "Erhöhte Chance Tiere zu finden - Zoo +5"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "50",
+     "name": "Blobfisch",
+     "description": "„Psychrolutes marcidus” Ein menschliches Gesicht mit Flossen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_blob_fish_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "55",
+     "name": "Der Krake",
+     "description": "Der legendäre Kraken wurde gefangen! Er wirbelt wild im Becken herum! Winzige menschliche Beobachter ducken sich unter seinem hypnotisierenden Blick!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_kraken_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 180.000,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+50 Gefechtskunde"
+     ],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "53",
+     "name": "Koboldhai",
+     "description": "„Mitsukurina owstoni” Beflügelt mit seiner langen Nase die Fantasie und ähnelt dem Kobold-Fabelwesen Tengu.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_goblinshark_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "51",
+     "name": "Kronenqualle",
+     "description": "„Periphylla periphylla” Meidet das Licht, wie so viele von uns es heutzutage tun.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_helmet_jellyfish_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "54",
+     "name": "Schwarzer Schlinger",
+     "description": "„Chiasmodon niger” Stopft Beutetiere größer als er selbst in einen dehnbaren kokonartigen Korb, der an seinem Bauch hängt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_blackswallower_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "52",
+     "name": "Tiefsee-Anglerfisch",
+     "description": "„Lophiiformes” Extrem anpassungsfähiger Tiefseefisch, der auch im Küstengebiet jagen kann.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_anglerfish_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_1"
+  },
+  {
+   "key": "s_9",
+   "name": "Leuchtkreaturen",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_glowfish_03_0_128_128.webp",
+   "description": [
+    "Diese Glühwürmchen aus der Tiefe sind bizarre Organismen, die in solcher Vielfalt leuchten, dass jenen, welche noch nicht mit ihnen Bekanntschaft geschlossen haben, häufig schwindelig wird. Die Entdeckung und das Verständnis dieser Lumineszenz kann Ihre Bevölkerung dazu ermutigen, ihre Einrichtungen aufzuhübschen.",
+    "DLC: Gesunkene Schätze"
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2205 (+30%)",
+    "Attraktivität: 90 (117 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Wirtshaus, Varieté, Clubhaus darüber hinaus alle Einkaufspassagen & Restaurants (kein Monument)",
+     "effects": [
+      "Attraktivität +3"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "86",
+     "name": "Drachenfisch der Tiefsee",
+     "description": "„Stomiidae” Hält sich normalerweise in Tiefen auf, die selbst Tauchboote nicht erreichen können. Wurde gefangen, als er zum Luftholen an die Oberfläche kam.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_glowfish_01_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "88",
+     "name": "Leuchtkalmar",
+     "description": "„Watasenia scintillans” Sehr klein. Er verwendet Gegenbeleuchtung, um sich vor seiner Beute zu verstecken und imitiert dabei die Farbe des Wassers an der Oberfläche.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_glowfish_03_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    },
+    {
+     "anchor": "87",
+     "name": "Unbekannter Leuchtfisch",
+     "description": "„Nicht eingetragene Spezies” Diese Spezies wurde noch nicht kategorisiert. Benennen Sie sie doch einfach nach sich selbst!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_glowfish_02_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 24.500,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Gesunkene Schätze"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_9"
+  },
+  {
+   "key": "s_2",
+   "name": "Arktische Tundra",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_reindeer_0_128_128.webp",
+   "description": [
+    "Die arktische Tundra erinnert ihre Besucher an die schwierigen Bedingungen, denen die verlorenen Arktis-Expeditionen trotzen mußten; ein Thema, das derzeit heiß - beziehungsweise sehr kalt - diskutiert wird.",
+    "DLC: Die Passage"
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2205 (+30%)",
+    "Attraktivität: 90 (117 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Besucherhäfen",
+     "effects": [
+      "Mehr Besucher +5%",
+      "Attraktivität +100"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "57",
+     "name": "Moschusochse",
+     "description": "„Ovibos moschatus” Männliche Moschusochsen sondern während der Brunftzeit einen starken Geruch ab, daher der Name.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_musk_oxen_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 15.625,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "56",
+     "name": "Polarwolf",
+     "description": "„Nicht eingetragene Spezies” Diese Spezies wurde noch nicht kategorisiert. Benennen Sie sie doch einfach nach sich selbst!",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_arctic_wolf_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 16.225,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Kampfkraft"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "58",
+     "name": "Rentier",
+     "description": "„Rangifer tarandus” Diese waldbewohnende Spezies ist die größte in der Familie der Hirsche. Sie reagiert extrem empfindlich auf Störungen ihres Lebensraums durch den Menschen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_reindeer_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 17.175,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_2"
+  },
+  {
+   "key": "s_12",
+   "name": "Polarkreis",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_polar_bear_0_128_128.webp",
+   "description": [
+    "In den unwirtlichen Landschaften des Polarkreises hat eine Handvoll erstaunlicher Tiere sich an die unglaublich kalten Temperaturen angepasst. Ihre dicken Häute, Felle und Federn speichern die Wärme selbst unter gefrorenen Meeren und in endlosen Schneestürmen.",
+    "DLC: Die Passage"
+   ],
+   "bonis": [
+    "Musikstück Bonus: Anno 2205 (+30%)",
+    "Attraktivität: 220 (286 inkl. Bonus)"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Schneiderei, Weberei, Hutmacherei, Ponchoweberei und Schneidergeschäft",
+     "effects": [
+      "Produktivität +25%",
+      "Wartungskosten -25%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "106",
+     "name": "Narwal",
+     "description": "„Monodon monoceros” Die beeindruckenden schraubenförmigen Stoßzähne, die aus ihrem Kiefer ragen, wurden schon in der Antike abgetrennt und als Einhorn-Hörner verkauft.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_narwhale_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 172.350,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "103",
+     "name": "Polarbär",
+     "description": "„Ursus maritimus” Nanuk. Dieser Hyperkarnivore hat sich an das Leben in der Arktis angepasst und stapft auf der Suche nach Robben über das Meereis.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_polar_bear_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 58.500,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Kampfkraft"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "101",
+     "name": "Polarfuchs",
+     "description": "„Vulpes lagopus” Sein schneeweißes Fell hält ihn warm und macht ihn für ungeschulte Augen nahezu unsichtbar.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_arctic_fox_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 4.650,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "105",
+     "name": "Riesenalk",
+     "description": "„Pinguinus impennis” Der Riesenalk ist mittlerweile ein sehr seltener Vogel, vielleicht weil seine Eier bei den Menschen so begehrt sind.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_great_auk_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 180.250,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "102",
+     "name": "Ringelrobbe",
+     "description": "„Pusa hispida” Diese kleine, ohrlose Robbe ist eine der Grundpfeiler des Lebens in der Arktis - die Inuit nennen sie „Nattiq”.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_sealion_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.325,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Die Passage"
+     ]
+    },
+    {
+     "anchor": "104",
+     "name": "Walross",
+     "description": "„Odobenus rosmarus” Seine Vibrissen - die harten Borsten rund um seine Stoßzähne - verleihen dem Walross das Aussehen eines Bartträgers.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_walrus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 53.350,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+25 Navigation"
+     ],
+     "dlc": [
+      "Die Passage"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_12"
+  },
+  {
+   "key": "s_18",
+   "name": "Wilde Seen",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_flamingo_0_128_128.webp",
+   "description": [
+    "Verschiedene Spezies versammeln sich hier, um an diesen Seen voller Leben zu trinken und zu grasen. Manche von ihnen fliegen sogar um den halben Erdball. um pünktlich hier zu sein.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 90"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Küstenproduktionsgebäude",
+     "effects": [
+      "Produktivität +20%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "131",
+     "name": "Flamingo",
+     "description": "„Phoenicopterus roseus” Der rosafarbende Ton der Federn stammt von den karotinhaltigen Krabben, die er in großen Mengen frisst.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_flamingo_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.750,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "133",
+     "name": "Flusspferd",
+     "description": "„Hippopotamus amphibius” Sehen Sie die Maulspanne? Die dicken, angebrochenen gelben Zähen? - Genau, denken Sie nicht mal dran.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_hippotanamus_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 70.100,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+40 Kampfkraft"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "132",
+     "name": "Grauhals-Kronenkranich",
+     "description": "„Balearica regulorum” Einst gab es ihn auch in der Alten Welt, doch als sich die Erde abkühlte, haben nur jene in wärmeren Regionen überlebt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_grey_crowned_crane_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 18.050,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Glaube"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_18"
+  },
+  {
+   "key": "s_16",
+   "name": "Stolze Savanne",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_lion_0_128_132.webp",
+   "description": [
+    "Das empfindliche Gleichgewicht zwischen den Spezies, die in der Savanne zusammenleben, mag grausam erscheinen, doch nur 50 kann es bestehen bleiben.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 190"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Rinder- und Alpakafarmen, alle elektrifizierten Weiden sowie Nandu-Farmen",
+     "effects": [
+      "Produktivität -25%",
+      "Zusatzwaren Produziert gelegentlich extra. 1/3",
+      "Anzahl Module -25%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "126",
+     "name": "Gepard",
+     "description": "„Acinonyx jubatus” Es heißt, Selemawi habe einen von ihnen gezähmt und mit einem Juwelelhalsband geschmückt, doch dann sei er weggelaufen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_cheeta_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 72.975,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Jagdglück"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "125",
+     "name": "Gnu",
+     "description": "„Connochaetes taurinus” Lassen Sie es in Ihr Leben trampeln oder überlassen Sie es den Löwen - Sie haben die Wahl.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_wildebeest_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 21.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "123",
+     "name": "Grevyzebra",
+     "description": "„Equus grevyi” Das größte Wildpferd und wohl auch das mit den meisten Streifen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_zebra_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.650,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "127",
+     "name": "Löwe",
+     "description": "„Panthera Leo” Erhabenheit und Sanftmut liegen in seinem Blick, aus dem wir alle Mut schöpfen können.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_lion_0_128_132.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 197.250,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Kampfkraft",
+      "+10 Redegabe"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "122",
+     "name": "Strauß",
+     "description": "„Struthio camelus” Seine Federn sind bei der Elite … und ihren mit dem Frühjahrsputz beschäftigen Dienern inzwischen sehr beliebt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_ostrich_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 7.125,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "124",
+     "name": "Tüpfelhyäne",
+     "description": "„Crocuta crocuta” Hat ein ansteckendes Lachen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_spotted_hyena_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 23.300,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+15 Kampfkraft",
+      "-5 Redegabe"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_16"
+  },
+  {
+   "key": "s_10",
+   "name": "Miombo Wälder",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_elephant_0_128_128.webp",
+   "description": [
+    "Unter den stillen Baumkronen der Miombo-Wälder futtern im dichten Gehölz gewaltige Pflanzenfresser.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 220"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Holzfällerhütten, Köhlereien und Jagdhütten",
+     "effects": [
+      "Walddichte -10%",
+      "Attraktivität +5"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "93",
+     "name": "Elefant",
+     "description": "„Loxodonta africana” Seine Intelligenz ist nicht zu unterschätzen, ebensowenig die Freude, mit der er seinen Rüssel entrollt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_elephant_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 190.600,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+30 Geschick",
+      "+20 Kampfkraft"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "92",
+     "name": "Giraffe",
+     "description": "„Giraffa camelopardalis” Hat von da oben einen hübschen Ausblick über die Savanne und die saftigsten Blätter.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_giraffe_0_132_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 73.250,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "90",
+     "name": "Impala",
+     "description": "„Aepyceros melampus” Hört nicht auf zu hüpfen und in die Luft zu springen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_impala_0_128_132.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 19.025,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "91",
+     "name": "Karakal",
+     "description": "„Caracal caracal” Wurde von Königin Nafir zur Jagd abgerichtet, als sie über das obere Krokodildelta herrschte.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_caracal_0_128_132.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 18.600,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "94",
+     "name": "Spitzmaulnashorn",
+     "description": "„Diceros bicornis” Um nicht alle Exemplare dieser Spezies an Wilderer zu verlieren, sollte man zumindest eine dieser Schönheiten im Zoo unterbringen.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_black_rhino_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Legendär",
+      "Attraktivität: +50 Attraktivität",
+      "Baukosten: 186.625,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+20 Kampfkraft"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "89",
+     "name": "Wildhund",
+     "description": "„Lycaon pictus” In der Folklore Enbesas nicht sehr bedeutend, wird er vornehmlich von den lokalen Jägern und Sammlern geschätzt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_wild_dog_0_128_132.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.300,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Jagdglück",
+      "+5 Gefechtskunde"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_10"
+  },
+  {
+   "key": "s_6",
+   "name": "Große Wüste",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_dromedary_0_128_128.webp",
+   "description": [
+    "Verschiedene Tiere, die sich an den sengend heißen Sand und die Wasserknappheit in der unendlichen Wüste angepasst haben.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 80"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst alle Feuerwachen",
+     "effects": [
+      "Löschgeschwindigkeit +30%",
+      "Reichweite +10%",
+      "Mobilisierungsanforderung - 10 (Verringert die Zufriedenheit, die erforderlich ist, um die Freiwillige Feuerwehr zu rufen.)"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "74",
+     "name": "Dromedar",
+     "description": "„Camelus dromedarius” Das einzige Reittier, das epische Reisen durch die Wüste übersteht.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_dromedary_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 6.175,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Geschick",
+      "+5 Kampfkraft"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "75",
+     "name": "Fennek",
+     "description": "„Vulpes zerda” Beim fressen äußerst wählerisch - nur ganz bestimmte Springmäuse stehen auf seinem Speiseplan.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_fennec_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 16.875,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "76",
+     "name": "Kaiserscorpion",
+     "description": "„Pandinus imperator” Äußerst majestätisch - mit einem so mächtigen Schwanz, dass er eher einer Stichwaffe gleicht.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_scorpion_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 18.750,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+5 Kampfkraft",
+      "+5 Heilkunst"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_6"
+  },
+  {
+   "key": "s_5",
+   "name": "Enbesanisches Hochland",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_gelada_0_128_128.webp",
+   "description": [
+    "Die vielfältige und einzigartige Fauna des enbesanischen Plateaus ist eines der vielen Reichtümer des Landes und unterscheidet sich stark von der Tierwelt in den tieferen Ebenen.",
+    "DLC: Land der Löwen"
+   ],
+   "bonis": [
+    "Attraktivität: 180"
+   ],
+   "affects": [
+    {
+     "target": "Beeinflusst Gelehrtenhäuser",
+     "effects": [
+      "Bedürfnis-Bonus - Meeresfrüchte-Eintopf -10%",
+      "Hibiskustee -10%"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "anchor": "72",
+     "name": "Bartgeier",
+     "description": "„Gypaetus barbatus” Wird oft beim schlürfen von Knochenmark beobachtet, bei Fleisch rümpft er eher den Schnabel.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_bearded_vulture_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 55.700,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "70",
+     "name": "Bergnyala",
+     "description": "„Tragelaphus buxtoni” Stattlich und Edel. Die weißen Flecken und Streifen bilden einen Kontrast zum ansonsten braunen Fell.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_tiger_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 16.625,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "73",
+     "name": "Dschelada",
+     "description": "„Theropithecus gelada” All die kleinen Skandale, die in ihrer Gruppe ausgeplaudert werden, lassen einem das Herz bluten.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_gelada_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Episch",
+      "Attraktivität: +40 Attraktivität",
+      "Baukosten: 61.525,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "68",
+     "name": "Enbesanischer Wolf",
+     "description": "„Canis simensis” Ein früher Bericht über diese in den Staaten von Enbesa heimische Hundeart vermerkt: „sie springen so hoch, als hätten sie Flügel”.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_enbesan_wolf_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 5.650,00 Verkaufspreis"
+     ],
+     "expedition": [
+      "+10 Jagdglück"
+     ],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "71",
+     "name": "Oryxantilope",
+     "description": "„Oryx beisa” Bekannt dafür, dass sie hin und wieder Löwen mit ihren dolchähnlichen Hörnern aufspießt.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_oryx_0_132_132.webp",
+     "properties": [
+      "Seltenheit: Selten",
+      "Attraktivität: +30 Attraktivität",
+      "Baukosten: 19.125,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    },
+    {
+     "anchor": "69",
+     "name": "Zweihornchamelion",
+     "description": "„Trioceros balebicornutus” Mit viel Glück findet man es tief im Harenna-Wald, in den Nebelbergen Enbesas.",
+     "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_bale_two_horned_chameleon_0_128_128.webp",
+     "properties": [
+      "Seltenheit: Ungewöhnlich",
+      "Attraktivität: +20 Attraktivität",
+      "Baukosten: 7.300,00 Verkaufspreis"
+     ],
+     "expedition": [],
+     "dlc": [
+      "Land der Löwen"
+     ]
+    }
+   ],
+   "url": "https://www.annoinfo.de/Anno_1800/tiere.html#s_5"
+  }
+ ],
+ "loose": [
+  {
+   "anchor": "1",
+   "name": "Adler",
+   "description": "„Accipitridae” Der perfekte Raubvogel.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_eagle_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.500,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Jagdglück"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "2",
+   "name": "Alligatorhecht",
+   "description": "„Atractosteus spatula” Diese Spezies existiert seit mehr Jahren als eine Person in ihrem gesamten Leben zählen könnte.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_aligatorgator_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.500,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Gesunkene Schätze"
+   ]
+  },
+  {
+   "anchor": "3",
+   "name": "Bison",
+   "description": "„Bison bonasus” Das Thema einiger der am frühesten datierten Höhlenmalereien.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_bison_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.125,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "4",
+   "name": "Braunkopfkakadu",
+   "description": "„Calyptorhynchus lathami” Schwarz, aber mit einer verlockend roten Unterschwanzdecke.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_black_cockatoo_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 18.900,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "5",
+   "name": "Dominikanermöwe",
+   "description": "„Larus pacificus” Eine sehr große Möwenart.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_pacific_gull_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.025,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Navigation"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "6",
+   "name": "Eisvogel",
+   "description": "„Alcedinidae” Ein eifriger Angler, in Azurblau und Orange gekleidet.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_smallbirds_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 19.500,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "7",
+   "name": "Elfenbeinmöwe",
+   "description": "„Pagpphila eburnea” Diese kleine arktische Möwe hat viele verschiedene Rufe, unter anderem einen trällernden Ton, mit dem sie vor Raubtieren warnt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_ivory_ygull_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.175,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+25 Navigation"
+   ],
+   "dlc": [
+    "Die Passage"
+   ]
+  },
+  {
+   "anchor": "8",
+   "name": "Esel",
+   "description": "„Equus africanus asinus” Sehen ein wenig traurig aus.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_donkey_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.525,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Geschick"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "9",
+   "name": "Geckos",
+   "description": "„Gekkota” Eine Sammlung von Eidechsen mit klebrigen Fingern.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_lizard_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.725,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "10",
+   "name": "Gelbe Haarqualle",
+   "description": "„Cyanea capillata” Die Rapunzel des Meeres. Mit ihren langen Haaren kann diese Nesselqualle länger werden als ein Blauwal!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_gigant_orange_jellyfish_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 53.500,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Gesunkene Schätze"
+   ]
+  },
+  {
+   "anchor": "11",
+   "name": "Gorilla",
+   "description": "„Gorilla” Versteckt im Nebel der Berge.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_gorilla_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 24.750,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "12",
+   "name": "Grauer Wolf",
+   "description": "„Canis lupus” Kann Sie auf eine Meile Entferung riechen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_wolf_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.350,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Jagdglück"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "13",
+   "name": "Großer Waldpapagei",
+   "description": "„Nestor productus” Der krächzende Schrei dieses außergewöhnlichen orangen Papageis soll dem Bellen eines Hundes ähneln.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_norfolk_kaka_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 183.750,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+30 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "14",
+   "name": "Haushund",
+   "description": "„Canis familiaris” Ihr bester Freund.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_dog_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.375,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Jagdglück"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "15",
+   "name": "Hauskatze",
+   "description": "„Felis catus” Schleicht ums Haus.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_cat_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.075,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "-5 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "16",
+   "name": "Kleiner Schwertwal",
+   "description": "„Pseudorca crassidens” Ein dickzahniger Schwertwal, der gerne tief taucht.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_false_killer_whale_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 52.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "17",
+   "name": "Klippenfuchs",
+   "description": "„Vulpes cana” Diese Füchse können praktisch senkrechte Klippen erklimmen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_blanfords_fox_0_128_132.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.900,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "18",
+   "name": "Kraushaar-Vogelspinne",
+   "description": "„Brachypelma albopilosum” Eine dicke, fette, haarige Spinne.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_spider_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.900,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "19",
+   "name": "Küstenleopard",
+   "description": "„Panthera pardus adersi” Von Bauern gefürchtet, werden diese Inselbewohner für Diener von Hexen gehalten.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_zanzibar_leopard_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 183.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+25 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "20",
+   "name": "Löffelfuchs",
+   "description": "„Otqcyon megalotis” Zeichnet sich durch seine auffällig großen Ohren und seinen buschigen Schwanz aus.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_bat_eared_fennec_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 15.300,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "21",
+   "name": "Mathilde, der Papagei",
+   "description": "Das Geschenk eines Jornaleros. „Sehen Sie sich diese Schönheit an, Chef. So einen Vogel habe ich noch nie gesehen. Ich liebe das Mädchen, obwohl sie nur krakeelt.”",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_puerto_rican_amazon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 60.250,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+25 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "22",
+   "name": "Mauersegler",
+   "description": "„Apodidae” Diese Vögel sind schnell.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_swift_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.375,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "23",
+   "name": "Möwe",
+   "description": "„Larus argentatus” Isst menschlichen Unrat.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_seagull_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.125,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Navigation"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "24",
+   "name": "Ochse",
+   "description": "„Bos primigenius taurus” Ein domestiziertes Zugtier.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_oxen_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.750,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Geschick"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "25",
+   "name": "Orang-Utan",
+   "description": "„Pongo” Der charakteristische Paarungsruf der Männchen hat seinen Ursprung im voluminösen Kehlsack.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_orangutan_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 50.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "26",
+   "name": "Östliche Riesenschnecke",
+   "description": "„Achatina fulica„ Es ist verlockend, sie als exotisches Haustier zu halten, doch diese invasive Art braucht viel Aufmerksamkeit.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_gigant_snail_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.200,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "-5 Kampfkraft"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "27",
+   "name": "Papagai",
+   "description": "„Psittaciformes” Farbenprächtige und redselige Vögel.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_parrot_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 6.725,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "28",
+   "name": "Paradiesvogel",
+   "description": "„Paradisaeidae” Die Männchen locken die Weibchen mit komplizierten Tanzritualen an.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_bird_of_paradise_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 70.250,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "29",
+   "name": "Pottwal",
+   "description": "„Physeter macrocephalus” Ein flossenloser Wal mit dem größten Gehirn aller bekannten Tiere.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_sperm_whale_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 55.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "30",
+   "name": "Puma",
+   "description": "„Puma concolor” Eine geheimnisvolle Katze, Herrin über alle Gebiete der Neuen Welt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_puma_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 22.250,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "31",
+   "name": "Qualle",
+   "description": "„Medusozoa” Wackelpudding!!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_jellyfish_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "32",
+   "name": "Quastenflosser",
+   "description": "„Latimeria chalumnae” Der Alte Nate schaut Sie an und sagt, dies sei nicht das einzige lebendige Fossil, das sich am Meeresgrund aufhält.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_coelacanth_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 180.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Gesunkene Schätze"
+   ]
+  },
+  {
+   "anchor": "33",
+   "name": "Ratten",
+   "description": "„Rattus” Sie sind überall!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_rodents_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.700,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "34",
+   "name": "Rotfuchs",
+   "description": "„Vulpes vulpes” Legt seinen Bau hinten im Garten an.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_fox_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.025,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "35",
+   "name": "Rotwild",
+   "description": "„Cervus elaphus” Majestätische Waldkreaturen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_deer_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.175,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "36",
+   "name": "Schlankdelfin",
+   "description": "„Stenella frontalis” Eine seltene, doch ungestüme Delfinart, die wegen ihrer zahlreichen weißen Flecken bemerkenswert ist.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_spotted_dolphin_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 61.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube",
+    "+20 Navigation"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "37",
+   "name": "Schmetterlinge",
+   "description": "„Rhopalocera” In all ihren faszinierenden Lebenszyklen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_butterflies_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.450,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+15 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "38",
+   "name": "Schwan",
+   "description": "„Cygnus” Ein Liebling der Königin.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_swan_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "39",
+   "name": "Schwarzdelfin",
+   "description": "„Lagenorhynchus obscurus” Diese für ihre akrobatischen Sprungeinlagen bekannte Delfinart sieht nur schwarz-weiß.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_dusky_dolphin_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 62.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube",
+    "+20 Navigation"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "40",
+   "name": "Schweinswal",
+   "description": "„Phocoena sinus” Ein kleiner Tümmler von solcher Diskretion und Zurückhaltung, dass manche an seiner Existenz zweifeln, doch hier ist der Beweis!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_vaquita_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 163.750,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube",
+    "+25 Navigation"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "41",
+   "name": "See-Orang-Utan",
+   "description": "„Pongo tapanuliensis” Ein seltener und scheuer Orang-Utan mit einem scheibenförmigen Gesicht, der Raupen und Pinienkerne isst.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_bornean_orangutan_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Legendär",
+    "Attraktivität: +50 Attraktivität",
+    "Baukosten: 155.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+25 Moral"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "42",
+   "name": "Silbermöwe",
+   "description": "„Larus californicus” Ein Vogel, der sich zu den Insekten in Städten hingezogen fühlt.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_california_gull_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Ungewöhnlich",
+    "Attraktivität: +20 Attraktivität",
+    "Baukosten: 5.050,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Navigation"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "43",
+   "name": "Silberrückengorilla",
+   "description": "„Gorilla” Aufgepasst! Der mächtige Silberrücken steht auf zwei Beinen und trommelt sich auf die Brust!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_gorilla_silverback_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 74.750,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Kampfkraft"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "44",
+   "name": "Speikobra",
+   "description": "„Naja ashei” Sie sollten sich ihr nur nähern, wenn Sie eine spucksichere Schutzbrille griffbereit haben!",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_snake_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Selten",
+    "Attraktivität: +30 Attraktivität",
+    "Baukosten: 20.800,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Kampfkraft",
+    "+10 Heilkunst"
+   ],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "45",
+   "name": "Storch",
+   "description": "„Ciconiiformes” Nester auf Telegrafenmasten.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_storck_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 2.300,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+10 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "46",
+   "name": "Taube",
+   "description": "„Columba” Ruckedigu, Ruckedigu.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_pigeon_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.000,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+5 Glaube"
+   ],
+   "dlc": []
+  },
+  {
+   "anchor": "47",
+   "name": "Vom Aussterben bedrohte Schmetterlinge",
+   "description": "Das Geschenk eines Investors. „Die hat mir mal ein Biologe geschenkt, nachdem ich seine erste Dschungelexpedition finanziert hatte.”",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_butterflies_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 63.000,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": []
+  },
+  {
+   "anchor": "48",
+   "name": "Weißbauchigel",
+   "description": "„Atelerix albiventris” Rollt sich zu einer stachligen Kugel zusammen, um seine Körperteile zu schützen.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_pygmy_hedgehog_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Gewöhnlich",
+    "Attraktivität: +10 Attraktivität",
+    "Baukosten: 1.675,00 Verkaufspreis"
+   ],
+   "expedition": [],
+   "dlc": [
+    "Land der Löwen"
+   ]
+  },
+  {
+   "anchor": "49",
+   "name": "Zwerggrindwal",
+   "description": "„Feresa attenuata” Oft fälschlich für einen Killerwal gehalten, ist dies tatsächlich eine kleinere Delfinart.",
+   "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/animals/icon_pygmy_killer_whale_0_128_128.webp",
+   "properties": [
+    "Seltenheit: Episch",
+    "Attraktivität: +40 Attraktivität",
+    "Baukosten: 68.250,00 Verkaufspreis"
+   ],
+   "expedition": [
+    "+20 Moral"
+   ],
+   "dlc": []
+  }
+ ],
+ "loose_intro": [
+  "Hier erhältst du eine detaillierte Übersicht der Tierarten im Zoo von Anno 1800, die nicht innerhalb von Erweiterungssets kategorisiert sind."
+ ]
+}

@@ -1,0 +1,9315 @@
+[
+ {
+  "key": "waren_rohstoffe",
+  "name": "Rohstoffe",
+  "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/cat/icon_rohstoffe.webp",
+  "goods": [
+   {
+    "anchor": "waren_rohstoffe#126",
+    "name": "Holz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wood_log.webp",
+    "description": "Gehackter Baum.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Bauern"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Holzfällerhütte",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/96.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Bauern",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Arktis"
+    ],
+    "building_id": 96,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#127",
+    "name": "Lehm",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_clay.webp",
+    "description": "Beginnt als roter Schlamm.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Lehmgrube",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/116.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": 116,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#128",
+    "name": "Eisenerz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_iron.webp",
+    "description": "Das Fundament des Industriezeitalters.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Eisenmine",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/117.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 117,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#129",
+    "name": "Kohle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_coal_2.webp",
+    "description": "Verwenden Sie es besser, bevor es ausgeht! Oh, Moment mal...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kohlemine",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/118.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 118,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#130",
+    "name": "Quarzsand",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_quartz_sand.webp",
+    "description": "Reiner Quarz, gewürzt mit Garnelenstaub.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Quarzgrube",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/108.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 108,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#131",
+    "name": "Zement",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cement.webp",
+    "description": "Ein Felsen, der aus den Skeletten von Meerestieren besteht.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Zementmine",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/119.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 119,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#132",
+    "name": "Kupfer",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_copper.webp",
+    "description": "Ein Schimmer von rosafarbenem Orange.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kupfermine",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/121.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 121,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#133",
+    "name": "Zink",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tin_ore.webp",
+    "description": "Ein Schimmer von rosafarbenem Orange.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Zinkmine",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/120.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 120,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#134",
+    "name": "Salpeter",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_niter.webp",
+    "description": "Kaliumnitrat, ein nützliches Alkali.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Salpeterwerk",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/109.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 109,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#135",
+    "name": "Perlen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pearls.webp",
+    "description": "Nur sehr wenige Weichtiere produzieren perfekte Perlen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Perlenfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/111.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 111,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#136",
+    "name": "Golderz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_gold_ore.webp",
+    "description": "Erz, für das es sich lohnt, sich zu beeilen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Goldmine",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/122.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 122,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#137",
+    "name": "Bauxit",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bauxit.webp",
+    "description": "Dieses gesprenkelte Gestein mag nicht vielversprechend erscheinen, aber durch Zerkleinern, Waschen, Aufschluss, Sedimentation, Kristallisation und Schmelzen können wir Aluminium gewinnen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "250 Obreros / 1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte, Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_rohstoffe#138",
+    "name": "Erze",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_minerals.webp",
+    "description": "Chemie trifft auf Kristallstrukturen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.700 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   }
+  ]
+ },
+ {
+  "key": "waren_konsumgueter",
+  "name": "Konsumgüter",
+  "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/cat/icon_konsumgueter.webp",
+  "goods": [
+   {
+    "anchor": "waren_konsumgueter#39",
+    "name": "Schnaps",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_schnapps_3.webp",
+    "description": "Schnell, bevor es verdunstet!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Bauern"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Bauern"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Kap Trelawney"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schnapsbrennerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/130.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Schnaps",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#4"
+       }
+      ]
+     ]
+    ],
+    "level": "Bauern",
+    "regions": [
+     "Alte Welt",
+     "Kap Trelawney"
+    ],
+    "building_id": 130,
+    "chain": "produktionsketten#4"
+   },
+   {
+    "anchor": "waren_konsumgueter#40",
+    "name": "Arbeitskleidung",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_working_cloth.webp",
+    "description": "Robuste Arbeitskittel.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Bauern"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Bauer"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Weberei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/57.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Arbeitskleidung",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#3"
+       }
+      ]
+     ]
+    ],
+    "level": "Bauern",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 57,
+    "chain": "produktionsketten#3"
+   },
+   {
+    "anchor": "waren_konsumgueter#38",
+    "name": "Fisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fish.webp",
+    "description": "Flossen- und Kiemenbewohner des Meeres.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Bauern"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "50 Bauer"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Fischerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/107.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Fisch",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#2"
+       }
+      ]
+     ]
+    ],
+    "level": "Bauern",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 107,
+    "chain": "produktionsketten#2"
+   },
+   {
+    "anchor": "waren_konsumgueter#41",
+    "name": "Wurst",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_meat_sausage.webp",
+    "description": "Tüten voller Geheimnisse.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Metzgerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/133.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Wurst",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#6"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 133,
+    "chain": "produktionsketten#6"
+   },
+   {
+    "anchor": "waren_konsumgueter#42",
+    "name": "Brot",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bread.webp",
+    "description": "Die Brote eines Kunsthandwerkers.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "150 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Bäckerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/135.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Brot",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#8"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 135,
+    "chain": "produktionsketten#8"
+   },
+   {
+    "anchor": "waren_konsumgueter#43",
+    "name": "Seife",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_soap_2.webp",
+    "description": "Zum Auswaschen des Mundes.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Siederei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/142.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Seife",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#11"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 142,
+    "chain": "produktionsketten#11"
+   },
+   {
+    "anchor": "waren_konsumgueter#44",
+    "name": "Bier",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_beer.webp",
+    "description": "Sicherer als Wasser.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Brauerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/145.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Bier",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#12"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 145,
+    "chain": "produktionsketten#12"
+   },
+   {
+    "anchor": "waren_konsumgueter#45",
+    "name": "Fleischkonserven",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_canned_goulash.webp",
+    "description": "Ich hoffe nur, dass Sie einen Dosenöffner zur Hand haben.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Konservenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/149.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Fleischkonserven",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#14"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 149,
+    "chain": "produktionsketten#14"
+   },
+   {
+    "anchor": "waren_konsumgueter#46",
+    "name": "Nähmaschinen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sewing_machine.webp",
+    "description": "Sie sind alle in Mode!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "250 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Nähmaschinenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/150.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Nähmaschinen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#15"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": 150,
+    "chain": "produktionsketten#15"
+   },
+   {
+    "anchor": "waren_konsumgueter#48",
+    "name": "Pelzmäntel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fur_coats.webp",
+    "description": "Eine der Insignien des Reichtums.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "900 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schneiderei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/152.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Pelzmäntel",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#16"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 152,
+    "chain": "produktionsketten#16"
+   },
+   {
+    "anchor": "waren_konsumgueter#87",
+    "name": "Schreibmaschinen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_typewriter.webp",
+    "description": "Mechanische Tastatur.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Wolkenkratzer Lvl. 3"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Schreibmaschinen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#26"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#26"
+   },
+   {
+    "anchor": "waren_konsumgueter#88",
+    "name": "Violinen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_violin.webp",
+    "description": "Ein herzbesaitetes Instrument mit Höhen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Wolkenkratzer Lvl. 3"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Violinen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#27"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#27"
+   },
+   {
+    "anchor": "waren_konsumgueter#89",
+    "name": "Kekse",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cookie.webp",
+    "description": "Herrlich gleichmäßig.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "15 Wolkenkratzer Lvl. 3"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Kekse",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#37"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#37"
+   },
+   {
+    "anchor": "waren_konsumgueter#90",
+    "name": "Cognac",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cognac.webp",
+    "description": "Mmm, ich bekomme heiße Kastanien, Zimt, Karamell...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Wolkenkratzer Lvl. 3"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Cognac",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#36"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#36"
+   },
+   {
+    "anchor": "waren_konsumgueter#91",
+    "name": "Billiard Tisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_billard.webp",
+    "description": "Bringt die Bälle des Geschäfts ins Rollen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "15 Wolkenkratzer Lvl. 4"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Billiard Tisch",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#41"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#41"
+   },
+   {
+    "anchor": "waren_konsumgueter#92",
+    "name": "Spielwaren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_toys.webp",
+    "description": "Kinderleicht",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "15 Wolkenkratzer Lvl. 5"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Spielwaren",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#42"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#42"
+   },
+   {
+    "anchor": "waren_konsumgueter#49",
+    "name": "Brillen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_glasses.webp",
+    "description": "Sie verbringen ihre Zeit damit, auf Nasen zu sitzen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Brillenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/155.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Brillen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#18"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 155,
+    "chain": "produktionsketten#18"
+   },
+   {
+    "anchor": "waren_konsumgueter#50",
+    "name": "Hochräder",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_high_wheeler.webp",
+    "description": "Penny Farthings - Benannt nach einem Penny (einer großen Münze) und einem Farthing (einem winzigen).",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Hochradwerkhalle",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/158.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Hochräder",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#20"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 158,
+    "chain": "produktionsketten#20"
+   },
+   {
+    "anchor": "waren_konsumgueter#51",
+    "name": "Taschenuhren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pocket_watch.webp",
+    "description": "Ein Geschenk des Himmels für spät laufende weiße Hasen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Uhrenwerkstatt",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/164.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Taschenuhren",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#22"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 164,
+    "chain": "produktionsketten#22"
+   },
+   {
+    "anchor": "waren_konsumgueter#53",
+    "name": "Glühbirnen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_light_bulb.webp",
+    "description": "Eine geniale Idee.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.750 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Glühbirnenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/166.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Glühbirnen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#23"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 166,
+    "chain": "produktionsketten#23"
+   },
+   {
+    "anchor": "waren_konsumgueter#55",
+    "name": "Shampoo",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_shampoo.webp",
+    "description": "Etwas, das in deine Augen klettert, egal wie fest du sie zusammendrückst.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "850 Touristen"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reisezeit"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Shampoo)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/238.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Shampoo",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#29"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 238,
+    "chain": "produktionsketten#29"
+   },
+   {
+    "anchor": "waren_konsumgueter#56",
+    "name": "Limonade",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_lemonade.webp",
+    "description": "Erfrischender Zitronensprudel in eine faustgroße Dose gepresst.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.250 Touristen"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reisezeit"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Limonade)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/239.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Limonade",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#30"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 239,
+    "chain": "produktionsketten#30"
+   },
+   {
+    "anchor": "waren_konsumgueter#57",
+    "name": "Souvenirs",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_souvenir.webp",
+    "description": "Wie könnte es jemals die ganze Geschichte dieser Reise erzählen...? Könnte aber nur das Gedächtnis auffrischen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.000 Touristen"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reisezeit"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Souvenirs)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/240.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Souvenirs",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#31"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 240,
+    "chain": "produktionsketten#31"
+   },
+   {
+    "anchor": "waren_konsumgueter#54",
+    "name": "Konfitüre",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_jam_1.webp",
+    "description": "Ganz anders als Marmelade, da Marmelade Orangen und Orangenschalen enthält.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Touristen"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reisezeit"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumschule (Konfitüre)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/231.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Konfitüre",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#28"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 231,
+    "chain": "produktionsketten#28"
+   },
+   {
+    "anchor": "waren_konsumgueter#58",
+    "name": "Sekt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_champagne.webp",
+    "description": "Perfekt für eine Feier.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investoren"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Investor"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Sektkellerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/167.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Sekt",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#32"
+       }
+      ]
+     ]
+    ],
+    "level": "Investoren",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 167,
+    "chain": "produktionsketten#32"
+   },
+   {
+    "anchor": "waren_konsumgueter#61",
+    "name": "Schmuck",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_jewelry.webp",
+    "description": "Symbole für Status und Erfolg.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investoren"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.750 Investoren"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Goldschmiede",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/170.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Schmuck",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#33"
+       }
+      ]
+     ]
+    ],
+    "level": "Investoren",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 170,
+    "chain": "produktionsketten#33"
+   },
+   {
+    "anchor": "waren_konsumgueter#62",
+    "name": "Phonographen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_phonographs.webp",
+    "description": "Etwas bequemer als ein persönliches Orchester.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investoren"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "3.000 Investoren"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Phonographenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/171.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Phonographen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#34"
+       }
+      ]
+     ]
+    ],
+    "level": "Investoren",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 171,
+    "chain": "produktionsketten#34"
+   },
+   {
+    "anchor": "waren_konsumgueter#63",
+    "name": "Dampfwagen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_steam_carriage.webp",
+    "description": "Ein Hoch auf die offene Straße!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investoren"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "5.000 Investoren"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Dampfwagenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/173.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Dampfwagen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#35"
+       }
+      ]
+     ]
+    ],
+    "level": "Investoren",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 173,
+    "chain": "produktionsketten#35"
+   },
+   {
+    "anchor": "waren_konsumgueter#86",
+    "name": "Kaugummi",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bubble_gum.webp",
+    "description": "Ein Hauch frischer Luft.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investor Hochhäuser"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Investor-Wolkenkratzer Lvl. 2"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Kaugummi)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/242.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Kaugummi",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#25"
+       }
+      ]
+     ]
+    ],
+    "level": "Investor Hochhäuser",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 242,
+    "chain": "produktionsketten-2#25"
+   },
+   {
+    "anchor": "waren_konsumgueter#71",
+    "name": "Telefone",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_telephones.webp",
+    "description": "Gespenstische, ferne Stimmen sind am anderen Ende zu hören...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Gelehrte"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "4.000 Gelehrte"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Telefonfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/176.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Telefone",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#45"
+       }
+      ]
+     ]
+    ],
+    "level": "Gelehrte",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 176,
+    "chain": "produktionsketten#45"
+   },
+   {
+    "anchor": "waren_konsumgueter#64",
+    "name": "Lederstiefel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_leather_shoes.webp",
+    "description": "Schlank und sinnlich im Griff.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Gelehrte"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Gelehrter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schuster",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/174.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Lederstiefel",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#43"
+       }
+      ]
+     ]
+    ],
+    "level": "Gelehrte",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 174,
+    "chain": "produktionsketten#43"
+   },
+   {
+    "anchor": "waren_konsumgueter#65",
+    "name": "Maßanzüge",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_suits.webp",
+    "description": "Reservieren Sie Ihre frühzeitig!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Gelehrte"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Gelehrte"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schneidergeschäft",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/175.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Maßanzüge",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#44"
+       }
+      ]
+     ]
+    ],
+    "level": "Gelehrte",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 175,
+    "chain": "produktionsketten#44"
+   },
+   {
+    "anchor": "waren_konsumgueter#72",
+    "name": "Gebackene Bananen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fried_bananas.webp",
+    "description": "Ein vermeintlich authentisches Gericht aus der Neuen Welt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "50 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Küche",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/180.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Gebackene Bananen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#55"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 180,
+    "chain": "produktionsketten-2#55"
+   },
+   {
+    "anchor": "waren_konsumgueter#73",
+    "name": "Ponchos",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_poncho.webp",
+    "description": "Ein gewebtes Obergewand der Neuen Welt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "200 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Ponchoweberei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/183.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Ponchos",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#58"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 183,
+    "chain": "produktionsketten-2#58"
+   },
+   {
+    "anchor": "waren_konsumgueter#47",
+    "name": "Rum",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_rum_barrel.webp",
+    "description": "Yo ho ho, und eine Flasche - hör auf damit!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "200 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt, Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Rumbrennerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/181.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Rum",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#57"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt",
+     "Alte Welt"
+    ],
+    "building_id": 181,
+    "chain": "produktionsketten-2#57"
+   },
+   {
+    "anchor": "waren_konsumgueter#59",
+    "name": "Zigarren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cigars.webp",
+    "description": "Denn wenn die dicke Dame singt...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Zigarrenmanufaktur",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/188.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Zigarren",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#63"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 188,
+    "chain": "produktionsketten-2#63"
+   },
+   {
+    "anchor": "waren_konsumgueter#66",
+    "name": "Melonen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bowler_hat.webp",
+    "description": "Einige modische Kopfbedeckungen aus der Neuen Welt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Hutmacherei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/187.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Melonen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#62"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 187,
+    "chain": "produktionsketten-2#62"
+   },
+   {
+    "anchor": "waren_konsumgueter#74",
+    "name": "Tortillas",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_burrito.webp",
+    "description": "Ein vermeintlich authentisches Gericht aus der Neuen Welt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Tortillabäckerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/184.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Tortillas",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#60"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 184,
+    "chain": "produktionsketten-2#60"
+   },
+   {
+    "anchor": "waren_konsumgueter#60",
+    "name": "Schokolade",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_chocolate.webp",
+    "description": "Ich? Gegessen? Nein...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.500 Obreros / 1.750 Investoren"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schokoladenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/190.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Schokolade",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#64"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 190,
+    "chain": "produktionsketten-2#64"
+   },
+   {
+    "anchor": "waren_konsumgueter#94",
+    "name": "Chilisauce",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tabasco_sauce.webp",
+    "description": "Eine unangenehme Form des Vergnügens.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Keim der Hoffnung"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Chilisauce",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#65"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#65"
+   },
+   {
+    "anchor": "waren_konsumgueter#93",
+    "name": "Atole",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_atole.webp",
+    "description": "Eine wohltuende Tasse Maismehl.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Keim der Hoffnung"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Atole",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#66"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#66"
+   },
+   {
+    "anchor": "waren_konsumgueter#52",
+    "name": "Kaffee",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_coffe_cup.webp",
+    "description": "Früh aufstehen, lange aufbleiben.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt, Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kaffeerösterei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/185.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Kaffee",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#61"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt",
+     "Alte Welt"
+    ],
+    "building_id": 185,
+    "chain": "produktionsketten-2#61"
+   },
+   {
+    "anchor": "waren_konsumgueter#95",
+    "name": "Fussbälle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ballsports.webp",
+    "description": "Sogar die Mesoaner hatten einen Kick davon.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Fussbälle",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#73"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#73"
+   },
+   {
+    "anchor": "waren_konsumgueter#195",
+    "name": "Nähmaschinen (Neue Welt)",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sewing_machine.webp",
+    "description": "Nähmaschinen halt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Nähmaschinenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/151.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Nähmaschinen (Neue Welt)",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#72"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": 151,
+    "chain": "produktionsketten#72"
+   },
+   {
+    "anchor": "waren_konsumgueter#101",
+    "name": "Motorroller",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_scooter.webp",
+    "description": "Freiheit auf zwei Rädern.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "6.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Motorroller",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#84"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#84"
+   },
+   {
+    "anchor": "waren_konsumgueter#96",
+    "name": "Mezcal",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_mezcal.webp",
+    "description": "Für alle Gelegenheiten, auch für die, die man lieber vergessen würde.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Mezcal",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#74"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#74"
+   },
+   {
+    "anchor": "waren_konsumgueter#97",
+    "name": "Jalea",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_jalea.webp",
+    "description": "Ein frittierter Genuss.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "900 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Jalea",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#75"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#75"
+   },
+   {
+    "anchor": "waren_konsumgueter#98",
+    "name": "Eiscreme",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_icecream_cone.webp",
+    "description": "Es ist immer Platz für ein Dessert.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.800 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Eiscreme",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#76"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#76"
+   },
+   {
+    "anchor": "waren_konsumgueter#99",
+    "name": "Parfüm",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_perfume.webp",
+    "description": "Süß und moschusartig, mit einem Hauch von Kokosnuss.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.700 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Parfüm",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#78"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#78"
+   },
+   {
+    "anchor": "waren_konsumgueter#100",
+    "name": "Ventilatoren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ventilator.webp",
+    "description": "Hält die Hitze des Tages fern.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Ventilatoren",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#81"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#81"
+   },
+   {
+    "anchor": "waren_konsumgueter#77",
+    "name": "Schlafsäcke",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sleeping_bags.webp",
+    "description": "Kuscheln Sie sich ein.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "250 Entdecker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schlafsackfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/205.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Schlafsäcke",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#93"
+       }
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 205,
+    "chain": "produktionsketten-3#93"
+   },
+   {
+    "anchor": "waren_konsumgueter#76",
+    "name": "Öllampen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_oil_lamps.webp",
+    "description": "Ein Licht in der Dunkelheit. Duftet.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Entdecker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Öllampenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/206.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Öllampen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#94"
+       }
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 206,
+    "chain": "produktionsketten-3#94"
+   },
+   {
+    "anchor": "waren_konsumgueter#75",
+    "name": "Pemmican",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pemmican.webp",
+    "description": "Karibu-Dörrfleisch.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Entdecker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Pemmikan Räucherei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/204.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Pemmican",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#92"
+       }
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 204,
+    "chain": "produktionsketten-3#92"
+   },
+   {
+    "anchor": "waren_konsumgueter#79",
+    "name": "Hundeschlitten",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sled.webp",
+    "description": "Rufen Sie \"Nanuk\" und Ihre Huskys könnten schneller laufen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Techniker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "750 Techniker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Hundeschlittenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/209.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Hundeschlitten",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#96"
+       }
+      ]
+     ]
+    ],
+    "level": "Techniker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 209,
+    "chain": "produktionsketten-3#96"
+   },
+   {
+    "anchor": "waren_konsumgueter#78",
+    "name": "Parkas",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fur_parka.webp",
+    "description": "Ein Annorak.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Techniker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Techniker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Parkafabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/207.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Parkas",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-3.html#95"
+       }
+      ]
+     ]
+    ],
+    "level": "Techniker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 207,
+    "chain": "produktionsketten-3#95"
+   },
+   {
+    "anchor": "waren_konsumgueter#82",
+    "name": "Trockenfleisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dried_meat.webp",
+    "description": "Angenehm zäh, wie Janihoy Ketema selbst sagt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Trockenhaus",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/193.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Trockenfleisch",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#100"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 193,
+    "chain": "produktionsketten-4#100"
+   },
+   {
+    "anchor": "waren_konsumgueter#81",
+    "name": "Gewänder",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_traditional_clothing.webp",
+    "description": "Bietet Komfort bei warmem Wetter und Isolierung in der Kühle der Nacht.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "150 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Stickerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/192.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Gewänder",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#99"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 192,
+    "chain": "produktionsketten-4#99"
+   },
+   {
+    "anchor": "waren_konsumgueter#80",
+    "name": "Ziegenmilch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_goat_milk.webp",
+    "description": "Schmackhaft und reichhaltig.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "50 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Ziegenfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/67.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Ziegenmilch",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#98"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 67,
+    "chain": "produktionsketten-4#98"
+   },
+   {
+    "anchor": "waren_konsumgueter#67",
+    "name": "Hibiskustee",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_hibiscus_tea.webp",
+    "description": "Reichhaltig und erfrischend am Nachmittag.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Teewürzerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/194.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Hibiskustee",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#101"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 194,
+    "chain": "produktionsketten-4#101"
+   },
+   {
+    "anchor": "waren_konsumgueter#85",
+    "name": "Laternen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_lanterns.webp",
+    "description": "Votivlaternen von zeremonieller Bedeutung.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Laternenmacherei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/203.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Laternen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#108"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 203,
+    "chain": "produktionsketten-4#108"
+   },
+   {
+    "anchor": "waren_konsumgueter#84",
+    "name": "Chroniken",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_scriptures.webp",
+    "description": "Die komplizierten und heiligen Illuminationen von Enbesa.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Buchmalerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/201.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Chroniken",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#107"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 201,
+    "chain": "produktionsketten-4#107"
+   },
+   {
+    "anchor": "waren_konsumgueter#83",
+    "name": "Keramik",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ceramics.webp",
+    "description": "Handgemachte Keramik bewahrt die Identität und Raffinesse ihrer Schöpfer.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ältester"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Keramikwerkstatt",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/196.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Keramik",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#103"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 196,
+    "chain": "produktionsketten-4#103"
+   },
+   {
+    "anchor": "waren_konsumgueter#70",
+    "name": "Tonpfeifen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tobacco_pipes.webp",
+    "description": "Tabakpfeifen im Enbesan-Stil.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Pfeifenmacherei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/200.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Tonpfeifen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#106"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 200,
+    "chain": "produktionsketten-4#106"
+   },
+   {
+    "anchor": "waren_konsumgueter#69",
+    "name": "Wandteppiche",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tapestries.webp",
+    "description": "Bedeckt mit Mustern, die für ihre Schöpfer von persönlicher Bedeutung sind.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ältester"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Teppichknüpferei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/197.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Wandteppiche",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#104"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 197,
+    "chain": "produktionsketten-4#104"
+   },
+   {
+    "anchor": "waren_konsumgueter#68",
+    "name": "Meeresfrüchte-Eintopf",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wat_stew.webp",
+    "description": "Die flambierten Hummerschalen verleihen wirklich eine Tiefe und Fülle...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Wat-Küche",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/199.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Meeresfrüchte-Eintopf",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#105"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 199,
+    "chain": "produktionsketten-4#105"
+   }
+  ]
+ },
+ {
+  "key": "waren_baumaterialien",
+  "name": "Baumaterialien",
+  "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/cat/icon_baumaterialien.webp",
+  "goods": [
+   {
+    "anchor": "waren_baumaterialien#102",
+    "name": "Holzbretter",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wooden_planks.webp",
+    "description": "In Scheiben geschnittener Baum.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Bauern"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Sägewerk",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/127.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Holzbretter",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#1"
+       }
+      ]
+     ]
+    ],
+    "level": "Bauern",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Arktis"
+    ],
+    "building_id": 127,
+    "chain": "produktionsketten#1"
+   },
+   {
+    "anchor": "waren_baumaterialien#103",
+    "name": "Zieglesteine",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bricks.webp",
+    "description": "Womit schlaue Schweine Häuser bauen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Ziegelei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/131.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Zieglesteine",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#5"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 131,
+    "chain": "produktionsketten#5"
+   },
+   {
+    "anchor": "waren_baumaterialien#104",
+    "name": "Segel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sail.webp",
+    "description": "Losfahren!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "150 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Segelweberei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/136.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Segel",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#7"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": 136,
+    "chain": "produktionsketten#7"
+   },
+   {
+    "anchor": "waren_baumaterialien#105",
+    "name": "Stahlträger",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_beams.webp",
+    "description": "Es gibt sie in I-, H-, W- und T-förmigen Stäben!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Stahlwerk",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/139.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Stahlträger",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#9"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 139,
+    "chain": "produktionsketten#9"
+   },
+   {
+    "anchor": "waren_baumaterialien#106",
+    "name": "Kanonen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_weapons.webp",
+    "description": "Gut für Zähne, Haut und Feuer schüren.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kanonengießerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/143.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Kanonen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#10"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 143,
+    "chain": "produktionsketten#10"
+   },
+   {
+    "anchor": "waren_baumaterialien#107",
+    "name": "Fenster",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_glass_window_3.webp",
+    "description": "Ohne sie wäre das Leben so düster.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Fensterfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/147.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Fenster",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#13"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 147,
+    "chain": "produktionsketten#13"
+   },
+   {
+    "anchor": "waren_baumaterialien#108",
+    "name": "Stahlbeton",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_reinforced_concrete.webp",
+    "description": "Eine langsam erstarrende Mischung aus harten Stücken.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Betonwerk",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/153.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Stahlbeton",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#17"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 153,
+    "chain": "produktionsketten#17"
+   },
+   {
+    "anchor": "waren_baumaterialien#109",
+    "name": "Dampfmaschine",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_steam_machine.webp",
+    "description": "Die Wolke, die von der Motorhaube kommt, ist normal.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Motorenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/159.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Dampfmaschine",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#21"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 159,
+    "chain": "produktionsketten#21"
+   },
+   {
+    "anchor": "waren_baumaterialien#110",
+    "name": "Schwere Geschütze",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_advanced_weaponry.webp",
+    "description": "Die großen Geschütze.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Geschützfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/157.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Schwere Geschütze",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#19"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 157,
+    "chain": "produktionsketten#19"
+   },
+   {
+    "anchor": "waren_baumaterialien#118",
+    "name": "Fahrstühle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_elevator.webp",
+    "description": "Vertikale Transportbox.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Kap Trelawney"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Fahrstühle",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#24"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt",
+     "Kap Trelawney"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#24"
+   },
+   {
+    "anchor": "waren_baumaterialien#124",
+    "name": "Aluminium",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_aluminium.webp",
+    "description": "Leichter als Stahl, rostbeständig und einfach zu formen, ist Aluminium wirklich das Metall der Zukunft.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "250 Obreros / 1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte, Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Aluminium",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#70"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#70"
+   },
+   {
+    "anchor": "waren_baumaterialien#123",
+    "name": "Löschwasser",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_water.webp",
+    "description": "»Ich sehe, daß Sie verärgert sind, Ma'am, aber würden Sie lieber ein nasses oder ein verbranntes Haus haben?«",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros / 4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt, Reich der Lüfte"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Löschwasser",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#53"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#53"
+   },
+   {
+    "anchor": "waren_baumaterialien#122",
+    "name": "Hilfspakete",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_care_packages.webp",
+    "description": "Mana vom Himmel.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros / 4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte, Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Hilfspakete",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#52"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#52"
+   },
+   {
+    "anchor": "waren_baumaterialien#121",
+    "name": "Flugblätter",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_pamphlets.webp",
+    "description": "Wahrheiten, Unwahrheiten und Halbwahrheiten.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros / 4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt, Reich der Lüfte"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Flugblätter",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#51"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#51"
+   },
+   {
+    "anchor": "waren_baumaterialien#120",
+    "name": "Seeminen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_seamines.webp",
+    "description": "Wenn der Steuermann sie erst einmal gesehen hat, ist es wahrscheinlich zu spät.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros / 4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte, Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Seeminen",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#50"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#50"
+   },
+   {
+    "anchor": "waren_baumaterialien#119",
+    "name": "Bomben",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dropgood_bomb_b.webp",
+    "description": "Die schöpferische Fähigkeit der Menschheit wächst parallel zu ihrer Fähigkeit zu zerstören.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros / 4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte, Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Bomben",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten.html#49"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten#49"
+   },
+   {
+    "anchor": "waren_baumaterialien#114",
+    "name": "Expeditionsschrott",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_passage_junk.webp",
+    "description": "Schrott vergangener Expeditionen, die sich in die Eiswüste wagten.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Gesunkene Schätze"
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Alte Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_baumaterialien#113",
+    "name": "Spezialschrott",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_junk_superior.webp",
+    "description": "Man kann diese seltenen Metalle bereits in den sich weitenden Augen des alten Nate glitzern sehen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Gesunkene Schätze"
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Alte Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_baumaterialien#112",
+    "name": "Schöner Schrott",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_junk.webp",
+    "description": "Schrott, der nicht so Mist ist.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Gesunkene Schätze"
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Alte Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_baumaterialien#111",
+    "name": "Schrott",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_junk_inferior.webp",
+    "description": "Die schrottigste Art von Schrott, die man sich vorstellen kann.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Gesunkene Schätze"
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Alte Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_baumaterialien#116",
+    "name": "Wanza Holz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wansa_wood.webp",
+    "description": "Cordia Africana. Verleiht dem Schlagzeug Resonanz.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "-"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Wanza-Holzfäller",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/104.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Wanza Holz",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#97"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 104,
+    "chain": "produktionsketten-4#97"
+   },
+   {
+    "anchor": "waren_baumaterialien#117",
+    "name": "Lehmziegel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_mud_bricks.webp",
+    "description": "Die Eckpfeiler, auf denen Enbesa basiert.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ältester"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Lehmziegelei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/195.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Lehmziegel",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-4.html#102"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 195,
+    "chain": "produktionsketten-4#102"
+   }
+  ]
+ },
+ {
+  "key": "waren_agrarprodukte",
+  "name": "Agrarprodukte",
+  "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/cat/icon_agrarprodukte.webp",
+  "goods": [
+   {
+    "anchor": "waren_agrarprodukte#140",
+    "name": "Wolle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wool.webp",
+    "description": "Fettige Tierhaare.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Bauern"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Bauern"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schäferei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/56.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Bauern",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 56,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#139",
+    "name": "Kartoffeln",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_potatoes.webp",
+    "description": "Der bescheidene Erdapfel.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Bauern"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Bauern"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kartoffelfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/73.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Bauern",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 73,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#142",
+    "name": "Weizen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cereals_2.webp",
+    "description": "Ein Grundnahrungsmittel für den Menschen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "150 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Getreidefarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/78.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 78,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#143",
+    "name": "Hopfen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_hops.webp",
+    "description": "Kleine Blüten, die beim Brauen verwendet werden.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Hopfenfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/79.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 79,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#141",
+    "name": "Schweine",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pigs.webp",
+    "description": "Domestizierte Nachkommen des Wildschweins.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schweinezucht",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/59.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 59,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#144",
+    "name": "Rindfleisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_meat_raw.webp",
+    "description": "Ein beliebtes rotes Fleisch, das vom Rind stammt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Rinderfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/61.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 61,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#145",
+    "name": "Paprika",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pepper.webp",
+    "description": "Ein bittersüßes, knackiges rotes Gemüse.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Paprikafarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/80.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 80,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#146",
+    "name": "Felle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fur.webp",
+    "description": "Die Felle von Tieren.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "900 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Arktis"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Jagdhütte",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/102.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt",
+     "Arktis"
+    ],
+    "building_id": 102,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#147",
+    "name": "Zimt",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cinamon.webp",
+    "description": "Stangen mit kulinarischem Dynamit.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "850 Touristen / 1 Lvl. 2 Wolkenkra"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt, Reisezeit"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumschule (Zimt)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/232.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 232,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#148",
+    "name": "Kokosnussöl",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_coconut.webp",
+    "description": "Genauso gut kannst du deinen ganzen Körper damit ersticken, es ist so gut.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "850 Touristen"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt, Reisezeit"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumschule (Kokosnussöl)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/233.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 233,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#149",
+    "name": "Zitrusfrüchte",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_citrus.webp",
+    "description": "Verschiedene süß-saure Ovale und Kugeln in verschiedenen pikanten Farben.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.250 Touristen"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt, Reisezeit"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumschule (Zitrusfrüchte)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/234.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 234,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#150",
+    "name": "Kampfer",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cellulose.webp",
+    "description": "Ein vielseitiges Naturprodukt des Kampferbaums.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Touristen"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.000 Touristen"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reisezeit, Dächer der Stadt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumschule (Kampfer)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/235.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Touristen",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 235,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#151",
+    "name": "Weintrauben",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_grapes.webp",
+    "description": "Eine kleine ovale Frucht, die in der Weinherstellung verwendet wird.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investoren"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Investor"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Weinberg",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/81.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Investoren",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 81,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#152",
+    "name": "Kirschbaumholz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cherry_wood.webp",
+    "description": "Ein kräuselndes Rosenholz, dessen Farbe sich mit der Zeit vertieft.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investor Hochhäuser"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Investor-Wolkenkratzer Lvl. 3"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumschule (Kirschbaumholz)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/237.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Investor Hochhäuser",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 237,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#153",
+    "name": "Harz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_wood_resin.webp",
+    "description": "Lebenselixier des Baumes.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investor Hochhäuser"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "15 Investor-Wolkenkratzer Lvl. 3"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumschule (Harz)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/236.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Investor Hochhäuser",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 236,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#154",
+    "name": "Fischöl",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fishoil.webp",
+    "description": "Es ist sehr gut für dich, sagt man zumindest...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "50 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Fischölfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/110.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 110,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#155",
+    "name": "Bananen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_banana.webp",
+    "description": "Ein herzhaftes Grundnahrungsmittel, das oft als \"Kochbanane\" bezeichnet wird.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "50 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Bananenplantage",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/82.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 82,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#156",
+    "name": "Zuckerrohr",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cane_sugar_1.webp",
+    "description": "Zuckerrohrfelder werden vor der Ernte in Brand gesetzt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Zuckerrohrplantage",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/83.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 83,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#157",
+    "name": "Baumwolle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cotton.webp",
+    "description": "Notorisch harte Arbeit bei der Auswahl.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumwollplantage",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/84.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 84,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#158",
+    "name": "Alpaka Wolle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_alpaca_wool.webp",
+    "description": "Die weichste und strapazierfähigste Wolle, die man finden kann.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "200 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Alpakafarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/65.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 65,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#159",
+    "name": "Kautschuk",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_caoutchouc.webp",
+    "description": "Bäume bluten weiß.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "200 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kautschukplantage",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/85.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 85,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#180",
+    "name": "Dünger",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_fertilizer_good.webp",
+    "description": "Landwirtschaftliche Innovationen riechen nie besonders angenehm.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Keim der Hoffnung"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#179",
+    "name": "Mist",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dung.webp",
+    "description": "Warum um alles in der Welt sollte man all diese Exkremente auf ein so schönes Schiff laden?",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Keim der Hoffnung"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#163",
+    "name": "Kakao",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cocoa.webp",
+    "description": "Die Kakaobohne muss zuerst getrocknet und fermentiert werden.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.500 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kakaoplantage",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/89.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 89,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#162",
+    "name": "Tabak",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tobacco.webp",
+    "description": "Eine höchst unkluge Entdeckung.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Tabakplantage",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/88.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 88,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#160",
+    "name": "Mais",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_corn.webp",
+    "description": "Verehrt von den Menschen der Neuen Welt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Maisfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/86.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 86,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#161",
+    "name": "Kaffeebohnen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_coffee_beans.webp",
+    "description": "Wachen Sie auf und riechen Sie diese!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kaffeeplantage",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/87.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 87,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#187",
+    "name": "Milch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sheep_milk.webp",
+    "description": "Schmeckt am besten, wenn es frisch ist.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.800 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Rinderfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/63.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 63,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#186",
+    "name": "Nandufedern",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_nandu_feathers.webp",
+    "description": "Auf den perfekten Punkt getrimmt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#185",
+    "name": "Orchideen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_orchid.webp",
+    "description": "Süß duftende, zerbrechliche Blüten.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.700 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#183",
+    "name": "Calamares",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_squid.webp",
+    "description": "Meister der Tarnung, verwandelt in leckere Leckereien.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "900 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#182",
+    "name": "Kräuter",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_herbs_with_flower.webp",
+    "description": "Die Natur hält alle Antworten bereit.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#181",
+    "name": "Nanduleder",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_nandu_leather.webp",
+    "description": "Weich und glatt, bis auf die Maserung.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Artista"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#164",
+    "name": "Walöl",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_whale_oil_2.webp",
+    "description": "Gewonnen aus Walspeck.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Entdecker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Walfängerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/114.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 114,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#167",
+    "name": "Gänsefedern",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_goose_feathers.webp",
+    "description": "Fühlen Sie sich niedergeschlagen? Kitzeln Sie sich selbst damit.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "250 Entdecker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Gänsefarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/71.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 71,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#166",
+    "name": "Robbenfelle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_seal_skin.webp",
+    "description": "Kälte- und wasserbeständig.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "250 Entdecker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Robbenfängerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/115.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 115,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#165",
+    "name": "Rentier Fleisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_reindeer_meat.webp",
+    "description": "Karibu-hoo.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Entdecker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Entdecker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Rentier-Jagdhütte",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/105.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Entdecker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 105,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#169",
+    "name": "Huskys",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_husky.webp",
+    "description": "Freundliche Wölfe.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Techniker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "750 Techniker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Husky-Farm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/72.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Techniker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 72,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#168",
+    "name": "Bärenfelle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_bear_fur.webp",
+    "description": "Das Fell eines Bären.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Techniker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Techniker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Bärenjagdhütte",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/106.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Techniker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 106,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#173",
+    "name": "Hibiskusblüten",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_hibiscus_farm.webp",
+    "description": "Das Stigma verschwindet im Tee.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Wasser"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Hibiskusfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/91.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 91,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#172",
+    "name": "Flachs",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_linen_farm.webp",
+    "description": "Auch bekannt als Linen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "150 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Wasser"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Flachsfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/90.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 90,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#171",
+    "name": "Salz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_salt_1.webp",
+    "description": "Einst eine wichtige Währung in Enbesa.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Saline",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/112.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 112,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#170",
+    "name": "Sanga Kühe",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_watusi.webp",
+    "description": "Ein beliebtes Tier in Enbesa und darüber hinaus.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Sanga-Farm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/69.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 69,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#184",
+    "name": "Ziegenmilch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_goat_milk.webp",
+    "description": "Schmeckt am besten, wenn es frisch ist.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "50 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Ziegenfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/67.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 67,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#174",
+    "name": "Teff",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_teff_grass.webp",
+    "description": "Man muss Liebesgras lieben.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ältester"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Wasser"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Tefffarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/92.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 92,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#175",
+    "name": "Indigo",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_indigo.webp",
+    "description": "Eine der sieben Farben des Regenbogens.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ältester"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Wasser"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Indigofarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/93.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 93,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#176",
+    "name": "Hummer",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_seafood.webp",
+    "description": "Eine Partie Schalentiere.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Hummer Fischerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/113.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 113,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#177",
+    "name": "Gewürze",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_spices.webp",
+    "description": "Eine Enbesan-Mischung aus Chili, Kardamom, Nelken und mehr...",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Wasser"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Gewürzfarm",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/94.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 94,
+    "chain": null
+   },
+   {
+    "anchor": "waren_agrarprodukte#178",
+    "name": "Bienenwachs",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_beeswax.webp",
+    "description": "Der Honig ist ein sehr glückliches Nebenprodukt!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Bienenhaus",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/95.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 95,
+    "chain": null
+   }
+  ]
+ },
+ {
+  "key": "waren_zwischenprodukte",
+  "name": "Zwischenprodukte",
+  "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/cat/icon_zwischenprodukte.webp",
+  "goods": [
+   {
+    "anchor": "waren_zwischenprodukte#189",
+    "name": "Stahl",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_steel.webp",
+    "description": "Eine Legierung aus Eisen, Kohlenstoff usw.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Hochofen",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/138.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 138,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#190",
+    "name": "Talk",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_tallow.webp",
+    "description": "Tierisches Fett, das für Seife und Kerzen verwendet wird.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Wasenmeisterei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/141.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 141,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#191",
+    "name": "Malz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_malt.webp",
+    "description": "Gekeimte Körner.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Mälzerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/144.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 144,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#188",
+    "name": "Mehl",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_flour.webp",
+    "description": "Von der Mühle.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Arbeiter"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "150 Arbeiter"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Mühle",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/134.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Arbeiter",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 134,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#192",
+    "name": "Glas",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_glass.webp",
+    "description": "Kinder mit Fußbällen: Wegbleiben!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Glashütte",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/146.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 146,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#193",
+    "name": "Gulasch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_goulash.webp",
+    "description": "Was fressen Geister?",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Großküche",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/148.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 148,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#194",
+    "name": "Messing",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_brass.webp",
+    "description": "Bildet einen wichtigen Teil des Orchesters.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieur"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Messinghütte",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/154.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 154,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#196",
+    "name": "Goldbarren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_gold.webp",
+    "description": "Mmm, glänzend.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Goldschmelze",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/163.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 163,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#197",
+    "name": "Glühfäden",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_carbon_filament.webp",
+    "description": "Sie werden wütend, wenn sie durch einen Stromschlag getötet werden.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.750 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Glühfadenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/165.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 165,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#198",
+    "name": "Dynamit",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dynamite.webp",
+    "description": "Bumm, Bumm, Bumm.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Dynamitfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/156.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 156,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#206",
+    "name": "Farben & Lacke",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_lacquer.webp",
+    "description": "Bitte nicht am Lack lecken.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "15 Investor-Wolkenkratzer Lvl. 3"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Dächer der Stadt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Farben & Lacke)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/241.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 241,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#199",
+    "name": "Holzfurnier",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_inlay.webp",
+    "description": "Für Intarsien und Parkett.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investoren"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "750 Investoren"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kunstschreinerei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/168.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Investoren",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": 168,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#200",
+    "name": "Fahrgestelle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_chassis.webp",
+    "description": "Fahrzeugrahmen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Investoren"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "5.000 Investoren"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kutschen-Werkhalle",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/172.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Investoren",
+    "regions": [
+     "Alte Welt"
+    ],
+    "building_id": 172,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#201",
+    "name": "Baumwollstoff",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_cloth.webp",
+    "description": "Es behält viel Sprungkraft.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Jornaleros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "100 Jornaleros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt, Alte Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Baumwollweberei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/182.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Jornaleros",
+    "regions": [
+     "Neue Welt",
+     "Alte Welt"
+    ],
+    "building_id": 182,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#205",
+    "name": "Zelluloid",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_celluloid.webp",
+    "description": "Das Feuer in Film bringen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "15 Investor-Wolkenkratzer Lvl. 2"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt, Dächer der Stadt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Zelluloid)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/244.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Zelluloid",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#39"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 244,
+    "chain": "produktionsketten-2#39"
+   },
+   {
+    "anchor": "waren_zwischenprodukte#207",
+    "name": "Schmiermittel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_industrial_lubricant_a.webp",
+    "description": "Nicht für den persönlichen Gebrauch bestimmt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#203",
+    "name": "Zucker",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sugar.webp",
+    "description": "Akzeptiere keine Ersatzstoffe.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.500 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Zuckerraffinerie",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/189.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 189,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#202",
+    "name": "Filz",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_felt.webp",
+    "description": "Es ist so... Filzig!",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Filzfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/186.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 186,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#204",
+    "name": "Ethanol",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_ethanol.webp",
+    "description": "Raketentreibstoff.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "15 Investor-Wolkenkratzer Lvl. 2"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt, Dächer der Stadt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Ethanol)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/243.html"
+       }
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Ethanol",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#38"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 243,
+    "chain": "produktionsketten-2#38"
+   },
+   {
+    "anchor": "waren_zwischenprodukte#221",
+    "name": "Medizin",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_medicine.webp",
+    "description": "Etwas, um die vier Säfte auszugleichen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "6.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#220",
+    "name": "Motoren",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_motor.webp",
+    "description": "Einfallsreichtum ist seine eigene Belohnung.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Elektrizität"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#219",
+    "name": "Kabel",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_electric_cable_1.webp",
+    "description": "Nicht anfassen, nicht verheddern.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#218",
+    "name": "Filmrolle",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_film_role.webp",
+    "description": "Stellen Sie sicher, dass diese Patronen lichtdicht sind.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ],
+     [
+      "Optional",
+      [
+       "Elektrizität"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Chemiefabrik (Filmrolle)",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/245.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": 245,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#217",
+    "name": "Polizeiausrüstung",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_police_equipment.webp",
+    "description": "Erstklassige Handschellen und Knüppel für Kapitalverbrechen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "4.000 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#216",
+    "name": "Feuerlöscher",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_extinguisher.webp",
+    "description": "Hoffen wir, dass sie nicht gebraucht werden.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.700 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#215",
+    "name": "Kostüme",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_costumes.webp",
+    "description": "Wenn die Nandu dich sehen könnte, wäre sie kalt und eifersüchtig.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.700 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#214",
+    "name": "Farbstoffe",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_pigments.webp",
+    "description": "Unlöslich und unentbehrlich.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Artistas"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "2.700 Artistas"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Aufstieg der neuen Welt"
+      ]
+     ]
+    ],
+    "level": "Artistas",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#208",
+    "name": "Schlitten",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_sled_frame.webp",
+    "description": "Festgezurrt, nicht festgenagelt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Techniker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "750 Techniker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ],
+     [
+      "Erfordert",
+      [
+       "Heizung"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Schlittenfabrik",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/208.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Techniker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": 208,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#210",
+    "name": "Trockenfleisch",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_dried_meat.webp",
+    "description": "Trockenfleisch ist durch Lufttrocknung konserviertes Fleisch, das sowohl aus rohem als auch aus erhitztem Fleisch hergestellt werden kann.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Trockenhaus",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/193.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 193,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#209",
+    "name": "Leinenstoff",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_linen_fabric.webp",
+    "description": "Ein vielseitiges Flachstextil.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Hirten"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "150 Hirten"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Leinenweberei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/191.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Hirten",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 191,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#213",
+    "name": "Wachskerzen",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_candles.webp",
+    "description": "Einige werden wahrscheinlich an beiden Enden verbrannt werden.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Kerzenzieherei",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/202.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 202,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#212",
+    "name": "Papier",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_paper.webp",
+    "description": "Er schreit förmlich nach bunten Tinten und Blattgold.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Papiermühle",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/212.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 212,
+    "chain": null
+   },
+   {
+    "anchor": "waren_zwischenprodukte#211",
+    "name": "Gewürzmehl",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_teff_flour.webp",
+    "description": "Dieses Mehl hat bereits einen guten Geschmack.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Älteste"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "300 Älteste"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Teff-Mühle",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/198.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Älteste",
+    "regions": [
+     "Enbesa"
+    ],
+    "building_id": 198,
+    "chain": null
+   }
+  ]
+ },
+ {
+  "key": "waren_ressoursen",
+  "name": "Strategische Ressourcen",
+  "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/cat/icon_ressoursen.webp",
+  "goods": [
+   {
+    "anchor": "waren_ressoursen#222",
+    "name": "Öl",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_oil.webp",
+    "description": "In Anno 1800 ist Öl eine entscheidende Ressource, die mit dem Erreichen der Industriezeit verfügbar wird. Es dient als Grundlage für die Produktion von Benzin und wird in Kraftwerken genutzt, um Strom zu erzeugen, der die Effizienz von Industriegebäuden und Kraftwerken steigert. Öl wird aus Ölquellen gewonnen und über Ölhäfen und Eisenbahnnetze transportiert. Es ist ein zentraler Bestandteil einer modernen Infrastruktur und spielt eine Schlüsselrolle bei der Entwicklung und Expansion von Städten in der Neuen und Alten Welt sowie in Enbesa.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieur"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Enbesa"
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Enbesa"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_ressoursen#223",
+    "name": "Benzin",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_gasoline.webp",
+    "description": "In Anno 1800 ist Benzin eine wichtige Ware, die mit dem DLC Reiche Ernte eingeführt wurde. Es wird hauptsächlich für die Versorgung von Traktorenmodulen in landwirtschaftlichen Betrieben benötigt, um deren Produktivität erheblich zu steigern. Benzin wird in Ölraffinerien hergestellt, wobei Öl als Rohstoff dient. Um Benzin effizient zu nutzen, ist eine gut ausgebaute Infrastruktur mit Ölquellen, Ölhäfen und Eisenbahnverbindungen erforderlich. Die Einführung von Benzin ermöglicht es, größere Mengen landwirtschaftlicher Güter zu produzieren, was die Wirtschaft erheblich vorantreibt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reiche Ernte"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Tankhof",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/160.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Enbesa"
+    ],
+    "building_id": 160,
+    "chain": null
+   },
+   {
+    "anchor": "waren_ressoursen#224",
+    "name": "Energie",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_electricity.webp",
+    "description": "Elektrizität ist ein wichtiger Mechanismus, der nach Erreichen des Ingenieursstatus verfügbar ist und benötigt wird, um die Bedürfnisse einiger Bewohner zu erfüllen und damit einige Gebäude funktionieren. Sie kann auch verwendet werden, um die Produktionsraten verschiedener Gebäude deutlich zu verbessern. Die wichtigste Möglichkeit, Gebäude mit Elektrizität zu versorgen, besteht darin, sicherzustellen, dass sie in Reichweite eines in Betrieb befindlichen Ölkraftwerks (oder Elektrizitätswerks) sind, das Teil einer komplexen Eisenbahninfrastruktur sein muss. Zu einer solchen Infrastruktur gehören ein Ölhafen, Ölraffinerien und Ölkraftwerke — alle über ein Eisenbahnsystem verbunden, das von Zügen genutzt wird, um Öl innerhalb des Netzwerks zu transportieren, um sicherzustellen, dass Ölkraftwerke das zur Stromerzeugung benötigte Öl erhalten. Andere Möglichkeiten der Stromversorgung sind Items oder gasbefeuerte Kraftwerke (DLC \"Die Passage \") oder der Damm (DLC \"Aufstieg der neuen Welt \").",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Ingenieure"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Ingenieure"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt"
+      ]
+     ],
+     [
+      "Produktionsgebäude",
+      [
+       {
+        "text": "Ölkraftwerk",
+        "href": "https://www.annoinfo.de/Anno_1800/gebaeude/detail/125.html"
+       }
+      ]
+     ]
+    ],
+    "level": "Ingenieure",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt"
+    ],
+    "building_id": 125,
+    "chain": null
+   },
+   {
+    "anchor": "waren_ressoursen#125",
+    "name": "Helium",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_helium.webp",
+    "description": "Wenn Luftschiffe Massenbeschwerden erlangen, wäre es sinnvoll, sie mit einem nicht brennbaren, nicht reaktiven Gas zu füllen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "600 Obreros"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Neue Welt"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte"
+      ]
+     ],
+     [
+      "Produktionskette",
+      [
+       {
+        "text": "Helium",
+        "href": "https://www.annoinfo.de/Anno_1800/produktionsketten-2.html#71"
+       }
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Neue Welt"
+    ],
+    "building_id": null,
+    "chain": "produktionsketten-2#71"
+   },
+   {
+    "anchor": "waren_ressoursen#115",
+    "name": "Gas",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_gas_red.webp",
+    "description": "Bläht Luftschiffe auf.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Techniker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "750 Techniker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage"
+      ]
+     ]
+    ],
+    "level": "Techniker",
+    "regions": [
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   }
+  ]
+ },
+ {
+  "key": "waren_post",
+  "name": "Post",
+  "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/cat/icon_post.webp",
+  "goods": [
+   {
+    "anchor": "waren_post#225",
+    "name": "Lokale Post",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_letter_normal.webp",
+    "description": "Diese Art von Post wird von Postämtern und Briefkästen erzeugt. Sie kann der Bevölkerung auf derselben Insel zur Verfügung gestellt oder per Luftschiffrouten zu anderen Inseln transportiert werden, um sie mit Regional- oder Überseepost zu versorgen.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Handwerker"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "500 Handwerker"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Enbesa"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte"
+      ]
+     ]
+    ],
+    "level": "Handwerker",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Enbesa"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_post#226",
+    "name": "Regionale Post",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_letter_delivered.webp",
+    "description": "Sie kann nicht direkt erzeugt werden. Sie wird durch die Nutzung von Luftschiffrouten zum Transport von Post zwischen Inseln derselben Region erhalten. Es kann nicht auf Luftschiffe geladen und transportiert werden, es muss auf der Insel verbraucht werden, auf der es ankommt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_post#227",
+    "name": "Überseepost",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_letter_oversea.webp",
+    "description": "Sie kann nicht direkt produziert werden. Sie wird erhalten, indem man Luftschiffrouten nutzt, um Post zwischen Inseln verschiedener Regionen zu transportieren. Sie kann nicht auf Luftschiffe geladen und transportiert werden, sie muss auf der Insel verbraucht werden, auf der sie ankommt.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Reich der Lüfte"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_post#228",
+    "name": "Neue Welt Reporte",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_herbarium.webp",
+    "description": "Die DLCs \"Reich der Lüfte \" und \"Land der Löwen \" führen eine neue Art von Post ein: die Neue-Welt-Reporte. Diese Berichte können durch ein spezielles Item erzeugt werden, das im Rathaus ausgerüstet wird. Voraussetzung dafür ist, dass in der Neuen Welt ein funktionierendes Postamt oder ein Briefkasten vorhanden ist.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Land der Löwen, Reich der Lüfte"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   },
+   {
+    "anchor": "waren_post#229",
+    "name": "Arktis Reporte",
+    "icon": "https://www.annoinfo.de/images/anno_1800/3dicons/waren/icon_valuable_sketches_b.webp",
+    "description": "Die Kombination der DLCs \"Reich der Lüfte \", \"Land der Löwen \" und \"Die Passage \" erweitert das Spiel um Arktis-Reporte. Diese werden auf ähnliche Weise erstellt: Ein spezielles Item, der Arktis Science Reporter, wird in einer Arctic Lodge ausgerüstet, wobei ein funktionierendes Postamt in der Arktis erforderlich ist.",
+    "fields": [
+     [
+      "Zivilisationsstufe",
+      [
+       "Obreros"
+      ]
+     ],
+     [
+      "Voraussetzung",
+      [
+       "1.000 Obrero"
+      ]
+     ],
+     [
+      "Region",
+      [
+       "Alte Welt, Neue Welt, Arktis"
+      ]
+     ],
+     [
+      "DLC",
+      [
+       "Die Passage, Reich der Lüfte"
+      ]
+     ]
+    ],
+    "level": "Obreros",
+    "regions": [
+     "Alte Welt",
+     "Neue Welt",
+     "Arktis"
+    ],
+    "building_id": null,
+    "chain": null
+   }
+  ]
+ }
+]
