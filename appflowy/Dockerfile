@@ -40,9 +40,18 @@ RUN cp -r /go/src/supabase/auth/migrations /out/migrations
 FROM node:20.12.0 AS web-builder
 ARG APPFLOWY_WEB_REF="v0.1.18"
 WORKDIR /app
+# patches/appflowy-web-password-login.patch adds an email + password sign-in
+# form to the web login page. Upstream v0.1.18 only offers the emailed
+# one-time code (useless without SMTP) and OAuth providers, although GoTrue
+# has always supported the password grant - the desktop app and the admin
+# console use it. The patch is a plain `git diff` against the pinned tag
+# (see the header comments inside the added/changed files); AGPL-3.0 permits
+# the modification, and the modified source is this repository.
+COPY patches/appflowy-web-password-login.patch /tmp/appflowy-web-password-login.patch
 RUN npm install -g pnpm@8.5.0 \
     && git clone --depth 1 --branch ${APPFLOWY_WEB_REF} https://github.com/AppFlowy-IO/AppFlowy-Web.git . \
     && sed -i 's|https://test.appflowy.cloud||g' src/components/main/app.hooks.ts \
+    && git apply --verbose /tmp/appflowy-web-password-login.patch \
     && pnpm install --frozen-lockfile \
     && pnpm run build
 

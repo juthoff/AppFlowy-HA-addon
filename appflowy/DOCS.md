@@ -54,7 +54,10 @@ kaum noch eine Rolle.
    zwar, aber es wird kein Admin-Konto angelegt.
 2. Add-on starten. Der erste Start dauert länger (Datenbank wird initialisiert, Migrationen
    laufen, Container-Images werden beim ersten Bauen kompiliert).
-3. Im Browser `http://<home-assistant-ip>:8099/` öffnen → AppFlowy Web.
+3. Im Browser `http://<home-assistant-ip>:8099/` öffnen → AppFlowy Web. Login mit
+   `admin_email`/`admin_password` über das Formular "E-Mail + Passwort" (Standardansicht der
+   Login-Seite, seit `0.9.64-9`; der Link "Continue with email code" darunter wechselt zum
+   ursprünglichen Einmal-Code-Login, der SMTP voraussetzt).
    Admin-Konsole: `http://<home-assistant-ip>:8099/console` (Login mit `admin_email`/`admin_password`).
 4. Für die Desktop-/Mobil-Apps von AppFlowy: beim Einrichten "Self-hosted" wählen und als
    Server-URL `http://<home-assistant-ip>:8099` eintragen. **Wichtig:** Nur Apps der
@@ -67,9 +70,9 @@ kaum noch eine Rolle.
 |---|---|
 | `fqdn` | Domain/IP, unter der das Add-on von außen erreichbar ist (leer = `localhost:8099`). Nur den Host angeben, **ohne** `http(s)://`. |
 | `scheme` | `http` oder `https` – **nur** relevant, wenn ein eigener Reverse Proxy mit TLS davorsteht. Das Add-on selbst spricht immer HTTP. |
-| `admin_email` / `admin_password` | Erstes Admin-Konto (Login über die Admin-Konsole oder die AppFlowy-App). |
+| `admin_email` / `admin_password` | Erstes Admin-Konto (Login über AppFlowy Web, die Admin-Konsole oder die AppFlowy-App). |
 | `enable_signup` | Ob sich neue Nutzer selbst registrieren können. |
-| `smtp_*` | Optional – ohne SMTP funktioniert alles außer "Magic Link"-Login und E-Mail-Einladungen; Nutzer/Einladungen lassen sich dann nur über die Admin-Konsole verwalten. `smtp_host` ist bereits auf [Resend](https://resend.com) vorbelegt (kostenloser Plan, Signup nur mit E-Mail-Adresse, keine weiteren persönlichen Daten nötig); dort einen API-Key erzeugen und als `smtp_password` eintragen. **Wichtig:** `smtp_user` muss bei Resend wörtlich `resend` sein (keine E-Mail-Adresse) – die tatsächliche Absenderadresse wird über `smtp_admin_email` gesetzt, die zu einer in Resend verifizierten Domain gehören muss (ohne eigene Domain nur `onboarding@resend.dev`, sendet dann nur an die eigene Resend-Konto-Adresse). |
+| `smtp_*` | Optional – ohne SMTP funktioniert alles außer "Magic Link"/Einmal-Code-Login und E-Mail-Einladungen; der Login in AppFlowy Web geht dann über E-Mail + Passwort (Passwort für neue Nutzer in der Admin-Konsole setzen), Nutzer/Einladungen lassen sich nur über die Admin-Konsole verwalten. `smtp_host` ist bereits auf [Resend](https://resend.com) vorbelegt (kostenloser Plan, Signup nur mit E-Mail-Adresse, keine weiteren persönlichen Daten nötig); dort einen API-Key erzeugen und als `smtp_password` eintragen. **Wichtig:** `smtp_user` muss bei Resend wörtlich `resend` sein (keine E-Mail-Adresse) – die tatsächliche Absenderadresse wird über `smtp_admin_email` gesetzt, die zu einer in Resend verifizierten Domain gehören muss (ohne eigene Domain nur `onboarding@resend.dev`, sendet dann nur an die eigene Resend-Konto-Adresse). |
 | `oauth_google_*` / `oauth_github_*` | Optionaler Login über Google/GitHub. |
 | `log_level` | Rust-Log-Level der Kernel-Dienste. |
 

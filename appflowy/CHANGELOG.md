@@ -232,3 +232,22 @@
   error:InvalidSignature`, `Refresh Token Not Found` und einem Fremdschlüssel-Fehler auf
   `af_collab` mit unbekannter Workspace-ID im Add-on-Log. Abhilfe: `data_<host>`-Ordner der App
   löschen und neu anmelden.
+
+## 0.9.64-9
+
+- **Neu: Login mit E-Mail + Passwort in AppFlowy Web.** Die Login-Seite von AppFlowy Web
+  `v0.1.18` bot bisher nur den per E-Mail verschickten Einmal-Code ("Continue with Email",
+  ohne SMTP wirkungslos) sowie die OAuth-Anbieter an - obwohl GoTrue den Passwort-Login
+  (`POST /gotrue/token?grant_type=password`) schon immer beherrscht und Desktop-App wie
+  Admin-Konsole ihn nutzen. Das Web-Frontend wird jetzt beim Build mit
+  `patches/appflowy-web-password-login.patch` erweitert: Standardmäßig zeigt die Login-Seite
+  ein Formular für E-Mail + (statisches) Konto-Passwort, per Link "Continue with email code"
+  bleibt der bisherige Magic-Link/OTP-Weg erreichbar. Damit funktioniert der Web-Login ohne
+  SMTP-Konfiguration, z. B. für das per `admin_email`/`admin_password` angelegte Admin-Konto.
+- Der Patch ist ein reines `git diff` gegen den unverändert gepinnten Tag `v0.1.18` (AGPL-3.0;
+  Änderung erlaubt, geänderte Quellen liegen in diesem Repository, betroffene Dateien tragen
+  einen Änderungsvermerk im Kopf). Neue Übersetzungsschlüssel für Englisch und Deutsch; der
+  Build (`tsc`, `eslint`, `vite build`) wurde lokal mit dem Patch verifiziert.
+- Server-seitig ändert sich nichts: keine neuen Optionen, keine neuen Endpunkte, keine
+  Migrationen. Nutzer, die sich bisher per Magic Link/OAuth angemeldet haben, besitzen kein
+  Passwort - ein Passwort lässt sich für sie in der Admin-Konsole (`/console`) setzen.
