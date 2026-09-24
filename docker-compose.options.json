@@ -16,5 +16,14 @@
   "oauth_github_enabled": false,
   "oauth_github_client_id": "",
   "oauth_github_client_secret": "",
-  "log_level": "info"
+  "log_level": "info",
+  "task_overview_enabled": false,
+  "task_overview_statuses": [
+    "Doing",
+    "To Do"
+  ],
+  "task_overview_status_field": "Status",
+  "task_overview_page": "Offene Aufgaben",
+  "task_overview_exclude": [],
+  "task_overview_workspace": ""
 }

@@ -163,12 +163,18 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends \
         ca-certificates curl gnupg xz-utils jq openssl \
         nginx redis-server \
+        python3 python3-venv \
         postgresql-common; \
     /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y; \
     apt-get update; \
     apt-get install -y --no-install-recommends postgresql-16 postgresql-16-pgvector; \
     apt-get clean; \
     rm -rf /var/lib/apt/lists/*
+
+# --- task overview service: pycrdt edits the overview page's Yjs document ---
+RUN set -eux; \
+    python3 -m venv /opt/task-overview/venv; \
+    /opt/task-overview/venv/bin/pip install --no-cache-dir pycrdt==0.14.6
 
 RUN set -eux; \
     case "${TARGETARCH}" in \
@@ -237,7 +243,8 @@ COPY rootfs/ /
 # and config file access in a very confusing way. Re-assert sane permissions
 # explicitly here instead of trusting the host state.
 RUN set -eux; \
-    chmod 755 /etc /etc/cont-init.d /etc/services.d /etc/nginx; \
+    chmod 755 /etc /etc/cont-init.d /etc/services.d /etc/nginx /opt /opt/task-overview; \
+    chmod 644 /opt/task-overview/task_overview.py; \
     find /etc/services.d -mindepth 1 -maxdepth 1 -type d -exec chmod 755 {} \; ; \
     chmod +x /etc/cont-init.d/*.sh /etc/services.d/*/run /etc/services.d/*/finish
 

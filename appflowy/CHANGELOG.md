@@ -251,3 +251,22 @@
 - Server-seitig ändert sich nichts: keine neuen Optionen, keine neuen Endpunkte, keine
   Migrationen. Nutzer, die sich bisher per Magic Link/OAuth angemeldet haben, besitzen kein
   Passwort - ein Passwort lässt sich für sie in der Admin-Konsole (`/console`) setzen.
+
+## 0.9.64-10
+
+- **Neu: automatische Aufgabenübersicht.** Mit der neuen Option `task_overview_enabled`
+  pflegt das Add-on eine Seite "Offene Aufgaben", die von allen Boards des Workspace die
+  Karten mit einem gewählten Status (Standard: `Doing`, `To Do`) sammelt – gruppiert nach
+  Status und Board, mit Link zum Board und dessen Pfad in der Seitenleiste. Standardmäßig
+  aus; Details unter "Aufgabenübersicht" in der Doku.
+- Auslöser: AppFlowy-Cloud 0.9.64 kennt keine Webhooks. Der neue Dienst `task_overview`
+  prüft deshalb alle 10 Sekunden `af_collab.updated_at` für Datenbanken, Datenbank-Zeilen
+  und die Seitenleiste (`partition_key` 1, 4, 3) und schreibt die Seite nur bei einer
+  Änderung neu. Die Übersicht selbst ist ein Dokument und löst dadurch keinen weiteren
+  Lauf aus.
+- Gelesen wird über die vorhandenen Datenbank-Endpunkte (`/api/workspace/{id}/database…`)
+  mit dem Admin-Konto aus `admin_email`/`admin_password`. Am AppFlowy-Server selbst ändert
+  sich nichts: keine neuen Endpunkte, keine Migrationen.
+- Das Image enthält dafür jetzt `python3` und ein venv mit `pycrdt` 0.14.6 (zum Neuschreiben
+  der Seite). Das Skript liegt unter `/opt/task-overview/task_overview.py` (vorher
+  `tools/appflowy_task_overview.py`) und läuft auch eigenständig gegen den Server.
