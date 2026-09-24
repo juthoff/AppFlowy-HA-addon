@@ -6,8 +6,10 @@ created in the first space if missing, and fully rewritten on each run: one
 section per status, and within it one heading per board (page mention plus
 sidebar path) listing the card titles.
 
-Inside the add-on the task_overview service runs this whenever a board changes.
-It also runs standalone against any AppFlowy 0.9.64 server:
+Inside the add-on the task_overview service runs this per workspace whenever a
+board changes, as the workspace owner: with AF_JWT_SECRET set and --as-user/
+--as-email given, it signs its own short-lived token with the server's JWT
+secret, so no password is needed. Standalone, it logs in with a password:
 
   AF_BASE=... AF_EMAIL=... AF_PASSWORD=... python3 task_overview.py
   ... --status Doing --status "To Do"   statuses to track, in section order
@@ -20,6 +22,9 @@ It also runs standalone against any AppFlowy 0.9.64 server:
 Writing the page needs `pip install pycrdt`.
 """
 import argparse
+import base64
+import hashlib
+import hmac
 import json
 import os
 import secrets
@@ -41,17 +46,36 @@ def log(msg):
 # ----------------------------------------------------------------------------
 # minimal AppFlowy-Cloud 0.9.64 client (subset of tools/appflowy_client.py)
 # ----------------------------------------------------------------------------
+def mint_token(secret, user_uuid, email, ttl=3600):
+    """HS256 token with the claims appflowy_cloud 0.9.64 requires (it only checks the signature locally)."""
+    def part(d):
+        return base64.urlsafe_b64encode(json.dumps(d, separators=(",", ":")).encode()).rstrip(b"=")
+    now = int(time.time())
+    signing_input = part({"alg": "HS256", "typ": "JWT"}) + b"." + part(
+        {"sub": user_uuid, "email": email, "phone": "", "role": "authenticated",
+         "app_metadata": {}, "user_metadata": {}, "iat": now, "exp": now + ttl})
+    sig = base64.urlsafe_b64encode(hmac.new(secret.encode(), signing_input, hashlib.sha256).digest()).rstrip(b"=")
+    return (signing_input + b"." + sig).decode()
+
+
 class AppFlowy:
-    def __init__(self):
+    def __init__(self, as_user=None, as_email=None):
         self.base = os.environ.get("AF_BASE", "").rstrip("/")
-        self.email = os.environ.get("AF_EMAIL")
+        self.secret = os.environ.get("AF_JWT_SECRET") if as_user else None
+        self.as_user = as_user
+        self.email = as_email if as_user else os.environ.get("AF_EMAIL")
         self.password = os.environ.get("AF_PASSWORD")
-        if not (self.base and self.email and self.password):
-            sys.exit("AF_BASE, AF_EMAIL and AF_PASSWORD must be set")
+        if as_user and not self.secret:
+            sys.exit("--as-user needs AF_JWT_SECRET")
+        if not self.base or not (self.secret or (self.email and self.password)):
+            sys.exit("AF_BASE plus AF_EMAIL/AF_PASSWORD (or AF_JWT_SECRET with --as-user) must be set")
         self.token = None
         self.login()
 
     def login(self):
+        if self.secret:
+            self.token = mint_token(self.secret, self.as_user, self.email or "")
+            return
         d = self._raw("POST", "/gotrue/token?grant_type=password",
                       {"email": self.email, "password": self.password}, auth=False)
         self.token = d["access_token"]
@@ -388,10 +412,12 @@ def main():
     ap.add_argument("--exclude", action="append", default=[], help="view_id or sidebar path to skip")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--dump", metavar="BOARD", help="print a board's fields and first rows, then exit")
+    ap.add_argument("--as-user", metavar="UUID", help="act as this user via AF_JWT_SECRET (add-on service)")
+    ap.add_argument("--as-email", metavar="EMAIL", help="that user's email, for the token and the log")
     args = ap.parse_args()
     statuses = args.status or DEFAULT_STATUSES
 
-    af = AppFlowy()
+    af = AppFlowy(args.as_user, args.as_email)
     w = pick_workspace(af, args.workspace)
     ws = w["workspace_id"]
     log(f"account {af.email}, workspace {w.get('workspace_name')!r} ({ws})")
@@ -411,6 +437,9 @@ def main():
         return print_results(by_status)
 
     summary = resolve(pages, args.summary_page)
+    if summary is None and not boards:
+        log("keine Boards, keine Seite angelegt")
+        return
     if summary is None:
         space = next(p for p in pages.values() if p["is_space"])
         vid = af.create_page(ws, space["view_id"], args.summary_page)

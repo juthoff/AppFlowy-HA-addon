@@ -270,3 +270,19 @@
 - Das Image enthält dafür jetzt `python3` und ein venv mit `pycrdt` 0.14.6 (zum Neuschreiben
   der Seite). Das Skript liegt unter `/opt/task-overview/task_overview.py` (vorher
   `tools/appflowy_task_overview.py`) und läuft auch eigenständig gegen den Server.
+
+## 0.9.64-11
+
+- **Aufgabenübersicht ohne Zugangsdaten und pro Workspace.** `0.9.64-10` arbeitete mit dem
+  Admin-Konto aus `admin_email`/`admin_password` und fand deshalb nur Boards in Workspaces, in
+  denen das Admin-Konto Mitglied ist. Jetzt pflegt der Dienst in jedem Workspace mit mindestens
+  einem Board eine eigene Übersichtsseite und meldet sich dafür als Besitzer des Workspace an –
+  mit einem kurzlebigen Token, das er mit dem vom Add-on selbst erzeugten JWT-Schlüssel
+  signiert (AppFlowy-Cloud 0.9.64 prüft Tokens nur lokal gegen diesen Schlüssel). Es muss
+  nichts eingetragen werden.
+- `task_overview_enabled` ist jetzt standardmäßig an; die Option `task_overview_workspace`
+  entfällt. Wer die Option unter `0.9.64-10` bereits auf `false` gespeichert hat, behält das.
+- Der Dienst prüft Änderungen jetzt pro Workspace und schreibt nur die betroffene Seite neu;
+  scheitert ein Workspace, wird nur dieser nach 60 Sekunden erneut versucht.
+- Hat `0.9.64-10` bereits eine Seite im eigenen Workspace des Admin-Kontos angelegt, wird sie
+  dort weiter aktualisiert (dieser Workspace enthält das Standard-Board "To-dos").

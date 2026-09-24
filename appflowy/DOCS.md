@@ -75,33 +75,36 @@ kaum noch eine Rolle.
 | `smtp_*` | Optional – ohne SMTP funktioniert alles außer "Magic Link"/Einmal-Code-Login und E-Mail-Einladungen; der Login in AppFlowy Web geht dann über E-Mail + Passwort (Passwort für neue Nutzer in der Admin-Konsole setzen), Nutzer/Einladungen lassen sich nur über die Admin-Konsole verwalten. `smtp_host` ist bereits auf [Resend](https://resend.com) vorbelegt (kostenloser Plan, Signup nur mit E-Mail-Adresse, keine weiteren persönlichen Daten nötig); dort einen API-Key erzeugen und als `smtp_password` eintragen. **Wichtig:** `smtp_user` muss bei Resend wörtlich `resend` sein (keine E-Mail-Adresse) – die tatsächliche Absenderadresse wird über `smtp_admin_email` gesetzt, die zu einer in Resend verifizierten Domain gehören muss (ohne eigene Domain nur `onboarding@resend.dev`, sendet dann nur an die eigene Resend-Konto-Adresse). |
 | `oauth_google_*` / `oauth_github_*` | Optionaler Login über Google/GitHub. |
 | `log_level` | Rust-Log-Level der Kernel-Dienste. |
-| `task_overview_enabled` | Schaltet die automatische Aufgabenübersicht ein (siehe "Aufgabenübersicht"). Standard: aus. |
+| `task_overview_enabled` | Schaltet die automatische Aufgabenübersicht ein oder aus (siehe "Aufgabenübersicht"). Standard: an. |
 | `task_overview_statuses` | Status-Werte, deren Karten in der Übersicht erscheinen – in dieser Reihenfolge als Abschnitte. Standard: `Doing`, `To Do`. |
 | `task_overview_status_field` | Name des Auswahlfelds, das auf den Boards den Status hält. Standard: `Status`. |
 | `task_overview_page` | Name der Übersichtsseite. Standard: `Offene Aufgaben`. |
 | `task_overview_exclude` | Boards, die ignoriert werden – als Pfad wie in der Seitenleiste, z. B. `General / To-dos`. Ein Ordnerpfad schließt alle Boards darunter aus. |
-| `task_overview_workspace` | Name oder ID des Workspace. Leer = der erste Workspace des Admin-Kontos. |
 
 ## Aufgabenübersicht
 
-Mit `task_overview_enabled: true` pflegt das Add-on selbst eine Seite (Standard: "Offene Aufgaben"),
-die von **allen Boards** des Workspace die Karten sammelt, deren Status in
-`task_overview_statuses` steht – gruppiert nach Status, darin nach Board, jeweils mit Link zum
-Board und dessen Pfad in der Seitenleiste.
+Das Add-on pflegt in **jedem Workspace, der mindestens ein Board hat**, eine eigene Seite
+(Standard: "Offene Aufgaben"). Sie sammelt von allen Boards dieses Workspace die Karten, deren
+Status in `task_overview_statuses` steht – gruppiert nach Status, darin nach Board, jeweils mit
+Link zum Board und dessen Pfad in der Seitenleiste. Jedes Konto bekommt so die Übersicht über
+seine eigenen Boards; alle Mitglieder eines Workspace sehen dessen Übersicht.
 
-- **Aktualisierung:** Der Dienst prüft alle 10 Sekunden in der Datenbank, ob sich ein Board,
-  eine Karte oder die Seitenleiste geändert hat, und schreibt die Seite dann neu. Eine Änderung
-  erscheint also, sobald AppFlowy sie gespeichert hat, plus höchstens 10 Sekunden.
-- **Konto:** Gelesen und geschrieben wird mit `admin_email`/`admin_password`. Das Admin-Konto
-  muss deshalb Mitglied des Workspace mit den Boards sein. Jeder Lauf schreibt Konto und
-  Workspace ins Add-on-Log (Zeilen mit `[task_overview]`).
+- **Keine Zugangsdaten nötig:** Der Dienst meldet sich als Besitzer des jeweiligen Workspace an,
+  mit einem kurzlebigen Token, das er mit dem vom Add-on selbst erzeugten Schlüssel
+  (`/data/secrets.env`) signiert. Es muss nichts eingetragen werden; `admin_email`/
+  `admin_password` spielen dafür keine Rolle.
+- **Aktualisierung:** Der Dienst prüft alle 10 Sekunden in der Datenbank, ob sich in einem
+  Workspace ein Board, eine Karte oder die Seitenleiste geändert hat, und schreibt dann nur die
+  Seite dieses Workspace neu. Eine Änderung erscheint, sobald AppFlowy sie gespeichert hat, plus
+  höchstens 10 Sekunden.
 - **Die Seite wird bei jedem Lauf komplett neu geschrieben** – eigene Notizen darauf gehen
   verloren. Sie darf in der Seitenleiste beliebig verschoben werden, gefunden wird sie über
   ihren Namen. Fehlt sie, legt der Dienst sie im ersten Space an.
 - Boards ohne ein Feld mit dem Namen aus `task_overview_status_field` werden übersprungen und
-  im Log genannt.
+  im Log genannt. Jeder Lauf schreibt Konto und Workspace ins Add-on-Log (Zeilen mit
+  `[task_overview]`).
 - Das Skript (`/opt/task-overview/task_overview.py`) läuft auch eigenständig gegen den Server,
-  z. B. zum Testen mit `--dry-run` (nur ausgeben, nichts schreiben).
+  dann mit E-Mail + Passwort, z. B. zum Testen mit `--dry-run` (nur ausgeben, nichts schreiben).
 
 ## Datenpersistenz
 
