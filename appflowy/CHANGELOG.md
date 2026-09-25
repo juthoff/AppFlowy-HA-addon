@@ -286,3 +286,14 @@
   scheitert ein Workspace, wird nur dieser nach 60 Sekunden erneut versucht.
 - Hat `0.9.64-10` bereits eine Seite im eigenen Workspace des Admin-Kontos angelegt, wird sie
   dort weiter aktualisiert (dieser Workspace enthält das Standard-Board "To-dos").
+
+## 0.9.64-12
+
+- **Build-Fix:** Das Image für `0.9.64-11` konnte nicht gebaut werden, weil
+  `quay.io/minio/minio` keine anonymen Downloads mehr erlaubt (HTTP 401) – nach den
+  `dl.min.io`-Downloads und der Docker-Hub-Organisation der letzte offizielle MinIO-Bezugsweg.
+  Das MinIO-Binary kommt jetzt aus `cgr.dev/chainguard/minio` (von Chainguard aus dem
+  MinIO-Quellcode gebaut, weiterhin AGPL-3.0), per Digest fest auf
+  `RELEASE.2026-09-22T19-25-18Z` gepinnt. Pfad und Aufruf von MinIO im Add-on bleiben gleich.
+- Enthält alle Änderungen aus `0.9.64-11` (Aufgabenübersicht pro Workspace), die wegen des
+  fehlgeschlagenen Builds nie als Image veröffentlicht wurden.

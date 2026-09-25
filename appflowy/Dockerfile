@@ -139,14 +139,16 @@ FROM appflowyinc/appflowy_worker@sha256:e9bcb9f712b2fb75318674fa874c0ef460d7b3b7
 FROM appflowy_worker_${TARGETARCH} AS appflowy_worker_src
 
 # ---------------------------------------------------------------------------
-# MinIO server binary - copied from the official multi-arch image.
-# dl.min.io's plain binary downloads (the previously used
-# https://dl.min.io/server/minio/release/<arch>/minio URLs) were shut down
-# by MinIO (HTTP 410 Gone) after this add-on was first written; MinIO's own
-# Docker Hub org was also removed. quay.io/minio/minio is MinIO's official,
-# actively maintained multi-arch image and is the documented replacement.
+# MinIO server binary - copied from Chainguard's multi-arch image.
+# MinIO has withdrawn every official distribution this add-on used:
+# dl.min.io binary downloads (HTTP 410 Gone), the minio Docker Hub org, and
+# finally quay.io/minio/minio (anonymous pulls now get 401, which broke the
+# 0.9.64-11 build). Chainguard builds upstream MinIO (AGPL-3.0) from source;
+# /usr/bin/minio is a statically linked Go binary, so it runs unchanged on
+# Debian bookworm. Chainguard's free tier only publishes :latest, so the
+# stage is pinned by index digest (RELEASE.2026-09-22T19-25-18Z).
 # ---------------------------------------------------------------------------
-FROM quay.io/minio/minio:latest AS minio_src
+FROM cgr.dev/chainguard/minio@sha256:bd014394a80898e68c149f2311fdf8d5a2c2f3bb2c33b9327ae6d02b4b065ae1 AS minio_src
 
 # ---------------------------------------------------------------------------
 # Final runtime image

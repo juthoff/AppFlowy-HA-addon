@@ -24,7 +24,7 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
 | PostgreSQL | Debian-Paket `postgresql-16` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | pgvector | Debian-Paket `postgresql-16-pgvector` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | Redis | Debian-Paket `redis-server` | Debian bookworm | RSALv2/SSPLv1/AGPL-3.0 (je Version) |
-| MinIO | `quay.io/minio/minio` (offizielles Multi-Arch-Image) | Binary `/usr/bin/minio`, Tag `latest`, jeweils aktuellstes stabiles Release zum Build-Zeitpunkt | AGPL-3.0 |
+| MinIO | `cgr.dev/chainguard/minio` (Chainguard, aus dem MinIO-Quellcode gebaut, Multi-Arch) | Binary `/usr/bin/minio`, `RELEASE.2026-09-22T19-25-18Z`, Index-Digest `sha256:bd014394a80898e68c149f2311fdf8d5a2c2f3bb2c33b9327ae6d02b4b065ae1` | AGPL-3.0 |
 | nginx | Debian-Paket `nginx` | Debian bookworm | BSD-2-Clause |
 | s6-overlay | https://github.com/just-containers/s6-overlay | v3.2.3.2 | ISC |
 
