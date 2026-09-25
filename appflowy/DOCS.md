@@ -106,6 +106,25 @@ seine eigenen Boards; alle Mitglieder eines Workspace sehen dessen Übersicht.
 - Das Skript (`/opt/task-overview/task_overview.py`) läuft auch eigenständig gegen den Server,
   dann mit E-Mail + Passwort, z. B. zum Testen mit `--dry-run` (nur ausgeben, nichts schreiben).
 
+## Verweise auf Seiten
+
+In AppFlowy Web (Browser) lassen sich Seiten jetzt auch dort verlinken, wo AppFlowy nur
+reinen Text speichert:
+
+- **Seitentitel**, **Titel einer Board-Karte** und **Einträge einer Checkliste**: `[[` oder `@`
+  tippen, dann Teil eines Seitennamens – es öffnet sich eine Seitenauswahl (Pfeiltasten + Enter
+  oder Klick). Gespeichert wird der Verweis als `[[Name|Seiten-ID]]`; AppFlowy Web zeigt ihn als
+  anklickbaren Link mit dem aktuellen Seitennamen, Seitenleiste, Brotkrumen und Browser-Tab
+  zeigen nur den Namen. Einen Titel mit Verweis zum Bearbeiten neben den Link klicken.
+- **Board-Karten** sind in AppFlowy Web jetzt bearbeitbar (vorher nur lesbar): Titel, das
+  Dokument unter den Eigenschaften (mit dem normalen `@`-Verweismenü, auch in Überschriften und
+  Listen) und die Checkliste (abhaken, hinzufügen, umbenennen, löschen).
+- **Die Desktop- und Mobil-Apps zeigen `[[Name|Seiten-ID]]` als reinen Text** – sie können vom
+  Add-on nicht verändert werden. Das Dokument einer Karte und Verweise darin sehen sie normal.
+- In der Handy-Ansicht von AppFlowy Web bleibt alles schreibgeschützt (wie im Original).
+- Änderungen an Karten werden erst nach einem Neuladen in anderen geöffneten Browser-Tabs
+  sichtbar (AppFlowy Web lädt Board-Daten nicht live nach).
+
 ## Datenpersistenz
 
 Alle Daten (Postgres, MinIO, generierte Geheimnisse) liegen im Add-on-eigenen `/data`-Verzeichnis

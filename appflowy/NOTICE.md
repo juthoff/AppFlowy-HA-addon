@@ -11,6 +11,12 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
   GoTrue-Client, die Service-Schnittstelle und die Übersetzungen `en`/`de-DE`). Die
   geänderten Dateien tragen einen Änderungsvermerk mit Datum (AGPL-3.0 §5a); der Patch
   wird zur Build-Zeit per `git apply` auf den unveränderten Tag `v0.1.18` angewendet.
+  Seit `0.9.64-13` zusätzlich `patches/appflowy-web-references.patch` (Seitenverweise
+  `[[Name|view-id]]` in Seitentiteln, Kartentiteln und Checklisten-Einträgen; bearbeitbare
+  Kartenseite eines Boards mit Dokument, Titel und Checkliste; Korrektur der Zeilen-
+  Synchronisation). Fügt `src/utils/referenceMarker.ts`,
+  `src/application/database-yjs/row-write.ts` und `src/components/_shared/reference/` hinzu;
+  geänderte Dateien tragen den Vermerk "AppFlowy Home Assistant add-on".
 - `gotrue`: `Secure`-Flag des Session-Cookies deaktiviert (siehe Dockerfile), MIT-Lizenz.
 
 | Komponente | Quelle | Referenz | Lizenz |
@@ -20,7 +26,7 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
 | appflowy_worker | `appflowyinc/appflowy_worker` (Docker Hub) | Digest `sha256:e9bcb9f712b2fb75318674fa874c0ef460d7b3b7487c99560f2b5ce5564991d2` (amd64) / `sha256:7986e875e4fc825c73de0bad7a58f464ae81019c6c6bdb2c3c0c5790df69b4f5` (arm64), gepusht 2025-07-04 | AGPL-3.0 |
 | Quellcode (appflowy_cloud/admin_frontend/appflowy_worker) | https://github.com/AppFlowy-IO/AppFlowy-Cloud | Git-Tag `0.9.64` | AGPL-3.0 |
 | gotrue (Auth) | https://github.com/AppFlowy-IO/auth | Branch/Tag `0.8.0`, aus Quellcode gebaut | MIT |
-| AppFlowy Web | https://github.com/AppFlowy-IO/AppFlowy-Web | Tag `v0.1.18`, aus Quellcode gebaut, mit `patches/appflowy-web-password-login.patch` (s. o.) | AGPL-3.0 |
+| AppFlowy Web | https://github.com/AppFlowy-IO/AppFlowy-Web | Tag `v0.1.18`, aus Quellcode gebaut, mit `patches/appflowy-web-password-login.patch` und `patches/appflowy-web-references.patch` (s. o.) | AGPL-3.0 |
 | PostgreSQL | Debian-Paket `postgresql-16` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | pgvector | Debian-Paket `postgresql-16-pgvector` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | Redis | Debian-Paket `redis-server` | Debian bookworm | RSALv2/SSPLv1/AGPL-3.0 (je Version) |

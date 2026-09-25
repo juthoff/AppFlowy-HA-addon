@@ -47,11 +47,19 @@ WORKDIR /app
 # console use it. The patch is a plain `git diff` against the pinned tag
 # (see the header comments inside the added/changed files); AGPL-3.0 permits
 # the modification, and the modified source is this repository.
+# patches/appflowy-web-references.patch (applied on top) adds page references
+# in plain-text names (`[[Name|view-id]]` in page titles, row titles and
+# checklist items, picked with `[[` or `@`) and makes the row page of a board
+# card editable: document body, title and checklist property. Upstream keeps
+# rows read-only, loads the body through page-view (which fails for row
+# documents) and syncs rows under a local cache key instead of the row id.
 COPY patches/appflowy-web-password-login.patch /tmp/appflowy-web-password-login.patch
+COPY patches/appflowy-web-references.patch /tmp/appflowy-web-references.patch
 RUN npm install -g pnpm@8.5.0 \
     && git clone --depth 1 --branch ${APPFLOWY_WEB_REF} https://github.com/AppFlowy-IO/AppFlowy-Web.git . \
     && sed -i 's|https://test.appflowy.cloud||g' src/components/main/app.hooks.ts \
     && git apply --verbose /tmp/appflowy-web-password-login.patch \
+    && git apply --verbose /tmp/appflowy-web-references.patch \
     && pnpm install --frozen-lockfile \
     && pnpm run build
 

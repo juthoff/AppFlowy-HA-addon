@@ -297,3 +297,17 @@
   `RELEASE.2026-09-22T19-25-18Z` gepinnt. Pfad und Aufruf von MinIO im Add-on bleiben gleich.
 - Enthält alle Änderungen aus `0.9.64-11` (Aufgabenübersicht pro Workspace), die wegen des
   fehlgeschlagenen Builds nie als Image veröffentlicht wurden.
+
+## 0.9.64-13
+
+- **Verweise auf Seiten überall in AppFlowy Web.** In Seitentiteln, Titeln von Board-Karten und
+  Checklisten-Einträgen öffnet `[[` oder `@` eine Seitenauswahl; der Verweis wird als
+  `[[Name|Seiten-ID]]` gespeichert und in AppFlowy Web als Link angezeigt (Desktop-/Mobil-App:
+  reiner Text). Details unter "Verweise auf Seiten" in der Dokumentation.
+- **Board-Karten sind in AppFlowy Web bearbeitbar.** AppFlowy Web `v0.1.18` zeigte geöffnete
+  Karten nur an und konnte ihr Dokument gar nicht laden. Jetzt lassen sich Titel, Dokument (mit
+  `@`-Verweisen) und Checkliste bearbeiten; ein noch leeres Karten-Dokument wird beim ersten
+  Tippen angelegt.
+- Fix: AppFlowy Web schickte Änderungen an Board-Zeilen unter einer internen Cache-Kennung statt
+  der Zeilen-ID an den Server, sodass sie nie ankamen.
+- Umgesetzt als zweiter Patch `patches/appflowy-web-references.patch` auf AppFlowy Web `v0.1.18`.

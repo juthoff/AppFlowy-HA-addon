@@ -1,0 +1,1505 @@
+diff --git a/src/application/database-yjs/context.ts b/src/application/database-yjs/context.ts
+index 56e3fb3..4a98c32 100644
+--- a/src/application/database-yjs/context.ts
++++ b/src/application/database-yjs/context.ts
+@@ -1,6 +1,7 @@
+ import {
+   CreateRowDoc,
+   LoadView,
++  View,
+   LoadViewMeta, RowId,
+   YDatabase,
+   YDatabaseRow,
+@@ -27,6 +28,14 @@ export interface DatabaseContextState {
+   onRendered?: (height: number) => void;
+   showActions?: boolean;
+   workspaceId: string;
++  // Added by the AppFlowy Home Assistant add-on: upstream v0.1.18 keeps every
++  // row read-only (useReadOnly() below always returns true). rowReadOnly is the
++  // real flag, used only by the row page (document body, title, checklists).
++  rowReadOnly?: boolean;
++  loadRowDocument?: (documentId: string) => Promise<YDoc>;
++  loadViews?: () => Promise<View[] | undefined>;
++  openPageModal?: (viewId: string) => void;
++  uploadFile?: (file: File) => Promise<string>;
+ }
+ 
+ export const DatabaseContext = createContext<DatabaseContextState | null>(null);
+@@ -77,6 +86,12 @@ export const useDatabaseViewId = () => {
+   return context?.viewId;
+ };
+ 
++export const useRowReadOnly = () => {
++  const context = useDatabaseContext();
++
++  return context?.rowReadOnly ?? true;
++};
++
+ export const useReadOnly = () => {
+   const context = useDatabaseContext();
+ 
+diff --git a/src/application/database-yjs/row-write.ts b/src/application/database-yjs/row-write.ts
+new file mode 100644
+index 0000000..7c06b7f
+--- /dev/null
++++ b/src/application/database-yjs/row-write.ts
+@@ -0,0 +1,81 @@
++// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
++// v0.1.18, which never writes database rows): cell and row-meta writes in the
++// same shape AppFlowy-Collab's Rust code uses, so the desktop app reads them.
++// Numbers are plain JS numbers; yrs decodes them as Any::Number, which its
++// i64 conversions accept just like Any::BigInt.
++import { FieldType, RowMetaKey } from '@/application/database-yjs/database.type';
++import { metaIdFromRowId } from '@/application/database-yjs/const';
++import { SelectOption } from '@/application/database-yjs/fields/select-option/select_option.type';
++import { YDoc, YjsDatabaseKey, YjsEditorKey } from '@/application/types';
++import * as Y from 'yjs';
++
++const nowSeconds = () => Math.floor(Date.now() / 1000);
++
++function rowMap (rowDoc: YDoc) {
++  return rowDoc.getMap(YjsEditorKey.data_section).get(YjsEditorKey.database_row) as Y.Map<unknown> | undefined;
++}
++
++export function updateRowCell (rowDoc: YDoc, fieldId: string, fieldType: FieldType, data: string) {
++  const row = rowMap(rowDoc);
++
++  if (!row) throw new Error('Row data not loaded');
++
++  rowDoc.transact(() => {
++    let cells = row.get(YjsDatabaseKey.cells) as Y.Map<unknown> | undefined;
++
++    if (!cells) {
++      cells = new Y.Map();
++      row.set(YjsDatabaseKey.cells, cells);
++    }
++
++    let cell = cells.get(fieldId) as Y.Map<unknown> | undefined;
++    const now = nowSeconds();
++
++    if (!cell) {
++      cell = new Y.Map();
++      cells.set(fieldId, cell);
++      cell.set(YjsDatabaseKey.field_type, fieldType);
++      cell.set(YjsDatabaseKey.created_at, now);
++    }
++
++    cell.set(YjsDatabaseKey.data, data);
++    cell.set(YjsDatabaseKey.last_modified, now);
++    row.set(YjsDatabaseKey.last_modified, now);
++  });
++}
++
++// Same serialization as collab-database's ChecklistCellData.
++export interface ChecklistData {
++  options: SelectOption[];
++  selected_option_ids: string[];
++}
++
++export function updateChecklistCell (rowDoc: YDoc, fieldId: string, data: ChecklistData) {
++  const options = data.options.map(({ id, name, color }) => ({ id, name, color }));
++  const ids = new Set(options.map((option) => option.id));
++  const selected = data.selected_option_ids.filter((id) => ids.has(id));
++
++  updateRowCell(rowDoc, fieldId, FieldType.Checklist, JSON.stringify({
++    options,
++    selected_option_ids: selected,
++  }));
++}
++
++// collab-database's gen_option_id(): nanoid(4)
++export function generateOptionId () {
++  const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz-';
++  const bytes = crypto.getRandomValues(new Uint8Array(4));
++
++  return Array.from(bytes, (b) => alphabet[b & 63]).join('');
++}
++
++export function setRowDocumentNotEmpty (rowDoc: YDoc, rowId: string) {
++  const root = rowDoc.getMap(YjsEditorKey.data_section);
++  const meta = root.get(YjsEditorKey.meta) as Y.Map<unknown> | undefined;
++  const key = metaIdFromRowId(rowId)(RowMetaKey.IsDocumentEmpty);
++
++  if (!meta || meta.get(key) === false) return;
++  rowDoc.transact(() => {
++    meta.set(key, false);
++  });
++}
+diff --git a/src/application/database-yjs/selector.ts b/src/application/database-yjs/selector.ts
+index 65c98d1..df3447d 100644
+--- a/src/application/database-yjs/selector.ts
++++ b/src/application/database-yjs/selector.ts
+@@ -22,6 +22,7 @@ import { DateTimeCell } from '@/application/database-yjs/cell.type';
+ import dayjs from 'dayjs';
+ import { debounce } from 'lodash-es';
+ import { useCallback, useEffect, useMemo, useState } from 'react';
++import * as Y from 'yjs';
+ import { CalendarLayoutSetting, FieldType, FieldVisibility, Filter, RowMetaKey, SortCondition } from './database.type';
+ 
+ export interface Column {
+@@ -507,7 +508,23 @@ export function useRowDataSelector (rowId: string) {
+ 
+ export function useCellSelector ({ rowId, fieldId }: { rowId: string; fieldId: string }) {
+   const { row } = useRowDataSelector(rowId);
+-  const cell = row?.get(YjsDatabaseKey.cells)?.get(fieldId);
++  const cells = row?.get(YjsDatabaseKey.cells);
++  // Added by the AppFlowy Home Assistant add-on: re-read when the cell is
++  // created (e.g. the first checklist item written on the row page).
++  const [, setCellsVersion] = useState(0);
++
++  useEffect(() => {
++    if (!cells) return;
++    const onCellsChange = (event: Y.YMapEvent<unknown>) => {
++      if (event.keysChanged.has(fieldId)) setCellsVersion((version) => version + 1);
++    };
++
++    cells.observe(onCellsChange);
++    return () => {
++      cells.unobserve(onCellsChange);
++    };
++  }, [cells, fieldId]);
++  const cell = cells?.get(fieldId);
+ 
+   const [cellValue, setCellValue] = useState(() => (cell ? parseYDatabaseCellToCell(cell) : undefined));
+ 
+diff --git a/src/application/services/js-services/index.ts b/src/application/services/js-services/index.ts
+index c9432b5..f8712b8 100644
+--- a/src/application/services/js-services/index.ts
++++ b/src/application/services/js-services/index.ts
+@@ -46,8 +46,10 @@ import {
+   UploadPublishNamespacePayload,
+   WorkspaceMember,
+   YjsEditorKey,
++  YSharedRoot,
+ } from '@/application/types';
+ import { applyYDoc } from '@/application/ydoc/apply';
++import { appendFirstEmptyParagraph, createEmptyDocument } from '@/application/slate-yjs/utils/yjs';
+ import { RepeatedChatMessage } from '@appflowyinc/ai-chat/dist/types';
+ import { nanoid } from 'nanoid';
+ import * as Y from 'yjs';
+@@ -186,6 +188,40 @@ export class AFClientService implements AFService {
+ 
+   }
+ 
++  // Added by the AppFlowy Home Assistant add-on: load a database row's document
++  // body (a Document collab keyed by the row's document_id). If the server has
++  // none yet (code -2, RecordNotFound), start an empty document; it is only
++  // created on the server once the user edits it (the first sync sends the
++  // full state). Other errors are passed on so a real document is never
++  // shadowed by an empty one.
++  async getRowDocument (workspaceId: string, documentId: string) {
++    const key = `${workspaceId}_${documentId}`;
++    const cached = this.rowDocuments.get(key);
++
++    if (cached) return cached;
++
++    let doc: Y.Doc;
++
++    try {
++      const res = await APIService.getCollab(workspaceId, documentId, Types.Document);
++
++      doc = new Y.Doc({ guid: documentId });
++      applyYDoc(doc, res.data);
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch (e: any) {
++      if (e?.code !== -2) throw e;
++      doc = createEmptyDocument();
++      appendFirstEmptyParagraph(doc.getMap(YjsEditorKey.data_section) as YSharedRoot, '');
++    }
++
++    this.rowDocuments.set(key, doc);
++    return doc;
++  }
++
++  private rowDocuments = new Map<string, Y.Doc>();
++
++  private syncedDocs = new WeakSet<Y.Doc>();
++
+   async createRowDoc (rowKey: string) {
+     return createRowDoc(rowKey);
+   }
+@@ -564,6 +600,11 @@ export class AFClientService implements AFService {
+       throw new Error('User not found');
+     }
+ 
++    // Added by the AppFlowy Home Assistant add-on: docs are cached and loaded
++    // again on every render pass; one SyncManager per doc is enough.
++    if (this.syncedDocs.has(doc)) return;
++    this.syncedDocs.add(doc);
++
+     const sync = new SyncManager(doc, { userId, ...context });
+ 
+     sync.initialize();
+diff --git a/src/application/services/services.type.ts b/src/application/services/services.type.ts
+index 17e5e91..0250075 100644
+--- a/src/application/services/services.type.ts
++++ b/src/application/services/services.type.ts
+@@ -106,6 +106,7 @@ export interface AppService {
+   cancelSubscription: (workspaceId: string, plan: SubscriptionPlan, reason?: string) => Promise<void>;
+   getActiveSubscription: (workspaceId: string) => Promise<SubscriptionPlan[]>;
+   getWorkspaceSubscriptions: (workspaceId: string) => Promise<Subscription[]>;
++  getRowDocument: (workspaceId: string, documentId: string) => Promise<YDoc>;
+   registerDocUpdate: (doc: YDoc, context: {
+     workspaceId: string, objectId: string, collabType: Types
+   }) => void;
+diff --git a/src/components/_shared/breadcrumb/BreadcrumbItem.tsx b/src/components/_shared/breadcrumb/BreadcrumbItem.tsx
+index ec81be6..1655a85 100644
+--- a/src/components/_shared/breadcrumb/BreadcrumbItem.tsx
++++ b/src/components/_shared/breadcrumb/BreadcrumbItem.tsx
+@@ -3,6 +3,7 @@ import PublishIcon from '@/components/_shared/view-icon/PublishIcon';
+ import { notify } from '@/components/_shared/notify';
+ import SpaceIcon from '@/components/_shared/view-icon/SpaceIcon';
+ import { Tooltip } from '@mui/material';
++import { plainName } from '@/utils/referenceMarker';
+ import React, { useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+ import PageIcon from '@/components/_shared/view-icon/PageIcon';
+@@ -13,7 +14,8 @@ function BreadcrumbItem({ crumb, disableClick = false, toView, variant }: {
+   toView?: (viewId: string) => Promise<void>;
+   variant?: UIVariant
+ }) {
+-  const { view_id, name, extra, is_published } = crumb;
++  const { view_id, extra, is_published } = crumb;
++  const name = plainName(crumb.name);
+ 
+   const { t } = useTranslation();
+ 
+diff --git a/src/components/_shared/helmet/ViewHelmet.tsx b/src/components/_shared/helmet/ViewHelmet.tsx
+index b472cb0..9e4f965 100644
+--- a/src/components/_shared/helmet/ViewHelmet.tsx
++++ b/src/components/_shared/helmet/ViewHelmet.tsx
+@@ -1,5 +1,6 @@
+ import { ViewIcon, ViewIconType } from '@/application/types';
+ import { getIconBase64 } from '@/utils/emoji';
++import { plainName } from '@/utils/referenceMarker';
+ import React, { useEffect } from 'react';
+ import { Helmet } from 'react-helmet';
+ 
+@@ -66,7 +67,7 @@ function ViewHelmet ({
+   if (!name) return null;
+   return (
+     <Helmet>
+-      <title>{name} | AppFlowy</title>
++      <title>{plainName(name)} | AppFlowy</title>
+     </Helmet>
+   );
+ }
+diff --git a/src/components/_shared/outline/utils.ts b/src/components/_shared/outline/utils.ts
+index 2a82be8..f0f04fb 100644
+--- a/src/components/_shared/outline/utils.ts
++++ b/src/components/_shared/outline/utils.ts
+@@ -1,11 +1,12 @@
+ import { View, ViewLayout } from '@/application/types';
++import { plainName } from '@/utils/referenceMarker';
+ 
+ export function filterViews (views: View[], keyword: string): View[] {
+   const filterAndFlatten = (views: View[]): View[] => {
+     let result: View[] = [];
+ 
+     for (const view of views) {
+-      if (view.name.toLowerCase().includes(keyword.toLowerCase())) {
++      if (plainName(view.name).toLowerCase().includes(keyword.toLowerCase())) {
+         result.push(view);
+       }
+ 
+diff --git a/src/components/_shared/reference/ReferenceInput.tsx b/src/components/_shared/reference/ReferenceInput.tsx
+new file mode 100644
+index 0000000..faabcba
+--- /dev/null
++++ b/src/components/_shared/reference/ReferenceInput.tsx
+@@ -0,0 +1,109 @@
++// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
++// v0.1.18): a single-line text input with the `[[` / `@` page picker. Enter or
++// blur commits, Escape cancels.
++import useReferencePicker from '@/components/_shared/reference/useReferencePicker';
++import React, { useCallback, useEffect, useRef, useState } from 'react';
++
++export function ReferenceInput ({
++  value,
++  onCommit,
++  onCancel,
++  placeholder,
++  className,
++  autoFocus = true,
++  clearOnCommit = false,
++}: {
++  value: string;
++  onCommit: (value: string) => void;
++  onCancel?: () => void;
++  placeholder?: string;
++  className?: string;
++  autoFocus?: boolean;
++  clearOnCommit?: boolean;
++}) {
++  const inputRef = useRef<HTMLInputElement>(null);
++  const [text, setText] = useState(value);
++  const committed = useRef(false);
++
++  useEffect(() => {
++    setText(value);
++  }, [value]);
++
++  const handlePick = useCallback((start: number, end: number, marker: string) => {
++    const input = inputRef.current;
++
++    if (!input) return;
++    const next = `${input.value.slice(0, start)}${marker} ${input.value.slice(end)}`;
++    const caret = start + marker.length + 1;
++
++    setText(next);
++    requestAnimationFrame(() => {
++      input.focus();
++      input.setSelectionRange(caret, caret);
++    });
++  }, []);
++
++  const picker = useReferencePicker({ onPick: handlePick });
++
++  const syncPicker = useCallback(() => {
++    const input = inputRef.current;
++
++    if (!input) return;
++    picker.update(input.value, input.selectionStart ?? input.value.length, input);
++  }, [picker]);
++
++  const commit = useCallback(() => {
++    if (committed.current) return;
++    committed.current = true;
++    picker.close();
++    onCommit(text.trim());
++    if (clearOnCommit) setText('');
++    requestAnimationFrame(() => {
++      committed.current = false;
++    });
++  }, [clearOnCommit, onCommit, picker, text]);
++
++  return (
++    <>
++      <input
++        ref={inputRef}
++        value={text}
++        autoFocus={autoFocus}
++        placeholder={placeholder}
++        className={`w-full min-w-0 bg-transparent outline-none ${className || ''}`}
++        onChange={(e) => {
++          setText(e.target.value);
++          picker.update(e.target.value, e.target.selectionStart ?? e.target.value.length, e.target);
++        }}
++        onClick={syncPicker}
++        onKeyUp={(e) => {
++          if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Home' || e.key === 'End') syncPicker();
++        }}
++        onKeyDown={(e) => {
++          e.stopPropagation();
++          if (picker.onKeyDown(e)) return;
++          if (e.key === 'Enter') {
++            e.preventDefault();
++            commit();
++          } else if (e.key === 'Escape') {
++            e.preventDefault();
++            committed.current = true;
++            picker.close();
++            setText(value);
++            onCancel?.();
++            requestAnimationFrame(() => {
++              committed.current = false;
++            });
++          }
++        }}
++        onBlur={() => {
++          if (!clearOnCommit || text.trim()) commit();
++          else onCancel?.();
++        }}
++      />
++      {picker.element}
++    </>
++  );
++}
++
++export default ReferenceInput;
+diff --git a/src/components/_shared/reference/ReferenceText.tsx b/src/components/_shared/reference/ReferenceText.tsx
+new file mode 100644
+index 0000000..58a7662
+--- /dev/null
++++ b/src/components/_shared/reference/ReferenceText.tsx
+@@ -0,0 +1,78 @@
++// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
++// v0.1.18): renders `[[Name|view-id]]` markers in plain-text names as page
++// references. Outside the app (published pages) there is no AppContext, so the
++// references degrade to their stored names.
++import { View, ViewLayout } from '@/application/types';
++import PageIcon from '@/components/_shared/view-icon/PageIcon';
++import { AppContext } from '@/components/app/app.hooks';
++import { parseReferences, plainName } from '@/utils/referenceMarker';
++import React, { useContext, useEffect, useMemo, useState } from 'react';
++
++export function ReferenceChip ({ name, viewId }: { name: string; viewId: string }) {
++  const context = useContext(AppContext);
++  const loadViewMeta = context?.loadViewMeta;
++  const toView = context?.toView;
++  const [meta, setMeta] = useState<View | null>(null);
++  const [noAccess, setNoAccess] = useState(false);
++
++  useEffect(() => {
++    if (!loadViewMeta) return;
++    let active = true;
++
++    setNoAccess(false);
++    loadViewMeta(viewId, (meta) => {
++      if (active) setMeta(meta);
++    }).then((meta) => {
++      if (active) setMeta(meta);
++    }).catch(() => {
++      if (active) setNoAccess(true);
++    });
++
++    return () => {
++      active = false;
++    };
++  }, [loadViewMeta, viewId]);
++
++  const label = (meta?.name && plainName(meta.name)) || name;
++
++  if (!context) return <span>{name}</span>;
++
++  return (
++    <span
++      data-reference-id={viewId}
++      contentEditable={false}
++      title={label}
++      onMouseDown={(e) => e.stopPropagation()}
++      onClick={(e) => {
++        e.preventDefault();
++        e.stopPropagation();
++        if (noAccess) return;
++        void toView?.(viewId);
++      }}
++      className={`inline-flex max-w-full items-baseline gap-1 align-baseline ${noAccess ? 'cursor-default text-text-caption line-through' : 'cursor-pointer underline hover:opacity-80'}`}
++      style={{ textUnderlinePosition: 'under' }}
++    >
++      <PageIcon
++        view={{ icon: meta?.icon, layout: meta?.layout ?? ViewLayout.Document }}
++        className={'flex h-[1em] w-[1em] shrink-0 items-center justify-center self-center'}
++      />
++      <span className={'truncate'}>{label}</span>
++    </span>
++  );
++}
++
++export function ReferenceText ({ text, placeholder }: { text?: string | null; placeholder?: React.ReactNode }) {
++  const segments = useMemo(() => parseReferences(text), [text]);
++
++  if (!segments.length) return <>{placeholder ?? null}</>;
++
++  return (
++    <>
++      {segments.map((segment, index) => segment.type === 'text'
++        ? <React.Fragment key={index}>{segment.text}</React.Fragment>
++        : <ReferenceChip key={index} name={segment.name} viewId={segment.viewId} />)}
++    </>
++  );
++}
++
++export default ReferenceText;
+diff --git a/src/components/_shared/reference/useReferencePicker.tsx b/src/components/_shared/reference/useReferencePicker.tsx
+new file mode 100644
+index 0000000..2d515a8
+--- /dev/null
++++ b/src/components/_shared/reference/useReferencePicker.tsx
+@@ -0,0 +1,150 @@
++// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
++// v0.1.18): a page picker for plain-text inputs. Typing `[[` or `@` opens it;
++// choosing a page replaces the typed trigger with a `[[Name|view-id]]` marker.
++import { View } from '@/application/types';
++import { flattenViews } from '@/components/_shared/outline/utils';
++import PageIcon from '@/components/_shared/view-icon/PageIcon';
++import { AppContext } from '@/components/app/app.hooks';
++import { findReferenceQuery, makeMarker, plainName } from '@/utils/referenceMarker';
++import { Paper, Popper } from '@mui/material';
++import { sortBy, uniqBy } from 'lodash-es';
++import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
++import { useTranslation } from 'react-i18next';
++
++const MAX_RESULTS = 8;
++
++interface PickerState {
++  query: string;
++  start: number;
++  end: number;
++  anchor: HTMLElement;
++}
++
++export function useReferencePicker ({ onPick }: {
++  // Replace text[start, end) with the marker; the caller moves the caret after it.
++  onPick: (start: number, end: number, marker: string) => void;
++}) {
++  const { t } = useTranslation();
++  const loadViews = useContext(AppContext)?.loadViews;
++  const [state, setState] = useState<PickerState | null>(null);
++  const [views, setViews] = useState<View[]>([]);
++  const [selected, setSelected] = useState(0);
++  const open = Boolean(state && loadViews);
++
++  useEffect(() => {
++    if (!open || !loadViews) return;
++    let active = true;
++
++    void loadViews().then((views) => {
++      if (!active) return;
++      const pages = flattenViews(views || []).filter((view) => !view.extra?.is_space);
++
++      setViews(sortBy(uniqBy(pages, 'view_id'), 'last_edited_time').reverse());
++    }).catch(console.error);
++    return () => {
++      active = false;
++    };
++  }, [open, loadViews]);
++
++  const results = useMemo(() => {
++    const query = (state?.query || '').trim().toLowerCase();
++
++    return views
++      .filter((view) => !query || plainName(view.name).toLowerCase().includes(query))
++      .slice(0, MAX_RESULTS);
++  }, [views, state?.query]);
++
++  useEffect(() => {
++    setSelected(0);
++  }, [state?.query]);
++
++  // Call after every input / caret change with the input's text and caret offset.
++  const update = useCallback((text: string, caret: number, anchor: HTMLElement | null) => {
++    const found = anchor ? findReferenceQuery(text, caret) : null;
++
++    setState(found && anchor ? { query: found.query, start: found.start, end: found.end, anchor } : null);
++  }, []);
++
++  const close = useCallback(() => setState(null), []);
++
++  const stateRef = useRef(state);
++
++  stateRef.current = state;
++
++  const pick = useCallback((view: View) => {
++    const current = stateRef.current;
++
++    if (!current) return;
++    setState(null);
++    onPick(current.start, current.end, makeMarker(view.name || t('menuAppHeader.defaultNewPageName'), view.view_id));
++  }, [onPick, t]);
++
++  // Returns true when the key was handled by the picker.
++  const onKeyDown = useCallback((e: React.KeyboardEvent) => {
++    if (!open || !results.length) {
++      if (open && e.key === 'Escape') {
++        e.preventDefault();
++        setState(null);
++        return true;
++      }
++
++      return false;
++    }
++
++    switch (e.key) {
++      case 'ArrowDown':
++        e.preventDefault();
++        setSelected((i) => (i + 1) % results.length);
++        return true;
++      case 'ArrowUp':
++        e.preventDefault();
++        setSelected((i) => (i - 1 + results.length) % results.length);
++        return true;
++      case 'Enter':
++      case 'Tab':
++        e.preventDefault();
++        pick(results[selected] || results[0]);
++        return true;
++      case 'Escape':
++        e.preventDefault();
++        setState(null);
++        return true;
++      default:
++        return false;
++    }
++  }, [open, results, selected, pick]);
++
++  const element = (
++    <Popper
++      open={open}
++      anchorEl={state?.anchor}
++      placement={'bottom-start'}
++      style={{ zIndex: 1500 }}
++    >
++      <Paper
++        className={'mt-1 flex max-h-[320px] w-[300px] flex-col overflow-y-auto p-1'}
++        onMouseDown={(e) => e.preventDefault()}
++      >
++        {results.length ? results.map((view, index) => (
++          <div
++            key={view.view_id}
++            onMouseEnter={() => setSelected(index)}
++            onClick={() => pick(view)}
++            className={`flex min-h-[32px] cursor-pointer items-center gap-2 rounded px-2 text-sm ${index === selected ? 'bg-fill-list-hover' : ''}`}
++          >
++            <PageIcon view={view} className={'flex h-5 w-5 min-w-5 items-center justify-center'} />
++            <span className={'truncate'}>{plainName(view.name) || t('menuAppHeader.defaultNewPageName')}</span>
++          </div>
++        )) : (
++          <div className={'flex items-center justify-center p-2 text-sm text-text-caption'}>
++            {t('findAndReplace.noResult')}
++          </div>
++        )}
++      </Paper>
++    </Popper>
++  );
++
++  return { update, close, onKeyDown, element, open };
++}
++
++export default useReferencePicker;
+diff --git a/src/components/app/DatabaseView.tsx b/src/components/app/DatabaseView.tsx
+index fa74fe3..8ed620a 100644
+--- a/src/components/app/DatabaseView.tsx
++++ b/src/components/app/DatabaseView.tsx
+@@ -10,7 +10,7 @@ import CalendarSkeleton from '@/components/_shared/skeleton/CalendarSkeleton';
+ import DocumentSkeleton from '@/components/_shared/skeleton/DocumentSkeleton';
+ import GridSkeleton from '@/components/_shared/skeleton/GridSkeleton';
+ import KanbanSkeleton from '@/components/_shared/skeleton/KanbanSkeleton';
+-import { useAppOutline } from '@/components/app/app.hooks';
++import { useAppHandlers, useAppOutline } from '@/components/app/app.hooks';
+ import { Database } from '@/components/database';
+ import React, { Suspense, useCallback, useMemo } from 'react';
+ import { useSearchParams } from 'react-router-dom';
+@@ -19,6 +19,9 @@ import ViewMetaPreview from 'src/components/view-meta/ViewMetaPreview';
+ function DatabaseView({ viewMeta, uploadFile, ...props }: ViewComponentProps) {
+   const [search, setSearch] = useSearchParams();
+   const outline = useAppOutline();
++  // Added by the AppFlowy Home Assistant add-on: row pages load their document
++  // body through the collab endpoint (it is not a folder view).
++  const { loadRowDocument } = useAppHandlers();
+   const iidIndex = viewMeta.viewId;
+   const view = useMemo(() => {
+     if(!outline || !iidIndex) return;
+@@ -100,6 +103,8 @@ function DatabaseView({ viewMeta, uploadFile, ...props }: ViewComponentProps) {
+           visibleViewIds={visibleViewIds}
+           onChangeView={handleChangeView}
+           onOpenRow={handleNavigateToRow}
++          loadRowDocument={loadRowDocument}
++          uploadFile={uploadFile}
+         />
+       </Suspense>
+     </div>
+diff --git a/src/components/app/app.hooks.tsx b/src/components/app/app.hooks.tsx
+index 322b2cd..e84973b 100644
+--- a/src/components/app/app.hooks.tsx
++++ b/src/components/app/app.hooks.tsx
+@@ -16,6 +16,7 @@ import {
+   UserWorkspaceInfo,
+   View,
+   ViewLayout,
++  YDoc,
+   YjsDatabaseKey,
+   YjsEditorKey,
+   YSharedRoot,
+@@ -35,6 +36,7 @@ export interface AppContextType {
+   toView: (viewId: string, blockId?: string, keepSearch?: boolean) => Promise<void>;
+   loadViewMeta: LoadViewMeta;
+   createRowDoc?: CreateRowDoc;
++  loadRowDocument?: (documentId: string) => Promise<YDoc>;
+   loadView: LoadView;
+   outline?: View[];
+   viewId?: string;
+@@ -287,9 +289,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+           throw new Error('Failed to create row doc');
+         }
+ 
++        // Added by the AppFlowy Home Assistant add-on: upstream registered the
++        // local cache key ({uid}_{ws}_{view}_rows_{rowId}) as the collab id, so
++        // row changes could never reach the server. The collab id is the row id.
++        const rowId = rowKey.split('_rows_').pop() || rowKey;
++
+         service.registerDocUpdate(doc, {
+           workspaceId: currentWorkspaceId,
+-          objectId: rowKey,
++          objectId: rowId,
+           collabType: Types.DatabaseRow,
+         });
+ 
+@@ -302,6 +309,24 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+     [currentWorkspaceId, service],
+   );
+ 
++  // Added by the AppFlowy Home Assistant add-on: a row's document body is a
++  // plain Document collab, not a folder view, so page-view can't load it.
++  const loadRowDocument = useCallback(async(documentId: string) => {
++    if(!currentWorkspaceId || !service) {
++      throw new Error('Failed to load row document');
++    }
++
++    const doc = await service.getRowDocument(currentWorkspaceId, documentId);
++
++    service.registerDocUpdate(doc, {
++      workspaceId: currentWorkspaceId,
++      objectId: documentId,
++      collabType: Types.Document,
++    });
++
++    return doc;
++  }, [currentWorkspaceId, service]);
++
+   const loadUserWorkspaceInfo = useCallback(async() => {
+     if(!service) return;
+     try {
+@@ -685,6 +710,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+       toView,
+       loadViewMeta,
+       createRowDoc,
++      loadRowDocument,
+       loadView,
+       loadFavoriteViews,
+       loadRecentViews,
+@@ -843,6 +869,7 @@ export function useAppHandlers() {
+     toView: context.toView,
+     loadViewMeta: context.loadViewMeta,
+     createRowDoc: context.createRowDoc,
++    loadRowDocument: context.loadRowDocument,
+     loadView: context.loadView,
+     appendBreadcrumb: context.appendBreadcrumb,
+     onChangeWorkspace: context.onChangeWorkspace,
+diff --git a/src/components/app/outline/ViewItem.tsx b/src/components/app/outline/ViewItem.tsx
+index f059a00..eb6f6d3 100644
+--- a/src/components/app/outline/ViewItem.tsx
++++ b/src/components/app/outline/ViewItem.tsx
+@@ -5,6 +5,7 @@ import { Origins } from '@/components/_shared/popover';
+ import PageIcon from '@/components/_shared/view-icon/PageIcon';
+ import { useAppHandlers, useAppViewId } from '@/components/app/app.hooks';
+ import { Tooltip } from '@mui/material';
++import { plainName } from '@/utils/referenceMarker';
+ import React, { lazy, Suspense, useCallback, useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+ 
+@@ -95,13 +96,13 @@ function ViewItem({ view, width, level = 0, renderExtra, expandIds, toggleExpand
+ 
+         </div>
+         <Tooltip
+-          title={view.layout === ViewLayout.AIChat ? 'View the chat history in app' : view.name}
++          title={view.layout === ViewLayout.AIChat ? 'View the chat history in app' : plainName(view.name)}
+           disableInteractive={true}
+         >
+           <div
+             className={'flex flex-1 overflow-hidden items-center gap-1 text-sm'}
+           >
+-            <div className={'w-full truncate'}>{view.name.trim() || t('menuAppHeader.defaultNewPageName')}</div>
++            <div className={'w-full truncate'}>{plainName(view.name).trim() || t('menuAppHeader.defaultNewPageName')}</div>
+           </div>
+         </Tooltip>
+         {renderExtra && renderExtra({ hovered, view })}
+diff --git a/src/components/database/Database.tsx b/src/components/database/Database.tsx
+index 2e503cd..115d555 100644
+--- a/src/components/database/Database.tsx
++++ b/src/components/database/Database.tsx
+@@ -4,6 +4,7 @@ import {
+   CreateRowDoc,
+   LoadView,
+   LoadViewMeta, RowId, UIVariant,
++  View,
+   YDatabase,
+   YDoc,
+   YjsDatabaseKey,
+@@ -37,6 +38,11 @@ export interface Database2Props {
+   isDocumentBlock?: boolean;
+   scrollLeft?: number;
+   showActions?: boolean;
++  // Added by the AppFlowy Home Assistant add-on: editing of the row page.
++  loadRowDocument?: (documentId: string) => Promise<YDoc>;
++  loadViews?: () => Promise<View[] | undefined>;
++  openPageModal?: (viewId: string) => void;
++  uploadFile?: (file: File) => Promise<string>;
+ }
+ 
+ function Database({
+@@ -60,6 +66,10 @@ function Database({
+   scrollLeft,
+   isDocumentBlock,
+   showActions,
++  loadRowDocument,
++  loadViews,
++  openPageModal,
++  uploadFile,
+ }: Database2Props) {
+   const database = doc.getMap(YjsEditorKey.data_section)?.get(YjsEditorKey.database) as YDatabase;
+   const view = database.get(YjsDatabaseKey.views).get(iidIndex);
+@@ -138,6 +148,11 @@ function Database({
+         isDocumentBlock={isDocumentBlock}
+         onRendered={onRendered}
+         showActions={showActions}
++        rowReadOnly={readOnly}
++        loadRowDocument={loadRowDocument}
++        loadViews={loadViews}
++        openPageModal={openPageModal}
++        uploadFile={uploadFile}
+       >
+         {rowId ? (
+           <DatabaseRow
+diff --git a/src/components/database/components/cell/text/TextCell.tsx b/src/components/database/components/cell/text/TextCell.tsx
+index 62a75fb..12cef3b 100644
+--- a/src/components/database/components/cell/text/TextCell.tsx
++++ b/src/components/database/components/cell/text/TextCell.tsx
+@@ -1,5 +1,6 @@
+ import { useReadOnly } from '@/application/database-yjs';
+ import { CellProps, TextCell as TextCellType } from '@/application/database-yjs/cell.type';
++import ReferenceText from '@/components/_shared/reference/ReferenceText';
+ import React from 'react';
+ 
+ export function TextCell ({ cell, style, placeholder }: CellProps<TextCellType>) {
+@@ -19,7 +20,8 @@ export function TextCell ({ cell, style, placeholder }: CellProps<TextCellType>)
+       style={style}
+       className={`text-cell w-full leading-[1.2] ${readOnly ? 'select-auto' : ''}`}
+     >
+-      {cell?.data}
++      {/* Changed by the AppFlowy Home Assistant add-on: `[[Name|view-id]]` markers render as page references. */}
++      <ReferenceText text={cell?.data} />
+     </div>
+   );
+ }
+diff --git a/src/components/database/components/database-row/DatabaseRowSubDocument.tsx b/src/components/database/components/database-row/DatabaseRowSubDocument.tsx
+index f86ac84..98f55af 100644
+--- a/src/components/database/components/database-row/DatabaseRowSubDocument.tsx
++++ b/src/components/database/components/database-row/DatabaseRowSubDocument.tsx
+@@ -1,41 +1,75 @@
+-import { YDoc } from '@/application/types';
+-import { useDatabaseContext, useReadOnly, useRowMetaSelector } from '@/application/database-yjs';
++import { CollabOrigin, YDoc } from '@/application/types';
++import {
++  metaIdFromRowId,
++  RowMetaKey,
++  useDatabaseContext,
++  useRowDocMap,
++  useRowMetaSelector,
++  useRowReadOnly,
++} from '@/application/database-yjs';
++import { setRowDocumentNotEmpty } from '@/application/database-yjs/row-write';
+ import EditorSkeleton from '@/components/_shared/skeleton/EditorSkeleton';
+ import { Editor } from '@/components/editor';
+ import React, { useCallback, useEffect, useState } from 'react';
+ 
+ export function DatabaseRowSubDocument({ rowId }: { rowId: string }) {
+   const meta = useRowMetaSelector(rowId);
+-  const readOnly = useReadOnly();
+-  const documentId = meta?.documentId;
++  // Changed by the AppFlowy Home Assistant add-on: upstream used useReadOnly(),
++  // which is always true, and loaded the body through loadView (page-view),
++  // which fails for row documents. The body is now loaded as a Document
++  // collab and is editable on the row page, with the page list the mention
++  // panel needs.
++  const readOnly = useRowReadOnly();
++  // The document id is derived from the row id (uuid v5), so rows whose meta
++  // map was never written still have one.
++  const documentId = meta?.documentId || metaIdFromRowId(rowId)(RowMetaKey.DocumentId);
+   const context = useDatabaseContext();
+   const loadView = context.loadView;
++  const loadRowDocument = context.loadRowDocument;
+   const createRowDoc = context.createRowDoc;
+   const navigateToView = context.navigateToView;
+   const loadViewMeta = context.loadViewMeta;
+   const workspaceId = context.workspaceId;
++  const rowDoc = useRowDocMap()?.[rowId];
+ 
+   const [loading, setLoading] = useState(true);
+   const [doc, setDoc] = useState<YDoc | null>(null);
+ 
+   const handleOpenDocument = useCallback(async() => {
+-    if(!loadView || !documentId) return;
++    if(!documentId) return;
++    const load = loadRowDocument || (loadView ? (id: string) => loadView(id, true) : undefined);
++
++    if(!load) return;
+     try {
+       setDoc(null);
+-      const doc = await loadView(documentId, true);
++      const doc = await load(documentId);
+ 
+       setDoc(doc);
+     } catch(e) {
+       console.error(e);
+       // haven't created by client, ignore error and show empty
+     }
+-  }, [loadView, documentId]);
++  }, [loadRowDocument, loadView, documentId]);
+ 
+   useEffect(() => {
+     setLoading(true);
+     void handleOpenDocument().then(() => setLoading(false));
+   }, [handleOpenDocument]);
+ 
++  // The desktop app shows a card's document icon from the row meta flag.
++  useEffect(() => {
++    if(!doc || !rowDoc || readOnly) return;
++    const onUpdate = (_: Uint8Array, origin: unknown) => {
++      if(origin === CollabOrigin.Remote) return;
++      setRowDocumentNotEmpty(rowDoc, rowId);
++    };
++
++    doc.on('update', onUpdate);
++    return () => {
++      doc.off('update', onUpdate);
++    };
++  }, [doc, rowDoc, rowId, readOnly]);
++
+   if(loading) {
+     return (
+       <EditorSkeleton />
+@@ -53,6 +87,9 @@ export function DatabaseRowSubDocument({ rowId }: { rowId: string }) {
+       createRowDoc={createRowDoc}
+       readOnly={readOnly}
+       loadView={loadView}
++      loadViews={context.loadViews}
++      openPageModal={context.openPageModal}
++      uploadFile={context.uploadFile}
+     />
+   );
+ }
+diff --git a/src/components/database/components/header/DatabaseRowHeader.tsx b/src/components/database/components/header/DatabaseRowHeader.tsx
+index 7746e98..d2a2146 100644
+--- a/src/components/database/components/header/DatabaseRowHeader.tsx
++++ b/src/components/database/components/header/DatabaseRowHeader.tsx
+@@ -1,4 +1,15 @@
+-import { RowMeta, useCellSelector, usePrimaryFieldId, useRowMetaSelector } from '@/application/database-yjs';
++import {
++  FieldType,
++  RowMeta,
++  useCellSelector,
++  usePrimaryFieldId,
++  useRowDocMap,
++  useRowMetaSelector,
++  useRowReadOnly,
++} from '@/application/database-yjs';
++import { updateRowCell } from '@/application/database-yjs/row-write';
++import { notify } from '@/components/_shared/notify';
++import { plainName } from '@/utils/referenceMarker';
+ import { AppendBreadcrumb, RowCoverType, ViewIconType, ViewLayout } from '@/application/types';
+ import Title from '@/components/database/components/header/Title';
+ import { getScrollParent } from '@/components/global-comment/utils';
+@@ -63,7 +74,7 @@ function DatabaseRowHeader({ rowId, appendBreadcrumb }: { rowId: string; appendB
+     appendBreadcrumb?.({
+       children: [],
+       extra: null, is_private: false, is_published: false, layout: ViewLayout.Document, view_id: rowId,
+-      name: cell?.data as string,
++      name: plainName(cell?.data as string),
+       icon: meta?.icon ? {
+         ty: ViewIconType.Emoji,
+         value: meta.icon,
+@@ -72,6 +83,19 @@ function DatabaseRowHeader({ rowId, appendBreadcrumb }: { rowId: string; appendB
+ 
+   }, [appendBreadcrumb, cell?.data, meta, rowId]);
+ 
++  // Added by the AppFlowy Home Assistant add-on: editable row title.
++  const readOnly = useRowReadOnly();
++  const rowDoc = useRowDocMap()?.[rowId];
++  const handleRename = useCallback((name: string) => {
++    if(!rowDoc || !fieldId) return;
++    try {
++      updateRowCell(rowDoc, fieldId, FieldType.RichText, name);
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch(e: any) {
++      notify.error(e.message);
++    }
++  }, [rowDoc, fieldId]);
++
+   useEffect(() => {
+     return () => {
+       appendBreadcrumb?.(undefined);
+@@ -122,6 +146,7 @@ function DatabaseRowHeader({ rowId, appendBreadcrumb }: { rowId: string; appendB
+     <Title
+       icon={meta?.icon}
+       name={cell?.data as string}
++      onRename={!readOnly && rowDoc && fieldId ? handleRename : undefined}
+     />
+   </div>;
+ }
+diff --git a/src/components/database/components/header/Title.tsx b/src/components/database/components/header/Title.tsx
+index 4549823..de4cf3e 100644
+--- a/src/components/database/components/header/Title.tsx
++++ b/src/components/database/components/header/Title.tsx
+@@ -1,17 +1,42 @@
+-import React from 'react';
++import ReferenceInput from '@/components/_shared/reference/ReferenceInput';
++import ReferenceText from '@/components/_shared/reference/ReferenceText';
++import React, { useState } from 'react';
+ import { useTranslation } from 'react-i18next';
+ 
+-export function Title ({ icon, name }: { icon?: string; name?: string }) {
++// Changed by the AppFlowy Home Assistant add-on: the row title can be edited
++// on an editable row page and may contain `[[Name|view-id]]` page references.
++export function Title ({ icon, name, onRename }: {
++  icon?: string;
++  name?: string;
++  onRename?: (name: string) => void;
++}) {
+   const { t } = useTranslation();
++  const [editing, setEditing] = useState(false);
+ 
+   return (
+     <div className={'flex w-full flex-col py-4 mt-10 max-sm:px-6 px-24'}>
+       <div className={'flex w-full items-center'}>
+-        <div className={'flex gap-2 text-3xl'}>
++        <div className={'flex w-full min-w-0 gap-2 text-3xl'}>
+           {icon ? <div>{icon}</div> : null}
+-          <div
+-            className={`font-bold ${!name ? 'text-text-placeholder' : 'text-text-title'}`}
+-          >{name || t('document.title.placeholder')}</div>
++          {onRename && editing ? (
++            <ReferenceInput
++              value={name || ''}
++              className={'font-bold text-text-title'}
++              placeholder={t('document.title.placeholder')}
++              onCommit={(value) => {
++                setEditing(false);
++                if (value !== (name || '')) onRename(value);
++              }}
++              onCancel={() => setEditing(false)}
++            />
++          ) : (
++            <div
++              onClick={() => onRename && setEditing(true)}
++              className={`min-w-0 break-words font-bold ${!name ? 'text-text-placeholder' : 'text-text-title'} ${onRename ? 'cursor-text' : ''}`}
++            >
++              <ReferenceText text={name} placeholder={t('document.title.placeholder')} />
++            </div>
++          )}
+         </div>
+       </div>
+     </div>
+diff --git a/src/components/database/components/property/cheklist/ChecklistProperty.tsx b/src/components/database/components/property/cheklist/ChecklistProperty.tsx
+index 3a5b3fa..27c79c4 100644
+--- a/src/components/database/components/property/cheklist/ChecklistProperty.tsx
++++ b/src/components/database/components/property/cheklist/ChecklistProperty.tsx
+@@ -1,32 +1,145 @@
+-import { parseChecklistData } from '@/application/database-yjs';
++import { parseChecklistData, SelectOptionColor, useRowDocMap, useRowReadOnly } from '@/application/database-yjs';
+ import { CellProps, ChecklistCell as CellType } from '@/application/database-yjs/cell.type';
++import { ChecklistData, generateOptionId, updateChecklistCell } from '@/application/database-yjs/row-write';
++import ReferenceInput from '@/components/_shared/reference/ReferenceInput';
++import ReferenceText from '@/components/_shared/reference/ReferenceText';
+ import { ChecklistCell } from '@/components/database/components/cell/checklist';
+-import React, { useMemo } from 'react';
++import { notify } from '@/components/_shared/notify';
++import React, { useCallback, useMemo, useState } from 'react';
++import { useTranslation } from 'react-i18next';
+ import { ReactComponent as CheckboxCheckSvg } from '@/assets/icons/check_filled.svg';
+ import { ReactComponent as CheckboxUncheckSvg } from '@/assets/icons/uncheck.svg';
++import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
++import { ReactComponent as AddIcon } from '@/assets/icons/plus.svg';
+ 
++// Changed by the AppFlowy Home Assistant add-on: upstream v0.1.18 only displays
++// checklists. On an editable row page, items can be ticked, added, renamed and
++// deleted; item names may contain `[[Name|view-id]]` page references (type
++// `[[` or `@` to pick a page).
+ export function ChecklistProperty(props: CellProps<CellType>) {
+-  const { cell } = props;
++  const { cell, fieldId, rowId } = props;
++  const { t } = useTranslation();
++  const readOnly = useRowReadOnly();
++  const rowDoc = useRowDocMap()?.[rowId];
++  const [editingId, setEditingId] = useState<string | null>(null);
++  const [adding, setAdding] = useState(false);
+   const data = useMemo(() => {
+     return parseChecklistData(cell?.data ?? '');
+   }, [cell?.data]);
+ 
+   const options = data?.options;
+   const selectedOptions = data?.selectedOptionIds;
++  const editable = !readOnly && Boolean(rowDoc);
++
++  const write = useCallback((change: (current: ChecklistData) => ChecklistData) => {
++    if(!rowDoc) return;
++    try {
++      updateChecklistCell(rowDoc, fieldId, change({
++        options: data?.options || [],
++        selected_option_ids: data?.selectedOptionIds || [],
++      }));
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch(e: any) {
++      notify.error(e.message);
++    }
++  }, [rowDoc, fieldId, data]);
++
++  const toggle = (id: string) => write(({ options, selected_option_ids }) => ({
++    options,
++    selected_option_ids: selected_option_ids.includes(id)
++      ? selected_option_ids.filter((selected) => selected !== id)
++      : [...selected_option_ids, id],
++  }));
++
++  const rename = (id: string, name: string) => {
++    setEditingId(null);
++    if(!name) return;
++    write(({ options, selected_option_ids }) => ({
++      options: options.map((option) => option.id === id ? { ...option, name } : option),
++      selected_option_ids,
++    }));
++  };
++
++  const remove = (id: string) => write(({ options, selected_option_ids }) => ({
++    options: options.filter((option) => option.id !== id),
++    selected_option_ids: selected_option_ids.filter((selected) => selected !== id),
++  }));
++
++  const add = (name: string) => {
++    if(!name) return;
++    write(({ options, selected_option_ids }) => ({
++      options: [...options, { id: generateOptionId(), name, color: SelectOptionColor.Purple }],
++      selected_option_ids,
++    }));
++  };
+ 
+   return (
+     <div className={'flex w-full flex-col gap-2 py-2'}>
+       <ChecklistCell {...props} />
+       {options?.map((option) => {
+         const isSelected = selectedOptions?.includes(option.id);
++        const Icon = isSelected ? CheckboxCheckSvg : CheckboxUncheckSvg;
+ 
+         return (
+-          <div key={option.id} className={'flex items-center gap-2 text-xs font-medium'}>
+-            {isSelected ? <CheckboxCheckSvg className={'h-5 w-5'} /> : <CheckboxUncheckSvg className={'h-5 w-5'} />}
+-            <div>{option.name}</div>
++          <div key={option.id} className={'group flex min-h-[24px] items-center gap-2 text-xs font-medium'}>
++            {editable ? (
++              <button
++                type={'button'}
++                className={'flex h-5 w-5 shrink-0 items-center justify-center'}
++                onClick={() => toggle(option.id)}
++              >
++                <Icon className={'h-5 w-5'} />
++              </button>
++            ) : <Icon className={'h-5 w-5 shrink-0'} />}
++            {editable && editingId === option.id ? (
++              <ReferenceInput
++                value={option.name}
++                onCommit={(name) => rename(option.id, name)}
++                onCancel={() => setEditingId(null)}
++                placeholder={t('grid.checklist.taskHint')}
++              />
++            ) : (
++              <div
++                className={`min-w-0 flex-1 break-words ${editable ? 'cursor-text' : ''}`}
++                onClick={() => editable && setEditingId(option.id)}
++              >
++                <ReferenceText text={option.name} />
++              </div>
++            )}
++            {editable && editingId !== option.id && (
++              <button
++                type={'button'}
++                title={t('button.delete')}
++                className={'invisible flex h-5 w-5 shrink-0 items-center justify-center text-text-caption hover:text-function-error group-hover:visible'}
++                onClick={() => remove(option.id)}
++              >
++                <DeleteIcon className={'h-4 w-4'} />
++              </button>
++            )}
+           </div>
+         );
+       })}
++      {editable && (adding ? (
++        <div className={'flex min-h-[24px] items-center gap-2 text-xs font-medium'}>
++          <CheckboxUncheckSvg className={'h-5 w-5 shrink-0 opacity-50'} />
++          <ReferenceInput
++            value={''}
++            clearOnCommit
++            onCommit={add}
++            onCancel={() => setAdding(false)}
++            placeholder={t('grid.checklist.taskHint')}
++          />
++        </div>
++      ) : (
++        <button
++          type={'button'}
++          className={'flex min-h-[24px] items-center gap-2 text-xs text-text-caption hover:text-text-title'}
++          onClick={() => setAdding(true)}
++        >
++          <AddIcon className={'h-5 w-5'} />
++          {t('grid.checklist.addNew')}
++        </button>
++      ))}
+     </div>
+   );
+ }
+diff --git a/src/components/editor/components/leaf/mention/MentionPage.tsx b/src/components/editor/components/leaf/mention/MentionPage.tsx
+index 5957bcd..0082dbb 100644
+--- a/src/components/editor/components/leaf/mention/MentionPage.tsx
++++ b/src/components/editor/components/leaf/mention/MentionPage.tsx
+@@ -6,6 +6,7 @@ import { ReactComponent as LinkArrowOverlay } from '@/assets/icons/link_arrow.sv
+ import { ReactComponent as ParagraphIcon } from '@/assets/icons/paragraph.svg';
+ 
+ import { useEditorContext } from '@/components/editor/EditorContext';
++import { plainName } from '@/utils/referenceMarker';
+ import React, { useCallback, useEffect, useMemo, useState } from 'react';
+ import { useTranslation } from 'react-i18next';
+ import { ReactEditor, useReadOnly, useSlate } from 'slate-react';
+@@ -64,7 +65,7 @@ function MentionPage({
+ 
+   useEffect(() => {
+     void (async () => {
+-      const pageName = meta?.name || t('menuAppHeader.defaultNewPageName');
++      const pageName = plainName(meta?.name) || t('menuAppHeader.defaultNewPageName');
+ 
+       if (blockId) {
+         if (currentViewId === pageId) {
+diff --git a/src/components/editor/components/panels/mention-panel/MentionPanel.tsx b/src/components/editor/components/panels/mention-panel/MentionPanel.tsx
+index 4252b62..478852f 100644
+--- a/src/components/editor/components/panels/mention-panel/MentionPanel.tsx
++++ b/src/components/editor/components/panels/mention-panel/MentionPanel.tsx
+@@ -9,6 +9,7 @@ import { useEditorContext } from '@/components/editor/EditorContext';
+ import { Button, Divider } from '@mui/material';
+ import { PopoverOrigin } from '@mui/material/Popover/Popover';
+ import { sortBy, uniqBy } from 'lodash-es';
++import { plainName } from '@/utils/referenceMarker';
+ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+ import { useTranslation } from 'react-i18next';
+ import { Transforms } from 'slate';
+@@ -121,7 +122,7 @@ export function MentionPanel() {
+   const filteredViews = useMemo(() => {
+     return views.filter(view => {
+       if(!searchText) return true;
+-      return view.name.toLowerCase().includes(searchText.toLowerCase());
++      return plainName(view.name).toLowerCase().includes(searchText.toLowerCase());
+     });
+   }, [searchText, views]);
+ 
+@@ -381,7 +382,7 @@ export function MentionPanel() {
+                     className={`justify-start truncate scroll-m-2 min-h-[32px] hover:bg-fill-list-hover ${selectedOption?.index === index && selectedOption?.category === MentionTag.Page ? 'bg-fill-list-hover' : ''}`}
+                     onClick={() => handleSelectedPage(view.view_id)}
+                   >
+-                    {view.name || t('menuAppHeader.defaultNewPageName')}
++                    {plainName(view.name) || t('menuAppHeader.defaultNewPageName')}
+                   </Button>
+                 ))}
+               </div>
+diff --git a/src/components/view-meta/TitleEditable.tsx b/src/components/view-meta/TitleEditable.tsx
+index e9fa6a8..72a706d 100644
+--- a/src/components/view-meta/TitleEditable.tsx
++++ b/src/components/view-meta/TitleEditable.tsx
+@@ -1,5 +1,6 @@
++import useReferencePicker from '@/components/_shared/reference/useReferencePicker';
+ import { debounce } from 'lodash-es';
+-import React, { memo, useEffect, useMemo, useRef } from 'react';
++import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+ import { useTranslation } from 'react-i18next';
+ 
+ const isCursorAtEnd = (el: HTMLDivElement) => {
+@@ -28,11 +29,13 @@ function TitleEditable({
+   name,
+   onUpdateName,
+   onEnter,
++  onBlur,
+ }: {
+   viewId: string;
+   name: string;
+   onUpdateName: (name: string) => void;
+   onEnter?: (text: string) => void;
++  onBlur?: () => void;
+ }) {
+   const { t } = useTranslation();
+   const debounceUpdateName = useMemo(() => {
+@@ -40,6 +43,29 @@ function TitleEditable({
+   }, [onUpdateName]);
+   const contentRef = useRef<HTMLDivElement>(null);
+ 
++  // Added by the AppFlowy Home Assistant add-on: `[[` or `@` opens a page
++  // picker that inserts a `[[Name|view-id]]` reference into the title.
++  const handlePick = useCallback((start: number, end: number, marker: string) => {
++    const el = contentRef.current;
++
++    if (!el) return;
++    const text = el.textContent || '';
++    const next = `${text.slice(0, start)}${marker} ${text.slice(end)}`;
++    const caret = start + marker.length + 1;
++
++    el.textContent = next;
++    debounceUpdateName(next);
++    el.focus();
++    const range = document.createRange();
++    const sel = window.getSelection();
++
++    range.setStart(el.childNodes[0], Math.min(caret, next.length));
++    range.collapse(true);
++    sel?.removeAllRanges();
++    sel?.addRange(range);
++  }, [debounceUpdateName]);
++  const picker = useReferencePicker({ onPick: handlePick });
++
+   useEffect(() => {
+     if (contentRef.current) {
+       contentRef.current.textContent = name;
+@@ -86,6 +112,7 @@ function TitleEditable({
+   }, []);
+ 
+   return (
++    <>
+     <div
+       ref={contentRef}
+       suppressContentEditableWarning={true}
+@@ -104,13 +131,18 @@ function TitleEditable({
+         if (contentRef.current.innerHTML === '<br>') {
+           contentRef.current.innerHTML = '';
+         }
++
++        picker.update(contentRef.current.textContent || '', getCursorOffset(), contentRef.current);
+       }}
+       onBlur={() => {
+         if (!contentRef.current) return;
++        picker.close();
+         onUpdateName(contentRef.current.textContent || '');
++        onBlur?.();
+       }}
+       onKeyDown={(e) => {
+         if (!contentRef.current) return;
++        if (picker.onKeyDown(e)) return;
+         if (e.key === 'Enter' || e.key === 'Escape') {
+           e.preventDefault();
+           if (e.key === 'Enter') {
+@@ -135,7 +167,8 @@ function TitleEditable({
+         }
+       }}
+     />
+-
++    {picker.element}
++    </>
+   );
+ }
+ 
+diff --git a/src/components/view-meta/ViewMetaPreview.tsx b/src/components/view-meta/ViewMetaPreview.tsx
+index 4013c57..f4ff8b2 100644
+--- a/src/components/view-meta/ViewMetaPreview.tsx
++++ b/src/components/view-meta/ViewMetaPreview.tsx
+@@ -1,6 +1,8 @@
+ import { CoverType, ViewIconType, ViewLayout, ViewMetaCover, ViewMetaIcon, ViewMetaProps } from '@/application/types';
+ import { notify } from '@/components/_shared/notify';
++import ReferenceText from '@/components/_shared/reference/ReferenceText';
+ import TitleEditable from '@/components/view-meta/TitleEditable';
++import { hasReferences } from '@/utils/referenceMarker';
+ import ViewCover from '@/components/view-meta/ViewCover';
+ import React, { lazy, Suspense, useCallback, useEffect, useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+@@ -63,6 +65,7 @@ export function ViewMetaPreview({
+   const { t } = useTranslation();
+ 
+   const [isHover, setIsHover] = React.useState(false);
++  const [editingTitle, setEditingTitle] = React.useState(false);
+ 
+   const handleUpdateIcon = React.useCallback(async(icon: { ty: ViewIconType, value: string }) => {
+     if(!updatePage || !viewId) return;
+@@ -215,11 +218,23 @@ export function ViewMetaPreview({
+               </div>
+               : null
+             }
+-            {!readOnly && viewId ? <TitleEditable
++            {/* Changed by the AppFlowy Home Assistant add-on: titles with
++                `[[Name|view-id]]` markers show page references until clicked. */}
++            {!readOnly && viewId && hasReferences(name) && !editingTitle ? <div
++                style={{
++                  wordBreak: 'break-word',
++                }}
++                className={'relative flex-1 break-words whitespace-pre-wrap cursor-text'}
++                onClick={() => setEditingTitle(true)}
++              >
++                <ReferenceText text={name} />
++              </div> :
++              !readOnly && viewId ? <TitleEditable
+                 viewId={viewId}
+                 name={name || ''}
+                 onUpdateName={handleUpdateName}
+                 onEnter={onEnter}
++                onBlur={() => setEditingTitle(false)}
+               /> :
+               <div
+                 style={{
+@@ -229,7 +244,7 @@ export function ViewMetaPreview({
+                 data-placeholder={t('menuAppHeader.defaultNewPageName')}
+                 contentEditable={false}
+               >
+-                {name}
++                <ReferenceText text={name} />
+               </div>
+             }
+           </h1>
+diff --git a/src/utils/referenceMarker.ts b/src/utils/referenceMarker.ts
+new file mode 100644
+index 0000000..de7a82c
+--- /dev/null
++++ b/src/utils/referenceMarker.ts
+@@ -0,0 +1,72 @@
++// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
++// v0.1.18): page references inside plain-text names (page titles, row titles,
++// checklist items). They are stored as `[[Name|view-id]]`, since those names
++// are plain strings in the collab data; other clients show the raw marker.
++
++export type ReferenceSegment =
++  | { type: 'text'; text: string }
++  | { type: 'reference'; name: string; viewId: string };
++
++const MARKER = /\[\[([^\]|\n]+)\|([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\]\]/g;
++
++export function hasReferences (text?: string | null) {
++  if (!text) return false;
++  MARKER.lastIndex = 0;
++  return MARKER.test(text);
++}
++
++export function parseReferences (text?: string | null): ReferenceSegment[] {
++  if (!text) return [];
++  const segments: ReferenceSegment[] = [];
++  let last = 0;
++
++  MARKER.lastIndex = 0;
++  for (let match = MARKER.exec(text); match; match = MARKER.exec(text)) {
++    if (match.index > last) segments.push({ type: 'text', text: text.slice(last, match.index) });
++    segments.push({ type: 'reference', name: match[1].trim(), viewId: match[2].toLowerCase() });
++    last = match.index + match[0].length;
++  }
++
++  if (last < text.length) segments.push({ type: 'text', text: text.slice(last) });
++  return segments;
++}
++
++// The name with every marker replaced by the referenced page's name, for places
++// that can only show plain text (sidebar, breadcrumbs, browser tab, search).
++export function plainName (text?: string | null) {
++  if (!text) return text || '';
++  MARKER.lastIndex = 0;
++  return text.replace(MARKER, (_, name: string) => name.trim());
++}
++
++export function makeMarker (name: string, viewId: string) {
++  const clean = plainName(name).replace(/[[\]|\n]/g, ' ').replace(/\s+/g, ' ').trim();
++
++  return `[[${clean || viewId}|${viewId}]]`;
++}
++
++export enum ReferenceTrigger {
++  Brackets = '[[',
++  At = '@',
++}
++
++// The reference being typed right before the caret: `[[query` (anything but
++// brackets, pipes and line breaks) or `@query` (no whitespace, at a word start).
++export function findReferenceQuery (text: string, caret: number) {
++  const before = text.slice(0, caret);
++  const brackets = /\[\[([^[\]|\n]{0,60})$/.exec(before);
++
++  if (brackets) {
++    return { trigger: ReferenceTrigger.Brackets, query: brackets[1], start: brackets.index, end: caret };
++  }
++
++  const at = /(^|\s)@([^\s@[\]|]{0,60})$/.exec(before);
++
++  if (at) {
++    const start = at.index + at[1].length;
++
++    return { trigger: ReferenceTrigger.At, query: at[2], start, end: caret };
++  }
++
++  return null;
++}
