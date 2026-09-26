@@ -311,3 +311,11 @@
 - Fix: AppFlowy Web schickte Änderungen an Board-Zeilen unter einer internen Cache-Kennung statt
   der Zeilen-ID an den Server, sodass sie nie ankamen.
 - Umgesetzt als zweiter Patch `patches/appflowy-web-references.patch` auf AppFlowy Web `v0.1.18`.
+
+## 0.9.64-14
+
+- **Seitenauswahl zeigt die Trefferzahl und lässt sich erweitern.** Die Auswahl hinter `[[`/`@`
+  in Titeln, Kartentiteln und Checklisten zeigt oben, wie viele Seiten passen, und nach den
+  ersten 8 Einträgen "8 weitere anzeigen (N)" (auch per Pfeiltasten + Enter). Das `@`-Menü in
+  Dokumenten zeigt die Anzahl in der Überschrift; sein Knopf "… weitere Seiten" ist jetzt auch
+  auf Deutsch übersetzt.

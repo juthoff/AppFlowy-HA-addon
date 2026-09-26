@@ -1,3 +1,39 @@
+diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
+index 4cd45ea..413cf94 100644
+--- a/src/@types/translations/de-DE.json
++++ b/src/@types/translations/de-DE.json
+@@ -2060,7 +2060,8 @@
+       "deletedContent": "Dieser Inhalt existiert nicht oder wurde gelöscht",
+       "noAccess": "Kein Zugriff",
+       "deletedPage": "Gelöschte Seite",
+-      "trashHint": " - im Papierkorb"
++      "trashHint": " - im Papierkorb",
++      "morePages": "weitere Seiten"
+     },
+     "toolbar": {
+       "resetToDefaultFont": "Auf den Standard zurücksetzen"
+@@ -2688,6 +2689,8 @@
+     "useThisTemplate": "Verwenden Sie die Vorlage"
+   },
+   "web": {
++    "referencePages": "{{count}} Seiten",
++    "referenceShowMore": "{{count}} weitere anzeigen",
+     "signInWithPassword": "Mit Passwort anmelden",
+     "signInWithEmailCode": "Mit E-Mail-Code anmelden",
+     "invalidCredentials": "E-Mail-Adresse oder Passwort ungültig",
+diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
+index 8ce6b55..336c3f6 100644
+--- a/src/@types/translations/en.json
++++ b/src/@types/translations/en.json
+@@ -2670,6 +2670,8 @@
+     "useThisTemplate": "Use the template"
+   },
+   "web": {
++    "referencePages": "{{count}} pages",
++    "referenceShowMore": "Show {{count}} more",
+     "signInWithPassword": "Continue with password",
+     "signInWithEmailCode": "Continue with email code",
+     "invalidCredentials": "Invalid email or password",
 diff --git a/src/application/database-yjs/context.ts b/src/application/database-yjs/context.ts
 index 56e3fb3..4a98c32 100644
 --- a/src/application/database-yjs/context.ts
@@ -503,10 +539,10 @@ index 0000000..58a7662
 +export default ReferenceText;
 diff --git a/src/components/_shared/reference/useReferencePicker.tsx b/src/components/_shared/reference/useReferencePicker.tsx
 new file mode 100644
-index 0000000..2d515a8
+index 0000000..bf5cfc2
 --- /dev/null
 +++ b/src/components/_shared/reference/useReferencePicker.tsx
-@@ -0,0 +1,150 @@
+@@ -0,0 +1,183 @@
 +// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
 +// v0.1.18): a page picker for plain-text inputs. Typing `[[` or `@` opens it;
 +// choosing a page replaces the typed trigger with a `[[Name|view-id]]` marker.
@@ -520,7 +556,7 @@ index 0000000..2d515a8
 +import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 +import { useTranslation } from 'react-i18next';
 +
-+const MAX_RESULTS = 8;
++const PAGE_SIZE = 8;
 +
 +interface PickerState {
 +  query: string;
@@ -538,6 +574,7 @@ index 0000000..2d515a8
 +  const [state, setState] = useState<PickerState | null>(null);
 +  const [views, setViews] = useState<View[]>([]);
 +  const [selected, setSelected] = useState(0);
++  const [limit, setLimit] = useState(PAGE_SIZE);
 +  const open = Boolean(state && loadViews);
 +
 +  useEffect(() => {
@@ -555,17 +592,30 @@ index 0000000..2d515a8
 +    };
 +  }, [open, loadViews]);
 +
-+  const results = useMemo(() => {
++  const matches = useMemo(() => {
 +    const query = (state?.query || '').trim().toLowerCase();
 +
-+    return views
-+      .filter((view) => !query || plainName(view.name).toLowerCase().includes(query))
-+      .slice(0, MAX_RESULTS);
++    return views.filter((view) => !query || plainName(view.name).toLowerCase().includes(query));
 +  }, [views, state?.query]);
++  const results = useMemo(() => matches.slice(0, limit), [matches, limit]);
++  const remaining = matches.length - results.length;
++  // The "show more" entry is the last selectable option.
++  const optionCount = results.length + (remaining > 0 ? 1 : 0);
 +
 +  useEffect(() => {
 +    setSelected(0);
-+  }, [state?.query]);
++    setLimit(PAGE_SIZE);
++  }, [state?.query, open]);
++
++  const listRef = useRef<HTMLDivElement>(null);
++
++  useEffect(() => {
++    listRef.current?.querySelector(`[data-option-index="${selected}"]`)?.scrollIntoView({ block: 'nearest' });
++  }, [selected, limit]);
++
++  const showMore = useCallback(() => {
++    setLimit((limit) => limit + PAGE_SIZE);
++  }, []);
 +
 +  // Call after every input / caret change with the input's text and caret offset.
 +  const update = useCallback((text: string, caret: number, anchor: HTMLElement | null) => {
@@ -590,7 +640,7 @@ index 0000000..2d515a8
 +
 +  // Returns true when the key was handled by the picker.
 +  const onKeyDown = useCallback((e: React.KeyboardEvent) => {
-+    if (!open || !results.length) {
++    if (!open || !optionCount) {
 +      if (open && e.key === 'Escape') {
 +        e.preventDefault();
 +        setState(null);
@@ -603,16 +653,17 @@ index 0000000..2d515a8
 +    switch (e.key) {
 +      case 'ArrowDown':
 +        e.preventDefault();
-+        setSelected((i) => (i + 1) % results.length);
++        setSelected((i) => (i + 1) % optionCount);
 +        return true;
 +      case 'ArrowUp':
 +        e.preventDefault();
-+        setSelected((i) => (i - 1 + results.length) % results.length);
++        setSelected((i) => (i - 1 + optionCount) % optionCount);
 +        return true;
 +      case 'Enter':
 +      case 'Tab':
 +        e.preventDefault();
-+        pick(results[selected] || results[0]);
++        if (selected >= results.length) showMore();
++        else pick(results[selected] || results[0]);
 +        return true;
 +      case 'Escape':
 +        e.preventDefault();
@@ -621,7 +672,7 @@ index 0000000..2d515a8
 +      default:
 +        return false;
 +    }
-+  }, [open, results, selected, pick]);
++  }, [open, optionCount, results, selected, pick, showMore]);
 +
 +  const element = (
 +    <Popper
@@ -631,12 +682,19 @@ index 0000000..2d515a8
 +      style={{ zIndex: 1500 }}
 +    >
 +      <Paper
++        ref={listRef}
 +        className={'mt-1 flex max-h-[320px] w-[300px] flex-col overflow-y-auto p-1'}
 +        onMouseDown={(e) => e.preventDefault()}
 +      >
++        {matches.length > 0 && (
++          <div className={'px-2 py-1 text-xs text-text-caption'}>
++            {t('web.referencePages', { count: matches.length })}
++          </div>
++        )}
 +        {results.length ? results.map((view, index) => (
 +          <div
 +            key={view.view_id}
++            data-option-index={index}
 +            onMouseEnter={() => setSelected(index)}
 +            onClick={() => pick(view)}
 +            className={`flex min-h-[32px] cursor-pointer items-center gap-2 rounded px-2 text-sm ${index === selected ? 'bg-fill-list-hover' : ''}`}
@@ -647,6 +705,17 @@ index 0000000..2d515a8
 +        )) : (
 +          <div className={'flex items-center justify-center p-2 text-sm text-text-caption'}>
 +            {t('findAndReplace.noResult')}
++          </div>
++        )}
++        {remaining > 0 && (
++          <div
++            data-option-index={results.length}
++            onMouseEnter={() => setSelected(results.length)}
++            onClick={showMore}
++            className={`flex min-h-[32px] cursor-pointer items-center rounded px-2 text-sm text-text-caption ${selected === results.length ? 'bg-fill-list-hover' : ''}`}
++          >
++            {t('web.referenceShowMore', { count: Math.min(remaining, PAGE_SIZE) })}
++            {' '}({remaining})
 +          </div>
 +        )}
 +      </Paper>
@@ -1248,7 +1317,7 @@ index 5957bcd..0082dbb 100644
        if (blockId) {
          if (currentViewId === pageId) {
 diff --git a/src/components/editor/components/panels/mention-panel/MentionPanel.tsx b/src/components/editor/components/panels/mention-panel/MentionPanel.tsx
-index 4252b62..478852f 100644
+index 4252b62..a8c3bd2 100644
 --- a/src/components/editor/components/panels/mention-panel/MentionPanel.tsx
 +++ b/src/components/editor/components/panels/mention-panel/MentionPanel.tsx
 @@ -9,6 +9,7 @@ import { useEditorContext } from '@/components/editor/EditorContext';
@@ -1268,7 +1337,18 @@ index 4252b62..478852f 100644
      });
    }, [searchText, views]);
  
-@@ -381,7 +382,7 @@ export function MentionPanel() {
+@@ -359,7 +360,9 @@ export function MentionPanel() {
+         ref={ref}
+         className={'flex relative w-[320px] flex-col gap-2 max-h-[560px] p-2 appflowy-scroller overflow-y-auto'}
+       >
+-        <div className={'text-text-caption scroll-my-10 px-1'}>{t('inlineActions.recentPages')}</div>
++        <div className={'text-text-caption scroll-my-10 px-1'}>
++          {t('inlineActions.recentPages')} ({t('web.referencePages', { count: filteredViews.length })})
++        </div>
+         <div
+           data-option-category={MentionTag.Page}
+           className={'flex flex-col gap-2'}
+@@ -381,7 +384,7 @@ export function MentionPanel() {
                      className={`justify-start truncate scroll-m-2 min-h-[32px] hover:bg-fill-list-hover ${selectedOption?.index === index && selectedOption?.category === MentionTag.Page ? 'bg-fill-list-hover' : ''}`}
                      onClick={() => handleSelectedPage(view.view_id)}
                    >

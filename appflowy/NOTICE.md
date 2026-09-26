@@ -16,7 +16,8 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
   Kartenseite eines Boards mit Dokument, Titel und Checkliste; Korrektur der Zeilen-
   Synchronisation). Fügt `src/utils/referenceMarker.ts`,
   `src/application/database-yjs/row-write.ts` und `src/components/_shared/reference/` hinzu;
-  geänderte Dateien tragen den Vermerk "AppFlowy Home Assistant add-on".
+  geänderte Dateien tragen den Vermerk "AppFlowy Home Assistant add-on". Seit `0.9.64-14`
+  ergänzt der Patch außerdem Übersetzungen in `en`/`de-DE` (Seitenanzahl, "weitere anzeigen").
 - `gotrue`: `Secure`-Flag des Session-Cookies deaktiviert (siehe Dockerfile), MIT-Lizenz.
 
 | Komponente | Quelle | Referenz | Lizenz |
