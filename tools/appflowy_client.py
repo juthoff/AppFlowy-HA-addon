@@ -84,6 +84,13 @@ def norm(name):
     return re.sub(r"\s+", " ", n).strip()
 
 
+def norm_loose(name):
+    """norm() plus folding '-' and the zero-width space to plain whitespace.
+    Only used for Ausrüstung effect-target <-> building-name matching, kept
+    separate from norm() so identity/dedup for already-live pages is untouched."""
+    return norm((name or "").replace("​", " ").replace("-", " "))
+
+
 # ----------------------------------------------------------------------------
 # block builders (SerdeBlock JSON for append-block)
 # ----------------------------------------------------------------------------
@@ -368,6 +375,29 @@ def create_page_with_icon(af, state, kind, name, parent_id, icon_src=None, block
     url = fid = None
     if icon_src:
         url, fid = upload_icon(af, ws, vid, icon_src)
+    state.record(kind, name, parent_id, vid, icon_src, url, fid, [], extra)
+    if blocks:
+        af.append_verified(ws, vid, blocks)
+        state.append_blocks(vid, blocks)
+    return vid
+
+
+def upload_icon_local(af, ws, view_id, icon_rel_path):
+    """Upload a PNG already on disk at DATA_DIR/icon_rel_path (no network fetch)."""
+    content = (DATA_DIR / icon_rel_path).read_bytes()
+    url, fid = af.upload_blob(ws, view_id, content, "image/png")
+    af.set_icon_url(ws, view_id, url)
+    return url, fid
+
+
+def create_page_with_local_icon(af, state, kind, name, parent_id, icon_src=None, blocks=None, extra=None):
+    """Parallels create_page_with_icon, but icon_src is a path relative to
+    DATA_DIR (e.g. items.json's "icon" field) instead of a URL."""
+    ws = state.workspace
+    vid = af.create_page(ws, parent_id, name)
+    url = fid = None
+    if icon_src:
+        url, fid = upload_icon_local(af, ws, vid, icon_src)
     state.record(kind, name, parent_id, vid, icon_src, url, fid, [], extra)
     if blocks:
         af.append_verified(ws, vid, blocks)

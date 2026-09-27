@@ -9,8 +9,17 @@ Two phases so that every cross-reference can be resolved:
   verify   compare the live folder tree with state.json and the parsed data
 
 Sub-commands: sync-state | create | fill | parents | verify | all
-Options: --kinds ziv,geb,ketten,items,waren   --only NAME   --limit N
+Options: --kinds ziv,geb,ketten,items,waren,equip   --only NAME   --limit N
          --relink (create: trash + recreate the existing goods pages)   --offline
+         --refresh (fill: rewrite pages whose regenerated body differs)
+
+"equip" is the Ausrüstung section built from tools/anno1800_data/parsed/items.json
+(general equippable items, effects, and cross-references to the buildings/ships
+they affect — creating a stub page under "Sonstige Ziele" for any target that has
+no existing page). Because equip items cross-reference building pages, `fill
+--kinds equip` also re-fills the (already-created) building pages so the new
+"Beeinflusst durch Ausrüstung" back-link section gets added — use --refresh so
+already-filled buildings whose body actually changed get rewritten.
 
 Environment: AF_BASE, AF_EMAIL, AF_PASSWORD (see appflowy_client.py)
 """
@@ -22,14 +31,15 @@ import sys
 import time
 
 import appflowy_client as ac
-from appflowy_client import (AppFlowy, State, PARSED_DIR, fetch, norm, para, bullet, heading, divider,
-                             image, mention, join_runs, label_line, create_page_with_icon, append_section,
-                             replace_body, replace_tail)
+from appflowy_client import (AppFlowy, State, PARSED_DIR, fetch, norm, norm_loose, para, bullet, heading, divider,
+                             image, mention, join_runs, label_line, create_page_with_icon,
+                             create_page_with_local_icon, append_section, replace_body, replace_tail)
 
 SPACE, GAME = "Gaming", "Anno 1800"
 ROOT_NAMES = {"Region": "region_root", "Waren": "waren_root", "Zivilisationsstufen": "ziv_root",
               "Gebäude": "geb_root", "Produktionsketten": "ketten_root", "Tiere": "items_root",
-              "Artefakte": "items_root", "Pflanzen": "items_root", "Vorlagen": "vorlagen"}
+              "Artefakte": "items_root", "Pflanzen": "items_root", "Vorlagen": "vorlagen",
+              "Ausrüstung": "equip_root"}
 ITEM_KINDS = {"tiere": ("Tiere", "Zoo", "3dicons/gebaeude/icon_zoo.webp"),
               "artefakte": ("Artefakte", "Museum", "3dicons/gebaeude/icon_museum.webp"),
               "pflanzen": ("Pflanzen", "Botanischer Garten", "3dicons/gebaeude/icon_botanic_garden.webp")}
@@ -37,9 +47,46 @@ IMG = "https://www.annoinfo.de/images/anno_1800/"
 REGION_ALIAS = {"kap trelawney": "Alte Welt", "alte welt / kap trelawney": "Alte Welt"}
 CHUNK = 40
 
+# --- Ausrüstung (equip) scope: general items with an effect and/or a target,
+# excluding the zoo/museum/botanicgarden categories already covered by Tiere/
+# Artefakte/Pflanzen above.
+EQUIP_EXCLUDE_CATS = {"zoo", "museum", "botanicgarden"}
+EQUIP_CATEGORY_ORDER = ["guildhouse", "townhall", "harboroffice", "lodge", "shipspecialist",
+                        "warship", "airship", "vehicle", "steamship", "pavilion", "sailship"]
+EQUIP_TARGETS_PAGE = "Sonstige Ziele"
+
 
 def load(name):
     return json.loads((PARSED_DIR / f"{name}.json").read_text())
+
+
+def _dezwsp(s):
+    return s.replace("​", "") if isinstance(s, str) else s
+
+
+def kept_equip_items(items_raw):
+    """The 983 items.json entries worth a wiki page: has an effect and/or a
+    resolved target, and isn't one of the zoo/museum/botanicgarden categories
+    already covered by the existing Tiere/Artefakte/Pflanzen section.
+
+    Also strips the stray zero-width spaces present in some source strings
+    (item/target names, effect text) so they never surface in the wiki."""
+    out = []
+    for i in items_raw["items"]:
+        if i["category"] in EQUIP_EXCLUDE_CATS or not (i["effects"] or i["effect_targets"]):
+            continue
+        i = dict(i)
+        i["name"] = _dezwsp(i["name"])
+        i["rarity_label"] = _dezwsp(i["rarity_label"])
+        i["flavor_text"] = _dezwsp(i["flavor_text"])
+        i["effects"] = [_dezwsp(e) for e in i["effects"]]
+        if i["effect_targets"]:
+            et = dict(i["effect_targets"])
+            et["pool_label"] = _dezwsp(et["pool_label"])
+            et["targets"] = [_dezwsp(t) for t in et["targets"]]
+            i["effect_targets"] = et
+        out.append(i)
+    return out
 
 
 # ----------------------------------------------------------------------------
@@ -74,6 +121,9 @@ class Links:
                 b["page_name"] = b["name"]
         self.chains = {c["key"]: c for r in data["ketten"] for c in r["chains"]}
         self.unresolved = collections.Counter()
+        self._equip_building_by_loose = {}
+        for b in self.buildings:
+            self._equip_building_by_loose.setdefault(norm_loose(b["name"]), b["id"])
 
     # --- generic
     def vid(self, kind, name):
@@ -201,6 +251,22 @@ class Links:
     def set_ref(self, kind, key):
         return self.ref(self.by_extra("set", "key", f"{kind}:{key}"), self.set_name(kind, key))
 
+    # --- Ausrüstung (equip) effect targets -> existing building or a stub page
+    def equip_target_building(self, name):
+        return self._equip_building_by_loose.get(norm_loose(name))
+
+    def equip_target(self, name):
+        bid = self.equip_target_building(name)
+        if bid is not None:
+            return self.building(site_id=bid)
+        return self.by_extra("equip_target", "key", norm_loose(name))
+
+    def equip_target_ref(self, name):
+        return self.ref(self.equip_target(name), name.replace("​", ""))
+
+    def equip_item_ref(self, item_id, name):
+        return self.ref(self.by_extra("equip_item", "key", str(item_id)), name)
+
     def runs_with_mentions(self, runs):
         """Replace ware / building / level links inside parsed runs by mentions."""
         out = []
@@ -303,6 +369,28 @@ class Links:
         return uniq, bad
 
 
+def equip_reverse_index(equip_items, L):
+    """One pass over every kept item's resolved targets: buckets each target
+    name into either an existing building (forward+back-link data) or a new
+    stub page under "Sonstige Ziele". Computed once, shared by create_equip()
+    (which stub pages to make) and fill_all() (both link directions)."""
+    stub = {}                                      # norm_loose(name) -> {"display", "items": [(item, name)]}
+    by_building = collections.defaultdict(list)    # building_id -> [(item, target_name), ...]
+    for it in equip_items:
+        et = it["effect_targets"]
+        if not et:
+            continue
+        for t in et["targets"]:
+            bid = L.equip_target_building(t)
+            if bid is not None:
+                by_building[bid].append((it, t))
+            else:
+                key = norm_loose(t)
+                s = stub.setdefault(key, {"display": t.replace("​", ""), "items": []})
+                s["items"].append((it, t))
+    return stub, by_building
+
+
 # ----------------------------------------------------------------------------
 # body builders
 # ----------------------------------------------------------------------------
@@ -359,7 +447,7 @@ def body_level(lv, L):
     return [x for x in b if x]
 
 
-def body_building(bd, L, sets_by_building):
+def body_building(bd, L, sets_by_building, equip_by_building):
     b = prose(bd["prose"], L) or [para(bd.get("overview_info") or bd["name"])]
     b.append(para())
     regs = bd["regions"] or [x.strip() for x in bd["region_text"].split(",") if x.strip()]
@@ -399,6 +487,13 @@ def body_building(bd, L, sets_by_building):
         b += [divider(), heading(2, "Beeinflusst durch Items")]
         for kind, st, aff in sets:
             b.append(bullet(L.set_ref(kind, st["key"]), f" ({ITEM_KINDS[kind][0]}): " + "; ".join(aff["effects"])))
+    equip = equip_by_building.get(bd["id"], [])
+    if equip:
+        b += [divider(), heading(2, "Beeinflusst durch Ausrüstung")]
+        for it, target in sorted(equip, key=lambda p: p[0]["name"]):
+            eff = "; ".join(it["effects"])
+            b.append(bullet(L.equip_item_ref(it["id"], it["name"]),
+                            f" ({it['category_label']})" + (f": {eff}" if eff else "")))
     b += [divider(), para("Quelle: ", {"text": "annoinfo.de", "href": bd["url"]})]
     return [x for x in b if x]
 
@@ -453,6 +548,49 @@ def body_item(it, kind, set_key, L):
     if it["dlc"]:
         b.append(label_line("DLC", ", ".join(it["dlc"])))
     return [x for x in b if x]
+
+
+def body_equip_item(it, L):
+    b = []
+    if it["flavor_text"]:
+        b.append(para(it["flavor_text"]))
+    b.append(para())
+    b.append(label_line("Kategorie", L.ref(L.vid("equip_cat", it["category_label"]), it["category_label"])))
+    b.append(label_line("Seltenheit", it["rarity_label"].replace("​", "")))
+    b.append(label_line("Typ", "Aktiv" if it["sub_type"] == "active" else "Passiv"))
+    if it["item_type"]:
+        b.append(label_line("Art", it["item_type"]))
+    if it["effects"]:
+        b.append(heading(2, "Effekte"))
+        b += [bullet(e) for e in it["effects"]]
+    et = it["effect_targets"]
+    if et and et["targets"]:
+        b += [divider(), heading(2, "Beeinflusst")]
+        if et["pool_label"]:
+            b.append(para(et["pool_label"]))
+        seen = set()
+        for t in et["targets"]:
+            if t not in seen:
+                seen.add(t)
+                b.append(bullet(L.equip_target_ref(t)))
+    if it["expedition_attributes"]:
+        b.append(heading(2, "Expeditionswerte"))
+        b += [bullet(f"{ea['attribute']}: {ea['amount']}") for ea in it["expedition_attributes"]]
+    acq = it.get("acquisition") or {}
+    if acq.get("trade_price") is not None:
+        b.append(label_line("Preis (Handelsroute)", f"{acq['trade_price']:,}".replace(",", ".")))
+    if acq.get("trade_price_online_currency") is not None:
+        b.append(label_line("Preis (Anno-Union-Shop)", f"{acq['trade_price_online_currency']} Anno-Coins"))
+    b += [divider(), para("Quelle: anno-toolkit-Datensatz (GitHub, jansepke/anno-toolkit)")]
+    return [x for x in b if x]
+
+
+def body_equip_target(info, L):
+    b = [para(f"Sammelseite für „{info['display']}“ – keine passende Gebäude-Seite im Wiki gefunden."),
+         divider(), heading(2, "Beeinflusst durch folgende Gegenstände")]
+    for it, _t in sorted(info["items"], key=lambda p: p[0]["name"]):
+        b.append(bullet(L.equip_item_ref(it["id"], it["name"])))
+    return b
 
 
 def body_set(st, kind, L, items_vids):
@@ -514,9 +652,15 @@ class Importer:
         self.args = args
         self.state = State()
         self.data = {n: load(n) for n in ("waren", "zivilisation", "gebaeude", "ketten", "tiere", "artefakte", "pflanzen", "intros")}
+        self.data["items_raw"] = load("items")
         self.af = None
         self.L = Links(self.state, self.data)
         self.created = self.filled = self.skipped = 0
+        self.equip_items = kept_equip_items(self.data["items_raw"])
+        self.equip_by_cat = collections.defaultdict(list)
+        for i in self.equip_items:
+            self.equip_by_cat[i["category"]].append(i)
+        self.equip_stub_targets, self.equip_buildings_by_building = equip_reverse_index(self.equip_items, self.L)
 
     def connect(self):
         if self.af is None:
@@ -598,6 +742,15 @@ class Importer:
                         rec("item", g, cc["view_id"])
                 elif kind == "vorlagen":
                     rec("vorlage", cc, c["view_id"])
+                elif kind == "equip_root":
+                    if norm(cc["name"]) == norm(EQUIP_TARGETS_PAGE):
+                        rec("equip_targets_root", cc, c["view_id"])
+                        for g in cc.get("children", []):
+                            rec("equip_target", g, cc["view_id"], self._equip_target_extra(g["name"]))
+                    else:
+                        rec("equip_cat", cc, c["view_id"])
+                        for g in cc.get("children", []):
+                            rec("equip_item", g, cc["view_id"], self._equip_item_extra(g["name"]))
                 else:
                     rec("other", cc, c["view_id"])
         gone = [p for p in self.state.data["pages"] if p["view_id"] not in live and p["kind"] != "space"]
@@ -620,6 +773,15 @@ class Importer:
                 return {"site_id": b["id"]}
         return {}
 
+    def _equip_item_extra(self, name):
+        for i in self.equip_items:
+            if norm(i["name"]) == norm(name):
+                return {"key": str(i["id"])}
+        return {}
+
+    def _equip_target_extra(self, name):
+        return {"key": norm_loose(name)}
+
     # ------------------------------------------------------------------ create
     def create_all(self):
         self.connect()
@@ -641,6 +803,8 @@ class Importer:
                 self.create_items(kind)
         if self.wanted("waren"):
             self.create_waren()
+        if self.wanted("equip"):
+            self.create_equip()
         print(f"create: created {self.created}, skipped {self.skipped}")
 
     def ensure(self, kind, name, parent_id, icon_src=None, extra=None):
@@ -654,6 +818,23 @@ class Importer:
         if self.args.limit is not None and self.created >= self.args.limit:
             return None
         vid = create_page_with_icon(self.af, self.state, kind, name, parent_id, icon_src, extra=extra)
+        self.created += 1
+        print(f"  created {kind} {name!r} {vid}", flush=True)
+        time.sleep(0.15)
+        return vid
+
+    def ensure_local(self, kind, name, parent_id, icon_src=None, extra=None):
+        """Like ensure(), but icon_src is a local DATA_DIR-relative path (see
+        create_page_with_local_icon), for the items.json-sourced Ausrüstung pages."""
+        p = self.state.child(parent_id, name)
+        if p and p["kind"] == kind:
+            self.skipped += 1
+            if extra:
+                self.state.record(kind, name, parent_id, p["view_id"], extra=extra)
+            return p["view_id"]
+        if self.args.limit is not None and self.created >= self.args.limit:
+            return None
+        vid = create_page_with_local_icon(self.af, self.state, kind, name, parent_id, icon_src, extra=extra)
         self.created += 1
         print(f"  created {kind} {name!r} {vid}", flush=True)
         time.sleep(0.15)
@@ -762,6 +943,28 @@ class Importer:
                     continue
                 self.ensure("ware", g["name"], cid, g["icon"], {"anchor": g["anchor"]})
 
+    def create_equip(self):
+        er = self.ensure_local("equip_root", "Ausrüstung", self.root_id, self._equip_rep_icon(self.equip_items))
+        for cat_key in EQUIP_CATEGORY_ORDER:
+            items_in_cat = self.equip_by_cat.get(cat_key, [])
+            if not items_in_cat or not er:
+                continue
+            label = items_in_cat[0]["category_label"]
+            cid = self.ensure_local("equip_cat", label, er, self._equip_rep_icon(items_in_cat))
+            for it in items_in_cat:
+                if cid and self.only_ok(it["name"]):
+                    self.ensure_local("equip_item", it["name"], cid, it["icon"], {"key": str(it["id"])})
+        if not er:
+            return
+        tr = self.ensure_local("equip_targets_root", EQUIP_TARGETS_PAGE, er, None)
+        for key, info in sorted(self.equip_stub_targets.items(), key=lambda kv: kv[1]["display"]):
+            if tr and self.only_ok(info["display"]):
+                self.ensure_local("equip_target", info["display"], tr, None, {"key": key})
+
+    @staticmethod
+    def _equip_rep_icon(items):
+        return next((i["icon"] for i in items if i["icon"]), None)
+
     # ------------------------------------------------------------------ fill
     def fill_all(self):
         self.connect()
@@ -811,7 +1014,7 @@ class Importer:
             print(f"  {'refreshed' if page.get('filled') else 'filled'} {page['kind']} {page['name']!r}", flush=True)
             time.sleep(0.1)
 
-        if self.wanted("geb"):
+        if self.wanted("geb") or self.wanted("equip"):
             for b in self.data["gebaeude"]:
                 if not self.only_ok(b["name"]):
                     continue
@@ -819,7 +1022,7 @@ class Importer:
                 page = self.state.by_id.get(vid)
                 if page and page.get("legacy"):
                     continue  # hand-written pages stay as they are
-                fill(page, body_building(b, L, sets_by_building))
+                fill(page, body_building(b, L, sets_by_building, self.equip_buildings_by_building))
         if self.wanted("ziv"):
             for r in self.data["zivilisation"]:
                 for lv in r["levels"]:
@@ -865,6 +1068,15 @@ class Importer:
                         if page and page.get("legacy"):
                             continue
                         fill(page, body_ware(g, c, L, needed_by, produced_by, used_by))
+        if self.wanted("equip"):
+            for it in self.equip_items:
+                if self.only_ok(it["name"]):
+                    vid = L.by_extra("equip_item", "key", str(it["id"]))
+                    fill(self.state.by_id.get(vid), body_equip_item(it, L))
+            for key, info in self.equip_stub_targets.items():
+                if self.only_ok(info["display"]):
+                    vid = L.by_extra("equip_target", "key", key)
+                    fill(self.state.by_id.get(vid), body_equip_target(info, L))
         print(f"fill: filled {self.filled}, skipped {self.skipped}")
         if L.unresolved:
             print("unresolved references (kept as text):", L.unresolved.most_common(40))
@@ -893,7 +1105,7 @@ class Importer:
         intros = self.data["intros"]
         # Anno 1800 root
         root = st.get("root", GAME)
-        names = ["Region", "Waren", "Zivilisationsstufen", "Gebäude", "Produktionsketten", "Tiere", "Artefakte", "Pflanzen"]
+        names = ["Region", "Waren", "Zivilisationsstufen", "Gebäude", "Produktionsketten", "Ausrüstung", "Tiere", "Artefakte", "Pflanzen"]
         refs = [st.child(root["view_id"], n) for n in names]
         lst(root, "lists_v1", [divider(), heading(2, "Bereiche")] + [bullet(mention(p["view_id"])) for p in refs if p])
         # Waren
@@ -956,6 +1168,36 @@ class Importer:
                         blocks.append(para("Zivilisationsstufe: ", L.level_ref(level)))
                 blocks.append(bullet(L.chain_ref(ch["key"])))
             lst(p, "lists_v1", blocks)
+        # Ausrüstung
+        er = st.get("equip_root", "Ausrüstung")
+        blocks = [divider(), heading(2, "Kategorien")]
+        for cat_key in EQUIP_CATEGORY_ORDER:
+            items_in_cat = self.equip_by_cat.get(cat_key, [])
+            if not items_in_cat:
+                continue
+            p = st.get("equip_cat", items_in_cat[0]["category_label"])
+            if p:
+                blocks.append(bullet(mention(p["view_id"]), f" ({len(items_in_cat)} Gegenstände)"))
+        tr = st.get("equip_targets_root", EQUIP_TARGETS_PAGE)
+        if tr:
+            blocks.append(bullet(mention(tr["view_id"]), f" ({len(self.equip_stub_targets)} Ziele ohne eigene Gebäude-Seite)"))
+        lst(er, "lists_v1", blocks)
+        for cat_key in EQUIP_CATEGORY_ORDER:
+            items_in_cat = self.equip_by_cat.get(cat_key, [])
+            if not items_in_cat:
+                continue
+            p = st.get("equip_cat", items_in_cat[0]["category_label"])
+            blocks = [heading(2, "Gegenstände")]
+            for it in sorted(items_in_cat, key=lambda i: i["name"]):
+                blocks.append(bullet(L.equip_item_ref(it["id"], it["name"]), f" ({it['rarity_label']})"))
+            lst(p, "lists_v1", blocks)
+        if tr:
+            blocks = [heading(2, EQUIP_TARGETS_PAGE)]
+            for key, info in sorted(self.equip_stub_targets.items(), key=lambda kv: kv[1]["display"]):
+                p = st.by_id.get(L.by_extra("equip_target", "key", key))
+                if p:
+                    blocks.append(bullet(mention(p["view_id"]), f" ({len(info['items'])})"))
+            lst(tr, "lists_v1", blocks)
         # Items
         for kind, (title, bname, _) in ITEM_KINDS.items():
             d = self.data[kind]
@@ -1016,7 +1258,8 @@ class Importer:
         counts = collections.Counter(p["kind"] for p in st.data["pages"] if p["view_id"] in live)
         print("live by kind:", dict(counts))
         exp = {"level": 16, "building": 272, "chain": 108, "ware": 192,
-               "item": sum(len(s["items"]) for k in ITEM_KINDS for s in self.data[k]["sets"]) + sum(len(self.data[k]["loose"]) for k in ITEM_KINDS)}
+               "item": sum(len(s["items"]) for k in ITEM_KINDS for s in self.data[k]["sets"]) + sum(len(self.data[k]["loose"]) for k in ITEM_KINDS),
+               "equip_item": len(self.equip_items), "equip_target": len(self.equip_stub_targets)}
         for k, v in exp.items():
             print(f"  {k}: {counts.get(k, 0)} / expected {v}", "OK" if counts.get(k, 0) == v else "MISMATCH")
         # duplicates per parent
@@ -1031,10 +1274,10 @@ class Importer:
                     if m and m.get("page_id") not in live:
                         dangling[p["name"]] += 1
         print("pages with dangling mentions:", dangling.most_common(10) or "none")
-        unfilled = [p["name"] for p in st.data["pages"] if p["kind"] in ("level", "building", "chain", "ware", "item", "set")
+        unfilled = [p["name"] for p in st.data["pages"] if p["kind"] in ("level", "building", "chain", "ware", "item", "set", "equip_item", "equip_target")
                     and not p.get("filled") and not p.get("legacy") and not p.get("loose")]
         print("unfilled pages:", len(unfilled), unfilled[:10])
-        noicon = [p["name"] for p in st.data["pages"] if p["view_id"] in live and not live[p["view_id"]][2] and p["kind"] not in ("root", "region_root", "waren_root", "vorlagen", "vorlage", "other", "region")]
+        noicon = [p["name"] for p in st.data["pages"] if p["view_id"] in live and not live[p["view_id"]][2] and p["kind"] not in ("root", "region_root", "waren_root", "vorlagen", "vorlage", "other", "region", "equip_targets_root", "equip_target")]
         print("pages without icon:", len(noicon), noicon[:10])
         # spot-check block sequences
         import random
@@ -1050,7 +1293,7 @@ class Importer:
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("command", choices=["sync-state", "create", "fill", "parents", "recreate", "verify", "all"])
-    ap.add_argument("--kinds", help="comma list of ziv,geb,ketten,items,waren")
+    ap.add_argument("--kinds", help="comma list of ziv,geb,ketten,items,waren,equip")
     ap.add_argument("--only")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--relink", action="store_true")
