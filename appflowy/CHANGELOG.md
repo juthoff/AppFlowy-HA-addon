@@ -319,3 +319,20 @@
   ersten 8 Einträgen "8 weitere anzeigen (N)" (auch per Pfeiltasten + Enter). Das `@`-Menü in
   Dokumenten zeigt die Anzahl in der Überschrift; sein Knopf "… weitere Seiten" ist jetzt auch
   auf Deutsch übersetzt.
+
+## 0.9.64-15
+
+- **AppFlowy Web hat im Handy-Browser dieselben Rechte wie am Desktop.** AppFlowy Web
+  `v0.1.18` machte auf Telefonen (erkannt am User-Agent) jede Seite schreibgeschützt. Jetzt
+  lassen sich Dokumente, Titel, Symbole, Titelbilder und geöffnete Board-Karten auch mobil
+  bearbeiten.
+- **Seitenaktionen in der mobilen Ansicht.** Die Seitenleiste zeigt an jeder Seite und jedem
+  Bereich "⋯" (Umbenennen, Symbol ändern, Duplizieren, Verschieben, Löschen, in neuem Tab
+  öffnen) und "+" (neue Unterseite). Das "⋯"-Menü oben rechts bietet für die aktuelle Seite
+  Duplizieren, Verschieben und Löschen.
+- Seiten, die per Verweis oder "+" im Fenster geöffnet werden, füllen auf Telefonen den ganzen
+  Bildschirm. Die Block-Griffe ("+"/Ziehen) am Rand sind mobil ausgeblendet, Blöcke fügt man
+  dort über `/` ein. Namen mit `[[Name|Seiten-ID]]`-Verweisen erscheinen auch in der mobilen
+  Seitenleiste als reiner Text.
+- Tabellen-, Board- und Kalenderzellen bleiben wie am Desktop schreibgeschützt.
+- Umgesetzt als dritter Patch `patches/appflowy-web-mobile-edit.patch` auf AppFlowy Web `v0.1.18`.

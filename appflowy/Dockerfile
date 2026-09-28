@@ -53,13 +53,21 @@ WORKDIR /app
 # card editable: document body, title and checklist property. Upstream keeps
 # rows read-only, loads the body through page-view (which fails for row
 # documents) and syncs rows under a local cache key instead of the row id.
+# patches/appflowy-web-mobile-edit.patch (applied last) gives mobile browsers
+# the desktop permissions. Upstream makes every page read-only when the user
+# agent is a phone and offers no page actions in the mobile layout; the patch
+# enables editing, adds the desktop page menus (add, rename, change icon,
+# duplicate, move, delete) to the mobile sidebar and top bar, and shows the
+# page modal full-screen on phones.
 COPY patches/appflowy-web-password-login.patch /tmp/appflowy-web-password-login.patch
 COPY patches/appflowy-web-references.patch /tmp/appflowy-web-references.patch
+COPY patches/appflowy-web-mobile-edit.patch /tmp/appflowy-web-mobile-edit.patch
 RUN npm install -g pnpm@8.5.0 \
     && git clone --depth 1 --branch ${APPFLOWY_WEB_REF} https://github.com/AppFlowy-IO/AppFlowy-Web.git . \
     && sed -i 's|https://test.appflowy.cloud||g' src/components/main/app.hooks.ts \
     && git apply --verbose /tmp/appflowy-web-password-login.patch \
     && git apply --verbose /tmp/appflowy-web-references.patch \
+    && git apply --verbose /tmp/appflowy-web-mobile-edit.patch \
     && pnpm install --frozen-lockfile \
     && pnpm run build
 
