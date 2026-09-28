@@ -2,3 +2,7 @@
 # Diagnostic logs pulled from the running add-on (Supervisor UI) contain
 # session tokens/emails - never commit these.
 *.log
+
+# Claude Code local settings
+.claude/settings.local.json
+.claude/hooks/
