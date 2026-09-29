@@ -121,9 +121,22 @@ reinen Text speichert:
   Listen) und die Checkliste (abhaken, hinzufügen, umbenennen, löschen).
 - **Die Desktop- und Mobil-Apps zeigen `[[Name|Seiten-ID]]` als reinen Text** – sie können vom
   Add-on nicht verändert werden. Das Dokument einer Karte und Verweise darin sehen sie normal.
-- In der Handy-Ansicht von AppFlowy Web bleibt alles schreibgeschützt (wie im Original).
+- Das gilt auch in der Handy-Ansicht von AppFlowy Web.
 - Änderungen an Karten werden erst nach einem Neuladen in anderen geöffneten Browser-Tabs
   sichtbar (AppFlowy Web lädt Board-Daten nicht live nach).
+
+## Tabellen, Boards und Kalender in AppFlowy Web
+
+- **Anlegen:** über das "+" an Bereichen und Seiten, über "Neue Seite" (Seitentyp wählen) oder
+  in einem Dokument mit `/grid`, `/board`, `/kalender` (die Datenbank erscheint dann direkt im
+  Dokument). Neue Boards haben ein Status-Feld mit To Do/Doing/Done und drei Beispielkarten.
+- **Zeilen/Karten/Termine:** "Neue Zeile" unter einer Tabelle, "Neu" unter einer Board-Spalte,
+  Klick (am Handy: lange drücken) auf einen Kalendertag. Die neue Zeile öffnet sich zum
+  Benennen; "Löschen" oben rechts auf der geöffneten Zeile entfernt sie aus allen Ansichten.
+- **Nur in der Desktop-App:** Felder anlegen/ändern, Auswahloptionen, Karten zwischen Spalten
+  ziehen, verknüpfte Ansichten.
+- Neue Zeilen erscheinen in anderen Browsern ggf. erst nach bis zu einer Minute (der Server
+  speichert sie zeitversetzt).
 
 ## Datenpersistenz
 

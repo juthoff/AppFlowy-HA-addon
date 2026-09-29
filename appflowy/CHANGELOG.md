@@ -336,3 +336,26 @@
   Seitenleiste als reiner Text.
 - Tabellen-, Board- und Kalenderzellen bleiben wie am Desktop schreibgeschützt.
 - Umgesetzt als dritter Patch `patches/appflowy-web-mobile-edit.patch` auf AppFlowy Web `v0.1.18`.
+
+## 0.9.64-16
+
+- **Datentabellen, Boards und Kalender in AppFlowy Web anlegen.** Upstream hatte diese
+  Seitentypen auskommentiert, es ging nur "Dokument". Jetzt bieten das "+" an Bereichen und
+  Seiten (Desktop und Handy), "Neue Seite" (mit Auswahl des Seitentyps, jetzt auch im
+  Handy-Menü) und das `/`-Menü in Dokumenten (`/grid`, `/board`, `/kalender`, fügt die Datenbank
+  direkt ins Dokument ein) alle vier Typen. Der Server legt sie mit Standardfeldern an (Board:
+  Status To Do/Doing/Done mit drei Beispielkarten).
+- **Zeilen, Karten und Termine hinzufügen und löschen.** Tabelle: "Neue Zeile" am Ende. Board:
+  "Neu" unter jeder Spalte legt die Karte in dieser Spalte an. Kalender: Klick auf einen Tag
+  (am Handy lange drücken) legt dort einen Termin an. Die neue Zeile öffnet sich direkt zum
+  Benennen; "Löschen" oben rechts entfernt sie nach Rückfrage.
+- Der Eintrag "AI Chat" im "+"-Menü ist entfernt; ohne KI-Dienst ließ sich die Seite nicht
+  öffnen.
+- Fix: AppFlowy Web speicherte beim Bearbeiten einer Karte den Änderungszeitpunkt der Zeile als
+  Zahl. Server und Desktop-App lesen ihn als Ganzzahl und lehnen den daraus dekodierten
+  Kommawert ab, sodass die ganze Zeile nicht geladen werden konnte. Jetzt als Text gespeichert
+  (wie ihn die Rust-Seite ausdrücklich akzeptiert); betroffene Karten heilen beim nächsten
+  Bearbeiten.
+- Felder, Auswahloptionen, Verschieben von Karten und verknüpfte Ansichten bleiben der
+  Desktop-App vorbehalten.
+- Umgesetzt als vierter Patch `patches/appflowy-web-databases.patch` auf AppFlowy Web `v0.1.18`.

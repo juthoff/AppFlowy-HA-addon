@@ -1,0 +1,1013 @@
+diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
+index 413cf94..80677bb 100644
+--- a/src/@types/translations/de-DE.json
++++ b/src/@types/translations/de-DE.json
+@@ -2689,6 +2689,7 @@
+     "useThisTemplate": "Verwenden Sie die Vorlage"
+   },
+   "web": {
++    "newPageType": "Seitentyp",
+     "referencePages": "{{count}} Seiten",
+     "referenceShowMore": "{{count}} weitere anzeigen",
+     "signInWithPassword": "Mit Passwort anmelden",
+diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
+index 336c3f6..5f93986 100644
+--- a/src/@types/translations/en.json
++++ b/src/@types/translations/en.json
+@@ -2670,6 +2670,7 @@
+     "useThisTemplate": "Use the template"
+   },
+   "web": {
++    "newPageType": "Page type",
+     "referencePages": "{{count}} pages",
+     "referenceShowMore": "Show {{count}} more",
+     "signInWithPassword": "Continue with password",
+diff --git a/src/application/database-yjs/context.ts b/src/application/database-yjs/context.ts
+index 4a98c32..6f069ef 100644
+--- a/src/application/database-yjs/context.ts
++++ b/src/application/database-yjs/context.ts
+@@ -36,6 +36,11 @@ export interface DatabaseContextState {
+   loadViews?: () => Promise<View[] | undefined>;
+   openPageModal?: (viewId: string) => void;
+   uploadFile?: (file: File) => Promise<string>;
++  // Added by the AppFlowy Home Assistant add-on: rows (grid rows, board cards,
++  // calendar events) can be added and deleted. Fields, options and drag & drop
++  // stay read-only (useReadOnly()).
++  canEditRows?: boolean;
++  onCloseRow?: () => void;
+ }
+ 
+ export const DatabaseContext = createContext<DatabaseContextState | null>(null);
+@@ -92,6 +97,12 @@ export const useRowReadOnly = () => {
+   return context?.rowReadOnly ?? true;
+ };
+ 
++export const useCanEditRows = () => {
++  const context = useDatabaseContext();
++
++  return context?.canEditRows ?? false;
++};
++
+ export const useReadOnly = () => {
+   const context = useDatabaseContext();
+ 
+diff --git a/src/application/database-yjs/index.ts b/src/application/database-yjs/index.ts
+index 1d5aa0c..4b88bc3 100644
+--- a/src/application/database-yjs/index.ts
++++ b/src/application/database-yjs/index.ts
+@@ -4,3 +4,5 @@ export * from './context';
+ export * from './selector';
+ export * from './database.type';
+ export * from './const';
++// Added by the AppFlowy Home Assistant add-on: adding/deleting rows.
++export * from './row-create';
+diff --git a/src/application/database-yjs/row-create.ts b/src/application/database-yjs/row-create.ts
+new file mode 100644
+index 0000000..e927173
+--- /dev/null
++++ b/src/application/database-yjs/row-create.ts
+@@ -0,0 +1,154 @@
++// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
++// v0.1.18, which cannot add rows): creates and deletes database rows (grid rows,
++// board cards, calendar events) in the same shape AppFlowy-Collab's Rust code
++// uses (collab-database rows/row.rs, views/row_order.rs).
++//
++// - A row is its own collab (root "data" -> {data, meta, comment}). It is created
++//   on the server by its first web-update; nothing else has to be registered.
++// - The row becomes visible by pushing a plain {id, height} object into the
++//   row_orders of every view of the database. Deleting removes those entries
++//   (the row collab stays, like on desktop).
++// - Row created_at/last_modified are decimal strings: yrs reads a JS integer as
++//   Any::Number(f64), which Row's i64 deserializer rejects, so the whole row
++//   would fail to load on server and desktop. Strings are accepted explicitly.
++import { db } from '@/application/db';
++import { useDatabaseContext } from '@/application/database-yjs/context';
++import { FieldType } from '@/application/database-yjs/database.type';
++import { updateCollab } from '@/application/services/js-services/http/http_api';
++import { Types, YDatabase, YDoc, YjsDatabaseKey, YjsEditorKey } from '@/application/types';
++import { notify } from '@/components/_shared/notify';
++import { useCallback } from 'react';
++import { v4 as uuidv4 } from 'uuid';
++import * as Y from 'yjs';
++
++const DEFAULT_ROW_HEIGHT = 60;
++
++export interface InitialCell {
++  fieldId: string;
++  fieldType: FieldType;
++  data: string;
++  extra?: Record<string, unknown>;
++}
++
++export function initRowDoc (rowDoc: YDoc, rowId: string, databaseId: string, cells: InitialCell[] = []) {
++  const now = Math.floor(Date.now() / 1000);
++  const root = rowDoc.getMap(YjsEditorKey.data_section);
++
++  rowDoc.transact(() => {
++    const row = new Y.Map<unknown>();
++
++    root.set(YjsEditorKey.database_row, row);
++    root.set(YjsEditorKey.meta, new Y.Map());
++    root.set('comment', new Y.Array());
++
++    row.set(YjsDatabaseKey.id, rowId);
++    row.set(YjsDatabaseKey.database_id, databaseId);
++    row.set(YjsDatabaseKey.height, DEFAULT_ROW_HEIGHT);
++    row.set(YjsDatabaseKey.visibility, true);
++    row.set(YjsDatabaseKey.created_at, String(now));
++    row.set(YjsDatabaseKey.last_modified, String(now));
++
++    const cellMap = new Y.Map<unknown>();
++
++    row.set(YjsDatabaseKey.cells, cellMap);
++
++    for (const { fieldId, fieldType, data, extra } of cells) {
++      const cell = new Y.Map<unknown>();
++
++      cellMap.set(fieldId, cell);
++      cell.set(YjsDatabaseKey.field_type, fieldType);
++      cell.set(YjsDatabaseKey.data, data);
++      cell.set(YjsDatabaseKey.created_at, now);
++      cell.set(YjsDatabaseKey.last_modified, now);
++      Object.entries(extra ?? {}).forEach(([key, value]) => cell.set(key, value));
++    }
++  });
++}
++
++function getDatabase (databaseDoc: YDoc) {
++  return databaseDoc.getMap(YjsEditorKey.data_section).get(YjsEditorKey.database) as YDatabase | undefined;
++}
++
++export async function createDatabaseRow ({ databaseDoc, workspaceId, createRowDoc }: {
++  databaseDoc: YDoc;
++  workspaceId: string;
++  createRowDoc: (rowKey: string) => Promise<YDoc>;
++}, cells?: InitialCell[]) {
++  const database = getDatabase(databaseDoc);
++
++  if (!database) throw new Error('Database not loaded');
++
++  const databaseId = database.get(YjsDatabaseKey.id);
++  const rowId = uuidv4();
++  const rowKey = `${databaseDoc.guid}_rows_${rowId}`;
++  // Registers the row for syncing under its row id (see app.hooks createRowDoc).
++  const rowDoc = await createRowDoc(rowKey);
++
++  initRowDoc(rowDoc, rowId, databaseId, cells);
++
++  // The row must exist on the server before the database refers to it.
++  await updateCollab(workspaceId, rowId, Types.DatabaseRow, Y.encodeStateAsUpdate(rowDoc), { version_vector: 0 });
++  // Database.tsx only shows rows that have a local cache entry.
++  await db.rows.put({ row_id: rowId, row_key: rowKey, version: 1 });
++
++  databaseDoc.transact(() => {
++    database.get(YjsDatabaseKey.views).forEach((view) => {
++      view.get(YjsDatabaseKey.row_orders)?.push([{ id: rowId, height: DEFAULT_ROW_HEIGHT } as never]);
++    });
++  });
++
++  return rowId;
++}
++
++export function deleteDatabaseRow (databaseDoc: YDoc, rowId: string) {
++  const database = getDatabase(databaseDoc);
++
++  if (!database) throw new Error('Database not loaded');
++
++  databaseDoc.transact(() => {
++    database.get(YjsDatabaseKey.views).forEach((view) => {
++      const rowOrders = view.get(YjsDatabaseKey.row_orders);
++
++      if (!rowOrders) return;
++
++      const items = rowOrders.toJSON() as { id: string }[];
++
++      for (let i = items.length - 1; i >= 0; i--) {
++        if (items[i]?.id === rowId) rowOrders.delete(i, 1);
++      }
++    });
++  });
++}
++
++export function useRowEditActions () {
++  const { databaseDoc, workspaceId, createRowDoc, navigateToRow, canEditRows } = useDatabaseContext();
++
++  const createRow = useCallback(async (cells?: InitialCell[], open = true) => {
++    if (!canEditRows || !createRowDoc) return;
++
++    try {
++      const rowId = await createDatabaseRow({ databaseDoc, workspaceId, createRowDoc }, cells);
++
++      if (open) navigateToRow?.(rowId);
++      return rowId;
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch (e: any) {
++      console.error(e);
++      notify.error(e?.message || String(e));
++    }
++  }, [canEditRows, createRowDoc, databaseDoc, workspaceId, navigateToRow]);
++
++  const deleteRow = useCallback((rowId: string) => {
++    if (!canEditRows) return;
++
++    try {
++      deleteDatabaseRow(databaseDoc, rowId);
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch (e: any) {
++      console.error(e);
++      notify.error(e?.message || String(e));
++    }
++  }, [canEditRows, databaseDoc]);
++
++  return { canEditRows: !!canEditRows, createRow, deleteRow };
++}
+diff --git a/src/application/database-yjs/row-write.ts b/src/application/database-yjs/row-write.ts
+index 7c06b7f..ed48cb0 100644
+--- a/src/application/database-yjs/row-write.ts
++++ b/src/application/database-yjs/row-write.ts
+@@ -1,8 +1,9 @@
+ // Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
+ // v0.1.18, which never writes database rows): cell and row-meta writes in the
+ // same shape AppFlowy-Collab's Rust code uses, so the desktop app reads them.
+-// Numbers are plain JS numbers; yrs decodes them as Any::Number, which its
+-// i64 conversions accept just like Any::BigInt.
++// Cell numbers are plain JS numbers (yrs decodes them as Any::Number). The row's
++// own last_modified is a decimal string, because Row parses it as i64 through
++// serde, which rejects Any::Number (see row-create.ts).
+ import { FieldType, RowMetaKey } from '@/application/database-yjs/database.type';
+ import { metaIdFromRowId } from '@/application/database-yjs/const';
+ import { SelectOption } from '@/application/database-yjs/fields/select-option/select_option.type';
+@@ -40,7 +41,8 @@ export function updateRowCell (rowDoc: YDoc, fieldId: string, fieldType: FieldTy
+ 
+     cell.set(YjsDatabaseKey.data, data);
+     cell.set(YjsDatabaseKey.last_modified, now);
+-    row.set(YjsDatabaseKey.last_modified, now);
++    // String on purpose: see row-create.ts (Row timestamps are parsed as i64).
++    row.set(YjsDatabaseKey.last_modified, String(now));
+   });
+ }
+ 
+diff --git a/src/components/_shared/mobile-topbar/MobileFolder.tsx b/src/components/_shared/mobile-topbar/MobileFolder.tsx
+index c9c3872..290ad20 100644
+--- a/src/components/_shared/mobile-topbar/MobileFolder.tsx
++++ b/src/components/_shared/mobile-topbar/MobileFolder.tsx
+@@ -12,6 +12,7 @@ import SwipeableViews from 'react-swipeable-views';
+ import { View } from '@/application/types';
+ import ViewActions from '@/components/app/view-actions/ViewActions';
+ import ViewActionsPopover from '@/components/app/view-actions/ViewActionsPopover';
++import NewPage from '@/components/app/view-actions/NewPage';
+ 
+ enum ViewTabsKey {
+   Space,
+@@ -67,6 +68,10 @@ function MobileFolder ({
+           </div>
+           <MobileMore onClose={onClose} />
+         </div>
++        {/* Added by the AppFlowy Home Assistant add-on: "New page" with type choice. */}
++        <div className={'mb-2'}>
++          <NewPage onCreated={onClose} />
++        </div>
+         <ViewTabs
+           value={selectedTab}
+           sx={{
+diff --git a/src/components/app/DatabaseView.tsx b/src/components/app/DatabaseView.tsx
+index 8ed620a..2993b00 100644
+--- a/src/components/app/DatabaseView.tsx
++++ b/src/components/app/DatabaseView.tsx
+@@ -57,6 +57,13 @@ function DatabaseView({ viewMeta, uploadFile, ...props }: ViewComponentProps) {
+     [setSearch],
+   );
+ 
++  const handleCloseRow = useCallback(() => {
++    setSearch(prev => {
++      prev.delete('r');
++      return prev;
++    });
++  }, [setSearch]);
++
+   const rowId = search.get('r') || undefined;
+   const doc = props.doc;
+   const database = doc?.getMap(YjsEditorKey.data_section)?.get(YjsEditorKey.database) as YDatabase;
+@@ -103,6 +110,7 @@ function DatabaseView({ viewMeta, uploadFile, ...props }: ViewComponentProps) {
+           visibleViewIds={visibleViewIds}
+           onChangeView={handleChangeView}
+           onOpenRow={handleNavigateToRow}
++          onCloseRow={handleCloseRow}
+           loadRowDocument={loadRowDocument}
+           uploadFile={uploadFile}
+         />
+diff --git a/src/components/app/view-actions/AddPageActions.tsx b/src/components/app/view-actions/AddPageActions.tsx
+index 2449bb8..b9688aa 100644
+--- a/src/components/app/view-actions/AddPageActions.tsx
++++ b/src/components/app/view-actions/AddPageActions.tsx
+@@ -7,6 +7,21 @@ import CircularProgress from '@mui/material/CircularProgress';
+ import React, { useCallback, useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+ 
++// Changed by the AppFlowy Home Assistant add-on: upstream v0.1.18 had Grid,
++// Board and Calendar commented out and offered AI Chat, which needs the AI
++// service this server doesn't run. Server 0.9.64 creates database pages with
++// default fields and rows. Also used by NewPage.
++export function usePageLayoutOptions () {
++  const { t } = useTranslation();
++
++  return useMemo(() => [
++    { layout: ViewLayout.Document, label: t('document.menuName') },
++    { layout: ViewLayout.Grid, label: t('grid.menuName'), name: t('grid.menuName') },
++    { layout: ViewLayout.Board, label: t('board.menuName'), name: t('board.menuName') },
++    { layout: ViewLayout.Calendar, label: t('calendar.menuName'), name: t('calendar.menuName') },
++  ] as { layout: ViewLayout; label: string; name?: string }[], [t]);
++}
++
+ function AddPageActions({ view, onClose }: {
+   view: View;
+   onClose: () => void;
+@@ -15,7 +30,6 @@ function AddPageActions({ view, onClose }: {
+   const {
+     addPage,
+     openPageModal,
+-    toView,
+   } = useAppHandlers();
+ 
+   const handleAddPage = useCallback(async(layout: ViewLayout, name?: string) => {
+@@ -29,11 +43,7 @@ function AddPageActions({ view, onClose }: {
+     try {
+       const viewId = await addPage(view.view_id, { layout, name });
+ 
+-      if(layout === ViewLayout.AIChat) {
+-        void toView(viewId);
+-      } else {
+-        void openPageModal?.(viewId);
+-      }
++      void openPageModal?.(viewId);
+ 
+       notify.clear();
+       // eslint-disable-next-line
+@@ -41,68 +51,24 @@ function AddPageActions({ view, onClose }: {
+       notify.clear();
+       notify.error(e.message);
+     }
+-  }, [addPage, openPageModal, t, toView, view.view_id]);
++  }, [addPage, openPageModal, t, view.view_id]);
+ 
++  const layoutOptions = usePageLayoutOptions();
+   const actions: {
+     label: string;
+     icon: React.ReactNode;
+     disabled?: boolean;
+     onClick: (e: React.MouseEvent) => void;
+-  }[] = useMemo(() => [
+-    {
+-      label: t('document.menuName'),
+-      icon: <ViewIcon
+-        layout={ViewLayout.Document}
+-        size={'small'}
+-      />,
+-      onClick: () => {
+-        void handleAddPage(ViewLayout.Document);
+-      },
+-    },
+-    // {
+-    //   label: t('grid.menuName'),
+-    //   disabled: true,
+-    //   icon: <ViewIcon
+-    //     layout={ViewLayout.Grid}
+-    //     size={'medium'}
+-    //   />,
+-    //   onClick: () => {
+-    //     void handleAddPage(ViewLayout.Grid, 'Table');
+-    //   },
+-    // },
+-    // {
+-    //   label: t('board.menuName'),
+-    //   disabled: true,
+-    //   icon: <ViewIcon
+-    //     layout={ViewLayout.Board}
+-    //     size={'medium'}
+-    //   />,
+-    //   onClick: () => {
+-    //     void handleAddPage(ViewLayout.Board, 'Board');
+-    //   },
+-    // },
+-    // {
+-    //   label: t('calendar.menuName'),
+-    //   disabled: true,
+-    //   icon: <ViewIcon
+-    //     layout={ViewLayout.Calendar}
+-    //     size={'medium'}
+-    //   />,
+-    //   onClick: () => {
+-    //     void handleAddPage(ViewLayout.Calendar, 'Calendar');
+-    //   },
+-    // },
+-    {
+-      label: t('chat.newChat'),
+-      icon: <ViewIcon
+-        layout={ViewLayout.AIChat}
+-        size={'small'}
+-      />,
+-      onClick: () => {
+-        void handleAddPage(ViewLayout.AIChat);
+-      },
++  }[] = useMemo(() => layoutOptions.map(({ layout, label, name }) => ({
++    label,
++    icon: <ViewIcon
++      layout={layout}
++      size={'small'}
++    />,
++    onClick: () => {
++      void handleAddPage(layout, name);
+     },
+-  ], [handleAddPage, t]);
++  })), [handleAddPage, layoutOptions]);
+ 
+   return (
+     <div className={'flex flex-col gap-2 w-full p-1.5 min-w-[230px]'}>
+@@ -126,4 +92,4 @@ function AddPageActions({ view, onClose }: {
+   );
+ }
+ 
+-export default AddPageActions;
+\ No newline at end of file
++export default AddPageActions;
+diff --git a/src/components/app/view-actions/NewPage.tsx b/src/components/app/view-actions/NewPage.tsx
+index 5f4c2b7..258eecd 100644
+--- a/src/components/app/view-actions/NewPage.tsx
++++ b/src/components/app/view-actions/NewPage.tsx
+@@ -2,15 +2,21 @@ import { ViewLayout } from '@/application/types';
+ import { ReactComponent as Add } from '@/assets/icons/add_new_page.svg';
+ import { NormalModal } from '@/components/_shared/modal';
+ import { notify } from '@/components/_shared/notify';
++import { ViewIcon } from '@/components/_shared/view-icon';
+ import { useAppHandlers, useAppOutline } from '@/components/app/app.hooks';
++import { usePageLayoutOptions } from '@/components/app/view-actions/AddPageActions';
+ import CreateSpaceModal from '@/components/app/view-actions/CreateSpaceModal';
+ import SpaceList from '@/components/publish/header/duplicate/SpaceList';
+ import { Button } from '@mui/material';
+ import React, { useCallback, useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+ 
+-function NewPage() {
++// Changed by the AppFlowy Home Assistant add-on: the page type can be chosen
++// (upstream always created a Document); onCreated lets the mobile drawer close.
++function NewPage({ onCreated }: { onCreated?: () => void }) {
+   const { t } = useTranslation();
++  const layoutOptions = usePageLayoutOptions();
++  const [layout, setLayout] = React.useState<ViewLayout>(ViewLayout.Document);
+   const [open, setOpen] = React.useState<boolean>(false);
+   const [loading, setLoading] = React.useState<boolean>(false);
+   const [selectedSpaceId, setSelectedSpaceId] = React.useState<string>('');
+@@ -42,11 +48,13 @@ function NewPage() {
+       setLoading(true);
+       try {
+         const viewId = await addPage(parentId, {
+-          layout: ViewLayout.Document,
++          layout,
++          name: layoutOptions.find((option) => option.layout === layout)?.name,
+         });
+ 
+-        openPageModal(viewId);
+         onClose();
++        onCreated?.();
++        openPageModal(viewId);
+         // eslint-disable-next-line
+       } catch (e: any) {
+         notify.error(e.message);
+@@ -54,7 +62,7 @@ function NewPage() {
+         setLoading(false);
+       }
+     },
+-    [addPage, openPageModal, onClose]
++    [addPage, openPageModal, onClose, onCreated, layout, layoutOptions]
+   );
+ 
+   return (
+@@ -82,6 +90,24 @@ function NewPage() {
+         }}
+         okLoading={loading}
+       >
++        <div className={'mb-4 flex flex-col gap-2'}>
++          <div className={'text-sm text-text-caption'}>{t('web.newPageType')}</div>
++          <div className={'grid grid-cols-2 gap-2 sm:grid-cols-4'}>
++            {layoutOptions.map((option) => (
++              <Button
++                key={option.layout}
++                size={'small'}
++                color={'inherit'}
++                variant={'outlined'}
++                onClick={() => setLayout(option.layout)}
++                startIcon={<ViewIcon layout={option.layout} size={'small'} />}
++                className={`justify-start text-sm font-normal ${option.layout === layout ? 'border-fill-default bg-fill-list-active' : 'border-line-divider'}`}
++              >
++                {option.label}
++              </Button>
++            ))}
++          </div>
++        </div>
+         <SpaceList
+           loading={false}
+           spaceList={spaceList}
+diff --git a/src/components/database/Database.tsx b/src/components/database/Database.tsx
+index 115d555..511fa68 100644
+--- a/src/components/database/Database.tsx
++++ b/src/components/database/Database.tsx
+@@ -43,6 +43,7 @@ export interface Database2Props {
+   loadViews?: () => Promise<View[] | undefined>;
+   openPageModal?: (viewId: string) => void;
+   uploadFile?: (file: File) => Promise<string>;
++  onCloseRow?: () => void;
+ }
+ 
+ function Database({
+@@ -70,6 +71,7 @@ function Database({
+   loadViews,
+   openPageModal,
+   uploadFile,
++  onCloseRow,
+ }: Database2Props) {
+   const database = doc.getMap(YjsEditorKey.data_section)?.get(YjsEditorKey.database) as YDatabase;
+   const view = database.get(YjsDatabaseKey.views).get(iidIndex);
+@@ -153,6 +155,9 @@ function Database({
+         loadViews={loadViews}
+         openPageModal={openPageModal}
+         uploadFile={uploadFile}
++        // Added by the AppFlowy Home Assistant add-on: adding/deleting rows.
++        canEditRows={!readOnly && variant === UIVariant.App && !!createRowDoc}
++        onCloseRow={onCloseRow}
+       >
+         {rowId ? (
+           <DatabaseRow
+diff --git a/src/components/database/DatabaseRow.tsx b/src/components/database/DatabaseRow.tsx
+index df4c8f1..c8ac6b0 100644
+--- a/src/components/database/DatabaseRow.tsx
++++ b/src/components/database/DatabaseRow.tsx
+@@ -3,6 +3,7 @@ import { AppendBreadcrumb } from '@/application/types';
+ import EditorSkeleton from '@/components/_shared/skeleton/EditorSkeleton';
+ import TableSkeleton from '@/components/_shared/skeleton/TableSkeleton';
+ import { DatabaseRowProperties, DatabaseRowSubDocument } from '@/components/database/components/database-row';
++import DeleteRowButton from '@/components/database/components/database-row/DeleteRowButton';
+ import DatabaseRowHeader from '@/components/database/components/header/DatabaseRowHeader';
+ import { Divider } from '@mui/material';
+ import React, { Suspense } from 'react';
+@@ -12,6 +13,10 @@ export function DatabaseRow ({ appendBreadcrumb, rowId }: { rowId: string; appen
+     <div className={'flex w-full justify-center'}>
+       <div className={'max-w-screen w-[964px] min-w-0'}>
+         <div className={' relative flex  flex-col gap-4'}>
++          {/* Added by the AppFlowy Home Assistant add-on */}
++          <div className={'flex justify-end px-24 max-sm:px-6 -mb-4'}>
++            <DeleteRowButton rowId={rowId} />
++          </div>
+           <DatabaseRowHeader appendBreadcrumb={appendBreadcrumb} rowId={rowId} />
+ 
+           <div className={'flex flex-1 flex-col gap-4'}>
+diff --git a/src/components/database/calendar/Calendar.tsx b/src/components/database/calendar/Calendar.tsx
+index 85d1d50..4b77b08 100644
+--- a/src/components/database/calendar/Calendar.tsx
++++ b/src/components/database/calendar/Calendar.tsx
+@@ -1,14 +1,35 @@
+-import { useDatabaseContext } from '@/application/database-yjs';
++import {
++  FieldType,
++  useCalendarLayoutSetting,
++  useDatabaseContext,
++  useRowEditActions,
++} from '@/application/database-yjs';
+ import { useCalendarSetup } from '@/components/database/calendar/Calendar.hooks';
+ import { Toolbar, Event } from '@/components/database/components/calendar';
+ import { useConditionsContext } from '@/components/database/components/conditions/context';
+ import { debounce } from 'lodash-es';
+-import React, { useEffect, useRef } from 'react';
+-import { Calendar as BigCalendar } from 'react-big-calendar';
++import React, { useCallback, useEffect, useRef } from 'react';
++import { Calendar as BigCalendar, SlotInfo } from 'react-big-calendar';
+ import './calendar.scss';
+ 
+ export function Calendar () {
+   const { dayPropGetter, localizer, formats, events, emptyEvents } = useCalendarSetup();
++  // Added by the AppFlowy Home Assistant add-on: clicking a day adds an event.
++  // The date is stored like collab-database's DateCellData (seconds as a
++  // string); noon UTC keeps the same day in every European time zone.
++  const { canEditRows, createRow } = useRowEditActions();
++  const { fieldId } = useCalendarLayoutSetting();
++  const handleSelectSlot = useCallback(({ start }: SlotInfo) => {
++    if (!fieldId) return;
++    const timestamp = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate(), 12) / 1000;
++
++    void createRow([{
++      fieldId,
++      fieldType: FieldType.DateTime,
++      data: String(timestamp),
++      extra: { end_timestamp: '', include_time: false, is_range: false, reminder_id: '' },
++    }]);
++  }, [createRow, fieldId]);
+   const scrollLeft = useDatabaseContext().scrollLeft;
+   const isDocumentBlock = useDatabaseContext().isDocumentBlock;
+   const ref = useRef<HTMLDivElement>(null);
+@@ -60,6 +81,8 @@ export function Calendar () {
+         showMultiDayTimes={true}
+         step={1}
+         showAllEvents={true}
++        selectable={canEditRows && !!fieldId}
++        onSelectSlot={handleSelectSlot}
+       />
+     </div>
+   );
+diff --git a/src/components/database/components/board/column/Column.tsx b/src/components/database/components/board/column/Column.tsx
+index 1bc0190..a8a76d8 100644
+--- a/src/components/database/components/board/column/Column.tsx
++++ b/src/components/database/components/board/column/Column.tsx
+@@ -1,4 +1,13 @@
+-import { Row, useDatabaseContext } from '@/application/database-yjs';
++import {
++  FieldType,
++  InitialCell,
++  Row,
++  useDatabaseContext,
++  useFieldSelector,
++  useRowEditActions,
++} from '@/application/database-yjs';
++import { YjsDatabaseKey } from '@/application/types';
++import { ReactComponent as AddIcon } from '@/assets/icons/plus.svg';
+ import { AFScroller } from '@/components/_shared/scroller';
+ import ListItem from '@/components/database/components/board/column/ListItem';
+ import { useRenderColumn } from '@/components/database/components/board/column/useRenderColumn';
+@@ -7,6 +16,7 @@ import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+ import AutoSizer from 'react-virtualized-auto-sizer';
+ import { VariableSizeList } from 'react-window';
+ import { debounce } from 'lodash-es';
++import { useTranslation } from 'react-i18next';
+ 
+ export interface ColumnProps {
+   id: string;
+@@ -25,6 +35,26 @@ export const Column = memo(
+     }, []);
+     const context = useDatabaseContext();
+     const isDocumentBlock = context.isDocumentBlock;
++    const { t } = useTranslation();
++    // Added by the AppFlowy Home Assistant add-on: "+ New" adds a card to this
++    // column by setting the group field's cell to the column id.
++    const { canEditRows, createRow } = useRowEditActions();
++    const { field } = useFieldSelector(fieldId);
++    const handleAddCard = useCallback(() => {
++      const fieldType = Number(field?.get(YjsDatabaseKey.type)) as FieldType;
++      const cells: InitialCell[] = [];
++
++      // The ungrouped ("No status") column has the field id as its id.
++      if (id !== fieldId) {
++        if (fieldType === FieldType.SingleSelect || fieldType === FieldType.MultiSelect) {
++          cells.push({ fieldId, fieldType, data: id });
++        } else if (fieldType === FieldType.Checkbox && id === 'Yes') {
++          cells.push({ fieldId, fieldType, data: 'Yes' });
++        }
++      }
++
++      void createRow(cells);
++    }, [createRow, field, fieldId, id]);
+ 
+     useEffect(() => {
+       forceUpdate(0);
+@@ -139,6 +169,16 @@ export const Column = memo(
+             }}
+           </AutoSizer>
+         </div>
++        {canEditRows && (
++          <button
++            type={'button'}
++            className={'flex items-center gap-2 rounded-[6px] px-2 py-1.5 text-sm text-text-caption hover:bg-fill-list-hover'}
++            onClick={handleAddCard}
++          >
++            <AddIcon className={'h-4 w-4'} />
++            {t('board.column.createNewCard')}
++          </button>
++        )}
+       </div>
+     );
+   },
+diff --git a/src/components/database/components/database-row/DeleteRowButton.tsx b/src/components/database/components/database-row/DeleteRowButton.tsx
+new file mode 100644
+index 0000000..0b0c03f
+--- /dev/null
++++ b/src/components/database/components/database-row/DeleteRowButton.tsx
+@@ -0,0 +1,48 @@
++// Added by the AppFlowy Home Assistant add-on: deletes the row shown on the row
++// page (grid row, board card or calendar event) from every view.
++import { useDatabaseContext, useRowEditActions } from '@/application/database-yjs';
++import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
++import { NormalModal } from '@/components/_shared/modal';
++import { Button } from '@mui/material';
++import React, { useState } from 'react';
++import { useTranslation } from 'react-i18next';
++
++export function DeleteRowButton ({ rowId }: { rowId: string }) {
++  const { t } = useTranslation();
++  const { canEditRows, deleteRow } = useRowEditActions();
++  const { onCloseRow } = useDatabaseContext();
++  const [open, setOpen] = useState(false);
++
++  if (!canEditRows) return null;
++
++  return (
++    <>
++      <Button
++        size={'small'}
++        color={'inherit'}
++        startIcon={<DeleteIcon className={'h-4 w-4'} />}
++        className={'text-text-caption hover:text-function-error'}
++        onClick={() => setOpen(true)}
++      >
++        {t('grid.row.delete')}
++      </Button>
++      <NormalModal
++        open={open}
++        danger
++        title={t('grid.row.delete')}
++        okText={t('button.delete')}
++        onClose={() => setOpen(false)}
++        onCancel={() => setOpen(false)}
++        onOk={() => {
++          setOpen(false);
++          onCloseRow?.();
++          deleteRow(rowId);
++        }}
++      >
++        {t('grid.row.deleteRowPrompt')}
++      </NormalModal>
++    </>
++  );
++}
++
++export default DeleteRowButton;
+diff --git a/src/components/database/components/grid/grid-row/useRenderRows.tsx b/src/components/database/components/grid/grid-row/useRenderRows.tsx
+index b1de9ea..deccf3d 100644
+--- a/src/components/database/components/grid/grid-row/useRenderRows.tsx
++++ b/src/components/database/components/grid/grid-row/useRenderRows.tsx
+@@ -1,4 +1,4 @@
+-import { DEFAULT_ROW_HEIGHT, useReadOnly, useRowOrdersSelector } from '@/application/database-yjs';
++import { DEFAULT_ROW_HEIGHT, useCanEditRows, useRowOrdersSelector } from '@/application/database-yjs';
+ 
+ import { useMemo } from 'react';
+ 
+@@ -16,7 +16,9 @@ export type RenderRow = {
+ 
+ export function useRenderRows() {
+   const rows = useRowOrdersSelector();
+-  const readOnly = useReadOnly();
++  // Changed by the AppFlowy Home Assistant add-on: upstream used useReadOnly(),
++  // which is always true, so the "new row" line never appeared.
++  const readOnly = !useCanEditRows();
+ 
+   const renderRows = useMemo(() => {
+     const rowItems =
+diff --git a/src/components/database/components/grid/grid-table/GridTable.tsx b/src/components/database/components/grid/grid-table/GridTable.tsx
+index 2783360..fc62adb 100644
+--- a/src/components/database/components/grid/grid-table/GridTable.tsx
++++ b/src/components/database/components/grid/grid-table/GridTable.tsx
+@@ -1,8 +1,10 @@
+-import { useDatabaseContext, useDatabaseViewId } from '@/application/database-yjs';
++import { useDatabaseContext, useDatabaseViewId, useRowEditActions } from '@/application/database-yjs';
++import { ReactComponent as AddIcon } from '@/assets/icons/plus.svg';
+ import { AFScroller } from '@/components/_shared/scroller';
+ import { useMeasureHeight } from '@/components/database/components/cell/useMeasure';
+ import { debounce } from 'lodash-es';
+ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
++import { useTranslation } from 'react-i18next';
+ import AutoSizer from 'react-virtualized-auto-sizer';
+ import { GridChildComponentProps, VariableSizeGrid } from 'react-window';
+ import { GridColumnType, RenderColumn } from '../grid-column';
+@@ -30,7 +32,11 @@ export const GridTable = ({ scrollLeft, columnWidth, columns, onScrollLeft }: Gr
+   const context = useDatabaseContext();
+   const onRendered = context.onRendered;
+   const isDocumentBlock = context.isDocumentBlock;
+-  const readOnly = context.readOnly;
++  // Changed by the AppFlowy Home Assistant add-on: the extra height is for the
++  // "new row" line, which is shown when rows can be added.
++  const { canEditRows, createRow } = useRowEditActions();
++  const { t } = useTranslation();
++  const readOnly = !canEditRows;
+ 
+   const calculateTableHeight = useMemo(() => debounce(() => {
+     const table = document.querySelector(`.grid-table-${viewId}`);
+@@ -145,9 +151,29 @@ export const GridTable = ({ scrollLeft, columnWidth, columns, onScrollLeft }: Gr
+         );
+       }
+ 
++      // Added by the AppFlowy Home Assistant add-on: upstream has no renderer for
++      // the "new row" line.
++      if (row.type === RenderRowType.NewRow && columnIndex === 1) {
++        return (
++          <div
++            style={{ ...style, width: 'auto', minWidth: style.width }}
++            className={'flex items-center border-b border-line-divider'}
++          >
++            <button
++              type={'button'}
++              className={'flex h-full w-full items-center gap-2 whitespace-nowrap px-2 text-sm text-text-caption hover:bg-fill-list-hover'}
++              onClick={() => void createRow()}
++            >
++              <AddIcon className={'h-4 w-4'} />
++              {t('grid.row.newRow')}
++            </button>
++          </div>
++        );
++      }
++
+       return <div style={style} />;
+     },
+-    [onResize, isDocumentBlock],
++    [onResize, isDocumentBlock, createRow, t],
+   );
+ 
+   return (
+diff --git a/src/components/editor/components/blocks/database/DatabaseBlock.tsx b/src/components/editor/components/blocks/database/DatabaseBlock.tsx
+index 740a6f2..b22017c 100644
+--- a/src/components/editor/components/blocks/database/DatabaseBlock.tsx
++++ b/src/components/editor/components/blocks/database/DatabaseBlock.tsx
+@@ -192,6 +192,9 @@ export const DatabaseBlock = memo(
+                     onRendered={handleRendered}
+                     scrollLeft={scrollLeft}
+                     isDocumentBlock={true}
++                    // Added by the AppFlowy Home Assistant add-on: lets embedded
++                    // databases add rows (Database defaults to read-only).
++                    readOnly={readOnly || variant !== UIVariant.App}
+                   />
+                 </>
+               ) : (
+diff --git a/src/components/editor/components/panels/slash-panel/SlashPanel.tsx b/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
+index d520035..48d46cb 100644
+--- a/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
++++ b/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
+@@ -7,6 +7,7 @@ import {
+   BlockData,
+   BlockType,
+   CalloutBlockData,
++  DatabaseNodeData,
+   HeadingBlockData,
+   ImageBlockData,
+   SubpageNodeData,
+@@ -24,9 +25,9 @@ import { ReactComponent as DividerIcon } from '@/assets/icons/divider.svg';
+ import { ReactComponent as RefDocumentIcon } from '@/assets/icons/ref_page.svg';
+ import { ReactComponent as EmojiIcon } from '@/assets/icons/add_emoji.svg';
+ import { ReactComponent as FileIcon } from '@/assets/icons/file.svg';
+-// import { ReactComponent as GridIcon } from '@/assets/slash_menu_icon_grid.svg';
+-// import { ReactComponent as BoardIcon } from '@/assets/slash_menu_icon_kanban.svg';
+-// import { ReactComponent as CalendarIcon } from '@/assets/slash_menu_icon_calendar.svg';
++import { ReactComponent as GridIcon } from '@/assets/icons/grid.svg';
++import { ReactComponent as BoardIcon } from '@/assets/icons/board.svg';
++import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
+ import { ReactComponent as Heading1Icon } from '@/assets/icons/h1.svg';
+ import { ReactComponent as Heading2Icon } from '@/assets/icons/h2.svg';
+ import { ReactComponent as Heading3Icon } from '@/assets/icons/h3.svg';
+@@ -163,6 +164,22 @@ export function SlashPanel({
+ 
+   const { openPanel } = usePanelContext();
+ 
++  // Added by the AppFlowy Home Assistant add-on: /grid, /kanban, /calendar.
++  const addDatabase = useCallback(async (layout: ViewLayout, blockType: BlockType, name: string) => {
++    if (!viewId || !addPage) return;
++    try {
++      const newViewId = await addPage(viewId, { layout, name });
++
++      turnInto(blockType, {
++        view_id: newViewId,
++        parent_id: viewId,
++      } as DatabaseNodeData);
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch (e: any) {
++      notify.error(e.message);
++    }
++  }, [viewId, addPage, turnInto]);
++
+   const { askAIAnything, continueWriting } = useAIWriter();
+ 
+   const options: {
+@@ -342,91 +359,37 @@ export function SlashPanel({
+           }
+         },
+       },
+-      //   {
+-      //   label: t('document.slashMenu.name.grid'),
+-      //   key: 'grid',
+-      //   icon: <GridIcon />,
+-      //   keywords: ['grid', 'table'],
+-      //   onClick: async () => {
+-      //     if (!viewId || !addPage || !openPageModal) return;
+-      //     try {
+-      //       const newViewId = await addPage(viewId, {
+-      //         layout: ViewLayout.Grid,
+-      //         name: 'Table',
+-      //       });
+-      //
+-      //       turnInto(BlockType.GridBlock, {
+-      //         view_id: newViewId,
+-      //       } as DatabaseNodeData);
+-      //
+-      //       openPageModal(newViewId);
+-      //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+-      //     } catch (e: any) {
+-      //       notify.error(e.message);
+-      //     }
+-      //   },
+-      // }, {
+-      //   label: t('document.slashMenu.name.linkedGrid'),
+-      //   key: 'linkedGrid',
+-      //   icon: <GridIcon />,
+-      //   keywords: ['linked', 'grid', 'table'],
+-      // }, {
+-      //   label: t('document.slashMenu.name.kanban'),
+-      //   key: 'board',
+-      //   icon: <BoardIcon />,
+-      //   keywords: ['board', 'kanban'],
+-      //   onClick: async () => {
+-      //     if (!viewId || !addPage || !openPageModal) return;
+-      //     try {
+-      //       const newViewId = await addPage(viewId, {
+-      //         layout: ViewLayout.Board,
+-      //         name: 'Board',
+-      //       });
+-      //
+-      //       turnInto(BlockType.BoardBlock, {
+-      //         view_id: newViewId,
+-      //       } as DatabaseNodeData);
+-      //
+-      //       openPageModal(newViewId);
+-      //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+-      //     } catch (e: any) {
+-      //       notify.error(e.message);
+-      //     }
+-      //   },
+-      // }, {
+-      //   label: t('document.slashMenu.name.linkedKanban'),
+-      //   key: 'linkedKanban',
+-      //   icon: <BoardIcon />,
+-      //   keywords: ['linked', 'kanban', 'board'],
+-      // }, {
+-      //   label: t('document.slashMenu.name.calendar'),
+-      //   key: 'calendar',
+-      //   icon: <CalendarIcon />,
+-      //   keywords: ['calendar', 'date'],
+-      //   onClick: async () => {
+-      //     if (!viewId || !addPage || !openPageModal) return;
+-      //     try {
+-      //       const newViewId = await addPage(viewId, {
+-      //         layout: ViewLayout.Calendar,
+-      //         name: 'Calendar',
+-      //       });
+-      //
+-      //       turnInto(BlockType.BoardBlock, {
+-      //         view_id: newViewId,
+-      //       } as DatabaseNodeData);
+-      //
+-      //       openPageModal(newViewId);
+-      //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+-      //     } catch (e: any) {
+-      //       notify.error(e.message);
+-      //     }
+-      //   },
+-      // }, {
+-      //   label: t('document.slashMenu.name.linkedCalendar'),
+-      //   key: 'linkedCalendar',
+-      //   icon: <CalendarIcon />,
+-      //   keywords: ['linked', 'calendar', 'date'],
+-      // },
++      // Changed by the AppFlowy Home Assistant add-on: upstream had these
++      // commented out (and used the board block for calendars). The database is
++      // created as a child page and shown inline, like on desktop; the linked
++      // variants stay unavailable.
++      {
++        label: t('grid.menuName'),
++        key: 'grid',
++        icon: <GridIcon />,
++        keywords: ['grid', 'table', 'database', 'tabelle'],
++        onClick: () => {
++          void addDatabase(ViewLayout.Grid, BlockType.GridBlock, t('grid.menuName'));
++        },
++      },
++      {
++        label: t('board.menuName'),
++        key: 'board',
++        icon: <BoardIcon />,
++        keywords: ['board', 'kanban'],
++        onClick: () => {
++          void addDatabase(ViewLayout.Board, BlockType.BoardBlock, t('board.menuName'));
++        },
++      },
++      {
++        label: t('calendar.menuName'),
++        key: 'calendar',
++        icon: <CalendarIcon />,
++        keywords: ['calendar', 'date', 'kalender'],
++        onClick: () => {
++          void addDatabase(ViewLayout.Calendar, BlockType.CalendarBlock, t('calendar.menuName'));
++        },
++      },
+       {
+         label: t('document.slashMenu.name.callout'),
+         key: 'callout',
+@@ -558,6 +521,7 @@ export function SlashPanel({
+     openPageModal,
+     setEmojiPosition,
+     searchText,
++    addDatabase,
+   ]);
+ 
+   const resultLength = options.length;
