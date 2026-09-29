@@ -133,8 +133,16 @@ reinen Text speichert:
 - **Zeilen/Karten/Termine:** "Neue Zeile" unter einer Tabelle, "Neu" unter einer Board-Spalte,
   Klick (am Handy: lange drücken) auf einen Kalendertag. Die neue Zeile öffnet sich zum
   Benennen; "Löschen" oben rechts auf der geöffneten Zeile entfernt sie aus allen Ansichten.
-- **Nur in der Desktop-App:** Felder anlegen/ändern, Auswahloptionen, Karten zwischen Spalten
-  ziehen, verknüpfte Ansichten.
+- **Eigenschaften:** Auf der geöffneten Zeile fügt "+ Neue Eigenschaft" ein Feld hinzu (Text,
+  Zahl, Datum, Auswahl, Mehrfachauswahl, Kontrollkästchen, URL, Checkliste); es gilt für die ganze
+  Datenbank. Tipp auf den Namen einer Eigenschaft: umbenennen oder löschen. Eigenschaften, nach
+  denen ein Board gruppiert ist oder die einen Kalender steuern, lassen sich nur in der
+  Desktop-App löschen.
+- **Werte bearbeiten:** Alle diese Eigenschaften sind auf der geöffneten Zeile bearbeitbar; bei
+  Auswahlfeldern legt das Suchfeld neue Optionen an (bei einem gruppierenden Feld mit neuer
+  Board-Spalte). In Tabellenzellen und auf Karten bleiben die Werte schreibgeschützt.
+- **Nur in der Desktop-App:** Auswahloptionen umbenennen/umfärben/löschen, Zahlen- und
+  Datumsformate, Karten zwischen Spalten ziehen, verknüpfte Ansichten.
 - Neue Zeilen erscheinen in anderen Browsern ggf. erst nach bis zu einer Minute (der Server
   speichert sie zeitversetzt).
 

@@ -1,0 +1,1437 @@
+diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
+index 80677bb..4081210 100644
+--- a/src/@types/translations/de-DE.json
++++ b/src/@types/translations/de-DE.json
+@@ -2690,6 +2690,10 @@
+   },
+   "web": {
+     "newPageType": "Seitentyp",
++    "propertyName": "Name der Eigenschaft",
++    "invalidNumber": "Bitte eine Zahl eingeben",
++    "propertyUsedByBoard": "Gruppiert ein Board und kann deshalb hier nicht gelöscht werden.",
++    "propertyUsedByCalendar": "Legt die Termine eines Kalenders fest und kann deshalb hier nicht gelöscht werden.",
+     "referencePages": "{{count}} Seiten",
+     "referenceShowMore": "{{count}} weitere anzeigen",
+     "signInWithPassword": "Mit Passwort anmelden",
+diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
+index 5f93986..a399375 100644
+--- a/src/@types/translations/en.json
++++ b/src/@types/translations/en.json
+@@ -2671,6 +2671,10 @@
+   },
+   "web": {
+     "newPageType": "Page type",
++    "propertyName": "Property name",
++    "invalidNumber": "Please enter a number",
++    "propertyUsedByBoard": "Groups a board, so it can't be deleted here.",
++    "propertyUsedByCalendar": "Places the events of a calendar, so it can't be deleted here.",
+     "referencePages": "{{count}} pages",
+     "referenceShowMore": "Show {{count}} more",
+     "signInWithPassword": "Continue with password",
+diff --git a/src/application/database-yjs/field-write.ts b/src/application/database-yjs/field-write.ts
+new file mode 100644
+index 0000000..f2a91d7
+--- /dev/null
++++ b/src/application/database-yjs/field-write.ts
+@@ -0,0 +1,288 @@
++// Added by the AppFlowy Home Assistant add-on (not part of upstream AppFlowy-Web
++// v0.1.18, which cannot change a database's properties): creates, renames and
++// deletes fields and adds select options, in the same shape AppFlowy-Collab's
++// Rust code uses (collab-database database.rs create_field / delete_field,
++// fields/field.rs, fields/field_settings.rs, fields/type_option/*).
++//
++// - Integers are plain JS numbers (yrs: Any::Number). Rust writes Any::BigInt,
++//   but yjs 14.0.0-1 cannot store a BigInt in a map, and every Rust reader of
++//   these keys accepts whole numbers (TryFrom<Any>, serde deserialize_i64/u32).
++//   `ty` must be a number: a string would make the server and the desktop app
++//   skip the field.
++// - field_orders entries are plain {id} objects (Rust parses them as Any).
++// - A new field is added to the orders and settings of every view in the same
++//   transaction as the field itself: useFieldsSelector only observes the orders
++//   and settings, and the row page reads the field as soon as it appears there.
++import { useDatabaseContext } from '@/application/database-yjs/context';
++import { FieldType } from '@/application/database-yjs/database.type';
++import { SelectOption, SelectOptionColor, SelectTypeOption } from '@/application/database-yjs/fields/select-option/select_option.type';
++import { DatabaseViewLayout, YDatabase, YDatabaseField, YDoc, YjsDatabaseKey, YjsEditorKey } from '@/application/types';
++import { notify } from '@/components/_shared/notify';
++import { nanoid } from 'nanoid';
++import { useCallback } from 'react';
++import * as Y from 'yjs';
++
++// The types that can be created and edited on the web row page.
++export const EDITABLE_FIELD_TYPES = [
++  FieldType.RichText,
++  FieldType.Number,
++  FieldType.DateTime,
++  FieldType.SingleSelect,
++  FieldType.MultiSelect,
++  FieldType.Checkbox,
++  FieldType.URL,
++  FieldType.Checklist,
++];
++
++const DEFAULT_FIELD_WIDTH = 150;
++const OPTION_COLORS = Object.values(SelectOptionColor);
++
++const nowSeconds = () => Math.floor(Date.now() / 1000);
++
++function getDatabase (databaseDoc: YDoc) {
++  const database = databaseDoc.getMap(YjsEditorKey.data_section).get(YjsEditorKey.database) as YDatabase | undefined;
++
++  if (!database) throw new Error('Database not loaded');
++  return database;
++}
++
++function getField (database: YDatabase, fieldId: string) {
++  const field = database.get(YjsDatabaseKey.fields)?.get(fieldId) as YDatabaseField | undefined;
++
++  if (!field) throw new Error('Property not found');
++  return field;
++}
++
++// Same defaults as collab-database's default_type_option_data_from_type().
++function defaultTypeOption (type: FieldType): Record<string, unknown> {
++  switch (type) {
++    case FieldType.Number:
++      return { format: 0, scale: 0, symbol: 'RUB', name: 'Number' };
++    case FieldType.DateTime:
++      return {
++        date_format: 3,
++        time_format: 1,
++        timezone_id: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Etc/UTC',
++      };
++    case FieldType.SingleSelect:
++    case FieldType.MultiSelect:
++      return { content: JSON.stringify({ options: [], disable_color: false }) };
++    case FieldType.URL:
++      return { url: '', content: '' };
++    default:
++      return {};
++  }
++}
++
++// Y.Map items (filters, sorts, groups) or plain objects.
++function fieldIdOf (item: unknown) {
++  if (item instanceof Y.Map) return item.get(YjsDatabaseKey.field_id);
++  return (item as { field_id?: string } | null)?.field_id;
++}
++
++function removeWhere (array: Y.Array<unknown> | undefined, match: (item: unknown) => boolean) {
++  if (!array) return;
++  const items = array.toArray();
++
++  for (let i = items.length - 1; i >= 0; i--) {
++    if (match(items[i])) array.delete(i, 1);
++  }
++}
++
++export function createField (databaseDoc: YDoc, name: string, type: FieldType) {
++  const database = getDatabase(databaseDoc);
++  const fields = database.get(YjsDatabaseKey.fields);
++  let fieldId = nanoid(6);
++
++  while (fields.has(fieldId)) fieldId = nanoid(6);
++
++  databaseDoc.transact(() => {
++    database.get(YjsDatabaseKey.views).forEach((view) => {
++      let orders = view.get(YjsDatabaseKey.field_orders);
++
++      if (!orders) {
++        orders = new Y.Array();
++        view.set(YjsDatabaseKey.field_orders, orders);
++      }
++
++      orders.push([{ id: fieldId }]);
++
++      let settings = view.get(YjsDatabaseKey.field_settings);
++
++      if (!settings) {
++        settings = new Y.Map() as typeof settings;
++        view.set(YjsDatabaseKey.field_settings, settings);
++      }
++
++      const setting = new Y.Map<unknown>();
++      const isGrid = Number(view.get(YjsDatabaseKey.layout)) === DatabaseViewLayout.Grid;
++
++      settings.set(fieldId, setting as never);
++      // collab-database default_field_visibility(): Grid AlwaysShown, else HideWhenEmpty.
++      setting.set(YjsDatabaseKey.visibility, isGrid ? 0 : 1);
++      setting.set(YjsDatabaseKey.width, DEFAULT_FIELD_WIDTH);
++      setting.set(YjsDatabaseKey.wrap, true);
++    });
++
++    const field = new Y.Map<unknown>();
++
++    fields.set(fieldId, field as YDatabaseField);
++    field.set(YjsDatabaseKey.id, fieldId);
++    field.set(YjsDatabaseKey.name, name);
++    field.set(YjsDatabaseKey.icon, '');
++    field.set(YjsDatabaseKey.type, type);
++    field.set(YjsDatabaseKey.is_primary, false);
++    field.set(YjsDatabaseKey.created_at, nowSeconds());
++    field.set(YjsDatabaseKey.last_modified, nowSeconds());
++
++    const typeOptions = new Y.Map<unknown>();
++    const typeOption = new Y.Map<unknown>();
++
++    field.set(YjsDatabaseKey.type_option, typeOptions);
++    typeOptions.set(String(type), typeOption);
++    Object.entries(defaultTypeOption(type)).forEach(([key, value]) => typeOption.set(key, value));
++  });
++
++  return fieldId;
++}
++
++export function renameField (databaseDoc: YDoc, fieldId: string, name: string) {
++  const field = getField(getDatabase(databaseDoc), fieldId);
++
++  databaseDoc.transact(() => {
++    field.set(YjsDatabaseKey.name, name);
++    field.set(YjsDatabaseKey.last_modified, nowSeconds());
++  });
++}
++
++export type FieldDeleteBlocker = 'primary' | 'group' | 'calendar' | null;
++
++// The web cannot re-group a board or re-assign a calendar's date property, so
++// properties that a view depends on are not deleted here.
++export function getFieldDeleteBlocker (database: YDatabase | undefined, fieldId: string): FieldDeleteBlocker {
++  if (!database) return null;
++  if (database.get(YjsDatabaseKey.fields)?.get(fieldId)?.get(YjsDatabaseKey.is_primary)) return 'primary';
++
++  let blocker: FieldDeleteBlocker = null;
++
++  database.get(YjsDatabaseKey.views)?.forEach((view) => {
++    if (blocker) return;
++    if (view.get(YjsDatabaseKey.groups)?.toArray().some((group) => fieldIdOf(group) === fieldId)) {
++      blocker = 'group';
++    } else if (view.get(YjsDatabaseKey.layout_settings)?.get('2')?.get(YjsDatabaseKey.field_id) === fieldId) {
++      blocker = 'calendar';
++    }
++  });
++  return blocker;
++}
++
++export function deleteField (databaseDoc: YDoc, fieldId: string) {
++  const database = getDatabase(databaseDoc);
++
++  if (getFieldDeleteBlocker(database, fieldId)) throw new Error('This property cannot be deleted');
++
++  databaseDoc.transact(() => {
++    database.get(YjsDatabaseKey.views).forEach((view) => {
++      removeWhere(view.get(YjsDatabaseKey.field_orders), (item) => (item as { id?: string } | null)?.id === fieldId);
++      view.get(YjsDatabaseKey.field_settings)?.delete(fieldId);
++      // Rust leaves these behind; the web would fail on a filter or sort whose
++      // property is gone.
++      removeWhere(view.get(YjsDatabaseKey.filters) as Y.Array<unknown>, (item) => fieldIdOf(item) === fieldId);
++      removeWhere(view.get(YjsDatabaseKey.sorts) as Y.Array<unknown>, (item) => fieldIdOf(item) === fieldId);
++      removeWhere(view.get(YjsDatabaseKey.calculations) as Y.Array<unknown>, (item) => fieldIdOf(item) === fieldId);
++    });
++    // Row cells stay, like on desktop.
++    database.get(YjsDatabaseKey.fields).delete(fieldId);
++  });
++}
++
++// Adds an option to a single/multi select property (or returns the existing
++// option with that name). Boards grouped by the property get a column for it.
++export function addSelectOption (databaseDoc: YDoc, fieldId: string, name: string): SelectOption {
++  const database = getDatabase(databaseDoc);
++  const field = getField(database, fieldId);
++  const type = Number(field.get(YjsDatabaseKey.type));
++  let typeOptions = field.get(YjsDatabaseKey.type_option) as Y.Map<unknown> | undefined;
++  let typeOption = typeOptions?.get(String(type)) as Y.Map<unknown> | undefined;
++  let content: SelectTypeOption = { options: [], disable_color: false };
++
++  try {
++    const parsed = JSON.parse((typeOption?.get(YjsDatabaseKey.content) as string) || '{}');
++
++    content = { options: parsed.options ?? [], disable_color: parsed.disable_color ?? false };
++  } catch (e) {
++    // keep the empty default
++  }
++
++  const existing = content.options.find((option) => option.name === name);
++
++  if (existing) return existing;
++
++  const ids = new Set(content.options.map((option) => option.id));
++  let id = nanoid(4);
++
++  while (ids.has(id)) id = nanoid(4);
++
++  const option: SelectOption = {
++    id,
++    name,
++    color: OPTION_COLORS[content.options.length % OPTION_COLORS.length],
++  };
++
++  databaseDoc.transact(() => {
++    if (!typeOptions) {
++      typeOptions = new Y.Map();
++      field.set(YjsDatabaseKey.type_option, typeOptions);
++    }
++
++    if (!typeOption) {
++      typeOption = new Y.Map();
++      typeOptions.set(String(type), typeOption);
++    }
++
++    typeOption.set(YjsDatabaseKey.content, JSON.stringify({ ...content, options: [...content.options, option] }));
++    field.set(YjsDatabaseKey.last_modified, nowSeconds());
++
++    database.get(YjsDatabaseKey.views).forEach((view) => {
++      view.get(YjsDatabaseKey.groups)?.forEach((group) => {
++        if (fieldIdOf(group) !== fieldId) return;
++        const columns = group.get(YjsDatabaseKey.groups) as Y.Array<unknown> | undefined;
++
++        if (!columns) return;
++        const known = (columns.toJSON() as { id: string }[]).some((column) => column.id === id);
++
++        if (!known) columns.push([{ id, visible: true }]);
++      });
++    });
++  });
++
++  return option;
++}
++
++export function useFieldEditActions () {
++  const { databaseDoc, canEditRows } = useDatabaseContext();
++
++  const run = useCallback(<T, >(action: () => T): T | undefined => {
++    if (!canEditRows) return;
++    try {
++      return action();
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch (e: any) {
++      console.error(e);
++      notify.error(e?.message || String(e));
++    }
++  }, [canEditRows]);
++
++  const create = useCallback((name: string, type: FieldType) => run(() => createField(databaseDoc, name, type)), [databaseDoc, run]);
++  const rename = useCallback((fieldId: string, name: string) => run(() => renameField(databaseDoc, fieldId, name)), [databaseDoc, run]);
++  const remove = useCallback((fieldId: string) => run(() => deleteField(databaseDoc, fieldId)), [databaseDoc, run]);
++  const addOption = useCallback((fieldId: string, name: string) => run(() => addSelectOption(databaseDoc, fieldId, name)), [databaseDoc, run]);
++
++  return {
++    canEditFields: !!canEditRows,
++    createField: create,
++    renameField: rename,
++    deleteField: remove,
++    addSelectOption: addOption,
++  };
++}
+diff --git a/src/application/database-yjs/index.ts b/src/application/database-yjs/index.ts
+index 4b88bc3..2b6f5a0 100644
+--- a/src/application/database-yjs/index.ts
++++ b/src/application/database-yjs/index.ts
+@@ -6,3 +6,5 @@ export * from './database.type';
+ export * from './const';
+ // Added by the AppFlowy Home Assistant add-on: adding/deleting rows.
+ export * from './row-create';
++// Added by the AppFlowy Home Assistant add-on: creating/renaming/deleting properties.
++export * from './field-write';
+diff --git a/src/application/database-yjs/row-write.ts b/src/application/database-yjs/row-write.ts
+index ed48cb0..832b707 100644
+--- a/src/application/database-yjs/row-write.ts
++++ b/src/application/database-yjs/row-write.ts
+@@ -16,7 +16,13 @@ function rowMap (rowDoc: YDoc) {
+   return rowDoc.getMap(YjsEditorKey.data_section).get(YjsEditorKey.database_row) as Y.Map<unknown> | undefined;
+ }
+ 
+-export function updateRowCell (rowDoc: YDoc, fieldId: string, fieldType: FieldType, data: string) {
++export function updateRowCell (
++  rowDoc: YDoc,
++  fieldId: string,
++  fieldType: FieldType,
++  data: string,
++  extra?: Record<string, unknown>,
++) {
+   const row = rowMap(rowDoc);
+ 
+   if (!row) throw new Error('Row data not loaded');
+@@ -35,10 +41,16 @@ export function updateRowCell (rowDoc: YDoc, fieldId: string, fieldType: FieldTy
+     if (!cell) {
+       cell = new Y.Map();
+       cells.set(fieldId, cell);
+-      cell.set(YjsDatabaseKey.field_type, fieldType);
+       cell.set(YjsDatabaseKey.created_at, now);
+     }
+ 
++    // On every write: a cell left over from a deleted property of another type
++    // would otherwise keep its old type and stay hidden.
++    if (Number(cell.get(YjsDatabaseKey.field_type)) !== fieldType) {
++      cell.set(YjsDatabaseKey.field_type, fieldType);
++    }
++
++    Object.entries(extra ?? {}).forEach(([key, value]) => cell?.set(key, value));
+     cell.set(YjsDatabaseKey.data, data);
+     cell.set(YjsDatabaseKey.last_modified, now);
+     // String on purpose: see row-create.ts (Row timestamps are parsed as i64).
+@@ -63,6 +75,31 @@ export function updateChecklistCell (rowDoc: YDoc, fieldId: string, data: Checkl
+   }));
+ }
+ 
++// collab-database's CheckboxCellData reads "1"/"true"/"yes"; the web (parse,
++// board groups) compares with "Yes".
++export function updateCheckboxCell (rowDoc: YDoc, fieldId: string, checked: boolean) {
++  updateRowCell(rowDoc, fieldId, FieldType.Checkbox, checked ? 'Yes' : 'No');
++}
++
++// SelectOptionIds: option ids joined by ",".
++export function updateSelectCell (rowDoc: YDoc, fieldId: string, fieldType: FieldType, optionIds: string[]) {
++  updateRowCell(rowDoc, fieldId, fieldType, optionIds.join(','));
++}
++
++// collab-database's DateCellData: `data` is the unix timestamp in seconds as a
++// string ("" = no date); range and reminder keys are kept as they are.
++export function updateDateCell (rowDoc: YDoc, fieldId: string, timestamp: number | null, includeTime: boolean) {
++  const cells = rowMap(rowDoc)?.get(YjsDatabaseKey.cells) as Y.Map<unknown> | undefined;
++  const cell = cells?.get(fieldId) as Y.Map<unknown> | undefined;
++
++  updateRowCell(rowDoc, fieldId, FieldType.DateTime, timestamp === null ? '' : String(timestamp), {
++    [YjsDatabaseKey.include_time]: includeTime,
++    [YjsDatabaseKey.is_range]: timestamp === null ? false : Boolean(cell?.get(YjsDatabaseKey.is_range)),
++    [YjsDatabaseKey.end_timestamp]: timestamp === null ? '' : String(cell?.get(YjsDatabaseKey.end_timestamp) ?? ''),
++    [YjsDatabaseKey.reminder_id]: String(cell?.get(YjsDatabaseKey.reminder_id) ?? ''),
++  });
++}
++
+ // collab-database's gen_option_id(): nanoid(4)
+ export function generateOptionId () {
+   const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz-';
+diff --git a/src/application/database-yjs/selector.ts b/src/application/database-yjs/selector.ts
+index df3447d..97a5b83 100644
+--- a/src/application/database-yjs/selector.ts
++++ b/src/application/database-yjs/selector.ts
+@@ -1,6 +1,7 @@
+ import {
+-  FieldId, RowCoverType,
++  FieldId, RowCoverType, RowId,
+   SortId,
++  YDoc,
+   YDatabase,
+   YDatabaseField, YDatabaseMetas, YDatabaseRow,
+   YjsDatabaseKey,
+@@ -152,10 +153,12 @@ export function useFieldSelector (fieldId: string) {
+     setField(field || null);
+     const observerEvent = () => setClock((prev) => prev + 1);
+ 
+-    field?.observe(observerEvent);
++    // Changed by the AppFlowy Home Assistant add-on: deep, so new select
++    // options (type_option content) re-render.
++    field?.observeDeep(observerEvent);
+ 
+     return () => {
+-      field?.unobserve(observerEvent);
++      field?.unobserveDeep(observerEvent);
+     };
+   }, [database, fieldId]);
+ 
+@@ -375,10 +378,35 @@ export function useGroup (groupId: string) {
+   };
+ }
+ 
++// Added by the AppFlowy Home Assistant add-on: a counter that changes when a
++// cell of one of the rows changes (e.g. edited on the row page), so boards and
++// calendars re-place the card or event.
++function useRowCellsVersion (rowOrders?: Row[], rows?: Record<RowId, YDoc> | null) {
++  const [version, setVersion] = useState(0);
++
++  useEffect(() => {
++    if (!rowOrders || !rows) return;
++    const onChange = debounce(() => setVersion((prev) => prev + 1), 200);
++    const maps = rowOrders
++      .map((row) => rows[row.id])
++      .filter((doc) => doc?.share.has(YjsEditorKey.data_section))
++      .map((doc) => doc.getMap(YjsEditorKey.data_section) as Y.Map<unknown>);
++
++    maps.forEach((map) => map.observeDeep(onChange));
++    return () => {
++      onChange.cancel();
++      maps.forEach((map) => map.unobserveDeep(onChange));
++    };
++  }, [rowOrders, rows]);
++
++  return version;
++}
++
+ export function useRowsByGroup (groupId: string) {
+   const { columns, fieldId } = useGroup(groupId);
+   const rows = useRowDocMap();
+   const rowOrders = useRowOrdersSelector();
++  const cellsVersion = useRowCellsVersion(rowOrders, rows);
+ 
+   const fields = useDatabaseFields();
+   const [notFound, setNotFound] = useState(false);
+@@ -416,7 +444,7 @@ export function useRowsByGroup (groupId: string) {
+     return () => {
+       fields.unobserveDeep(onConditionsChange);
+     };
+-  }, [fieldId, fields, rowOrders, rows]);
++  }, [fieldId, fields, rowOrders, rows, cellsVersion]);
+ 
+   const visibleColumns = columns.filter((column) => {
+     if (column.id === fieldId) return !layoutSetting?.get(YjsDatabaseKey.hide_ungrouped_column);
+@@ -555,6 +583,7 @@ export function useCalendarEventsSelector () {
+   const { field } = useFieldSelector(filedId);
+   const rowOrders = useRowOrdersSelector();
+   const rows = useRowDocMap();
++  const cellsVersion = useRowCellsVersion(rowOrders, rows);
+   const [events, setEvents] = useState<CalendarEvent[]>([]);
+   const [emptyEvents, setEmptyEvents] = useState<CalendarEvent[]>([]);
+ 
+@@ -600,7 +629,7 @@ export function useCalendarEventsSelector () {
+ 
+     setEvents(newEvents);
+     setEmptyEvents(emptyEvents);
+-  }, [field, rowOrders, rows, filedId]);
++  }, [field, rowOrders, rows, filedId, cellsVersion]);
+ 
+   return { events, emptyEvents };
+ }
+diff --git a/src/components/database/components/cell/number/NumberCell.tsx b/src/components/database/components/cell/number/NumberCell.tsx
+index 4b6660c..550fdaa 100644
+--- a/src/components/database/components/cell/number/NumberCell.tsx
++++ b/src/components/database/components/cell/number/NumberCell.tsx
+@@ -10,9 +10,11 @@ import React, { useMemo } from 'react';
+ import Decimal from 'decimal.js';
+ 
+ export function NumberCell({ cell, fieldId, style, placeholder }: CellProps<NumberCellType>) {
+-  const { field } = useFieldSelector(fieldId);
++  const { field, clock } = useFieldSelector(fieldId);
+ 
+-  const format = useMemo(() => (field ? parseNumberTypeOptions(field).format : NumberFormat.Num), [field]);
++  // clock: added by the AppFlowy Home Assistant add-on (format changed elsewhere)
++  // eslint-disable-next-line react-hooks/exhaustive-deps
++  const format = useMemo(() => (field ? parseNumberTypeOptions(field).format : NumberFormat.Num), [field, clock]);
+ 
+   const className = useMemo(() => {
+     const classList = ['select-text', 'cursor-text'];
+diff --git a/src/components/database/components/cell/select-option/SelectOptionCell.tsx b/src/components/database/components/cell/select-option/SelectOptionCell.tsx
+index 20ef342..88a79c2 100644
+--- a/src/components/database/components/cell/select-option/SelectOptionCell.tsx
++++ b/src/components/database/components/cell/select-option/SelectOptionCell.tsx
+@@ -6,11 +6,13 @@ import React, { useCallback, useMemo } from 'react';
+ 
+ export function SelectOptionCell({ cell, fieldId, style, placeholder }: CellProps<SelectOptionCellType>) {
+   const selectOptionIds = useMemo(() => (!cell?.data ? [] : cell?.data.split(',')), [cell]);
+-  const { field } = useFieldSelector(fieldId);
++  const { field, clock } = useFieldSelector(fieldId);
+   const typeOption = useMemo(() => {
+     if (!field) return null;
+     return parseSelectOptionTypeOptions(field);
+-  }, [field]);
++    // clock: added by the AppFlowy Home Assistant add-on (options added on the web)
++    // eslint-disable-next-line react-hooks/exhaustive-deps
++  }, [field, clock]);
+ 
+   const renderSelectedOptions = useCallback(
+     (selected: string[]) =>
+diff --git a/src/components/database/components/database-row/AddPropertyButton.tsx b/src/components/database/components/database-row/AddPropertyButton.tsx
+new file mode 100644
+index 0000000..3becdfa
+--- /dev/null
++++ b/src/components/database/components/database-row/AddPropertyButton.tsx
+@@ -0,0 +1,106 @@
++// Added by the AppFlowy Home Assistant add-on: "New property" on the row page
++// (grid row, board card, calendar event). The property is added to every view
++// of the database, like on desktop.
++import { EDITABLE_FIELD_TYPES, FieldType, useFieldEditActions } from '@/application/database-yjs';
++import { ReactComponent as AddIcon } from '@/assets/icons/plus.svg';
++import { NormalModal } from '@/components/_shared/modal';
++import { FieldTypeIcon } from '@/components/database/components/field/FieldTypeIcon';
++import { Button, TextField } from '@mui/material';
++import React, { useState } from 'react';
++import { useTranslation } from 'react-i18next';
++
++export function AddPropertyButton () {
++  const { t } = useTranslation();
++  const { canEditFields, createField } = useFieldEditActions();
++  const [open, setOpen] = useState(false);
++  const [type, setType] = useState<FieldType>(FieldType.Checklist);
++  const [name, setName] = useState('');
++
++  if (!canEditFields) return null;
++
++  const typeName = (fieldType: FieldType): string => {
++    switch (fieldType) {
++      case FieldType.RichText:
++        return t('grid.field.textFieldName');
++      case FieldType.Number:
++        return t('grid.field.numberFieldName');
++      case FieldType.DateTime:
++        return t('grid.field.dateFieldName');
++      case FieldType.SingleSelect:
++        return t('grid.field.singleSelectFieldName');
++      case FieldType.MultiSelect:
++        return t('grid.field.multiSelectFieldName');
++      case FieldType.Checkbox:
++        return t('grid.field.checkboxFieldName');
++      case FieldType.URL:
++        return t('grid.field.urlFieldName');
++      case FieldType.Checklist:
++        return t('grid.field.checklistFieldName');
++      default:
++        return '';
++    }
++  };
++
++  const close = () => {
++    setOpen(false);
++    setName('');
++  };
++
++  return (
++    <>
++      <Button
++        size={'small'}
++        color={'inherit'}
++        startIcon={<AddIcon className={'h-4 w-4'} />}
++        className={'w-fit justify-start text-xs font-normal text-text-caption hover:text-text-title'}
++        onClick={() => setOpen(true)}
++      >
++        {t('grid.field.newProperty')}
++      </Button>
++      <NormalModal
++        open={open}
++        title={t('grid.field.newProperty')}
++        okText={t('button.create')}
++        onClose={close}
++        onCancel={close}
++        onOk={() => {
++          createField(name.trim() || typeName(type), type);
++          close();
++        }}
++        classes={{ container: 'items-start max-md:mt-auto max-md:items-center mt-[10%] ' }}
++      >
++        <div className={'flex min-w-[260px] flex-col gap-4'}>
++          <TextField
++            autoFocus
++            fullWidth
++            size={'small'}
++            label={t('web.propertyName')}
++            placeholder={typeName(type)}
++            value={name}
++            onChange={(e) => setName(e.target.value)}
++          />
++          <div className={'flex flex-col gap-2'}>
++            <div className={'text-sm text-text-caption'}>{t('grid.field.propertyType')}</div>
++            <div className={'grid grid-cols-2 gap-2 sm:grid-cols-4'}>
++              {EDITABLE_FIELD_TYPES.map((fieldType) => (
++                <Button
++                  key={fieldType}
++                  size={'small'}
++                  color={'inherit'}
++                  variant={'outlined'}
++                  onClick={() => setType(fieldType)}
++                  startIcon={<FieldTypeIcon type={fieldType} className={'h-4 w-4'} />}
++                  className={`justify-start text-sm font-normal ${fieldType === type ? 'border-fill-default bg-fill-list-active' : 'border-line-divider'}`}
++                >
++                  <span className={'truncate'}>{typeName(fieldType)}</span>
++                </Button>
++              ))}
++            </div>
++          </div>
++        </div>
++      </NormalModal>
++    </>
++  );
++}
++
++export default AddPropertyButton;
+diff --git a/src/components/database/components/database-row/DatabaseRowProperties.tsx b/src/components/database/components/database-row/DatabaseRowProperties.tsx
+index d9fff83..56beb8e 100644
+--- a/src/components/database/components/database-row/DatabaseRowProperties.tsx
++++ b/src/components/database/components/database-row/DatabaseRowProperties.tsx
+@@ -1,5 +1,6 @@
+ import { useFieldsSelector, usePrimaryFieldId } from '@/application/database-yjs';
+ import { Property } from '@/components/database/components/property';
++import AddPropertyButton from '@/components/database/components/database-row/AddPropertyButton';
+ import React from 'react';
+ 
+ export function DatabaseRowProperties ({ rowId }: { rowId: string }) {
+@@ -15,6 +16,8 @@ export function DatabaseRowProperties ({ rowId }: { rowId: string }) {
+           key={field.fieldId}
+         />;
+       })}
++      {/* Added by the AppFlowy Home Assistant add-on */}
++      <AddPropertyButton />
+     </div>
+   );
+ }
+diff --git a/src/components/database/components/field/select-option/SelectOptionList.tsx b/src/components/database/components/field/select-option/SelectOptionList.tsx
+index a3960f9..e50d27b 100644
+--- a/src/components/database/components/field/select-option/SelectOptionList.tsx
++++ b/src/components/database/components/field/select-option/SelectOptionList.tsx
+@@ -5,11 +5,13 @@ import React, { useCallback, useMemo } from 'react';
+ import { ReactComponent as CheckIcon } from '@/assets/icons/tick.svg';
+ 
+ export function SelectOptionList({ fieldId, selectedIds }: { fieldId: string; selectedIds: string[] }) {
+-  const { field } = useFieldSelector(fieldId);
++  const { field, clock } = useFieldSelector(fieldId);
+   const typeOption = useMemo(() => {
+     if (!field) return null;
+     return parseSelectOptionTypeOptions(field);
+-  }, [field]);
++    // clock: added by the AppFlowy Home Assistant add-on (options added on the web)
++    // eslint-disable-next-line react-hooks/exhaustive-deps
++  }, [field, clock]);
+ 
+   const renderOption = useCallback(
+     (option: SelectOption) => {
+diff --git a/src/components/database/components/property/Property.tsx b/src/components/database/components/property/Property.tsx
+index e11498d..2f01ec5 100644
+--- a/src/components/database/components/property/Property.tsx
++++ b/src/components/database/components/property/Property.tsx
+@@ -12,6 +12,15 @@ import { TextCell } from '@/components/database/components/cell/text';
+ import { UrlCell } from '@/components/database/components/cell/url';
+ import PropertyWrapper from '@/components/database/components/property/PropertyWrapper';
+ import { TextProperty } from '@/components/database/components/property/text';
++import DateEditor from '@/components/database/components/property/editable/DateEditor';
++import SelectEditor from '@/components/database/components/property/editable/SelectEditor';
++import {
++  CheckboxEditor,
++  NumberEditor,
++  TextEditor,
++  UrlEditor,
++} from '@/components/database/components/property/editable/SimpleEditors';
++import { useCellWriter } from '@/components/database/components/property/editable/useCellWriter';
+ 
+ import React, { FC, useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+@@ -27,7 +36,27 @@ export function Property ({ fieldId, rowId }: { fieldId: string; rowId: string }
+   const fieldType = Number(field?.get(YjsDatabaseKey.type)) as FieldType;
+ 
+   const { t } = useTranslation();
++  const { editable } = useCellWriter(rowId);
+   const Component = useMemo(() => {
++    // Added by the AppFlowy Home Assistant add-on: editors on an editable row page.
++    if (editable) {
++      switch (fieldType) {
++        case FieldType.RichText:
++          return TextEditor;
++        case FieldType.Number:
++          return NumberEditor;
++        case FieldType.URL:
++          return UrlEditor;
++        case FieldType.Checkbox:
++          return CheckboxEditor;
++        case FieldType.DateTime:
++          return DateEditor;
++        case FieldType.SingleSelect:
++        case FieldType.MultiSelect:
++          return SelectEditor;
++      }
++    }
++
+     switch (fieldType) {
+       case FieldType.URL:
+         return UrlCell;
+@@ -53,7 +82,7 @@ export function Property ({ fieldId, rowId }: { fieldId: string; rowId: string }
+       default:
+         return TextProperty;
+     }
+-  }, [fieldType]) as FC<CellProps<CellType>>;
++  }, [fieldType, editable]) as FC<CellProps<CellType>>;
+ 
+   const style = useMemo(
+     () => ({
+diff --git a/src/components/database/components/property/PropertyWrapper.tsx b/src/components/database/components/property/PropertyWrapper.tsx
+index 4932d0e..06f31d4 100644
+--- a/src/components/database/components/property/PropertyWrapper.tsx
++++ b/src/components/database/components/property/PropertyWrapper.tsx
+@@ -1,15 +1,123 @@
++import { getFieldDeleteBlocker, useDatabase, useFieldEditActions, useFieldSelector } from '@/application/database-yjs';
++import { YjsDatabaseKey } from '@/application/types';
++import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
++import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg';
++import { NormalModal } from '@/components/_shared/modal';
+ import { FieldDisplay } from '@/components/database/components/field';
+-import React from 'react';
++import { ListItemIcon, Menu, MenuItem, TextField } from '@mui/material';
++import React, { useState } from 'react';
++import { useTranslation } from 'react-i18next';
+ 
+ function PropertyWrapper({ fieldId, children }: { fieldId: string; children: React.ReactNode }) {
+   return (
+     <div className={'flex min-h-[28px] w-full gap-2'}>
+       <div className={'property-label flex h-auto w-[30%] items-center py-2'}>
+-        <FieldDisplay fieldId={fieldId} />
++        <PropertyLabel fieldId={fieldId} />
+       </div>
+       <div className={'flex h-fit flex-1 flex-wrap items-center overflow-x-hidden py-2 pr-1'}>{children}</div>
+     </div>
+   );
+ }
+ 
++// Added by the AppFlowy Home Assistant add-on: on an editable row page, the label
++// opens a menu to rename or delete the property.
++function PropertyLabel({ fieldId }: { fieldId: string }) {
++  const { t } = useTranslation();
++  const database = useDatabase();
++  const { field } = useFieldSelector(fieldId);
++  const { canEditFields, renameField, deleteField } = useFieldEditActions();
++  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
++  const [renaming, setRenaming] = useState(false);
++  const [deleting, setDeleting] = useState(false);
++  const [name, setName] = useState('');
++
++  if (!canEditFields) return <FieldDisplay fieldId={fieldId} />;
++
++  const blocker = anchorEl ? getFieldDeleteBlocker(database, fieldId) : null;
++  const blockerText = blocker === 'group'
++    ? t('web.propertyUsedByBoard')
++    : blocker === 'calendar'
++      ? t('web.propertyUsedByCalendar')
++      : null;
++
++  const commitRename = () => {
++    const next = name.trim();
++
++    setRenaming(false);
++    if (next && next !== field?.get(YjsDatabaseKey.name)) renameField(fieldId, next);
++  };
++
++  return (
++    <>
++      <button
++        type={'button'}
++        className={'-mx-1 flex w-full min-w-0 items-center rounded-[6px] px-1 py-0.5 text-left hover:bg-fill-list-hover'}
++        onClick={(e) => setAnchorEl(e.currentTarget)}
++      >
++        <FieldDisplay fieldId={fieldId} />
++      </button>
++      <Menu
++        open={Boolean(anchorEl)}
++        anchorEl={anchorEl}
++        onClose={() => setAnchorEl(null)}
++      >
++        <MenuItem
++          onClick={() => {
++            setName(field?.get(YjsDatabaseKey.name) || '');
++            setRenaming(true);
++            setAnchorEl(null);
++          }}
++        >
++          <ListItemIcon><EditIcon className={'h-4 w-4'} /></ListItemIcon>
++          <span className={'text-sm'}>{t('button.rename')}</span>
++        </MenuItem>
++        <MenuItem
++          disabled={Boolean(blocker)}
++          onClick={() => {
++            setDeleting(true);
++            setAnchorEl(null);
++          }}
++        >
++          <ListItemIcon><DeleteIcon className={'h-4 w-4'} /></ListItemIcon>
++          <span className={'text-sm'}>{t('grid.field.delete')}</span>
++        </MenuItem>
++        {blockerText && (
++          <div className={'max-w-[240px] px-4 pb-2 text-xs text-text-caption'}>{blockerText}</div>
++        )}
++      </Menu>
++      <NormalModal
++        open={renaming}
++        title={t('button.rename')}
++        onClose={() => setRenaming(false)}
++        onCancel={() => setRenaming(false)}
++        onOk={commitRename}
++      >
++        <TextField
++          autoFocus
++          fullWidth
++          size={'small'}
++          className={'min-w-[240px]'}
++          label={t('web.propertyName')}
++          value={name}
++          onChange={(e) => setName(e.target.value)}
++        />
++      </NormalModal>
++      <NormalModal
++        open={deleting}
++        danger
++        title={t('grid.field.delete')}
++        okText={t('button.delete')}
++        onClose={() => setDeleting(false)}
++        onCancel={() => setDeleting(false)}
++        onOk={() => {
++          setDeleting(false);
++          deleteField(fieldId);
++        }}
++      >
++        {t('grid.field.deleteFieldPromptMessage')}
++      </NormalModal>
++    </>
++  );
++}
++
+ export default PropertyWrapper;
+diff --git a/src/components/database/components/property/cheklist/ChecklistProperty.tsx b/src/components/database/components/property/cheklist/ChecklistProperty.tsx
+index 27c79c4..92c8acc 100644
+--- a/src/components/database/components/property/cheklist/ChecklistProperty.tsx
++++ b/src/components/database/components/property/cheklist/ChecklistProperty.tsx
+@@ -110,7 +110,8 @@ export function ChecklistProperty(props: CellProps<CellType>) {
+               <button
+                 type={'button'}
+                 title={t('button.delete')}
+-                className={'invisible flex h-5 w-5 shrink-0 items-center justify-center text-text-caption hover:text-function-error group-hover:visible'}
++                // Hover-only on devices with a mouse; always shown on touch screens.
++                className={'flex h-5 w-5 shrink-0 items-center justify-center text-text-caption hover:text-function-error [@media(hover:hover)]:invisible [@media(hover:hover)]:group-hover:visible'}
+                 onClick={() => remove(option.id)}
+               >
+                 <DeleteIcon className={'h-4 w-4'} />
+diff --git a/src/components/database/components/property/editable/DateEditor.tsx b/src/components/database/components/property/editable/DateEditor.tsx
+new file mode 100644
+index 0000000..df86a2a
+--- /dev/null
++++ b/src/components/database/components/property/editable/DateEditor.tsx
+@@ -0,0 +1,101 @@
++// Added by the AppFlowy Home Assistant add-on: picks the date (and optionally
++// the time) of a Date property on the row page. Native inputs, so phones show
++// their own date and time pickers. Dates are stored in local time, like the
++// desktop app does.
++import { FieldType } from '@/application/database-yjs';
++import { CellProps, DateTimeCell as DateTimeCellType } from '@/application/database-yjs/cell.type';
++import { updateDateCell } from '@/application/database-yjs/row-write';
++import { DateTimeCell } from '@/components/database/components/cell/date';
++import EditorPopup from '@/components/database/components/property/editable/EditorPopup';
++import { useCellWriter } from '@/components/database/components/property/editable/useCellWriter';
++import { Button, FormControlLabel, Switch } from '@mui/material';
++import dayjs from 'dayjs';
++import React, { useMemo, useState } from 'react';
++import { useTranslation } from 'react-i18next';
++
++const inputClass = 'w-full rounded-[8px] border border-line-divider bg-transparent px-2 py-1.5 text-sm outline-none focus:border-fill-default';
++
++export function DateEditor (props: CellProps<DateTimeCellType>) {
++  const { cell, fieldId, rowId, placeholder, style } = props;
++  const { t } = useTranslation();
++  const { write } = useCellWriter(rowId);
++  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
++  const isDate = cell?.fieldType === FieldType.DateTime;
++  const includeTime = isDate ? Boolean(cell.includeTime) : false;
++
++  const current = useMemo(() => {
++    if (!isDate || !cell.data) return null;
++    const value = dayjs.unix(Number(cell.data));
++
++    return value.isValid() ? value : null;
++  }, [cell, isDate]);
++
++  const date = current ? current.format('YYYY-MM-DD') : '';
++  const time = current ? current.format('HH:mm') : '';
++
++  const save = (nextDate: string, nextTime: string, nextIncludeTime: boolean) => {
++    if (!nextDate) return;
++    const value = dayjs(`${nextDate}T${nextIncludeTime && nextTime ? nextTime : '00:00'}:00`);
++
++    if (!value.isValid()) return;
++    write((rowDoc) => updateDateCell(rowDoc, fieldId, value.unix(), nextIncludeTime));
++  };
++
++  return (
++    <>
++      <div
++        className={'min-h-[24px] w-full min-w-0 cursor-pointer'}
++        onClick={(e) => setAnchorEl(e.currentTarget)}
++      >
++        {current ? <DateTimeCell {...props} /> : <div style={style} className={'text-text-placeholder'}>{placeholder}</div>}
++      </div>
++      <EditorPopup open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
++        <input
++          type={'date'}
++          className={inputClass}
++          value={date}
++          onChange={(e) => save(e.target.value, time || dayjs().format('HH:mm'), includeTime)}
++        />
++        <FormControlLabel
++          className={'m-0 justify-between'}
++          labelPlacement={'start'}
++          label={<span className={'text-sm'}>{t('grid.field.includeTime')}</span>}
++          control={(
++            <Switch
++              size={'small'}
++              checked={includeTime}
++              disabled={!date}
++              onChange={(e) => save(date, time || dayjs().format('HH:mm'), e.target.checked)}
++            />
++          )}
++        />
++        {includeTime && (
++          <input
++            type={'time'}
++            className={inputClass}
++            value={time}
++            onChange={(e) => save(date, e.target.value, true)}
++          />
++        )}
++        <div className={'flex justify-between gap-2'}>
++          <Button
++            size={'small'}
++            color={'inherit'}
++            disabled={!current}
++            onClick={() => {
++              write((rowDoc) => updateDateCell(rowDoc, fieldId, null, false));
++              setAnchorEl(null);
++            }}
++          >
++            {t('grid.field.clearDate')}
++          </Button>
++          <Button size={'small'} variant={'contained'} onClick={() => setAnchorEl(null)}>
++            {t('button.done')}
++          </Button>
++        </div>
++      </EditorPopup>
++    </>
++  );
++}
++
++export default DateEditor;
+diff --git a/src/components/database/components/property/editable/EditorPopup.tsx b/src/components/database/components/property/editable/EditorPopup.tsx
+new file mode 100644
+index 0000000..11c9dd2
+--- /dev/null
++++ b/src/components/database/components/property/editable/EditorPopup.tsx
+@@ -0,0 +1,48 @@
++// Added by the AppFlowy Home Assistant add-on: a popover next to the property
++// on desktop, a bottom sheet on phones (the row page is full-screen there).
++import { Popover } from '@/components/_shared/popover';
++import { getPlatform } from '@/utils/platform';
++import { Drawer } from '@mui/material';
++import React, { useMemo } from 'react';
++
++export function EditorPopup ({
++  open,
++  anchorEl,
++  onClose,
++  children,
++}: {
++  open: boolean;
++  anchorEl: HTMLElement | null;
++  onClose: () => void;
++  children: React.ReactNode;
++}) {
++  const isMobile = useMemo(() => getPlatform().isMobile, []);
++
++  if (!open) return null;
++
++  if (isMobile) {
++    return (
++      <Drawer
++        anchor={'bottom'}
++        open={open}
++        onClose={onClose}
++        PaperProps={{ className: 'rounded-t-[12px] max-h-[70vh]' }}
++      >
++        <div className={'flex flex-col gap-3 p-4 pb-8'}>{children}</div>
++      </Drawer>
++    );
++  }
++
++  return (
++    <Popover
++      open={open}
++      anchorEl={anchorEl}
++      onClose={onClose}
++      adjustOrigins
++    >
++      <div className={'flex w-[280px] max-w-[90vw] flex-col gap-3 p-3'}>{children}</div>
++    </Popover>
++  );
++}
++
++export default EditorPopup;
+diff --git a/src/components/database/components/property/editable/InlineInput.tsx b/src/components/database/components/property/editable/InlineInput.tsx
+new file mode 100644
+index 0000000..ef56645
+--- /dev/null
++++ b/src/components/database/components/property/editable/InlineInput.tsx
+@@ -0,0 +1,54 @@
++// Added by the AppFlowy Home Assistant add-on: a plain single-line input for the
++// row page editors. Enter or blur commits, Escape cancels.
++import React, { useRef, useState } from 'react';
++
++export function InlineInput ({
++  value,
++  onCommit,
++  onCancel,
++  placeholder,
++  type = 'text',
++  inputMode,
++}: {
++  value: string;
++  onCommit: (value: string) => void;
++  onCancel: () => void;
++  placeholder?: string;
++  type?: string;
++  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
++}) {
++  const [text, setText] = useState(value);
++  const done = useRef(false);
++
++  const finish = (commit: boolean) => {
++    if (done.current) return;
++    done.current = true;
++    if (commit) onCommit(text.trim());
++    else onCancel();
++  };
++
++  return (
++    <input
++      autoFocus
++      type={type}
++      inputMode={inputMode}
++      value={text}
++      placeholder={placeholder}
++      className={'w-full min-w-0 bg-transparent outline-none'}
++      onChange={(e) => setText(e.target.value)}
++      onKeyDown={(e) => {
++        e.stopPropagation();
++        if (e.key === 'Enter') {
++          e.preventDefault();
++          finish(true);
++        } else if (e.key === 'Escape') {
++          e.preventDefault();
++          finish(false);
++        }
++      }}
++      onBlur={() => finish(true)}
++    />
++  );
++}
++
++export default InlineInput;
+diff --git a/src/components/database/components/property/editable/SelectEditor.tsx b/src/components/database/components/property/editable/SelectEditor.tsx
+new file mode 100644
+index 0000000..46f0a32
+--- /dev/null
++++ b/src/components/database/components/property/editable/SelectEditor.tsx
+@@ -0,0 +1,134 @@
++// Added by the AppFlowy Home Assistant add-on: chooses the options of a Single or
++// Multi select property on the row page and creates new ones. Renaming,
++// recoloring and deleting options stays in the desktop app.
++import {
++  FieldType,
++  parseSelectOptionTypeOptions,
++  SelectOption,
++  useFieldEditActions,
++  useFieldSelector,
++} from '@/application/database-yjs';
++import { CellProps, SelectOptionCell as SelectOptionCellType } from '@/application/database-yjs/cell.type';
++import { updateSelectCell } from '@/application/database-yjs/row-write';
++import { YjsDatabaseKey } from '@/application/types';
++import { ReactComponent as CheckIcon } from '@/assets/icons/tick.svg';
++import { ReactComponent as AddIcon } from '@/assets/icons/plus.svg';
++import { Tag } from '@/components/_shared/tag';
++import { SelectOptionColorMap } from '@/components/database/components/cell/cell.const';
++import { SelectOptionCell } from '@/components/database/components/cell/select-option';
++import EditorPopup from '@/components/database/components/property/editable/EditorPopup';
++import { useCellWriter } from '@/components/database/components/property/editable/useCellWriter';
++import { getPlatform } from '@/utils/platform';
++import React, { useMemo, useState } from 'react';
++import { useTranslation } from 'react-i18next';
++
++export function SelectEditor (props: CellProps<SelectOptionCellType>) {
++  const { cell, fieldId, rowId, placeholder, style } = props;
++  const { t } = useTranslation();
++  const { write } = useCellWriter(rowId);
++  const { addSelectOption } = useFieldEditActions();
++  const { field, clock } = useFieldSelector(fieldId);
++  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
++  const [search, setSearch] = useState('');
++  const fieldType = Number(field?.get(YjsDatabaseKey.type)) as FieldType;
++  const isMulti = fieldType === FieldType.MultiSelect;
++
++  const options = useMemo(() => {
++    if (!field) return [];
++    return parseSelectOptionTypeOptions(field)?.options ?? [];
++    // clock: the options live inside the field's type option
++    // eslint-disable-next-line react-hooks/exhaustive-deps
++  }, [field, clock]);
++
++  const selectedIds = useMemo(() => {
++    const data = cell?.fieldType === fieldType ? cell?.data : '';
++
++    return typeof data === 'string' && data ? data.split(',').filter((id) => options.some((o) => o.id === id)) : [];
++  }, [cell, fieldType, options]);
++
++  const query = search.trim();
++  const filtered = options.filter((option) => option.name.toLowerCase().includes(query.toLowerCase()));
++  const canCreate = query !== '' && !options.some((option) => option.name === query);
++
++  const choose = (option: SelectOption) => {
++    const selected = selectedIds.includes(option.id);
++    let next: string[];
++
++    if (isMulti) {
++      next = selected ? selectedIds.filter((id) => id !== option.id) : [...selectedIds, option.id];
++    } else {
++      next = selected ? [] : [option.id];
++      setAnchorEl(null);
++    }
++
++    setSearch('');
++    write((rowDoc) => updateSelectCell(rowDoc, fieldId, fieldType, next));
++  };
++
++  const create = () => {
++    const option = addSelectOption(fieldId, query);
++
++    if (option) choose(option);
++  };
++
++  return (
++    <>
++      <div
++        className={'min-h-[24px] w-full min-w-0 cursor-pointer'}
++        onClick={(e) => setAnchorEl(e.currentTarget)}
++      >
++        {selectedIds.length ? <SelectOptionCell {...props} /> : <div style={style} className={'text-text-placeholder'}>{placeholder}</div>}
++      </div>
++      <EditorPopup
++        open={Boolean(anchorEl)}
++        anchorEl={anchorEl}
++        onClose={() => {
++          setAnchorEl(null);
++          setSearch('');
++        }}
++      >
++        <input
++          autoFocus={!getPlatform().isMobile}
++          value={search}
++          placeholder={t('grid.selectOption.searchOrCreateOption')}
++          className={'w-full rounded-[8px] border border-line-divider bg-transparent px-2 py-1.5 text-sm outline-none focus:border-fill-default'}
++          onChange={(e) => setSearch(e.target.value)}
++          onKeyDown={(e) => {
++            e.stopPropagation();
++            if (e.key !== 'Enter') return;
++            e.preventDefault();
++            const exact = options.find((option) => option.name === query);
++
++            if (exact) choose(exact);
++            else if (canCreate) create();
++          }}
++        />
++        <div className={'flex max-h-[300px] flex-col gap-1 overflow-y-auto'}>
++          {filtered.map((option) => (
++            <button
++              key={option.id}
++              type={'button'}
++              className={'flex min-h-[32px] items-center justify-between gap-2 rounded-[6px] px-1 text-left hover:bg-fill-list-hover'}
++              onClick={() => choose(option)}
++            >
++              <Tag size={'small'} label={option.name} color={SelectOptionColorMap[option.color]} />
++              {selectedIds.includes(option.id) && <CheckIcon className={'h-4 w-4 shrink-0'} />}
++            </button>
++          ))}
++          {canCreate && (
++            <button
++              type={'button'}
++              className={'flex min-h-[32px] items-center gap-2 rounded-[6px] px-1 text-left text-sm hover:bg-fill-list-hover'}
++              onClick={create}
++            >
++              <AddIcon className={'h-4 w-4 shrink-0'} />
++              <span className={'truncate'}>{t('button.create')} &quot;{query}&quot;</span>
++            </button>
++          )}
++        </div>
++      </EditorPopup>
++    </>
++  );
++}
++
++export default SelectEditor;
+diff --git a/src/components/database/components/property/editable/SimpleEditors.tsx b/src/components/database/components/property/editable/SimpleEditors.tsx
+new file mode 100644
+index 0000000..f1e7999
+--- /dev/null
++++ b/src/components/database/components/property/editable/SimpleEditors.tsx
+@@ -0,0 +1,156 @@
++// Added by the AppFlowy Home Assistant add-on: row page editors for Text, Number,
++// URL and Checkbox properties (upstream v0.1.18 only displays them).
++import { FieldType } from '@/application/database-yjs';
++import {
++  CellProps,
++  CheckboxCell as CheckboxCellType,
++  NumberCell as NumberCellType,
++  TextCell as TextCellType,
++  UrlCell as UrlCellType,
++} from '@/application/database-yjs/cell.type';
++import { updateCheckboxCell, updateRowCell } from '@/application/database-yjs/row-write';
++import { ReactComponent as CheckboxCheckSvg } from '@/assets/icons/check_filled.svg';
++import { ReactComponent as CheckboxUncheckSvg } from '@/assets/icons/uncheck.svg';
++import { ReactComponent as EditSvg } from '@/assets/icons/edit.svg';
++import { notify } from '@/components/_shared/notify';
++import ReferenceInput from '@/components/_shared/reference/ReferenceInput';
++import { NumberCell } from '@/components/database/components/cell/number';
++import { TextCell } from '@/components/database/components/cell/text';
++import { UrlCell } from '@/components/database/components/cell/url';
++import InlineInput from '@/components/database/components/property/editable/InlineInput';
++import { useCellWriter } from '@/components/database/components/property/editable/useCellWriter';
++import { IconButton } from '@mui/material';
++import React, { useState } from 'react';
++import { useTranslation } from 'react-i18next';
++
++const clickArea = 'min-h-[24px] w-full min-w-0 cursor-text';
++
++export function TextEditor (props: CellProps<TextCellType>) {
++  const { cell, fieldId, rowId, placeholder } = props;
++  const { write } = useCellWriter(rowId);
++  const [editing, setEditing] = useState(false);
++  const value = cell?.fieldType === FieldType.RichText ? cell.data || '' : '';
++
++  if (editing) {
++    return (
++      <div className={'w-full text-xs'}>
++        <ReferenceInput
++          value={value}
++          placeholder={placeholder}
++          onCancel={() => setEditing(false)}
++          onCommit={(text) => {
++            setEditing(false);
++            if (text !== value) write((rowDoc) => updateRowCell(rowDoc, fieldId, FieldType.RichText, text));
++          }}
++        />
++      </div>
++    );
++  }
++
++  return (
++    <div className={clickArea} onClick={() => setEditing(true)}>
++      <TextCell {...props} />
++    </div>
++  );
++}
++
++// Accepts "1,5" as well as "1.5"; "" clears the value.
++function normalizeNumber (text: string) {
++  const value = text.replace(/\s/g, '').replace(',', '.');
++
++  if (value === '') return '';
++  if (!/^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(value)) return null;
++  return String(Number(value));
++}
++
++export function NumberEditor (props: CellProps<NumberCellType>) {
++  const { cell, fieldId, rowId, placeholder, style } = props;
++  const { t } = useTranslation();
++  const { write } = useCellWriter(rowId);
++  const [editing, setEditing] = useState(false);
++  const value = cell?.fieldType === FieldType.Number ? cell.data || '' : '';
++
++  if (editing) {
++    return (
++      <div className={'w-full text-xs'}>
++        <InlineInput
++          value={value}
++          inputMode={'decimal'}
++          placeholder={placeholder}
++          onCancel={() => setEditing(false)}
++          onCommit={(text) => {
++            setEditing(false);
++            const number = normalizeNumber(text);
++
++            if (number === null) {
++              notify.error(t('web.invalidNumber'));
++              return;
++            }
++
++            if (number !== value) write((rowDoc) => updateRowCell(rowDoc, fieldId, FieldType.Number, number));
++          }}
++        />
++      </div>
++    );
++  }
++
++  return (
++    <div className={clickArea} onClick={() => setEditing(true)}>
++      {value ? <NumberCell {...props} /> : <div style={style} className={'text-text-placeholder'}>{placeholder}</div>}
++    </div>
++  );
++}
++
++export function UrlEditor (props: CellProps<UrlCellType>) {
++  const { cell, fieldId, rowId, placeholder } = props;
++  const { t } = useTranslation();
++  const { write } = useCellWriter(rowId);
++  const [editing, setEditing] = useState(false);
++  const value = cell?.fieldType === FieldType.URL ? cell.data || '' : '';
++
++  if (editing) {
++    return (
++      <div className={'w-full text-xs'}>
++        <InlineInput
++          value={value}
++          type={'url'}
++          inputMode={'url'}
++          placeholder={placeholder}
++          onCancel={() => setEditing(false)}
++          onCommit={(text) => {
++            setEditing(false);
++            if (text !== value) write((rowDoc) => updateRowCell(rowDoc, fieldId, FieldType.URL, text));
++          }}
++        />
++      </div>
++    );
++  }
++
++  // Tapping a link opens it, so editing has its own (always visible) button.
++  return (
++    <div className={'flex w-full min-w-0 items-center gap-1'}>
++      <div className={`relative flex-1 ${clickArea}`} onClick={() => !value && setEditing(true)}>
++        <UrlCell {...props} />
++      </div>
++      <IconButton size={'small'} title={t('button.edit')} onClick={() => setEditing(true)}>
++        <EditSvg className={'h-4 w-4'} />
++      </IconButton>
++    </div>
++  );
++}
++
++export function CheckboxEditor ({ cell, fieldId, rowId }: CellProps<CheckboxCellType>) {
++  const { write } = useCellWriter(rowId);
++  const checked = cell?.fieldType === FieldType.Checkbox && Boolean(cell.data);
++  const Icon = checked ? CheckboxCheckSvg : CheckboxUncheckSvg;
++
++  return (
++    <button
++      type={'button'}
++      className={'flex h-6 w-6 items-center justify-center text-fill-default'}
++      onClick={() => write((rowDoc) => updateCheckboxCell(rowDoc, fieldId, !checked))}
++    >
++      <Icon className={'h-5 w-5'} />
++    </button>
++  );
++}
+diff --git a/src/components/database/components/property/editable/useCellWriter.ts b/src/components/database/components/property/editable/useCellWriter.ts
+new file mode 100644
+index 0000000..077e5eb
+--- /dev/null
++++ b/src/components/database/components/property/editable/useCellWriter.ts
+@@ -0,0 +1,24 @@
++// Added by the AppFlowy Home Assistant add-on: shared by the row page editors.
++import { useRowDocMap, useRowReadOnly } from '@/application/database-yjs';
++import { YDoc } from '@/application/types';
++import { notify } from '@/components/_shared/notify';
++import { useCallback } from 'react';
++
++export function useCellWriter (rowId: string) {
++  const readOnly = useRowReadOnly();
++  const rowDoc = useRowDocMap()?.[rowId];
++  const editable = !readOnly && Boolean(rowDoc);
++
++  const write = useCallback((change: (rowDoc: YDoc) => void) => {
++    if (!rowDoc || readOnly) return;
++    try {
++      change(rowDoc);
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch (e: any) {
++      console.error(e);
++      notify.error(e?.message || String(e));
++    }
++  }, [readOnly, rowDoc]);
++
++  return { editable, write };
++}

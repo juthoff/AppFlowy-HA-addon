@@ -359,3 +359,25 @@
 - Felder, Auswahloptionen, Verschieben von Karten und verknüpfte Ansichten bleiben der
   Desktop-App vorbehalten.
 - Umgesetzt als vierter Patch `patches/appflowy-web-databases.patch` auf AppFlowy Web `v0.1.18`.
+
+## 0.9.64-17
+
+- **Eigenschaften in AppFlowy Web anlegen.** Auf der geöffneten Zeile (Tabellenzeile,
+  Board-Karte, Kalendertermin) fügt "+ Neue Eigenschaft" unter den Eigenschaften ein Feld hinzu:
+  Text, Zahl, Datum, Auswahl, Mehrfachauswahl, Kontrollkästchen, URL oder Checkliste. Das Feld
+  gilt für die ganze Datenbank und erscheint in allen Ansichten. Damit lassen sich Karten jetzt
+  auch im Browser mit einer Checkliste versehen. Funktioniert am Desktop und am Handy.
+- **Eigenschaften umbenennen und löschen:** Tipp auf den Namen der Eigenschaft öffnet ein Menü.
+  Löschen fragt nach; Eigenschaften, nach denen ein Board gruppiert ist oder die einen Kalender
+  steuern, lassen sich im Browser nicht löschen.
+- **Alle diese Eigenschaften sind auf der geöffneten Zeile bearbeitbar:** Text, Zahl (Komma oder
+  Punkt), URL (Stift-Symbol zum Ändern), Kontrollkästchen, Datum mit optionaler Uhrzeit (native
+  Datums-/Zeitauswahl des Geräts) und Auswahl/Mehrfachauswahl inklusive neuer Optionen. Eine neue
+  Option im gruppierenden Feld eines Boards bekommt sofort eine eigene Spalte.
+- Board-Karten und Kalendertermine rücken nach einer Änderung auf der geöffneten Zeile sofort in
+  die richtige Spalte bzw. an den richtigen Tag (vorher erst nach Neuladen).
+- Der Löschen-Knopf von Checklisten-Einträgen ist auf Touch-Geräten jetzt sichtbar (vorher nur
+  bei Mauszeiger darüber).
+- Umbenennen, Umfärben und Löschen von Auswahloptionen, Zahlen- und Datumsformate, Karten
+  verschieben und verknüpfte Ansichten bleiben der Desktop-App vorbehalten.
+- Umgesetzt als fünfter Patch `patches/appflowy-web-properties.patch` auf AppFlowy Web `v0.1.18`.

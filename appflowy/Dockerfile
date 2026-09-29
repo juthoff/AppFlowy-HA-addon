@@ -59,17 +59,26 @@ WORKDIR /app
 # enables editing, adds the desktop page menus (add, rename, change icon,
 # duplicate, move, delete) to the mobile sidebar and top bar, and shows the
 # page modal full-screen on phones.
-# patches/appflowy-web-databases.patch (applied last) lets the web create Grid,
+# patches/appflowy-web-databases.patch (applied fourth) lets the web create Grid,
 # Board and Calendar pages (upstream commented them out of the "+" menu, the
 # "New page" dialog and the slash menu; server 0.9.64 creates them with default
 # fields) and add/delete rows, board cards and calendar events. Upstream keeps
 # databases read-only. It hides the AI Chat entry (no AI service here) and
 # stores row timestamps as strings, since collab-database parses them as i64
 # and rejects the float that a JS number decodes to.
+# patches/appflowy-web-properties.patch (applied last) adds "New property" to
+# the row page of a grid row, board card or calendar event (Text, Number, Date,
+# Single/Multi select, Checkbox, URL, Checklist), renames and deletes
+# properties, and makes those cells editable there, incl. creating select
+# options. Upstream cannot change a database's fields at all. Fields are
+# written in collab-database's shape (field map, {id} field order and field
+# settings in every view); properties a board groups by or a calendar uses
+# cannot be deleted from the web.
 COPY patches/appflowy-web-password-login.patch /tmp/appflowy-web-password-login.patch
 COPY patches/appflowy-web-references.patch /tmp/appflowy-web-references.patch
 COPY patches/appflowy-web-mobile-edit.patch /tmp/appflowy-web-mobile-edit.patch
 COPY patches/appflowy-web-databases.patch /tmp/appflowy-web-databases.patch
+COPY patches/appflowy-web-properties.patch /tmp/appflowy-web-properties.patch
 RUN npm install -g pnpm@8.5.0 \
     && git clone --depth 1 --branch ${APPFLOWY_WEB_REF} https://github.com/AppFlowy-IO/AppFlowy-Web.git . \
     && sed -i 's|https://test.appflowy.cloud||g' src/components/main/app.hooks.ts \
@@ -77,6 +86,7 @@ RUN npm install -g pnpm@8.5.0 \
     && git apply --verbose /tmp/appflowy-web-references.patch \
     && git apply --verbose /tmp/appflowy-web-mobile-edit.patch \
     && git apply --verbose /tmp/appflowy-web-databases.patch \
+    && git apply --verbose /tmp/appflowy-web-properties.patch \
     && pnpm install --frozen-lockfile \
     && pnpm run build
 

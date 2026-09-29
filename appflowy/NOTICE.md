@@ -23,7 +23,12 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
   `patches/appflowy-web-databases.patch` (Anlegen von Tabellen, Boards und Kalendern; Zeilen,
   Karten und Termine hinzufügen und löschen). Fügt `src/application/database-yjs/row-create.ts`
   und `src/components/database/components/database-row/DeleteRowButton.tsx` hinzu; geänderte
-  Dateien tragen denselben Vermerk.
+  Dateien tragen denselben Vermerk. Seit `0.9.64-17` zusätzlich
+  `patches/appflowy-web-properties.patch` (Eigenschaften anlegen, umbenennen, löschen und auf der
+  Zeilenseite bearbeiten). Fügt `src/application/database-yjs/field-write.ts`,
+  `src/components/database/components/database-row/AddPropertyButton.tsx` und
+  `src/components/database/components/property/editable/` hinzu; geänderte Dateien tragen
+  denselben Vermerk.
 - `gotrue`: `Secure`-Flag des Session-Cookies deaktiviert (siehe Dockerfile), MIT-Lizenz.
 
 | Komponente | Quelle | Referenz | Lizenz |
@@ -33,7 +38,7 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
 | appflowy_worker | `appflowyinc/appflowy_worker` (Docker Hub) | Digest `sha256:e9bcb9f712b2fb75318674fa874c0ef460d7b3b7487c99560f2b5ce5564991d2` (amd64) / `sha256:7986e875e4fc825c73de0bad7a58f464ae81019c6c6bdb2c3c0c5790df69b4f5` (arm64), gepusht 2025-07-04 | AGPL-3.0 |
 | Quellcode (appflowy_cloud/admin_frontend/appflowy_worker) | https://github.com/AppFlowy-IO/AppFlowy-Cloud | Git-Tag `0.9.64` | AGPL-3.0 |
 | gotrue (Auth) | https://github.com/AppFlowy-IO/auth | Branch/Tag `0.8.0`, aus Quellcode gebaut | MIT |
-| AppFlowy Web | https://github.com/AppFlowy-IO/AppFlowy-Web | Tag `v0.1.18`, aus Quellcode gebaut, mit `patches/appflowy-web-password-login.patch`, `patches/appflowy-web-references.patch`, `patches/appflowy-web-mobile-edit.patch` und `patches/appflowy-web-databases.patch` (s. o.) | AGPL-3.0 |
+| AppFlowy Web | https://github.com/AppFlowy-IO/AppFlowy-Web | Tag `v0.1.18`, aus Quellcode gebaut, mit `patches/appflowy-web-password-login.patch`, `patches/appflowy-web-references.patch`, `patches/appflowy-web-mobile-edit.patch`, `patches/appflowy-web-databases.patch` und `patches/appflowy-web-properties.patch` (s. o.) | AGPL-3.0 |
 | PostgreSQL | Debian-Paket `postgresql-16` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | pgvector | Debian-Paket `postgresql-16-pgvector` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | Redis | Debian-Paket `redis-server` | Debian bookworm | RSALv2/SSPLv1/AGPL-3.0 (je Version) |
