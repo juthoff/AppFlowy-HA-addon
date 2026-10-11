@@ -146,6 +146,25 @@ reinen Text speichert:
 - Neue Zeilen erscheinen in anderen Browsern ggf. erst nach bis zu einer Minute (der Server
   speichert sie zeitversetzt).
 
+## Kasten-Block in AppFlowy Web
+
+- **Einfügen:** in einem Dokument `/box` (auch `/kasten`, `/rahmen`) tippen und "Kasten"
+  wählen. Es erscheint ein umrandeter Kasten mit einer Überschrift-Zeile und einer leeren
+  Textzeile darunter.
+- **Inhalt:** Die erste Zeile ist die Überschrift (fett, größer). Enter springt in den Kasten;
+  darunter lassen sich beliebig viele Absätze, Listen und andere Blöcke schreiben. Enter in einer
+  leeren letzten Zeile verlässt den Kasten.
+- **Rahmenfarbe:** Farbknopf oben rechts im Kasten (am Desktop beim Überfahren mit der Maus
+  sichtbar, am Handy immer) oder ⋮⋮-Griff links → "Rahmenfarbe". Zur Wahl stehen Standard (grau)
+  und die neun Textfarben von AppFlowy; sie sind im hellen und dunklen Design gut sichtbar.
+- Enter in einer leeren Überschrift springt ebenfalls in den Kasten. Markdown-Kürzel wie `# `
+  oder `- ` wirken in der Überschrift nicht (sie würden den Kasten auflösen), im Text darunter
+  schon.
+- **Nur in AppFlowy Web:** Die AppFlowy-Desktop- und Handy-Apps kennen diesen Blocktyp nicht und
+  zeigen den Kasten samt Inhalt nicht an. Ob sie ihn beim Bearbeiten desselben Dokuments
+  unverändert lassen, ist nicht getestet – Dokumente mit Kasten daher besser nur im Browser
+  bearbeiten.
+
 ## Datenpersistenz
 
 Alle Daten (Postgres, MinIO, generierte Geheimnisse) liegen im Add-on-eigenen `/data`-Verzeichnis
