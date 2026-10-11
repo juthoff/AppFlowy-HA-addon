@@ -381,3 +381,18 @@
 - Umbenennen, Umfärben und Löschen von Auswahloptionen, Zahlen- und Datumsformate, Karten
   verschieben und verknüpfte Ansichten bleiben der Desktop-App vorbehalten.
 - Umgesetzt als fünfter Patch `patches/appflowy-web-properties.patch` auf AppFlowy Web `v0.1.18`.
+
+## 0.9.64-18
+
+- **Neuer Block "Kasten" in AppFlowy Web** (#1): ein umrandeter Kasten mit Überschrift und
+  Text. Einfügen in einem Dokument über `/box` (auch `/kasten`, `/rahmen`); ein neuer Kasten
+  startet mit einer Überschrift-Zeile und einer leeren Textzeile. Unter der Überschrift lassen
+  sich beliebig viele Absätze, Listen und andere Blöcke schreiben.
+- **Rahmenfarbe einstellbar:** über den Farbknopf oben rechts im Kasten (am Handy immer sichtbar)
+  oder im ⋮⋮-Blockmenü unter "Rahmenfarbe". Zur Wahl stehen Standard (grau) und die neun
+  Textfarben von AppFlowy, die im hellen und dunklen Design sichtbar bleiben.
+- Gespeichert als Blocktyp `bordered_box` mit `border_color` in den Blockdaten. Die
+  AppFlowy-Desktop- und Handy-Apps kennen diesen Typ nicht und zeigen den Kasten nicht an; ob
+  sie ihn beim Bearbeiten desselben Dokuments erhalten, ist nicht getestet.
+- Umgesetzt als sechster Patch `patches/appflowy-web-box.patch` auf AppFlowy Web `v0.1.18`;
+  lokal gegen das Add-on getestet.
