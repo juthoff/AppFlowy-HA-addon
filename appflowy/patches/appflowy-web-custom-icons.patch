@@ -1,0 +1,50 @@
+diff --git a/src/application/services/js-services/http/http_api.ts b/src/application/services/js-services/http/http_api.ts
+index fea13ba..199a19c 100644
+--- a/src/application/services/js-services/http/http_api.ts
++++ b/src/application/services/js-services/http/http_api.ts
+@@ -1641,7 +1641,10 @@ export async function uploadFile (workspaceId: string, viewId: string, file: Fil
+     });
+ 
+     if (response?.data.code === 0) {
+-      const baseURL = axiosInstance?.defaults.baseURL;
++      // Changed by the AppFlowy Home Assistant add-on: store an absolute URL. The desktop app only
++      // loads http(s) URLs and treats a relative `/api/...` path as a local file. Without
++      // AF_BASE_URL the web is served from the server's own origin.
++      const baseURL = axiosInstance?.defaults.baseURL || window.location.origin;
+       const url = `${baseURL}/api/file_storage/${workspaceId}/v1/blob/${viewId}/${response?.data.data.file_id}`;
+ 
+       return url;
+@@ -1651,7 +1654,7 @@ export async function uploadFile (workspaceId: string, viewId: string, file: Fil
+     // eslint-disable-next-line
+   } catch (e: any) {
+ 
+-    if (e.response.status === 413) {
++    if (e?.response?.status === 413) {
+       return Promise.reject({
+         code: 413,
+         message: 'File size is too large. Please upgrade your plan for unlimited uploads.',
+diff --git a/src/components/_shared/image-upload/UploadImage.tsx b/src/components/_shared/image-upload/UploadImage.tsx
+index 50d3ac6..48640e3 100644
+--- a/src/components/_shared/image-upload/UploadImage.tsx
++++ b/src/components/_shared/image-upload/UploadImage.tsx
+@@ -21,16 +21,17 @@ export function UploadImage({ onDone, uploadAction }: {
+     try {
+       const url = await uploadAction?.(file);
+ 
++      // Changed by the AppFlowy Home Assistant add-on: never store a `blob:` object URL on a failed
++      // upload. It only exists in this browser tab and is a broken image everywhere else.
+       if(!url) {
+-        onDone?.(URL.createObjectURL(file));
++        notify.error('Upload file failed.');
+         return;
+       }
+ 
+       onDone?.(url);
+       // eslint-disable-next-line
+     } catch(e: any) {
+-      notify.error(e.message);
+-      onDone?.(URL.createObjectURL(file));
++      notify.error(e?.message || 'Upload file failed.');
+     } finally {
+       setLoading(false);
+     }

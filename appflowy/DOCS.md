@@ -191,6 +191,10 @@ Sicherung (Snapshot/Backup) sichert damit auch alle AppFlowy-Inhalte mit.
 
 ## Bekannte Probleme
 
+- **In AppFlowy Web hochgeladenes Seiten-Icon zeigt in der Desktop-App ein kaputtes Bild
+  (Änderung in `0.9.64-19`)**: Web speicherte die Bildadresse bis `0.9.64-18` als relativen Pfad,
+  den die Desktop-App nicht laden kann. Ab `0.9.64-19` speichert Web die vollständige Adresse.
+  Icons, die vorher in Web hochgeladen wurden, einmal neu setzen.
 - **Erster Login eines Kontos schlägt fehl – Desktop-App "Something went wrong" / "Record not
   found", Admin-Konsole erst beim zweiten Versuch (behoben in `0.9.64-8`, Raspberry Pi 4 und
   andere ARM-CPUs ohne Krypto-Erweiterungen)**: `appflowy_cloud` stürzte bei jedem ersten

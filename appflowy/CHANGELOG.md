@@ -396,3 +396,17 @@
   sie ihn beim Bearbeiten desselben Dokuments erhalten, ist nicht getestet.
 - Umgesetzt als sechster Patch `patches/appflowy-web-box.patch` auf AppFlowy Web `v0.1.18`;
   lokal gegen das Add-on getestet.
+
+## 0.9.64-19
+
+- **Eigene Seiten-Icons aus AppFlowy Web erscheinen in der Desktop-App:** AppFlowy Web hat
+  hochgeladene Icons (und Titelbilder) bisher mit einem relativen Pfad
+  `/api/file_storage/...` gespeichert. Der Browser ergänzt die Serveradresse selbst, die
+  Desktop-App `0.9.5` hält den Pfad dagegen für eine lokale Datei und zeigt ein kaputtes Bild.
+  Web speichert jetzt die vollständige Adresse (`http://<server>:8099/api/file_storage/...`),
+  so wie es die Desktop-App ohnehin tut. Die Gegenrichtung (Desktop → Web) funktionierte bereits.
+- **Schon vorhandene Icons, die in Web hochgeladen wurden, bleiben in der Desktop-App kaputt**,
+  bis sie einmal neu gesetzt werden (Icon → Hochladen in AppFlowy Web oder in der Desktop-App).
+- Schlägt ein Upload fehl, speichert Web kein browserlokales `blob:`-Bild mehr als Icon oder
+  Titelbild (das war überall sonst kaputt), sondern zeigt eine Fehlermeldung.
+- Umgesetzt als siebter Patch `patches/appflowy-web-custom-icons.patch` auf AppFlowy Web `v0.1.18`.
