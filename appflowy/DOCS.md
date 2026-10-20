@@ -168,9 +168,11 @@ reinen Text speichert:
 ## Vorlagen in AppFlowy Web
 
 - **Vorlage speichern:** bei einer beliebigen Seite (Dokument, Tabelle, Board, Kalender) im
-  ···-Menü (Seitenleiste oder oben rechts auf der Seite) "Als Vorlage speichern" wählen. Eine
-  Kopie der Seite samt Unterseiten landet im Bereich **"Vorlagen"**, der beim ersten Mal
-  automatisch angelegt wird und für alle Mitglieder des Workspaces sichtbar ist.
+  ···-Menü (Seitenleiste oder oben rechts auf der Seite) "Als Vorlage speichern" wählen und den
+  Namen der Vorlage eingeben (vorbelegt mit dem Seitentitel; das Original behält seinen
+  Titel). Eine Kopie der Seite samt Unterseiten landet unter diesem Namen im Bereich
+  **"Vorlagen"**, der beim ersten Mal automatisch angelegt wird und für alle Mitglieder des
+  Workspaces sichtbar ist.
 - **Vorlagen verwalten:** Jede Seite auf oberster Ebene des Bereichs "Vorlagen" ist eine
   Vorlage. Dort lassen sie sich wie normale Seiten bearbeiten, umbenennen, löschen oder
   hinein-/herausverschieben. Der Bereich darf umbenannt werden.
@@ -184,7 +186,8 @@ reinen Text speichert:
     "Hinzufügen";
   - in einem Dokument `/vorlage` (oder `/template`) tippen → "Vorlage: <Name>". Tabellen,
     Boards und Kalender werden eingebettet, Dokumente als Unterseite verlinkt.
-- Die neue Seite heißt wie die Vorlage und enthält alle ihre Unterseiten. Bei Datenbanken werden
+- Die neue Seite trägt den Namen der Vorlage (danach wie gewohnt umbenennen) und enthält alle
+  ihre Unterseiten. Bei Datenbanken werden
   Eigenschaften, Ansichten, Filter, Sortierungen, Gruppierungen und Zeilen mitkopiert. Eingebettete
   Datenbanken, Unterseiten-Blöcke und @-Erwähnungen in den kopierten Dokumenten zeigen auf die
   Kopien.

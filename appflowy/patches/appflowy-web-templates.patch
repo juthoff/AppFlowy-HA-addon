@@ -1,8 +1,8 @@
 diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
-index 9141094..9fb3de1 100644
+index 9141094..3c66c9e 100644
 --- a/src/@types/translations/de-DE.json
 +++ b/src/@types/translations/de-DE.json
-@@ -2695,6 +2695,12 @@
+@@ -2695,6 +2695,13 @@
      "boxAddText": "Klicken, um Text hinzuzufügen",
      "boxBorderColor": "Rahmenfarbe",
      "newPageType": "Seitentyp",
@@ -11,15 +11,16 @@ index 9141094..9fb3de1 100644
 +    "saveAsTemplate": "Als Vorlage speichern",
 +    "savedAsTemplate": "Im Bereich „Vorlagen“ gespeichert",
 +    "templateSpaceName": "Vorlagen",
++    "templateName": "Name der Vorlage",
 +    "noTemplates": "Noch keine Vorlagen. Eine Seite über ··· → Als Vorlage speichern ablegen.",
      "propertyName": "Name der Eigenschaft",
      "invalidNumber": "Bitte eine Zahl eingeben",
      "propertyUsedByBoard": "Gruppiert ein Board und kann deshalb hier nicht gelöscht werden.",
 diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
-index 10156c3..5697a00 100644
+index 10156c3..4ca6681 100644
 --- a/src/@types/translations/en.json
 +++ b/src/@types/translations/en.json
-@@ -2676,6 +2676,12 @@
+@@ -2676,6 +2676,13 @@
      "boxAddText": "Click to add text",
      "boxBorderColor": "Border color",
      "newPageType": "Page type",
@@ -28,6 +29,7 @@ index 10156c3..5697a00 100644
 +    "saveAsTemplate": "Save as template",
 +    "savedAsTemplate": "Saved to the Templates space",
 +    "templateSpaceName": "Templates",
++    "templateName": "Template name",
 +    "noTemplates": "No templates yet. Use ··· → Save as template on any page.",
      "propertyName": "Property name",
      "invalidNumber": "Please enter a number",
@@ -227,7 +229,7 @@ index b22077a..4db92df 100644
    return (
      <Dialog
 diff --git a/src/components/app/app.hooks.tsx b/src/components/app/app.hooks.tsx
-index e84973b..e7e45b0 100644
+index e84973b..9501ca2 100644
 --- a/src/components/app/app.hooks.tsx
 +++ b/src/components/app/app.hooks.tsx
 @@ -7,6 +7,7 @@ import {
@@ -259,7 +261,7 @@ index e84973b..e7e45b0 100644
    unpublish?: (viewId: string) => Promise<void>;
    refreshOutline?: () => Promise<void>;
 +  createFromTemplate?: (templateId: string, parentId: string) => Promise<string>;
-+  saveAsTemplate?: (viewId: string, spaceName: string) => Promise<string>;
++  saveAsTemplate?: (viewId: string, spaceName: string, templateName: string) => Promise<string>;
 +}
 +
 +// Added by the AppFlowy Home Assistant add-on: maps every view of a template
@@ -284,8 +286,8 @@ index e84973b..e7e45b0 100644
 +  // Added by the AppFlowy Home Assistant add-on: copies a page (incl. sub-pages
 +  // and databases) under parentId, for templates. The server's duplicate puts
 +  // the copy next to the source and doesn't return its id, so it gets a unique
-+  // name suffix to be found, then is renamed back and moved.
-+  const copyPageTree = useCallback(async(sourceId: string, parentId: string) => {
++  // name suffix to be found, then is renamed (to name, or back) and moved.
++  const copyPageTree = useCallback(async(sourceId: string, parentId: string, name?: string) => {
 +    if(!currentWorkspaceId || !service) {
 +      throw new Error('No workspace or service found');
 +    }
@@ -324,7 +326,7 @@ index e84973b..e7e45b0 100644
 +    }));
 +
 +    await service.updateAppPage(currentWorkspaceId, copy.view_id, {
-+      name: source.name,
++      name: name ?? source.name,
 +      icon: source.icon || { ty: ViewIconType.Emoji, value: '' },
 +      extra: copy.extra || {},
 +    });
@@ -344,9 +346,9 @@ index e84973b..e7e45b0 100644
 +  }, [copyPageTree]);
 +
 +  // Added by the AppFlowy Home Assistant add-on: saves a snapshot copy of the
-+  // page into the template space (its top-level pages are the templates),
-+  // which is created as a public space on first use.
-+  const saveAsTemplate = useCallback(async(viewId: string, spaceName: string) => {
++  // page, named templateName, into the template space (its top-level pages
++  // are the templates), which is created as a public space on first use.
++  const saveAsTemplate = useCallback(async(viewId: string, spaceName: string, templateName: string) => {
 +    if(!currentWorkspaceId || !service) {
 +      throw new Error('No workspace or service found');
 +    }
@@ -381,7 +383,7 @@ index e84973b..e7e45b0 100644
 +      }
 +    }
 +
-+    return copyPageTree(viewId, templateSpace.view_id);
++    return copyPageTree(viewId, templateSpace.view_id, templateName);
 +  }, [currentWorkspaceId, service, loadOutline, copyPageTree]);
 +
    return <AppContext.Provider
@@ -406,10 +408,10 @@ index e84973b..e7e45b0 100644
  }
  
 diff --git a/src/components/app/header/MoreActionsContent.tsx b/src/components/app/header/MoreActionsContent.tsx
-index 7b73441..7ac3b40 100644
+index 7b73441..f43bba5 100644
 --- a/src/components/app/header/MoreActionsContent.tsx
 +++ b/src/components/app/header/MoreActionsContent.tsx
-@@ -2,6 +2,7 @@ import { ViewLayout } from '@/application/types';
+@@ -2,11 +2,13 @@ import { ViewLayout } from '@/application/types';
  import { ReactComponent as DuplicateIcon } from '@/assets/icons/duplicate.svg';
  import { ReactComponent as MoveToIcon } from '@/assets/icons/move_to.svg';
  import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
@@ -417,36 +419,24 @@ index 7b73441..7ac3b40 100644
  import { notify } from '@/components/_shared/notify';
  import { Origins } from '@/components/_shared/popover';
  import { useAppHandlers, useAppView, useCurrentWorkspaceId } from '@/components/app/app.hooks';
-@@ -28,7 +29,28 @@ function MoreActionsContent ({ itemClicked, viewId, movePopoverOrigins, onDelete
-   const [duplicateLoading, setDuplicateLoading] = useState(false);
+ import DeletePageConfirm from '@/components/app/view-actions/DeletePageConfirm';
+ import MovePagePopover from '@/components/app/view-actions/MovePagePopover';
++import SaveAsTemplateModal from '@/components/app/view-actions/SaveAsTemplateModal';
+ import { useService } from '@/components/main/app.hooks';
+ import { Button, CircularProgress } from '@mui/material';
+ import React, { useState } from 'react';
+@@ -29,6 +31,10 @@ function MoreActionsContent ({ itemClicked, viewId, movePopoverOrigins, onDelete
    const {
      refreshOutline,
-+    saveAsTemplate,
    } = useAppHandlers();
-+  const [templateLoading, setTemplateLoading] = useState(false);
-+
-+  // Added by the AppFlowy Home Assistant add-on: saves a copy of the page as
-+  // template (offered in the "+" menu, the "New page" dialog and the slash menu).
-+  const handleSaveAsTemplate = async () => {
-+    if (!saveAsTemplate) return;
-+    setTemplateLoading(true);
-+    try {
-+      await saveAsTemplate(viewId, t('web.templateSpaceName'));
-+      notify.success(t('web.savedAsTemplate'));
-+      // eslint-disable-next-line
-+    } catch (e: any) {
-+      notify.error(e.message);
-+    } finally {
-+      setTemplateLoading(false);
-+    }
-+
-+    itemClicked?.();
-+  };
++  // Added by the AppFlowy Home Assistant add-on: "Save as template" asks for
++  // the template's name, then copies the page into the template space.
++  const [templateModalOpen, setTemplateModalOpen] = useState(false);
 +
    const handleDuplicateClick = async () => {
      if (!workspaceId || !service) return;
      setDuplicateLoading(true);
-@@ -56,6 +78,14 @@ function MoreActionsContent ({ itemClicked, viewId, movePopoverOrigins, onDelete
+@@ -56,6 +62,15 @@ function MoreActionsContent ({ itemClicked, viewId, movePopoverOrigins, onDelete
          disabled={duplicateLoading}
          startIcon={duplicateLoading ? <CircularProgress size={14} /> : <DuplicateIcon />}
        >{t('button.duplicate')}</Button>
@@ -454,13 +444,29 @@ index 7b73441..7ac3b40 100644
 +        size={'small'}
 +        className={`px-3 py-1 ${layout === ViewLayout.AIChat || view?.extra?.is_space ? 'hidden' : ''} justify-start `}
 +        color={'inherit'}
-+        onClick={handleSaveAsTemplate}
-+        disabled={templateLoading}
-+        startIcon={templateLoading ? <CircularProgress size={14} /> : <TemplateIcon />}
++        onClick={() => {
++          setTemplateModalOpen(true);
++        }}
++        startIcon={<TemplateIcon />}
 +      >{t('web.saveAsTemplate')}</Button>
        <Button
          size={'small'}
          className={'px-3 py-1 justify-start '}
+@@ -76,6 +91,14 @@ function MoreActionsContent ({ itemClicked, viewId, movePopoverOrigins, onDelete
+ 
+         startIcon={<DeleteIcon />}
+       >{t('button.delete')}</Button>
++      <SaveAsTemplateModal
++        open={templateModalOpen}
++        onClose={() => {
++          setTemplateModalOpen(false);
++          itemClicked?.();
++        }}
++        viewId={viewId}
++      />
+       <DeletePageConfirm
+         open={deleteModalOpen}
+         onClose={() => {
 diff --git a/src/components/app/view-actions/AddPageActions.tsx b/src/components/app/view-actions/AddPageActions.tsx
 index b9688aa..8807a40 100644
 --- a/src/components/app/view-actions/AddPageActions.tsx
@@ -674,6 +680,109 @@ index 258eecd..b0213f0 100644
          </div>
          <SpaceList
            loading={false}
+diff --git a/src/components/app/view-actions/SaveAsTemplateModal.tsx b/src/components/app/view-actions/SaveAsTemplateModal.tsx
+new file mode 100644
+index 0000000..2ea06af
+--- /dev/null
++++ b/src/components/app/view-actions/SaveAsTemplateModal.tsx
+@@ -0,0 +1,97 @@
++// Added by the AppFlowy Home Assistant add-on: asks for the template's name
++// before "Save as template" copies the page into the template space. Pages
++// created from the template get this name.
++import { NormalModal } from '@/components/_shared/modal';
++import { notify } from '@/components/_shared/notify';
++import { useAppHandlers, useAppView } from '@/components/app/app.hooks';
++import { plainName } from '@/utils/referenceMarker';
++import { OutlinedInput } from '@mui/material';
++import React, { useCallback, useEffect, useRef } from 'react';
++import { useTranslation } from 'react-i18next';
++
++function SaveAsTemplateModal({ open, onClose, viewId }: {
++  open: boolean;
++  onClose: () => void;
++  viewId: string;
++}) {
++  const view = useAppView(viewId);
++
++  const { t } = useTranslation();
++
++  const [name, setName] = React.useState('');
++  const [loading, setLoading] = React.useState(false);
++
++  const { saveAsTemplate } = useAppHandlers();
++
++  const handleOk = useCallback(async () => {
++    if (!saveAsTemplate) return;
++    const templateName = name.trim();
++
++    if (!templateName) {
++      notify.warning(t('web.error.pageNameIsEmpty'));
++      return;
++    }
++
++    setLoading(true);
++    try {
++      await saveAsTemplate(viewId, t('web.templateSpaceName'), templateName);
++      notify.success(t('web.savedAsTemplate'));
++      onClose();
++      // eslint-disable-next-line
++    } catch (e: any) {
++      notify.error(e.message);
++    } finally {
++      setLoading(false);
++    }
++  }, [name, t, saveAsTemplate, viewId, onClose]);
++
++  useEffect(() => {
++    if (view && open) {
++      setName(plainName(view.name));
++    }
++  }, [view, open]);
++
++  const inputRef = useRef<HTMLInputElement | null>(null);
++
++  return (
++    <NormalModal
++      keepMounted={false}
++      okText={t('button.save')}
++      cancelText={t('button.cancel')}
++      open={open}
++      okLoading={loading}
++      onClose={onClose}
++      title={t('web.saveAsTemplate')}
++      onOk={handleOk}
++      PaperProps={{
++        className: 'w-96 max-w-[70vw]',
++      }}
++      classes={{ container: 'items-start max-md:mt-auto max-md:items-center mt-[10%] ' }}
++    >
++      <div className={'mb-2 text-sm text-text-caption'}>{t('web.templateName')}</div>
++      <OutlinedInput
++        autoFocus
++        size={'small'}
++        value={name}
++        inputRef={(input: HTMLInputElement) => {
++          if (!input) return;
++          if (!inputRef.current) {
++            setTimeout(() => {
++              input.setSelectionRange(0, input.value.length);
++            }, 100);
++            inputRef.current = input;
++          }
++        }}
++        onChange={e => setName(e.target.value)}
++        fullWidth
++        onKeyDown={(e) => {
++          if (e.key === 'Enter' && !loading) {
++            void handleOk();
++          }
++        }}
++      />
++    </NormalModal>
++  );
++}
++
++export default SaveAsTemplateModal;
 diff --git a/src/components/editor/EditorContext.tsx b/src/components/editor/EditorContext.tsx
 index 1d06f89..e1e9bf7 100644
 --- a/src/components/editor/EditorContext.tsx

@@ -37,7 +37,8 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
   Titelbilder mit absoluter URL speichern, kein `blob:`-Ersatz bei Upload-Fehlern); geänderte
   Dateien tragen denselben Vermerk. Seit `0.9.64-20` zusätzlich
   `patches/appflowy-web-templates.patch` (Seiten als Vorlage speichern und neue Seiten aus
-  Vorlagen anlegen); geänderte Dateien tragen denselben Vermerk.
+  Vorlagen anlegen). Fügt `src/components/app/view-actions/SaveAsTemplateModal.tsx` hinzu;
+  geänderte Dateien tragen denselben Vermerk.
 - `gotrue`: `Secure`-Flag des Session-Cookies deaktiviert (siehe Dockerfile), MIT-Lizenz.
 
 | Komponente | Quelle | Referenz | Lizenz |

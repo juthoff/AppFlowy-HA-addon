@@ -413,9 +413,10 @@
 
 ## 0.9.64-20
 
-- **Vorlagen in AppFlowy Web:** ··· → "Als Vorlage speichern" legt eine Kopie einer beliebigen
-  Seite (Dokument, Tabelle, Board oder Kalender, mit allen Unterseiten) im Bereich "Vorlagen"
-  ab. Der Bereich wird beim ersten Mal automatisch angelegt und ist für alle Mitglieder des
+- **Vorlagen in AppFlowy Web:** ··· → "Als Vorlage speichern" fragt nach dem Namen der Vorlage
+  (vorbelegt mit dem Seitentitel) und legt eine Kopie der Seite (Dokument, Tabelle, Board oder
+  Kalender, mit allen Unterseiten) unter diesem Namen im Bereich "Vorlagen" ab; das Original
+  behält seinen Titel. Neue Seiten aus der Vorlage tragen den Namen der Vorlage. Der Bereich wird beim ersten Mal automatisch angelegt und ist für alle Mitglieder des
   Workspaces sichtbar. Jede Seite auf oberster Ebene dieses Bereichs ist eine Vorlage: dort
   bearbeiten, löschen oder hinein-/herausverschieben wie jede andere Seite.
 - Die Vorlage ist eine eigenständige Kopie: Das Original kann danach weiter bearbeitet oder
