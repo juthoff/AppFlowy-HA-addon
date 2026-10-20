@@ -80,11 +80,20 @@ WORKDIR /app
 # picked from the editor's text colours (button in the box or the block menu)
 # and stored as `border_color` in the block data. Other AppFlowy clients do
 # not know this block type and don't show it.
-# patches/appflowy-web-custom-icons.patch (applied last) makes uploaded page
+# patches/appflowy-web-custom-icons.patch (applied seventh) makes uploaded page
 # icons and covers store an absolute URL. Upstream builds it from AF_BASE_URL,
 # which is empty here, so the stored value was a relative /api/file_storage/...
 # path that the desktop app treats as a local file (broken icon there). A
 # failed upload no longer stores a tab-local blob: URL.
+# patches/appflowy-web-templates.patch (applied last) adds page templates:
+# "Save as template" in the page menu copies the page into a public template
+# space (created on first use, marked `is_template_space` in its extra), whose
+# top-level pages are the templates; the "+" menu, the "New page" dialog and
+# the slash menu create a copy of one (incl. sub-pages and databases). Copies
+# use server 0.9.64's page-view duplicate, are found by a unique name suffix
+# (the endpoint returns no id), renamed back and moved; inline databases,
+# sub-page blocks and page mentions in copied documents are pointed at the
+# copies. Upstream's Template Center needs appflowy.com and published pages.
 COPY patches/appflowy-web-password-login.patch /tmp/appflowy-web-password-login.patch
 COPY patches/appflowy-web-references.patch /tmp/appflowy-web-references.patch
 COPY patches/appflowy-web-mobile-edit.patch /tmp/appflowy-web-mobile-edit.patch
@@ -92,6 +101,7 @@ COPY patches/appflowy-web-databases.patch /tmp/appflowy-web-databases.patch
 COPY patches/appflowy-web-properties.patch /tmp/appflowy-web-properties.patch
 COPY patches/appflowy-web-box.patch /tmp/appflowy-web-box.patch
 COPY patches/appflowy-web-custom-icons.patch /tmp/appflowy-web-custom-icons.patch
+COPY patches/appflowy-web-templates.patch /tmp/appflowy-web-templates.patch
 RUN npm install -g pnpm@8.5.0 \
     && git clone --depth 1 --branch ${APPFLOWY_WEB_REF} https://github.com/AppFlowy-IO/AppFlowy-Web.git . \
     && sed -i 's|https://test.appflowy.cloud||g' src/components/main/app.hooks.ts \
@@ -102,6 +112,7 @@ RUN npm install -g pnpm@8.5.0 \
     && git apply --verbose /tmp/appflowy-web-properties.patch \
     && git apply --verbose /tmp/appflowy-web-box.patch \
     && git apply --verbose /tmp/appflowy-web-custom-icons.patch \
+    && git apply --verbose /tmp/appflowy-web-templates.patch \
     && pnpm install --frozen-lockfile \
     && pnpm run build
 

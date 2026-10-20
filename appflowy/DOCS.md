@@ -165,6 +165,38 @@ reinen Text speichert:
   unverändert lassen, ist nicht getestet – Dokumente mit Kasten daher besser nur im Browser
   bearbeiten.
 
+## Vorlagen in AppFlowy Web
+
+- **Vorlage speichern:** bei einer beliebigen Seite (Dokument, Tabelle, Board, Kalender) im
+  ···-Menü (Seitenleiste oder oben rechts auf der Seite) "Als Vorlage speichern" wählen. Eine
+  Kopie der Seite samt Unterseiten landet im Bereich **"Vorlagen"**, der beim ersten Mal
+  automatisch angelegt wird und für alle Mitglieder des Workspaces sichtbar ist.
+- **Vorlagen verwalten:** Jede Seite auf oberster Ebene des Bereichs "Vorlagen" ist eine
+  Vorlage. Dort lassen sie sich wie normale Seiten bearbeiten, umbenennen, löschen oder
+  hinein-/herausverschieben. Der Bereich darf umbenannt werden.
+- **Original und Vorlage sind unabhängig:** Das Original kann nach dem Speichern weiter
+  bearbeitet oder gelöscht werden, die Vorlage bleibt unverändert. Eine gelöschte Vorlage
+  verschwindet aus den Menüs und kommt beim Wiederherstellen aus dem Papierkorb zurück. Bereits
+  aus einer Vorlage angelegte Seiten sind von beidem nicht betroffen.
+- **Seite aus Vorlage anlegen:**
+  - "+" neben einer Seite oder einem Bereich → unter "Vorlagen" die gewünschte Vorlage;
+  - "Neue Seite" oben in der Seitenleiste (auch am Handy) → Vorlage wählen, Ziel wählen,
+    "Hinzufügen";
+  - in einem Dokument `/vorlage` (oder `/template`) tippen → "Vorlage: <Name>". Tabellen,
+    Boards und Kalender werden eingebettet, Dokumente als Unterseite verlinkt.
+- Die neue Seite heißt wie die Vorlage und enthält alle ihre Unterseiten. Bei Datenbanken werden
+  Eigenschaften, Ansichten, Filter, Sortierungen, Gruppierungen und Zeilen mitkopiert. Eingebettete
+  Datenbanken, Unterseiten-Blöcke und @-Erwähnungen in den kopierten Dokumenten zeigen auf die
+  Kopien.
+- **Nicht mitkopiert** wird der Dokumentinhalt einzelner Zeilen (die Seite, die beim Öffnen
+  einer Karte erscheint). `[[Name|…]]`-Verweise in Seiten- und Zeilentiteln zeigen weiterhin
+  auf die kopierte Ausgangsseite.
+- Das Kopieren großer Seiten dauert einige Sekunden. Für einen Moment erscheint die Kopie mit
+  einem Namenszusatz `#template-…` neben der Ausgangsseite, bevor sie umbenannt und verschoben
+  wird.
+- Die Desktop-App zeigt "Vorlagen" als normalen Bereich; Seiten aus Vorlagen anlegen geht nur in
+  AppFlowy Web (dort ggf. "Duplizieren" und verschieben).
+
 ## Datenpersistenz
 
 Alle Daten (Postgres, MinIO, generierte Geheimnisse) liegen im Add-on-eigenen `/data`-Verzeichnis

@@ -1,0 +1,832 @@
+diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
+index 9141094..9fb3de1 100644
+--- a/src/@types/translations/de-DE.json
++++ b/src/@types/translations/de-DE.json
+@@ -2695,6 +2695,12 @@
+     "boxAddText": "Klicken, um Text hinzuzufügen",
+     "boxBorderColor": "Rahmenfarbe",
+     "newPageType": "Seitentyp",
++    "template": "Vorlage",
++    "templates": "Vorlagen",
++    "saveAsTemplate": "Als Vorlage speichern",
++    "savedAsTemplate": "Im Bereich „Vorlagen“ gespeichert",
++    "templateSpaceName": "Vorlagen",
++    "noTemplates": "Noch keine Vorlagen. Eine Seite über ··· → Als Vorlage speichern ablegen.",
+     "propertyName": "Name der Eigenschaft",
+     "invalidNumber": "Bitte eine Zahl eingeben",
+     "propertyUsedByBoard": "Gruppiert ein Board und kann deshalb hier nicht gelöscht werden.",
+diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
+index 10156c3..5697a00 100644
+--- a/src/@types/translations/en.json
++++ b/src/@types/translations/en.json
+@@ -2676,6 +2676,12 @@
+     "boxAddText": "Click to add text",
+     "boxBorderColor": "Border color",
+     "newPageType": "Page type",
++    "template": "Template",
++    "templates": "Templates",
++    "saveAsTemplate": "Save as template",
++    "savedAsTemplate": "Saved to the Templates space",
++    "templateSpaceName": "Templates",
++    "noTemplates": "No templates yet. Use ··· → Save as template on any page.",
+     "propertyName": "Property name",
+     "invalidNumber": "Please enter a number",
+     "propertyUsedByBoard": "Groups a board, so it can't be deleted here.",
+diff --git a/src/application/services/js-services/http/http_api.ts b/src/application/services/js-services/http/http_api.ts
+index 199a19c..475b707 100644
+--- a/src/application/services/js-services/http/http_api.ts
++++ b/src/application/services/js-services/http/http_api.ts
+@@ -1870,12 +1870,15 @@ export async function getChatMessages (workspaceId: string, chatId: string, limi
+   return Promise.reject(data);
+ }
+ 
+-export async function duplicatePage (workspaceId: string, viewId: string) {
++// Changed by the AppFlowy Home Assistant add-on: optional suffix for the copy's
++// name (the server defaults to " (Copy)"); templates use a unique one to find
++// the copy, since the server doesn't return its id.
++export async function duplicatePage (workspaceId: string, viewId: string, suffix?: string) {
+   const url = `/api/workspace/${workspaceId}/page-view/${viewId}/duplicate`;
+   const response = await axiosInstance?.post<{
+     code: number;
+     message: string;
+-  }>(url, {});
++  }>(url, suffix === undefined ? {} : { suffix });
+ 
+   if (response?.data.code === 0) {
+     return;
+diff --git a/src/application/services/js-services/index.ts b/src/application/services/js-services/index.ts
+index f8712b8..682ef51 100644
+--- a/src/application/services/js-services/index.ts
++++ b/src/application/services/js-services/index.ts
+@@ -45,8 +45,11 @@ import {
+   UpdateWorkspacePayload,
+   UploadPublishNamespacePayload,
+   WorkspaceMember,
++  YBlocks,
+   YjsEditorKey,
++  YMeta,
+   YSharedRoot,
++  YTextMap,
+ } from '@/application/types';
+ import { applyYDoc } from '@/application/ydoc/apply';
+ import { appendFirstEmptyParagraph, createEmptyDocument } from '@/application/slate-yjs/utils/yjs';
+@@ -632,8 +635,75 @@ export class AFClientService implements AFService {
+     return APIService.updatePage(workspaceId, viewId, data);
+   }
+ 
+-  async duplicateAppPage (workspaceId: string, viewId: string) {
+-    return APIService.duplicatePage(workspaceId, viewId);
++  async duplicateAppPage (workspaceId: string, viewId: string, suffix?: string) {
++    return APIService.duplicatePage(workspaceId, viewId, suffix);
++  }
++
++  // Added by the AppFlowy Home Assistant add-on: the server's duplicate copies
++  // a document's blocks unchanged, so inline databases, sub-page blocks and
++  // page mentions in a copy still point at the original pages. Rewrites them
++  // with mapping (old view id -> new view id) and sends only the diff.
++  async remapDocumentViewIds (workspaceId: string, documentId: string, mapping: Record<string, string>) {
++    const res = await APIService.getCollab(workspaceId, documentId, Types.Document);
++    const doc = new Y.Doc({ guid: documentId });
++
++    applyYDoc(doc, res.data);
++    const before = Y.encodeStateVector(doc);
++    const document = (doc.getMap(YjsEditorKey.data_section) as YSharedRoot).get(YjsEditorKey.document);
++
++    if (!document) return;
++    const blocks = document.get(YjsEditorKey.blocks) as YBlocks;
++    const textMap = (document.get(YjsEditorKey.meta) as YMeta).get(YjsEditorKey.text_map) as YTextMap;
++
++    doc.transact(() => {
++      blocks.forEach((value) => {
++        const block = value as Y.Map<unknown>;
++        const raw = block.get(YjsEditorKey.block_data);
++
++        if (typeof raw !== 'string') return;
++        let data: Record<string, unknown>;
++
++        try {
++          data = JSON.parse(raw);
++        } catch (e) {
++          return;
++        }
++
++        let changed = false;
++
++        ['view_id', 'parent_id'].forEach((key) => {
++          const id = data[key];
++
++          if (typeof id === 'string' && mapping[id]) {
++            data[key] = mapping[id];
++            changed = true;
++          }
++        });
++        if (changed) block.set(YjsEditorKey.block_data, JSON.stringify(data));
++      });
++
++      textMap.forEach((value) => {
++        const text = value as Y.Text;
++        let offset = 0;
++
++        text.toDelta().forEach((op: { insert: string | object; attributes?: { mention?: { page_id?: string } } }) => {
++          const length = typeof op.insert === 'string' ? op.insert.length : 1;
++          const mention = op.attributes?.mention;
++
++          if (mention?.page_id && mapping[mention.page_id]) {
++            text.format(offset, length, { mention: { ...mention, page_id: mapping[mention.page_id] } });
++          }
++
++          offset += length;
++        });
++      });
++    });
++
++    const update = Y.encodeStateAsUpdate(doc, before);
++
++    // An update with no changes is just the empty struct and delete sets.
++    if (update.length <= 2) return;
++    await APIService.updateCollab(workspaceId, documentId, Types.Document, update, { version_vector: 0 });
+   }
+ 
+   async deleteTrash (workspaceId: string, viewId?: string) {
+diff --git a/src/application/services/services.type.ts b/src/application/services/services.type.ts
+index 0250075..5b67296 100644
+--- a/src/application/services/services.type.ts
++++ b/src/application/services/services.type.ts
+@@ -120,7 +120,8 @@ export interface AppService {
+   restoreFromTrash: (workspaceId: string, viewId?: string) => Promise<void>;
+   movePage: (workspaceId: string, viewId: string, parentId: string, prevViewId?: string) => Promise<void>;
+   uploadFile: (workspaceId: string, viewId: string, file: File, onProgress?: (progress: number) => void) => Promise<string>;
+-  duplicateAppPage: (workspaceId: string, viewId: string) => Promise<void>;
++  duplicateAppPage: (workspaceId: string, viewId: string, suffix?: string) => Promise<void>;
++  remapDocumentViewIds: (workspaceId: string, documentId: string, mapping: Record<string, string>) => Promise<void>;
+   joinWorkspaceByInvitationCode: (code: string) => Promise<string>;
+   getWorkspaceInfoByInvitationCode: (code: string) => Promise<{
+     workspace_id: string;
+diff --git a/src/application/types.ts b/src/application/types.ts
+index c62318b..fdc0c3e 100644
+--- a/src/application/types.ts
++++ b/src/application/types.ts
+@@ -861,6 +861,9 @@ export interface ViewExtra {
+   space_icon_color?: string;
+   space_permission?: number;
+   is_pinned?: boolean;
++  // Added by the AppFlowy Home Assistant add-on: the space holds the page
++  // templates (its top-level pages), offered when creating pages.
++  is_template_space?: boolean;
+   cover?: {
+     type: CoverType;
+     value: string;
+@@ -1033,6 +1036,9 @@ export interface ViewComponentProps {
+   onRendered?: () => void;
+   updatePage?: (viewId: string, data: UpdatePagePayload) => Promise<void>;
+   addPage?: (parentId: string, payload: CreatePagePayload) => Promise<string>;
++  // Added by the AppFlowy Home Assistant add-on: page templates for the slash menu.
++  templates?: View[];
++  createFromTemplate?: (templateId: string, parentId: string) => Promise<string>;
+   deletePage?: (viewId: string) => Promise<void>;
+   openPageModal?: (viewId: string) => void;
+   variant?: UIVariant;
+diff --git a/src/components/app/ViewModal.tsx b/src/components/app/ViewModal.tsx
+index b22077a..4db92df 100644
+--- a/src/components/app/ViewModal.tsx
++++ b/src/components/app/ViewModal.tsx
+@@ -4,6 +4,7 @@ import { findAncestors, findView } from '@/components/_shared/outline/utils';
+ import { useAppHandlers, useAppOutline, useCurrentWorkspaceId } from '@/components/app/app.hooks';
+ import DatabaseView from '@/components/app/DatabaseView';
+ import MoreActions from '@/components/app/header/MoreActions';
++import { useTemplates } from '@/components/app/view-actions/AddPageActions';
+ import MovePagePopover from '@/components/app/view-actions/MovePagePopover';
+ import { Document } from '@/components/document';
+ import RecordNotFound from '@/components/error/RecordNotFound';
+@@ -54,7 +55,9 @@ function ViewModal({
+     loadViews,
+     setWordCount,
+     uploadFile,
++    createFromTemplate,
+   } = useAppHandlers();
++  const templates = useTemplates();
+   const outline = useAppOutline();
+   const [doc, setDoc] = React.useState<
+     | {
+@@ -209,6 +212,8 @@ function ViewModal({
+       loadView={loadView}
+       updatePage={updatePage}
+       addPage={addPage}
++      templates={templates}
++      createFromTemplate={createFromTemplate}
+       deletePage={deletePage}
+       openPageModal={openPageModal}
+       loadViews={loadViews}
+@@ -216,7 +221,7 @@ function ViewModal({
+       uploadFile={handleUploadFile}
+       variant={UIVariant.App}
+     />;
+-  }, [requestInstance, openPageModal, workspaceId, handleUploadFile, setWordCount, loadViews, doc, viewMeta, View, toView, loadViewMeta, createRowDoc, loadView, updatePage, addPage, deletePage]);
++  }, [requestInstance, openPageModal, workspaceId, handleUploadFile, setWordCount, loadViews, doc, viewMeta, View, toView, loadViewMeta, createRowDoc, loadView, updatePage, addPage, deletePage, templates, createFromTemplate]);
+ 
+   return (
+     <Dialog
+diff --git a/src/components/app/app.hooks.tsx b/src/components/app/app.hooks.tsx
+index e84973b..e7e45b0 100644
+--- a/src/components/app/app.hooks.tsx
++++ b/src/components/app/app.hooks.tsx
+@@ -7,6 +7,7 @@ import {
+   DatabaseRelations,
+   LoadView,
+   LoadViewMeta,
++  SpacePermission,
+   Subscription,
+   TextCount,
+   Types,
+@@ -15,13 +16,14 @@ import {
+   UpdateSpacePayload,
+   UserWorkspaceInfo,
+   View,
++  ViewIconType,
+   ViewLayout,
+   YDoc,
+   YjsDatabaseKey,
+   YjsEditorKey,
+   YSharedRoot,
+ } from '@/application/types';
+-import { findAncestors, findView, findViewByLayout } from '@/components/_shared/outline/utils';
++import { findAncestors, findView, findViewByLayout, flattenViews } from '@/components/_shared/outline/utils';
+ import { AIChatProvider } from '@/components/ai-chat/AIChatProvider';
+ import RequestAccess from '@/components/app/landing-pages/RequestAccess';
+ import { AFConfigContext, useService } from '@/components/main/app.hooks';
+@@ -73,6 +75,22 @@ export interface AppContextType {
+   publish?: (view: View, publishName?: string, visibleViewIds?: string[]) => Promise<void>;
+   unpublish?: (viewId: string) => Promise<void>;
+   refreshOutline?: () => Promise<void>;
++  createFromTemplate?: (templateId: string, parentId: string) => Promise<string>;
++  saveAsTemplate?: (viewId: string, spaceName: string) => Promise<string>;
++}
++
++// Added by the AppFlowy Home Assistant add-on: maps every view of a template
++// subtree to its copy. The server keeps the children's order when it
++// duplicates, so they pair up by position.
++function mapCopiedViews(source: View, copy: View, mapping: Record<string, string>) {
++  mapping[source.view_id] = copy.view_id;
++  source.children?.forEach((child, index) => {
++    const copied = copy.children?.[index];
++
++    if(copied && copied.layout === child.layout) {
++      mapCopiedViews(child, copied, mapping);
++    }
++  });
+ }
+ 
+ const USER_NO_ACCESS_CODE = [1024, 1012];
+@@ -702,6 +720,109 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+     await loadOutline(currentWorkspaceId, false);
+   }, [currentWorkspaceId, loadOutline]);
+ 
++  // Added by the AppFlowy Home Assistant add-on: copies a page (incl. sub-pages
++  // and databases) under parentId, for templates. The server's duplicate puts
++  // the copy next to the source and doesn't return its id, so it gets a unique
++  // name suffix to be found, then is renamed back and moved.
++  const copyPageTree = useCallback(async(sourceId: string, parentId: string) => {
++    if(!currentWorkspaceId || !service) {
++      throw new Error('No workspace or service found');
++    }
++
++    const ancestors = findAncestors(outlineRef.current || [], sourceId);
++    const source = ancestors?.[ancestors.length - 1];
++    const sourceParent = ancestors?.[ancestors.length - 2];
++
++    if(!source || !sourceParent) {
++      throw new Error('Page not found');
++    }
++
++    const suffix = ` #template-${Math.random().toString(36).slice(2, 10)}`;
++
++    await service.duplicateAppPage(currentWorkspaceId, sourceId, suffix);
++    await loadOutline(currentWorkspaceId, false);
++
++    const copy = findView(outlineRef.current || [], sourceParent.view_id)?.children
++      ?.find((child) => child.name.endsWith(suffix));
++
++    if(!copy) {
++      throw new Error('The copy of the page was not found');
++    }
++
++    const mapping: Record<string, string> = {};
++
++    mapCopiedViews(source, copy, mapping);
++    const copiedDocuments = flattenViews([copy]).filter((view) => view.layout === ViewLayout.Document);
++
++    await Promise.all(copiedDocuments.map(async(view) => {
++      try {
++        await service.remapDocumentViewIds(currentWorkspaceId, view.view_id, mapping);
++      } catch(e) {
++        console.error('Failed to update the references of', view.view_id, e);
++      }
++    }));
++
++    await service.updateAppPage(currentWorkspaceId, copy.view_id, {
++      name: source.name,
++      icon: source.icon || { ty: ViewIconType.Emoji, value: '' },
++      extra: copy.extra || {},
++    });
++
++    if(parentId !== sourceParent.view_id) {
++      const lastChild = findView(outlineRef.current || [], parentId)?.children?.slice(-1)[0];
++
++      await service.movePage(currentWorkspaceId, copy.view_id, parentId, lastChild?.view_id);
++    }
++
++    await loadOutline(currentWorkspaceId, false);
++    return copy.view_id;
++  }, [currentWorkspaceId, service, loadOutline]);
++
++  const createFromTemplate = useCallback((templateId: string, parentId: string) => {
++    return copyPageTree(templateId, parentId);
++  }, [copyPageTree]);
++
++  // Added by the AppFlowy Home Assistant add-on: saves a snapshot copy of the
++  // page into the template space (its top-level pages are the templates),
++  // which is created as a public space on first use.
++  const saveAsTemplate = useCallback(async(viewId: string, spaceName: string) => {
++    if(!currentWorkspaceId || !service) {
++      throw new Error('No workspace or service found');
++    }
++
++    const findTemplateSpace = () => outlineRef.current?.find((view) => view.extra?.is_template_space);
++    let templateSpace = findTemplateSpace();
++
++    if(!templateSpace) {
++      const spaceId = await service.createSpace(currentWorkspaceId, {
++        name: spaceName,
++        space_icon: '',
++        space_icon_color: '',
++        space_permission: SpacePermission.Public,
++      });
++
++      await loadOutline(currentWorkspaceId, false);
++      const space = findView(outlineRef.current || [], spaceId);
++
++      if(!space) {
++        throw new Error('The template space was not found');
++      }
++
++      await service.updateAppPage(currentWorkspaceId, spaceId, {
++        name: space.name,
++        icon: space.icon || { ty: ViewIconType.Emoji, value: '' },
++        extra: { ...space.extra, is_template_space: true },
++      });
++      await loadOutline(currentWorkspaceId, false);
++      templateSpace = findTemplateSpace();
++      if(!templateSpace) {
++        throw new Error('The template space was not found');
++      }
++    }
++
++    return copyPageTree(viewId, templateSpace.view_id);
++  }, [currentWorkspaceId, service, loadOutline, copyPageTree]);
++
+   return <AppContext.Provider
+     value={{
+       currentWorkspaceId,
+@@ -744,6 +865,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+       publish,
+       unpublish,
+       refreshOutline,
++      createFromTemplate,
++      saveAsTemplate,
+     }}
+   >
+     <AIChatProvider>
+@@ -890,6 +1013,8 @@ export function useAppHandlers() {
+     publish: context.publish,
+     unpublish: context.unpublish,
+     refreshOutline: context.refreshOutline,
++    createFromTemplate: context.createFromTemplate,
++    saveAsTemplate: context.saveAsTemplate,
+   };
+ }
+ 
+diff --git a/src/components/app/header/MoreActionsContent.tsx b/src/components/app/header/MoreActionsContent.tsx
+index 7b73441..7ac3b40 100644
+--- a/src/components/app/header/MoreActionsContent.tsx
++++ b/src/components/app/header/MoreActionsContent.tsx
+@@ -2,6 +2,7 @@ import { ViewLayout } from '@/application/types';
+ import { ReactComponent as DuplicateIcon } from '@/assets/icons/duplicate.svg';
+ import { ReactComponent as MoveToIcon } from '@/assets/icons/move_to.svg';
+ import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
++import { ReactComponent as TemplateIcon } from '@/assets/icons/template.svg';
+ import { notify } from '@/components/_shared/notify';
+ import { Origins } from '@/components/_shared/popover';
+ import { useAppHandlers, useAppView, useCurrentWorkspaceId } from '@/components/app/app.hooks';
+@@ -28,7 +29,28 @@ function MoreActionsContent ({ itemClicked, viewId, movePopoverOrigins, onDelete
+   const [duplicateLoading, setDuplicateLoading] = useState(false);
+   const {
+     refreshOutline,
++    saveAsTemplate,
+   } = useAppHandlers();
++  const [templateLoading, setTemplateLoading] = useState(false);
++
++  // Added by the AppFlowy Home Assistant add-on: saves a copy of the page as
++  // template (offered in the "+" menu, the "New page" dialog and the slash menu).
++  const handleSaveAsTemplate = async () => {
++    if (!saveAsTemplate) return;
++    setTemplateLoading(true);
++    try {
++      await saveAsTemplate(viewId, t('web.templateSpaceName'));
++      notify.success(t('web.savedAsTemplate'));
++      // eslint-disable-next-line
++    } catch (e: any) {
++      notify.error(e.message);
++    } finally {
++      setTemplateLoading(false);
++    }
++
++    itemClicked?.();
++  };
++
+   const handleDuplicateClick = async () => {
+     if (!workspaceId || !service) return;
+     setDuplicateLoading(true);
+@@ -56,6 +78,14 @@ function MoreActionsContent ({ itemClicked, viewId, movePopoverOrigins, onDelete
+         disabled={duplicateLoading}
+         startIcon={duplicateLoading ? <CircularProgress size={14} /> : <DuplicateIcon />}
+       >{t('button.duplicate')}</Button>
++      <Button
++        size={'small'}
++        className={`px-3 py-1 ${layout === ViewLayout.AIChat || view?.extra?.is_space ? 'hidden' : ''} justify-start `}
++        color={'inherit'}
++        onClick={handleSaveAsTemplate}
++        disabled={templateLoading}
++        startIcon={templateLoading ? <CircularProgress size={14} /> : <TemplateIcon />}
++      >{t('web.saveAsTemplate')}</Button>
+       <Button
+         size={'small'}
+         className={'px-3 py-1 justify-start '}
+diff --git a/src/components/app/view-actions/AddPageActions.tsx b/src/components/app/view-actions/AddPageActions.tsx
+index b9688aa..8807a40 100644
+--- a/src/components/app/view-actions/AddPageActions.tsx
++++ b/src/components/app/view-actions/AddPageActions.tsx
+@@ -1,12 +1,27 @@
+ import { View, ViewLayout } from '@/application/types';
+ import { notify } from '@/components/_shared/notify';
+ import { ViewIcon } from '@/components/_shared/view-icon';
+-import { useAppHandlers } from '@/components/app/app.hooks';
+-import { Button } from '@mui/material';
++import PageIcon from '@/components/_shared/view-icon/PageIcon';
++import { useAppHandlers, useAppOutline } from '@/components/app/app.hooks';
++import { plainName } from '@/utils/referenceMarker';
++import { Button, Divider } from '@mui/material';
+ import CircularProgress from '@mui/material/CircularProgress';
++import { sortBy } from 'lodash-es';
+ import React, { useCallback, useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+ 
++// Added by the AppFlowy Home Assistant add-on: the page templates, i.e. the
++// top-level pages of the template space ("Save as template" in the page menu
++// puts copies there), offered when creating a page.
++export function useTemplates () {
++  const outline = useAppOutline();
++
++  return useMemo(() => sortBy(
++    (outline || []).filter((space) => space.extra?.is_template_space).flatMap((space) => space.children || []),
++    (view) => plainName(view.name).toLowerCase(),
++  ), [outline]);
++}
++
+ // Changed by the AppFlowy Home Assistant add-on: upstream v0.1.18 had Grid,
+ // Board and Calendar commented out and offered AI Chat, which needs the AI
+ // service this server doesn't run. Server 0.9.64 creates database pages with
+@@ -30,7 +45,30 @@ function AddPageActions({ view, onClose }: {
+   const {
+     addPage,
+     openPageModal,
++    createFromTemplate,
+   } = useAppHandlers();
++  const templates = useTemplates();
++
++  const handleAddFromTemplate = useCallback(async(templateId: string) => {
++    if(!createFromTemplate) return;
++    notify.default(
++      <span>
++        <CircularProgress size={20} />
++        <span className={'ml-2'}>{t('document.creating')}</span>
++      </span>,
++    );
++    try {
++      const viewId = await createFromTemplate(templateId, view.view_id);
++
++      void openPageModal?.(viewId);
++
++      notify.clear();
++      // eslint-disable-next-line
++    } catch(e: any) {
++      notify.clear();
++      notify.error(e.message);
++    }
++  }, [createFromTemplate, openPageModal, t, view.view_id]);
+ 
+   const handleAddPage = useCallback(async(layout: ViewLayout, name?: string) => {
+     if(!addPage) return;
+@@ -88,6 +126,26 @@ function AddPageActions({ view, onClose }: {
+           {action.label}
+         </Button>
+       ))}
++      <Divider className={'my-0.5'} />
++      <div className={'px-3 text-xs text-text-caption'}>{t('web.templates')}</div>
++      {templates.length ? templates.map(template => (
++        <Button
++          key={template.view_id}
++          size={'small'}
++          onClick={() => {
++            void handleAddFromTemplate(template.view_id);
++            onClose();
++          }}
++          className={'px-3 py-1 justify-start'}
++          color={'inherit'}
++          startIcon={<PageIcon
++            view={template}
++            className={'flex h-5 w-5 items-center justify-center'}
++          />}
++        >
++          <span className={'truncate'}>{plainName(template.name).trim() || t('menuAppHeader.defaultNewPageName')}</span>
++        </Button>
++      )) : <div className={'px-3 pb-1 text-xs text-text-caption max-w-[230px]'}>{t('web.noTemplates')}</div>}
+     </div>
+   );
+ }
+diff --git a/src/components/app/view-actions/NewPage.tsx b/src/components/app/view-actions/NewPage.tsx
+index 258eecd..b0213f0 100644
+--- a/src/components/app/view-actions/NewPage.tsx
++++ b/src/components/app/view-actions/NewPage.tsx
+@@ -3,20 +3,25 @@ import { ReactComponent as Add } from '@/assets/icons/add_new_page.svg';
+ import { NormalModal } from '@/components/_shared/modal';
+ import { notify } from '@/components/_shared/notify';
+ import { ViewIcon } from '@/components/_shared/view-icon';
++import PageIcon from '@/components/_shared/view-icon/PageIcon';
+ import { useAppHandlers, useAppOutline } from '@/components/app/app.hooks';
+-import { usePageLayoutOptions } from '@/components/app/view-actions/AddPageActions';
++import { usePageLayoutOptions, useTemplates } from '@/components/app/view-actions/AddPageActions';
+ import CreateSpaceModal from '@/components/app/view-actions/CreateSpaceModal';
+ import SpaceList from '@/components/publish/header/duplicate/SpaceList';
++import { plainName } from '@/utils/referenceMarker';
+ import { Button } from '@mui/material';
+ import React, { useCallback, useMemo } from 'react';
+ import { useTranslation } from 'react-i18next';
+ 
+ // Changed by the AppFlowy Home Assistant add-on: the page type can be chosen
+-// (upstream always created a Document); onCreated lets the mobile drawer close.
++// (upstream always created a Document), or a template to copy; onCreated
++// lets the mobile drawer close.
+ function NewPage({ onCreated }: { onCreated?: () => void }) {
+   const { t } = useTranslation();
+   const layoutOptions = usePageLayoutOptions();
++  const templates = useTemplates();
+   const [layout, setLayout] = React.useState<ViewLayout>(ViewLayout.Document);
++  const [templateId, setTemplateId] = React.useState<string>();
+   const [open, setOpen] = React.useState<boolean>(false);
+   const [loading, setLoading] = React.useState<boolean>(false);
+   const [selectedSpaceId, setSelectedSpaceId] = React.useState<string>('');
+@@ -38,19 +43,21 @@ function NewPage({ onCreated }: { onCreated?: () => void }) {
+     setOpen(false);
+   }, []);
+ 
+-  const { addPage, openPageModal } = useAppHandlers();
++  const { addPage, openPageModal, createFromTemplate } = useAppHandlers();
+ 
+   const [createSpaceOpen, setCreateSpaceOpen] = React.useState(false);
+ 
+   const handleAddPage = useCallback(
+     async (parentId: string) => {
+-      if (!addPage || !openPageModal) return;
++      if (!addPage || !openPageModal || !createFromTemplate) return;
+       setLoading(true);
+       try {
+-        const viewId = await addPage(parentId, {
+-          layout,
+-          name: layoutOptions.find((option) => option.layout === layout)?.name,
+-        });
++        const viewId = templateId
++          ? await createFromTemplate(templateId, parentId)
++          : await addPage(parentId, {
++              layout,
++              name: layoutOptions.find((option) => option.layout === layout)?.name,
++            });
+ 
+         onClose();
+         onCreated?.();
+@@ -62,13 +69,16 @@ function NewPage({ onCreated }: { onCreated?: () => void }) {
+         setLoading(false);
+       }
+     },
+-    [addPage, openPageModal, onClose, onCreated, layout, layoutOptions]
++    [addPage, openPageModal, createFromTemplate, onClose, onCreated, layout, layoutOptions, templateId]
+   );
+ 
+   return (
+     <>
+       <Button
+-        onClick={() => setOpen(true)}
++        onClick={() => {
++          setTemplateId(undefined);
++          setOpen(true);
++        }}
+         startIcon={<Add className={'mr-[1px]'} />}
+         size={'small'}
+         className={'w-full justify-start  py-1.5 text-sm font-normal hover:bg-fill-list-hover'}
+@@ -99,14 +109,39 @@ function NewPage({ onCreated }: { onCreated?: () => void }) {
+                 size={'small'}
+                 color={'inherit'}
+                 variant={'outlined'}
+-                onClick={() => setLayout(option.layout)}
++                onClick={() => {
++                  setLayout(option.layout);
++                  setTemplateId(undefined);
++                }}
+                 startIcon={<ViewIcon layout={option.layout} size={'small'} />}
+-                className={`justify-start text-sm font-normal ${option.layout === layout ? 'border-fill-default bg-fill-list-active' : 'border-line-divider'}`}
++                className={`justify-start text-sm font-normal ${!templateId && option.layout === layout ? 'border-fill-default bg-fill-list-active' : 'border-line-divider'}`}
+               >
+                 {option.label}
+               </Button>
+             ))}
+           </div>
++          <div className={'text-sm text-text-caption'}>{t('web.templates')}</div>
++          {templates.length ? (
++            <div className={'grid max-h-[160px] grid-cols-1 gap-2 overflow-y-auto sm:grid-cols-2'}>
++              {templates.map((template) => (
++                <Button
++                  key={template.view_id}
++                  size={'small'}
++                  color={'inherit'}
++                  variant={'outlined'}
++                  onClick={() => setTemplateId(template.view_id)}
++                  startIcon={<PageIcon view={template} className={'flex h-5 w-5 items-center justify-center'} />}
++                  className={`justify-start text-sm font-normal ${template.view_id === templateId ? 'border-fill-default bg-fill-list-active' : 'border-line-divider'}`}
++                >
++                  <span className={'truncate'}>
++                    {plainName(template.name).trim() || t('menuAppHeader.defaultNewPageName')}
++                  </span>
++                </Button>
++              ))}
++            </div>
++          ) : (
++            <div className={'text-xs text-text-caption'}>{t('web.noTemplates')}</div>
++          )}
+         </div>
+         <SpaceList
+           loading={false}
+diff --git a/src/components/editor/EditorContext.tsx b/src/components/editor/EditorContext.tsx
+index 1d06f89..e1e9bf7 100644
+--- a/src/components/editor/EditorContext.tsx
++++ b/src/components/editor/EditorContext.tsx
+@@ -48,6 +48,9 @@ export interface EditorContextState {
+   selectedBlockIds?: string[];
+   setSelectedBlockIds?: React.Dispatch<React.SetStateAction<string[]>>;
+   addPage?: (parentId: string, payload: CreatePagePayload) => Promise<string>;
++  // Added by the AppFlowy Home Assistant add-on: page templates for the slash menu.
++  templates?: View[];
++  createFromTemplate?: (templateId: string, parentId: string) => Promise<string>;
+   deletePage?: (viewId: string) => Promise<void>;
+   openPageModal?: (viewId: string) => void;
+   loadViews?: (variant?: UIVariant) => Promise<View[] | undefined>;
+diff --git a/src/components/editor/components/panels/slash-panel/SlashPanel.tsx b/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
+index a2aaf96..644788f 100644
+--- a/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
++++ b/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
+@@ -13,9 +13,11 @@ import {
+   SubpageNodeData,
+   ToggleListBlockData,
+   VideoBlockData,
++  View,
+   ViewLayout,
+ } from '@/application/types';
+ import { ReactComponent as DocumentIcon } from '@/assets/icons/page.svg';
++import { ReactComponent as TemplateIcon } from '@/assets/icons/template.svg';
+ // import { ReactComponent as AIWriterIcon } from '@/assets/slash_menu_icon_ai_writer.svg';
+ import { ReactComponent as BulletedListIcon } from '@/assets/icons/bulleted_list.svg';
+ import { ReactComponent as CalloutIcon } from '@/assets/icons/callout.svg';
+@@ -53,6 +55,7 @@ import { usePanelContext } from '@/components/editor/components/panels/Panels.ho
+ import { PanelType } from '@/components/editor/components/panels/PanelsContext';
+ import { getRangeRect } from '@/components/editor/components/toolbar/selection-toolbar/utils';
+ import { useEditorContext } from '@/components/editor/EditorContext';
++import { plainName } from '@/utils/referenceMarker';
+ import { getCharacters } from '@/utils/word';
+ import { useAIWriter } from '@appflowyinc/ai-chat';
+ import { Button } from '@mui/material';
+@@ -67,7 +70,7 @@ export function SlashPanel({
+   setEmojiPosition: (position: { top: number; left: number }) => void;
+ }) {
+   const { isPanelOpen, panelPosition, closePanel, searchText, removeContent } = usePanelContext();
+-  const { addPage, openPageModal, viewId, loadViewMeta } = useEditorContext();
++  const { addPage, openPageModal, viewId, loadViewMeta, templates, createFromTemplate } = useEditorContext();
+   const [viewName, setViewName] = useState('');
+ 
+   const editor = useSlateStatic() as YjsEditor;
+@@ -203,6 +206,39 @@ export function SlashPanel({
+     }
+   }, [viewId, addPage, turnInto]);
+ 
++  // Added by the AppFlowy Home Assistant add-on: copies a template page as a
++  // child page and shows it inline (a database) or as a sub-page block.
++  const addFromTemplate = useCallback(async (template: View) => {
++    if (!viewId || !createFromTemplate) return;
++    notify.default(t('document.creating'));
++    try {
++      const newViewId = await createFromTemplate(template.view_id, viewId);
++      const databaseBlockType = {
++        [ViewLayout.Grid]: BlockType.GridBlock,
++        [ViewLayout.Board]: BlockType.BoardBlock,
++        [ViewLayout.Calendar]: BlockType.CalendarBlock,
++      }[template.layout as ViewLayout.Grid | ViewLayout.Board | ViewLayout.Calendar];
++
++      notify.clear();
++      if (databaseBlockType) {
++        turnInto(databaseBlockType, {
++          view_id: newViewId,
++          parent_id: viewId,
++        } as DatabaseNodeData);
++        return;
++      }
++
++      turnInto(BlockType.SubpageBlock, {
++        view_id: newViewId,
++      } as SubpageNodeData);
++      openPageModal?.(newViewId);
++      // eslint-disable-next-line @typescript-eslint/no-explicit-any
++    } catch (e: any) {
++      notify.clear();
++      notify.error(e.message);
++    }
++  }, [viewId, createFromTemplate, turnInto, openPageModal, t]);
++
+   const { askAIAnything, continueWriting } = useAIWriter();
+ 
+   const options: {
+@@ -413,6 +449,19 @@ export function SlashPanel({
+           void addDatabase(ViewLayout.Calendar, BlockType.CalendarBlock, t('calendar.menuName'));
+         },
+       },
++      ...(templates || []).filter((template) => template.view_id !== viewId).map((template) => {
++        const name = plainName(template.name).trim() || t('menuAppHeader.defaultNewPageName');
++
++        return {
++          label: `${t('web.template')}: ${name}`,
++          key: `template-${template.view_id}`,
++          icon: <TemplateIcon />,
++          keywords: ['template', 'vorlage', name],
++          onClick: () => {
++            void addFromTemplate(template);
++          },
++        };
++      }),
+       {
+         label: t('document.slashMenu.name.callout'),
+         key: 'callout',
+@@ -553,6 +602,8 @@ export function SlashPanel({
+     searchText,
+     addDatabase,
+     addBorderedBox,
++    templates,
++    addFromTemplate,
+   ]);
+ 
+   const resultLength = options.length;
+diff --git a/src/pages/AppPage.tsx b/src/pages/AppPage.tsx
+index e886695..57fc553 100644
+--- a/src/pages/AppPage.tsx
++++ b/src/pages/AppPage.tsx
+@@ -11,6 +11,7 @@ import {
+   useCurrentWorkspaceId,
+ } from '@/components/app/app.hooks';
+ import DatabaseView from '@/components/app/DatabaseView';
++import { useTemplates } from '@/components/app/view-actions/AddPageActions';
+ import { Document } from '@/components/document';
+ import RecordNotFound from '@/components/error/RecordNotFound';
+ import { useService } from '@/components/main/app.hooks';
+@@ -40,7 +41,9 @@ function AppPage() {
+     loadViews,
+     setWordCount,
+     uploadFile,
++    createFromTemplate,
+   } = useAppHandlers();
++  const templates = useTemplates();
+   const view = useMemo(() => {
+     if (!outline || !viewId) return;
+     return findView(outline, viewId);
+@@ -144,6 +147,8 @@ function AppPage() {
+         onRendered={onRendered}
+         updatePage={updatePage}
+         addPage={addPage}
++        templates={templates}
++        createFromTemplate={createFromTemplate}
+         deletePage={deletePage}
+         openPageModal={openPageModal}
+         loadViews={loadViews}
+@@ -153,6 +158,8 @@ function AppPage() {
+       />
+     ) : null;
+   }, [
++    templates,
++    createFromTemplate,
+     requestInstance,
+     workspaceId,
+     doc,

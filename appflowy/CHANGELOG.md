@@ -410,3 +410,29 @@
 - Schlägt ein Upload fehl, speichert Web kein browserlokales `blob:`-Bild mehr als Icon oder
   Titelbild (das war überall sonst kaputt), sondern zeigt eine Fehlermeldung.
 - Umgesetzt als siebter Patch `patches/appflowy-web-custom-icons.patch` auf AppFlowy Web `v0.1.18`.
+
+## 0.9.64-20
+
+- **Vorlagen in AppFlowy Web:** ··· → "Als Vorlage speichern" legt eine Kopie einer beliebigen
+  Seite (Dokument, Tabelle, Board oder Kalender, mit allen Unterseiten) im Bereich "Vorlagen"
+  ab. Der Bereich wird beim ersten Mal automatisch angelegt und ist für alle Mitglieder des
+  Workspaces sichtbar. Jede Seite auf oberster Ebene dieses Bereichs ist eine Vorlage: dort
+  bearbeiten, löschen oder hinein-/herausverschieben wie jede andere Seite.
+- Die Vorlage ist eine eigenständige Kopie: Das Original kann danach weiter bearbeitet oder
+  gelöscht werden, ohne die Vorlage zu verändern. Eine gelöschte Vorlage verschwindet aus den
+  Menüs und kommt beim Wiederherstellen aus dem Papierkorb zurück.
+- **Neue Seite aus einer Vorlage:** im "+"-Menü einer Seite oder eines Bereichs, im Dialog
+  "Neue Seite" (auch am Handy) und im Slash-Menü eines Dokuments (`/vorlage` bzw. `/template`;
+  eine Tabelle, ein Board oder ein Kalender wird eingebettet, ein Dokument als Unterseite
+  verlinkt). Die neue Seite ist eine Kopie der Vorlage mit allen Unterseiten; bei Datenbanken
+  werden Eigenschaften, Ansichten, Filter, Sortierungen, Gruppierungen und Zeilen mitkopiert.
+- Eingebettete Tabellen/Boards/Kalender, Unterseiten-Blöcke und @-Erwähnungen in kopierten
+  Dokumenten zeigen auf die kopierten Seiten, nicht auf die der Vorlage.
+- **Nicht mitkopiert:** der Dokumentinhalt einzelner Zeilen (die Seite, die beim Öffnen einer
+  Karte erscheint). `[[Name|…]]`-Verweise in Seiten- und Zeilentiteln zeigen weiter auf die
+  kopierte Ausgangsseite.
+- Der Vorlagen-Bereich wird über `is_template_space` im `extra`-Feld erkannt (Umbenennen ist
+  also unproblematisch); die Desktop-App zeigt ihn als normalen Bereich. Kopiert wird über die
+  vorhandene Duplizieren-Funktion des Servers; die Vorlagen-Galerie von appflowy.com wird nicht
+  verwendet.
+- Umgesetzt als achter Patch `patches/appflowy-web-templates.patch` auf AppFlowy Web `v0.1.18`.
