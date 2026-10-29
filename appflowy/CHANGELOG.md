@@ -448,6 +448,10 @@
   "+" neben und unter der Tabelle hängt eine Spalte bzw. Zeile an; das ···-Menü einer Zelle
   fügt Zeilen/Spalten davor oder danach ein oder löscht sie. Spalten- und Zeileneinstellungen
   aus der Desktop-App (Breite, Farbe, Ausrichtung) wandern beim Einfügen und Löschen mit.
+- **Spaltenbreite in Web einstellen:** am rechten Rand einer Zelle ziehen ändert die Breite der
+  Spalte, Doppelklick auf den Rand setzt sie zurück. Das ···-Menü bietet zusätzlich
+  "Spaltenbreite zurücksetzen" und "Spalten gleich breit machen". Breiten werden als
+  Kommazahl gespeichert (z. B. `160.0`), wie die Desktop-App sie erwartet.
 - Rücktaste, Entf und Markierungen über Zellgrenzen hinweg verschieben keinen Text zwischen
   Zellen und hinterlassen keine leeren Zellen. Pfeil nach oben funktioniert in Tabellen wieder
   (Web hat die Taste dort bisher geschluckt).

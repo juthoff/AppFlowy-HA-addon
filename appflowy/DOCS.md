@@ -182,6 +182,11 @@ reinen Text speichert:
   ···-Knopf in der Ecke einer Zelle bietet Zeile darüber/darunter einfügen, Spalte links/rechts
   einfügen sowie Zeile oder Spalte löschen. Die letzte Zeile bzw. Spalte lässt sich nicht
   löschen; die ganze Tabelle löscht man über den ⋮⋮-Griff links → "Löschen".
+- **Spaltenbreite:** den rechten Rand einer Zelle mit der Maus ziehen (der Rand färbt sich beim
+  Überfahren); die neue Breite gilt für die ganze Spalte und wird beim Loslassen gespeichert.
+  Doppelklick auf den Rand oder ··· → "Spaltenbreite zurücksetzen" stellt die Standardbreite
+  wieder her, ··· → "Spalten gleich breit machen" verteilt die Gesamtbreite gleichmäßig auf
+  alle Spalten. Auf Touch-Geräten geht das nur über das Menü.
 - Rücktaste am Anfang einer Zelle und Entf am Ende einer Zelle verschieben keinen Text zwischen
   Zellen. Eine Markierung, die in einer Zelle beginnt und in einer anderen (oder außerhalb der
   Tabelle) endet, wird nicht gelöscht. Eine Markierung, die die ganze Tabelle umschließt,

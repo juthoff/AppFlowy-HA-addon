@@ -1,8 +1,8 @@
 diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
-index 3c66c9e..2d12840 100644
+index 3c66c9e..96adf92 100644
 --- a/src/@types/translations/de-DE.json
 +++ b/src/@types/translations/de-DE.json
-@@ -2694,6 +2694,12 @@
+@@ -2694,6 +2694,14 @@
      "boxText": "Text",
      "boxAddText": "Klicken, um Text hinzuzufügen",
      "boxBorderColor": "Rahmenfarbe",
@@ -12,14 +12,16 @@ index 3c66c9e..2d12840 100644
 +    "tableInsertColumnLeft": "Spalte links einfügen",
 +    "tableInsertColumnRight": "Spalte rechts einfügen",
 +    "tableDeleteColumn": "Spalte löschen",
++    "tableResetColumnWidth": "Spaltenbreite zurücksetzen",
++    "tableDistributeColumns": "Spalten gleich breit machen",
      "newPageType": "Seitentyp",
      "template": "Vorlage",
      "templates": "Vorlagen",
 diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
-index 4ca6681..f110d36 100644
+index 4ca6681..402fb1a 100644
 --- a/src/@types/translations/en.json
 +++ b/src/@types/translations/en.json
-@@ -2675,6 +2675,12 @@
+@@ -2675,6 +2675,14 @@
      "boxText": "Text",
      "boxAddText": "Click to add text",
      "boxBorderColor": "Border color",
@@ -29,14 +31,16 @@ index 4ca6681..f110d36 100644
 +    "tableInsertColumnLeft": "Insert column left",
 +    "tableInsertColumnRight": "Insert column right",
 +    "tableDeleteColumn": "Delete column",
++    "tableResetColumnWidth": "Reset column width",
++    "tableDistributeColumns": "Distribute columns evenly",
      "newPageType": "Page type",
      "template": "Template",
      "templates": "Templates",
 diff --git a/src/application/slate-yjs/command/index.ts b/src/application/slate-yjs/command/index.ts
-index f923c94..39a220f 100644
+index f923c94..a0e9779 100644
 --- a/src/application/slate-yjs/command/index.ts
 +++ b/src/application/slate-yjs/command/index.ts
-@@ -36,13 +36,25 @@ import isEqual from 'lodash-es/isEqual';
+@@ -36,13 +36,27 @@ import isEqual from 'lodash-es/isEqual';
  import { BasePoint, BaseRange, Editor, Element, Node, NodeEntry, Path, Range, Text, Transforms } from 'slate';
  import { ReactEditor } from 'slate-react';
  import {
@@ -53,18 +57,20 @@ index f923c94..39a220f 100644
 +  createSimpleTable,
 +  deleteTableColumn,
 +  deleteTableRow,
++  distributeTableColumns,
 +  getTableColumnCount,
 +  getTableRowCount,
 +  insertTableColumn,
 +  insertTableRow,
++  setTableColumnWidth,
 +} from '@/application/slate-yjs/utils/simpleTable';
 +
 +// Added by the AppFlowy Home Assistant add-on
-+export type SimpleTableAction = 'insertRowAbove' | 'insertRowBelow' | 'insertColumnLeft' | 'insertColumnRight' | 'deleteRow' | 'deleteColumn';
++export type SimpleTableAction = 'insertRowAbove' | 'insertRowBelow' | 'insertColumnLeft' | 'insertColumnRight' | 'deleteRow' | 'deleteColumn' | 'resetColumnWidth' | 'distributeColumns';
  
  export const CustomEditor = {
    getEditorContent(editor: YjsEditor) {
-@@ -608,7 +620,11 @@ export const CustomEditor = {
+@@ -608,7 +622,11 @@ export const CustomEditor = {
      }], 'deleteBlock');
      const children = editor.children;
  
@@ -77,7 +83,7 @@ index f923c94..39a220f 100644
        addBlock(editor, {
          ty: BlockType.Paragraph,
          data: {},
-@@ -648,6 +664,131 @@ export const CustomEditor = {
+@@ -648,6 +666,148 @@ export const CustomEditor = {
      return newBlockId;
    },
  
@@ -150,8 +156,25 @@ index f923c94..39a220f 100644
 +        case 'deleteColumn':
 +          deleteTableColumn(sharedRoot, table, columnIndex);
 +          break;
++        case 'resetColumnWidth':
++          setTableColumnWidth(table, columnIndex);
++          break;
++        case 'distributeColumns':
++          distributeTableColumns(sharedRoot, table);
++          break;
 +      }
 +    }], 'editSimpleTable');
++  },
++
++  // Added by the AppFlowy Home Assistant add-on: stores a column width dragged at a cell's edge.
++  setSimpleTableColumnWidth(editor: YjsEditor, tableId: string, columnIndex: number, width: number) {
++    const sharedRoot = getSharedRoot(editor);
++    const table = getBlock(tableId, sharedRoot);
++
++    if(!table) return;
++    executeOperations(sharedRoot, [() => {
++      setTableColumnWidth(table, columnIndex, width);
++    }], 'setSimpleTableColumnWidth');
 +  },
 +
 +  // Added by the AppFlowy Home Assistant add-on: appends a row or a column to a table.
@@ -343,10 +366,10 @@ index d47c556..55dfde2 100644
      return;
 diff --git a/src/application/slate-yjs/utils/simpleTable.ts b/src/application/slate-yjs/utils/simpleTable.ts
 new file mode 100644
-index 0000000..7279810
+index 0000000..dd9f929
 --- /dev/null
 +++ b/src/application/slate-yjs/utils/simpleTable.ts
-@@ -0,0 +1,139 @@
+@@ -0,0 +1,195 @@
 +// Added by the AppFlowy Home Assistant add-on: creates simple tables and adds or
 +// removes their rows and columns, in the desktop app's block shape:
 +// simple_table > simple_table_row > simple_table_cell > paragraph. Per-row and
@@ -364,6 +387,10 @@ index 0000000..7279810
 +
 +export const DEFAULT_TABLE_ROWS = 2;
 +export const DEFAULT_TABLE_COLUMNS = 2;
++// Width Web shows for a column without a stored width (MIN_WIDTH in blocks/simple-table/const.ts).
++export const DEFAULT_COLUMN_WIDTH = 120;
++export const MIN_COLUMN_WIDTH = 40;
++const WIDTHS_PLACEHOLDER = '__column_widths__';
 +
 +const ROW_DATA_KEYS = ['row_colors', 'row_aligns', 'row_bold_attributes', 'row_text_colors'];
 +const COLUMN_DATA_KEYS = ['column_widths', 'column_colors', 'column_aligns', 'column_bold_attributes', 'column_text_colors'];
@@ -393,8 +420,29 @@ index 0000000..7279810
 +  return row;
 +}
 +
++function getTableData(table: YBlock) {
++  return dataStringTOJson(table.get(YjsEditorKey.block_data)) as Record<string, unknown>;
++}
++
++function getColumnWidths(data: Record<string, unknown>) {
++  const widths = data.column_widths;
++
++  return widths && typeof widths === 'object' ? { ...(widths as Record<string, number>) } : {};
++}
++
++// The desktop app reads column_widths as doubles and ignores the whole map if a width is an
++// integer, so widths are written as e.g. 160.0 (JSON.stringify would write 160).
++function setTableData(table: YBlock, data: Record<string, unknown>) {
++  const widths = Object.entries(getColumnWidths(data))
++    .filter(([, width]) => typeof width === 'number' && Number.isFinite(width))
++    .map(([key, width]) => `${JSON.stringify(key)}:${Number.isInteger(width) ? width.toFixed(1) : String(width)}`);
++  const json = JSON.stringify({ ...data, column_widths: WIDTHS_PLACEHOLDER });
++
++  table.set(YjsEditorKey.block_data, json.replace(`"${WIDTHS_PLACEHOLDER}"`, `{${widths.join(',')}}`));
++}
++
 +function shiftIndexedData(table: YBlock, keys: string[], index: number, delta: 1 | -1) {
-+  const data = dataStringTOJson(table.get(YjsEditorKey.block_data)) as Record<string, unknown>;
++  const data = getTableData(table);
 +
 +  keys.forEach((key) => {
 +    const map = data[key] as Record<string, unknown> | undefined;
@@ -415,7 +463,7 @@ index 0000000..7279810
 +    });
 +    data[key] = shifted;
 +  });
-+  table.set(YjsEditorKey.block_data, JSON.stringify(data));
++  setTableData(table, data);
 +}
 +
 +// Returns the id of the first cell's paragraph, to put the cursor there.
@@ -485,6 +533,37 @@ index 0000000..7279810
 +    if(cellId) deleteBlock(sharedRoot, cellId);
 +  });
 +  shiftIndexedData(table, COLUMN_DATA_KEYS, index, -1);
++}
++
++// Without a width the column falls back to the default width.
++export function setTableColumnWidth(table: YBlock, index: number, width?: number) {
++  const data = getTableData(table);
++  const widths = getColumnWidths(data);
++
++  if(width === undefined) {
++    delete widths[String(index)];
++  } else {
++    widths[String(index)] = Math.max(MIN_COLUMN_WIDTH, Math.round(width));
++  }
++
++  setTableData(table, { ...data, column_widths: widths });
++}
++
++// Gives every column the same width, keeping the table's total width.
++export function distributeTableColumns(sharedRoot: YSharedRoot, table: YBlock) {
++  const columnCount = getTableColumnCount(sharedRoot, table);
++
++  if(columnCount === 0) return;
++  const data = getTableData(table);
++  const widths = getColumnWidths(data);
++  const indexes = Array.from({ length: columnCount }, (_, i) => String(i));
++  const total = indexes.reduce((sum, i) => sum + (widths[i] || DEFAULT_COLUMN_WIDTH), 0);
++  const width = Math.max(MIN_COLUMN_WIDTH, Math.round(total / columnCount));
++
++  setTableData(table, {
++    ...data,
++    column_widths: Object.fromEntries(indexes.map((i) => [i, width])),
++  });
 +}
 diff --git a/src/components/editor/components/blocks/simple-table/SimpleTable.hooks.ts b/src/components/editor/components/blocks/simple-table/SimpleTable.hooks.ts
 index 8a29ba7..9c97058 100644
@@ -657,10 +736,10 @@ index 4c75ca1..9153ba8 100644
        </div>
      );
 diff --git a/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx b/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx
-index 1fc1513..74ae913 100644
+index 1fc1513..a15e150 100644
 --- a/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx
 +++ b/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx
-@@ -2,9 +2,10 @@ import { BlockType } from '@/application/types';
+@@ -2,9 +2,11 @@ import { BlockType } from '@/application/types';
  import { EditorElementProps, SimpleTableCellBlockNode, SimpleTableNode } from '@/components/editor/editor.type';
  import { renderColor } from '@/utils/color';
  import React, { forwardRef, useMemo } from 'react';
@@ -670,15 +749,18 @@ index 1fc1513..74ae913 100644
 +import { ReactEditor, useReadOnly, useSlate } from 'slate-react';
  import { MIN_WIDTH } from '@/components/editor/components/blocks/simple-table/const';
 +import SimpleTableCellMenu from '@/components/editor/components/blocks/simple-table/SimpleTableCellMenu';
++import SimpleTableColumnResizer from '@/components/editor/components/blocks/simple-table/SimpleTableColumnResizer';
  
  const SimpleTableCell =
    forwardRef<HTMLTableCellElement, EditorElementProps<SimpleTableCellBlockNode>>(({
-@@ -71,11 +72,18 @@ const SimpleTableCell =
+@@ -71,11 +73,20 @@ const SimpleTableCell =
          };
        }, [colIndex, row, table]);
  
-+      // Added by the AppFlowy Home Assistant add-on: row and column menu of an editable table
++      // Added by the AppFlowy Home Assistant add-on: row and column menu and the column-width handle
++      // of an editable table
 +      const readOnly = useReadOnly();
++      const tableId = table?.[0].blockId;
 +      const focused = !!editor.selection && Path.isAncestor(path, editor.selection.anchor.path);
 +      const rowCount = table ? (table[0].children as Element[]).length : 0;
 +      const columnCount = row ? (row[0].children as Element[]).length : 0;
@@ -692,22 +774,25 @@ index 1fc1513..74ae913 100644
            ref={ref}
            {...attributes}
            rowSpan={1}
-@@ -93,6 +101,9 @@ const SimpleTableCell =
+@@ -93,6 +104,12 @@ const SimpleTableCell =
            >
              {children}
            </div>
 +          {!readOnly && blockId && (
 +            <SimpleTableCellMenu cellId={blockId} canDeleteRow={rowCount > 1} canDeleteColumn={columnCount > 1} />
 +          )}
++          {!readOnly && blockId && tableId && (
++            <SimpleTableColumnResizer tableId={tableId} cellId={blockId} columnIndex={colIndex} width={width ?? MIN_WIDTH} />
++          )}
          </td>
        );
      },
 diff --git a/src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx b/src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx
 new file mode 100644
-index 0000000..d491c5b
+index 0000000..fbd69e5
 --- /dev/null
 +++ b/src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,95 @@
 +// Added by the AppFlowy Home Assistant add-on: the row and column menu of a table cell, opened with
 +// the button in the cell's corner (shown while the cell is hovered or holds the cursor).
 +import { YjsEditor } from '@/application/slate-yjs';
@@ -740,13 +825,17 @@ index 0000000..d491c5b
 +        { action: 'insertColumnRight', label: t('web.tableInsertColumnRight') },
 +        { action: 'deleteColumn', label: t('web.tableDeleteColumn'), disabled: !canDeleteColumn },
 +      ],
++      [
++        { action: 'resetColumnWidth', label: t('web.tableResetColumnWidth') },
++        { action: 'distributeColumns', label: t('web.tableDistributeColumns') },
++      ],
 +    ];
 +
 +    return groups;
 +  }, [t, canDeleteRow, canDeleteColumn]);
 +
 +  return (
-+    <div contentEditable={false} className={'simple-table-cell-menu absolute right-0.5 top-0.5 select-none'}>
++    <div contentEditable={false} className={'simple-table-cell-menu absolute right-1.5 top-0.5 select-none'}>
 +      <button
 +        type={'button'}
 +        data-testid={'simple-table-cell-menu'}
@@ -799,11 +888,90 @@ index 0000000..d491c5b
 +}
 +
 +export default SimpleTableCellMenu;
+diff --git a/src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx b/src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx
+new file mode 100644
+index 0000000..751ff30
+--- /dev/null
++++ b/src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx
+@@ -0,0 +1,73 @@
++// Added by the AppFlowy Home Assistant add-on: drag handle on a cell's right edge that changes the
++// column width. While dragging only the DOM is resized; the width is stored once on release, so
++// collaborators don't get an update per mouse move. Double-click resets the column width.
++import { YjsEditor } from '@/application/slate-yjs';
++import { CustomEditor } from '@/application/slate-yjs/command';
++import { MIN_COLUMN_WIDTH } from '@/application/slate-yjs/utils/simpleTable';
++import React, { useCallback } from 'react';
++import { useSlateStatic } from 'slate-react';
++
++function resizeColumnInDom(table: HTMLTableElement, columnIndex: number, width: number) {
++  const col = table.querySelectorAll('col')[columnIndex];
++
++  if(col) col.style.width = `${width}px`;
++  table.querySelectorAll<HTMLElement>(`td[data-cell-index="${columnIndex}"]`).forEach((cell) => {
++    cell.style.width = `${width}px`;
++    cell.style.minWidth = `${width}px`;
++  });
++}
++
++export function SimpleTableColumnResizer({ tableId, cellId, columnIndex, width }: {
++  tableId: string;
++  cellId: string;
++  columnIndex: number;
++  width: number;
++}) {
++  const editor = useSlateStatic() as YjsEditor;
++
++  const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
++    e.preventDefault();
++    e.stopPropagation();
++    const table = e.currentTarget.closest('table');
++
++    if(!table) return;
++    const handle = e.currentTarget;
++    const startX = e.clientX;
++    let newWidth = width;
++
++    const onMouseMove = (event: MouseEvent) => {
++      newWidth = Math.max(MIN_COLUMN_WIDTH, Math.round(width + event.clientX - startX));
++      resizeColumnInDom(table, columnIndex, newWidth);
++    };
++
++    const onMouseUp = () => {
++      document.removeEventListener('mousemove', onMouseMove);
++      document.removeEventListener('mouseup', onMouseUp);
++      document.body.style.cursor = '';
++      handle.removeAttribute('data-resizing');
++      if(newWidth !== width) {
++        CustomEditor.setSimpleTableColumnWidth(editor, tableId, columnIndex, newWidth);
++      }
++    };
++
++    document.body.style.cursor = 'col-resize';
++    handle.setAttribute('data-resizing', 'true');
++    document.addEventListener('mousemove', onMouseMove);
++    document.addEventListener('mouseup', onMouseUp);
++  }, [editor, tableId, columnIndex, width]);
++
++  return (
++    <div
++      contentEditable={false}
++      data-testid={'simple-table-column-resizer'}
++      className={'simple-table-column-resizer absolute right-0 top-0 z-[1] h-full w-[5px] cursor-col-resize select-none'}
++      onMouseDown={onMouseDown}
++      onDoubleClick={(e) => {
++        e.preventDefault();
++        CustomEditor.editSimpleTable(editor, cellId, 'resetColumnWidth');
++      }}
++    />
++  );
++}
++
++export default SimpleTableColumnResizer;
 diff --git a/src/components/editor/components/blocks/simple-table/simple-table.scss b/src/components/editor/components/blocks/simple-table/simple-table.scss
-index 0c92476..083dbb6 100644
+index 0c92476..b6721a9 100644
 --- a/src/components/editor/components/blocks/simple-table/simple-table.scss
 +++ b/src/components/editor/components/blocks/simple-table/simple-table.scss
-@@ -23,8 +23,23 @@
+@@ -23,8 +23,29 @@
      @apply border-t border-line-divider;
    }
  
@@ -820,6 +988,12 @@ index 0c92476..083dbb6 100644
 +  td:hover > .simple-table-cell-menu,
 +  td[data-cell-focused="true"] > .simple-table-cell-menu {
 +    opacity: 1;
++  }
++
++  // The column-width handle on a cell's right edge: highlighted on hover and while dragging.
++  .simple-table-column-resizer:hover,
++  .simple-table-column-resizer[data-resizing="true"] {
++    @apply bg-fill-default;
 +  }
 +
    td[data-block-type="simple_table_cell"] {

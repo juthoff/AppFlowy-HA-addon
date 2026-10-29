@@ -40,8 +40,9 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
   Vorlagen anlegen). Fügt `src/components/app/view-actions/SaveAsTemplateModal.tsx` hinzu;
   geänderte Dateien tragen denselben Vermerk. Seit `0.9.64-21` zusätzlich
   `patches/appflowy-web-simple-tables.patch` (einfache Tabellen per `/tabelle` einfügen und
-  bearbeiten). Fügt `src/application/slate-yjs/utils/simpleTable.ts` und
-  `src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx` hinzu;
+  bearbeiten). Fügt `src/application/slate-yjs/utils/simpleTable.ts`,
+  `src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx` und
+  `src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx` hinzu;
   geänderte Dateien tragen denselben Vermerk.
 - `gotrue`: `Secure`-Flag des Session-Cookies deaktiviert (siehe Dockerfile), MIT-Lizenz.
 

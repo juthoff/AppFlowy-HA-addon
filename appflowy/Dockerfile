@@ -98,7 +98,8 @@ WORKDIR /app
 # simple table in the desktop app's block shape (simple_table > simple_table_row >
 # simple_table_cell > paragraph) and makes simple tables editable (upstream renders
 # them read-only): typing in cells, Tab between cells, add/insert/delete rows and
-# columns. Backspace, Delete and range deletes never merge text across cells, and the
+# columns, column widths (drag a cell's edge; stored as doubles like 160.0, the
+# format the desktop app writes; it reads them as a map of doubles). Backspace, Delete and range deletes never merge text across cells, and the
 # Yjs-to-Slate sync no longer assumes every parent block starts with a text node.
 COPY patches/appflowy-web-password-login.patch /tmp/appflowy-web-password-login.patch
 COPY patches/appflowy-web-references.patch /tmp/appflowy-web-references.patch
