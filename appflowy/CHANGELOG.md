@@ -437,3 +437,22 @@
   vorhandene Duplizieren-Funktion des Servers; die Vorlagen-Galerie von appflowy.com wird nicht
   verwendet.
 - Umgesetzt als achter Patch `patches/appflowy-web-templates.patch` auf AppFlowy Web `v0.1.18`.
+
+## 0.9.64-21
+
+- **Tabellen per `/` in AppFlowy Web:** `/tabelle` (oder `/table`) fügt in einem Dokument eine
+  einfache Tabelle mit 2 × 2 Zellen ein, im selben Format wie die Desktop-App
+  (`simple_table` → Zeilen → Zellen → Absatz). Bisher konnte Web solche Tabellen nur anzeigen.
+- **Tabellen sind in Web bearbeitbar:** Text in Zellen schreiben (auch Listen, Überschriften
+  usw.), Tab/Shift+Tab springt zwischen Zellen, Tab in der letzten Zelle hängt eine Zeile an.
+  "+" neben und unter der Tabelle hängt eine Spalte bzw. Zeile an; das ···-Menü einer Zelle
+  fügt Zeilen/Spalten davor oder danach ein oder löscht sie. Spalten- und Zeileneinstellungen
+  aus der Desktop-App (Breite, Farbe, Ausrichtung) wandern beim Einfügen und Löschen mit.
+- Rücktaste, Entf und Markierungen über Zellgrenzen hinweg verschieben keinen Text zwischen
+  Zellen und hinterlassen keine leeren Zellen. Pfeil nach oben funktioniert in Tabellen wieder
+  (Web hat die Taste dort bisher geschluckt).
+- Dafür angepasst: Web setzte neue Unterblöcke immer hinter die Textzeile des übergeordneten
+  Blocks. Tabelle, Zeile und Zelle haben keine eigene Textzeile, neue Zeilen und Zellen wären
+  dadurch eine Position zu weit hinten gelandet.
+- Umgesetzt als neunter Patch `patches/appflowy-web-simple-tables.patch` auf AppFlowy Web
+  `v0.1.18`.

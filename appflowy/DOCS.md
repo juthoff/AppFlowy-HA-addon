@@ -165,6 +165,30 @@ reinen Text speichert:
   unverändert lassen, ist nicht getestet – Dokumente mit Kasten daher besser nur im Browser
   bearbeiten.
 
+## Einfache Tabellen in Dokumenten (AppFlowy Web)
+
+- **Einfügen:** in einem Dokument `/tabelle` (oder `/table`) tippen und "Tabelle" wählen. Es
+  erscheint eine Tabelle mit 2 × 2 leeren Zellen, der Cursor steht in der ersten Zelle. In einer
+  leeren Zeile ersetzt die Tabelle diese Zeile, sonst kommt sie darunter. Steht danach nichts
+  mehr im Dokument, folgt eine leere Zeile, damit man unter der Tabelle weiterschreiben kann.
+- Das ist die einfache Tabelle der Desktop-App (Blocktyp `simple_table`), keine Datenbank: Zellen
+  enthalten normalen Text, Listen usw. Für Spalten mit Eigenschaften, Filtern und Sortierung ist
+  `/grid` ("Datentabelle") gedacht.
+- **Schreiben:** in eine Zelle klicken. Tab springt in die nächste Zelle, Shift+Tab in die
+  vorige; Tab in der letzten Zelle hängt eine neue Zeile an. Enter beginnt eine neue Zeile
+  innerhalb der Zelle.
+- **Zeilen und Spalten:** "+" rechts neben bzw. unter der Tabelle hängt eine Spalte bzw. Zeile
+  an (sichtbar beim Überfahren mit der Maus oder wenn der Cursor in der Tabelle steht). Der
+  ···-Knopf in der Ecke einer Zelle bietet Zeile darüber/darunter einfügen, Spalte links/rechts
+  einfügen sowie Zeile oder Spalte löschen. Die letzte Zeile bzw. Spalte lässt sich nicht
+  löschen; die ganze Tabelle löscht man über den ⋮⋮-Griff links → "Löschen".
+- Rücktaste am Anfang einer Zelle und Entf am Ende einer Zelle verschieben keinen Text zwischen
+  Zellen. Eine Markierung, die in einer Zelle beginnt und in einer anderen (oder außerhalb der
+  Tabelle) endet, wird nicht gelöscht. Eine Markierung, die die ganze Tabelle umschließt,
+  löscht sie mitsamt Inhalt.
+- **Nur in der Desktop-App:** Spaltenbreiten ziehen, Kopfzeile/-spalte, Farben und Ausrichtung.
+  In der Desktop-App gesetzte Einstellungen bleiben erhalten und werden in Web angezeigt.
+
 ## Vorlagen in AppFlowy Web
 
 - **Vorlage speichern:** bei einer beliebigen Seite (Dokument, Tabelle, Board, Kalender) im
