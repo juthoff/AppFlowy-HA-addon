@@ -1,0 +1,1106 @@
+diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
+index 3c66c9e..96adf92 100644
+--- a/src/@types/translations/de-DE.json
++++ b/src/@types/translations/de-DE.json
+@@ -2694,6 +2694,14 @@
+     "boxText": "Text",
+     "boxAddText": "Klicken, um Text hinzuzufügen",
+     "boxBorderColor": "Rahmenfarbe",
++    "tableInsertRowAbove": "Zeile darüber einfügen",
++    "tableInsertRowBelow": "Zeile darunter einfügen",
++    "tableDeleteRow": "Zeile löschen",
++    "tableInsertColumnLeft": "Spalte links einfügen",
++    "tableInsertColumnRight": "Spalte rechts einfügen",
++    "tableDeleteColumn": "Spalte löschen",
++    "tableResetColumnWidth": "Spaltenbreite zurücksetzen",
++    "tableDistributeColumns": "Spalten gleich breit machen",
+     "newPageType": "Seitentyp",
+     "template": "Vorlage",
+     "templates": "Vorlagen",
+diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
+index 4ca6681..402fb1a 100644
+--- a/src/@types/translations/en.json
++++ b/src/@types/translations/en.json
+@@ -2675,6 +2675,14 @@
+     "boxText": "Text",
+     "boxAddText": "Click to add text",
+     "boxBorderColor": "Border color",
++    "tableInsertRowAbove": "Insert row above",
++    "tableInsertRowBelow": "Insert row below",
++    "tableDeleteRow": "Delete row",
++    "tableInsertColumnLeft": "Insert column left",
++    "tableInsertColumnRight": "Insert column right",
++    "tableDeleteColumn": "Delete column",
++    "tableResetColumnWidth": "Reset column width",
++    "tableDistributeColumns": "Distribute columns evenly",
+     "newPageType": "Page type",
+     "template": "Template",
+     "templates": "Templates",
+diff --git a/src/application/slate-yjs/command/index.ts b/src/application/slate-yjs/command/index.ts
+index f923c94..a0e9779 100644
+--- a/src/application/slate-yjs/command/index.ts
++++ b/src/application/slate-yjs/command/index.ts
+@@ -36,13 +36,27 @@ import isEqual from 'lodash-es/isEqual';
+ import { BasePoint, BaseRange, Editor, Element, Node, NodeEntry, Path, Range, Text, Transforms } from 'slate';
+ import { ReactEditor } from 'slate-react';
+ import {
+-  dataStringTOJson, deepCopyBlock, deleteBlock,
++  createBlock, dataStringTOJson, deepCopyBlock, deleteBlock,
+   executeOperations,
+   getBlock,
+-  getBlockIndex, getParent,
++  getBlockIndex, getChildrenArray, getParent,
+   getPreviousSiblingBlock, indentBlock, liftBlock, turnToBlock,
+   updateBlockParent,
+ } from '@/application/slate-yjs/utils/yjs';
++import {
++  createSimpleTable,
++  deleteTableColumn,
++  deleteTableRow,
++  distributeTableColumns,
++  getTableColumnCount,
++  getTableRowCount,
++  insertTableColumn,
++  insertTableRow,
++  setTableColumnWidth,
++} from '@/application/slate-yjs/utils/simpleTable';
++
++// Added by the AppFlowy Home Assistant add-on
++export type SimpleTableAction = 'insertRowAbove' | 'insertRowBelow' | 'insertColumnLeft' | 'insertColumnRight' | 'deleteRow' | 'deleteColumn' | 'resetColumnWidth' | 'distributeColumns';
+ 
+ export const CustomEditor = {
+   getEditorContent(editor: YjsEditor) {
+@@ -608,7 +622,11 @@ export const CustomEditor = {
+     }], 'deleteBlock');
+     const children = editor.children;
+ 
+-    if(children.length === 0) {
++    // Table cell added by the AppFlowy Home Assistant add-on: a cell always keeps one block
++    const isEmptyCell = parent.get(YjsEditorKey.block_type) === BlockType.SimpleTableCellBlock
++      && getChildrenArray(parent.get(YjsEditorKey.block_children), sharedRoot).length === 0;
++
++    if(children.length === 0 || isEmptyCell) {
+       addBlock(editor, {
+         ty: BlockType.Paragraph,
+         data: {},
+@@ -648,6 +666,148 @@ export const CustomEditor = {
+     return newBlockId;
+   },
+ 
++  // Added by the AppFlowy Home Assistant add-on: /table. Takes the place of the empty block the
++  // command was typed in (kept as a line after the table if nothing follows), otherwise goes below
++  // it. The cursor lands in the first cell.
++  insertSimpleTable(editor: YjsEditor, blockId: string) {
++    const sharedRoot = getSharedRoot(editor);
++    const parent = getParent(blockId, sharedRoot);
++    const entry = findSlateEntryByBlockId(editor, blockId);
++
++    if(!parent || !entry) return;
++    const [node] = entry;
++    const replace = node.children.length <= 1 && !CustomEditor.getBlockTextContent(node, 2);
++    let paragraphId: string | undefined;
++
++    executeOperations(sharedRoot, [() => {
++      const index = getBlockIndex(blockId, sharedRoot);
++      const tableIndex = replace ? index : index + 1;
++
++      paragraphId = createSimpleTable(sharedRoot, parent, tableIndex);
++      const length = getChildrenArray(parent.get(YjsEditorKey.block_children), sharedRoot).length;
++
++      if(replace && tableIndex + 1 < length - 1) {
++        deleteBlock(sharedRoot, blockId);
++      }
++
++      if(!replace && tableIndex === length - 1) {
++        const paragraph = createBlock(sharedRoot, { ty: BlockType.Paragraph, data: {} });
++
++        updateBlockParent(sharedRoot, paragraph, parent, length);
++      }
++    }], 'insertSimpleTable');
++
++    if(!paragraphId) return;
++    const paragraph = findSlateEntryByBlockId(editor, paragraphId);
++
++    if(!paragraph) return;
++    ReactEditor.focus(editor);
++    Transforms.select(editor, Editor.start(editor, paragraph[1]));
++  },
++
++  // Added by the AppFlowy Home Assistant add-on: row and column actions of a table cell's menu.
++  editSimpleTable(editor: YjsEditor, cellId: string, action: SimpleTableAction) {
++    const sharedRoot = getSharedRoot(editor);
++    const row = getParent(cellId, sharedRoot);
++    const table = row ? getParent(row.get(YjsEditorKey.block_id), sharedRoot) : undefined;
++
++    if(!row || !table) return;
++    const rowIndex = getBlockIndex(row.get(YjsEditorKey.block_id), sharedRoot);
++    const columnIndex = getBlockIndex(cellId, sharedRoot);
++
++    executeOperations(sharedRoot, [() => {
++      switch(action) {
++        case 'insertRowAbove':
++          insertTableRow(sharedRoot, table, rowIndex);
++          break;
++        case 'insertRowBelow':
++          insertTableRow(sharedRoot, table, rowIndex + 1);
++          break;
++        case 'insertColumnLeft':
++          insertTableColumn(sharedRoot, table, columnIndex);
++          break;
++        case 'insertColumnRight':
++          insertTableColumn(sharedRoot, table, columnIndex + 1);
++          break;
++        case 'deleteRow':
++          deleteTableRow(sharedRoot, table, rowIndex);
++          break;
++        case 'deleteColumn':
++          deleteTableColumn(sharedRoot, table, columnIndex);
++          break;
++        case 'resetColumnWidth':
++          setTableColumnWidth(table, columnIndex);
++          break;
++        case 'distributeColumns':
++          distributeTableColumns(sharedRoot, table);
++          break;
++      }
++    }], 'editSimpleTable');
++  },
++
++  // Added by the AppFlowy Home Assistant add-on: stores a column width dragged at a cell's edge.
++  setSimpleTableColumnWidth(editor: YjsEditor, tableId: string, columnIndex: number, width: number) {
++    const sharedRoot = getSharedRoot(editor);
++    const table = getBlock(tableId, sharedRoot);
++
++    if(!table) return;
++    executeOperations(sharedRoot, [() => {
++      setTableColumnWidth(table, columnIndex, width);
++    }], 'setSimpleTableColumnWidth');
++  },
++
++  // Added by the AppFlowy Home Assistant add-on: appends a row or a column to a table.
++  appendToSimpleTable(editor: YjsEditor, tableId: string, what: 'row' | 'column') {
++    const sharedRoot = getSharedRoot(editor);
++    const table = getBlock(tableId, sharedRoot);
++
++    if(!table) return;
++    executeOperations(sharedRoot, [() => {
++      if(what === 'row') {
++        insertTableRow(sharedRoot, table, getTableRowCount(sharedRoot, table));
++      } else {
++        insertTableColumn(sharedRoot, table, getTableColumnCount(sharedRoot, table));
++      }
++    }], 'appendToSimpleTable');
++  },
++
++  // Added by the AppFlowy Home Assistant add-on: Tab / Shift+Tab in a table cell moves to the next /
++  // previous cell, Tab in the last cell adds a row. Returns false outside of tables.
++  moveToSiblingTableCell(editor: YjsEditor, backward: boolean) {
++    const { selection } = editor;
++
++    if(!selection) return false;
++    const isType = (type: BlockType) => (n: Node) => !Editor.isEditor(n) && Element.isElement(n) && n.type === type;
++    const cell = Editor.above(editor, { at: Range.start(selection), match: isType(BlockType.SimpleTableCellBlock) });
++    const table = cell ? Editor.above(editor, { at: cell[1], match: isType(BlockType.SimpleTableBlock) }) : undefined;
++
++    if(!cell || !table) return false;
++    const cells = Array.from(Editor.nodes(editor, { at: table[1], match: isType(BlockType.SimpleTableCellBlock) }));
++    const index = cells.findIndex(([, path]) => Path.equals(path, cell[1]));
++    const target = cells[index + (backward ? -1 : 1)];
++
++    if(target) {
++      Transforms.select(editor, Editor.start(editor, target[1]));
++      return true;
++    }
++
++    if(backward) return true;
++    const sharedRoot = getSharedRoot(editor);
++    const tableBlock = getBlock((table[0] as Element).blockId as string, sharedRoot);
++    let rowId: string | undefined;
++
++    executeOperations(sharedRoot, [() => {
++      rowId = insertTableRow(sharedRoot, tableBlock, getTableRowCount(sharedRoot, tableBlock));
++    }], 'insertTableRow');
++    const row = rowId ? findSlateEntryByBlockId(editor, rowId) : undefined;
++
++    if(row) {
++      Transforms.select(editor, Editor.start(editor, row[1]));
++    }
++
++    return true;
++  },
++
+   pastedText(editor: YjsEditor, text: string) {
+     if(!beforePasted(editor))
+       return;
+diff --git a/src/application/slate-yjs/utils/applyToSlate.ts b/src/application/slate-yjs/utils/applyToSlate.ts
+index bfae06a..b4489e3 100644
+--- a/src/application/slate-yjs/utils/applyToSlate.ts
++++ b/src/application/slate-yjs/utils/applyToSlate.ts
+@@ -3,7 +3,7 @@ import { BlockJson } from '@/application/slate-yjs/types';
+ import { blockToSlateNode, deltaInsertToSlateNode } from '@/application/slate-yjs/utils/convert';
+ import { YBlock, YjsEditorKey } from '@/application/types';
+ import isEqual from 'lodash-es/isEqual';
+-import { Editor, Element, NodeEntry } from 'slate';
++import { Editor, Element, Node, NodeEntry } from 'slate';
+ import { YEvent, YMapEvent, YTextEvent } from 'yjs';
+ import { YText } from 'yjs/dist/src/types/YText';
+ import { dataStringTOJson, getBlock, getChildrenArray, getPageId, getText } from '@/application/slate-yjs/utils/yjs';
+@@ -158,6 +158,14 @@ function handleNewBlock(editor: YjsEditor, key: string, keyPath: Record<string,
+ 
+   let path = [index];
+ 
++  // Changed by the AppFlowy Home Assistant add-on: child blocks follow the parent's text node, but
++  // blocks without text (table, table row, table cell) have none, so their children start at 0.
++  const textOffset = (parentNode: Element) => {
++    const first = parentNode.children[0];
++
++    return Element.isElement(first) && first.type === YjsEditorKey.text ? 1 : 0;
++  };
++
+   if(parentId !== pageId) {
+     const [parentEntry] = editor.nodes({
+       match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.blockId === parentId,
+@@ -167,15 +175,18 @@ function handleNewBlock(editor: YjsEditor, key: string, keyPath: Record<string,
+ 
+     if(!parentEntry) {
+       if(keyPath[parentId]) {
+-        path = [...keyPath[parentId], index + 1];
++        const parentNode = Node.get(editor, keyPath[parentId]) as Element;
++
++        path = [...keyPath[parentId], index + textOffset(parentNode)];
+       } else {
+         console.error('Parent block not found', parentId);
+         return [];
+       }
+     } else {
+-      const childrenLength = (parentEntry[0] as Element).children.length;
++      const parentNode = parentEntry[0] as Element;
++      const childrenLength = parentNode.children.length;
+ 
+-      path = [...parentEntry[1], Math.min(index + 1, childrenLength)];
++      path = [...parentEntry[1], Math.min(index + textOffset(parentNode), childrenLength)];
+     }
+   }
+ 
+diff --git a/src/application/slate-yjs/utils/editor.ts b/src/application/slate-yjs/utils/editor.ts
+index d47c556..55dfde2 100644
+--- a/src/application/slate-yjs/utils/editor.ts
++++ b/src/application/slate-yjs/utils/editor.ts
+@@ -182,6 +182,16 @@ export function handleCollapsedBreakWithTxn(editor: YjsEditor, sharedRoot: YShar
+ }
+ 
+ export function removeRangeWithTxn(editor: YjsEditor, sharedRoot: YSharedRoot, range: Range) {
++  // Added by the AppFlowy Home Assistant add-on: a selection that starts and ends in different table
++  // cells (or only one end in a table) is not deleted; merging its ends would break the table.
++  // A selection around a whole table still deletes it.
++  const [rangeStart, rangeEnd] = Range.edges(range);
++
++  if(getTableCellId(editor, rangeStart.path) !== getTableCellId(editor, rangeEnd.path)) {
++    Transforms.collapse(editor, { edge: 'start' });
++    return;
++  }
++
+   const { startBlock, endBlock, middleBlocks, startRange, endRange } = getAffectedBlocks(editor, range);
+   const operations: (() => void)[] = [];
+   const isSameBlock = startBlock[0].blockId === endBlock[0].blockId;
+@@ -608,6 +618,21 @@ export function handleMergeBlockBackwardWithTxn(editor: YjsEditor, node: Element
+ 
+     Transforms.select(editor, prevPoint);
+ 
++    // Added by the AppFlowy Home Assistant add-on: at the start of a table cell, or right after a
++    // table, Backspace only moves into the previous cell; an empty block after a table is removed.
++    const cellId = getTableCellId(editor, point.path);
++
++    if(cellId !== getTableCellId(editor, prevPath)) {
++      if(!cellId && node.children.length <= 1 && !Node.string(node)) {
++        operations.push(() => {
++          deleteBlock(sharedRoot, node.blockId as string);
++        });
++      }
++
++      executeOperations(sharedRoot, operations, 'deleteBlockBackward');
++      return;
++    }
++
+     operations.push(() => {
+       mergeBlocks(sharedRoot, node, targetNode);
+     });
+@@ -641,6 +666,11 @@ export function handleMergeBlockForwardWithTxn(editor: YjsEditor, node: Element,
+ 
+     const [sourceNode] = source as NodeEntry<Element>;
+ 
++    // Added by the AppFlowy Home Assistant add-on: Delete does not pull text out of or into a table cell
++    if(getTableCellId(editor, point.path) !== getTableCellId(editor, nextPoint.path)) {
++      return;
++    }
++
+     operations.push(() => {
+       mergeBlocks(sharedRoot, sourceNode, node);
+     });
+@@ -825,13 +855,25 @@ export function preventLiftNode(editor: YjsEditor, blockId: string) {
+ 
+   const parent = getParent(blockId, getSharedRoot(editor));
+ 
+-  if(level < 2 || (parent && [BlockType.ColumnsBlock, BlockType.ColumnBlock].includes(parent.get(YjsEditorKey.block_type)))) {
++  // SimpleTableCellBlock added by the AppFlowy Home Assistant add-on: a cell keeps its blocks
++  if(level < 2 || (parent && [BlockType.ColumnsBlock, BlockType.ColumnBlock, BlockType.SimpleTableCellBlock].includes(parent.get(YjsEditorKey.block_type)))) {
+     return true;
+   }
+ 
+   return false;
+ }
+ 
++// Added by the AppFlowy Home Assistant add-on: the table cell a point or block is in, if any.
++// Text must not be merged or deleted across cells, or a cell would lose its last block.
++export function getTableCellId(editor: Editor, at: Path) {
++  const entry = Editor.above(editor, {
++    at,
++    match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === BlockType.SimpleTableCellBlock,
++  });
++
++  return entry ? (entry[0] as Element).blockId : undefined;
++}
++
+ export function liftEditorNode(editor: YjsEditor, sharedRoot: YSharedRoot, block: YBlock, point: Point) {
+   if(preventLiftNode(editor, block.get(YjsEditorKey.block_id))) {
+     return;
+diff --git a/src/application/slate-yjs/utils/simpleTable.ts b/src/application/slate-yjs/utils/simpleTable.ts
+new file mode 100644
+index 0000000..dd9f929
+--- /dev/null
++++ b/src/application/slate-yjs/utils/simpleTable.ts
+@@ -0,0 +1,195 @@
++// Added by the AppFlowy Home Assistant add-on: creates simple tables and adds or
++// removes their rows and columns, in the desktop app's block shape:
++// simple_table > simple_table_row > simple_table_cell > paragraph. Per-row and
++// per-column settings in the table data are maps keyed by the index as a string,
++// so they are shifted along when rows or columns are inserted or deleted.
++import { BlockType, YBlock, YjsEditorKey, YSharedRoot } from '@/application/types';
++import {
++  createBlock,
++  dataStringTOJson,
++  deleteBlock,
++  getBlock,
++  getChildrenArray,
++  updateBlockParent,
++} from '@/application/slate-yjs/utils/yjs';
++
++export const DEFAULT_TABLE_ROWS = 2;
++export const DEFAULT_TABLE_COLUMNS = 2;
++// Width Web shows for a column without a stored width (MIN_WIDTH in blocks/simple-table/const.ts).
++export const DEFAULT_COLUMN_WIDTH = 120;
++export const MIN_COLUMN_WIDTH = 40;
++const WIDTHS_PLACEHOLDER = '__column_widths__';
++
++const ROW_DATA_KEYS = ['row_colors', 'row_aligns', 'row_bold_attributes', 'row_text_colors'];
++const COLUMN_DATA_KEYS = ['column_widths', 'column_colors', 'column_aligns', 'column_bold_attributes', 'column_text_colors'];
++
++function getChildIds(sharedRoot: YSharedRoot, block: YBlock): string[] {
++  return getChildrenArray(block.get(YjsEditorKey.block_children), sharedRoot)?.toArray() ?? [];
++}
++
++function createCell(sharedRoot: YSharedRoot, row: YBlock, index: number) {
++  const cell = createBlock(sharedRoot, { ty: BlockType.SimpleTableCellBlock, data: {} });
++
++  updateBlockParent(sharedRoot, cell, row, index);
++  const paragraph = createBlock(sharedRoot, { ty: BlockType.Paragraph, data: {} });
++
++  updateBlockParent(sharedRoot, paragraph, cell, 0);
++  return cell;
++}
++
++function createRow(sharedRoot: YSharedRoot, table: YBlock, index: number, columnCount: number) {
++  const row = createBlock(sharedRoot, { ty: BlockType.SimpleTableRowBlock, data: {} });
++
++  updateBlockParent(sharedRoot, row, table, index);
++  for(let i = 0; i < columnCount; i++) {
++    createCell(sharedRoot, row, i);
++  }
++
++  return row;
++}
++
++function getTableData(table: YBlock) {
++  return dataStringTOJson(table.get(YjsEditorKey.block_data)) as Record<string, unknown>;
++}
++
++function getColumnWidths(data: Record<string, unknown>) {
++  const widths = data.column_widths;
++
++  return widths && typeof widths === 'object' ? { ...(widths as Record<string, number>) } : {};
++}
++
++// The desktop app reads column_widths as doubles and ignores the whole map if a width is an
++// integer, so widths are written as e.g. 160.0 (JSON.stringify would write 160).
++function setTableData(table: YBlock, data: Record<string, unknown>) {
++  const widths = Object.entries(getColumnWidths(data))
++    .filter(([, width]) => typeof width === 'number' && Number.isFinite(width))
++    .map(([key, width]) => `${JSON.stringify(key)}:${Number.isInteger(width) ? width.toFixed(1) : String(width)}`);
++  const json = JSON.stringify({ ...data, column_widths: WIDTHS_PLACEHOLDER });
++
++  table.set(YjsEditorKey.block_data, json.replace(`"${WIDTHS_PLACEHOLDER}"`, `{${widths.join(',')}}`));
++}
++
++function shiftIndexedData(table: YBlock, keys: string[], index: number, delta: 1 | -1) {
++  const data = getTableData(table);
++
++  keys.forEach((key) => {
++    const map = data[key] as Record<string, unknown> | undefined;
++
++    if(!map || typeof map !== 'object') return;
++    const shifted: Record<string, unknown> = {};
++
++    Object.entries(map).forEach(([k, value]) => {
++      const i = Number(k);
++
++      if(Number.isNaN(i) || i < index) {
++        shifted[k] = value;
++        return;
++      }
++
++      if(delta < 0 && i === index) return;
++      shifted[String(i + delta)] = value;
++    });
++    data[key] = shifted;
++  });
++  setTableData(table, data);
++}
++
++// Returns the id of the first cell's paragraph, to put the cursor there.
++export function createSimpleTable(sharedRoot: YSharedRoot, parent: YBlock, index: number, rowCount = DEFAULT_TABLE_ROWS, columnCount = DEFAULT_TABLE_COLUMNS) {
++  const table = createBlock(sharedRoot, {
++    ty: BlockType.SimpleTableBlock,
++    data: {
++      enable_header_row: false,
++      enable_header_column: false,
++      column_widths: {},
++      column_colors: {},
++      column_aligns: {},
++      row_colors: {},
++      row_aligns: {},
++    },
++  });
++
++  updateBlockParent(sharedRoot, table, parent, index);
++  for(let i = 0; i < rowCount; i++) {
++    createRow(sharedRoot, table, i, columnCount);
++  }
++
++  const firstRow = getBlock(getChildIds(sharedRoot, table)[0], sharedRoot);
++  const firstCell = getBlock(getChildIds(sharedRoot, firstRow)[0], sharedRoot);
++
++  return getChildIds(sharedRoot, firstCell)[0];
++}
++
++export function getTableColumnCount(sharedRoot: YSharedRoot, table: YBlock) {
++  const firstRowId = getChildIds(sharedRoot, table)[0];
++
++  return firstRowId ? getChildIds(sharedRoot, getBlock(firstRowId, sharedRoot)).length : 0;
++}
++
++export function getTableRowCount(sharedRoot: YSharedRoot, table: YBlock) {
++  return getChildIds(sharedRoot, table).length;
++}
++
++export function insertTableRow(sharedRoot: YSharedRoot, table: YBlock, index: number) {
++  const row = createRow(sharedRoot, table, index, Math.max(getTableColumnCount(sharedRoot, table), 1));
++
++  shiftIndexedData(table, ROW_DATA_KEYS, index, 1);
++  return row.get(YjsEditorKey.block_id);
++}
++
++export function insertTableColumn(sharedRoot: YSharedRoot, table: YBlock, index: number) {
++  getChildIds(sharedRoot, table).forEach((rowId) => {
++    createCell(sharedRoot, getBlock(rowId, sharedRoot), index);
++  });
++  shiftIndexedData(table, COLUMN_DATA_KEYS, index, 1);
++}
++
++// The last row or column is kept: a table without cells can't be edited any more.
++export function deleteTableRow(sharedRoot: YSharedRoot, table: YBlock, index: number) {
++  const rowIds = getChildIds(sharedRoot, table);
++
++  if(rowIds.length <= 1 || !rowIds[index]) return;
++  deleteBlock(sharedRoot, rowIds[index]);
++  shiftIndexedData(table, ROW_DATA_KEYS, index, -1);
++}
++
++export function deleteTableColumn(sharedRoot: YSharedRoot, table: YBlock, index: number) {
++  if(getTableColumnCount(sharedRoot, table) <= 1) return;
++  getChildIds(sharedRoot, table).forEach((rowId) => {
++    const cellId = getChildIds(sharedRoot, getBlock(rowId, sharedRoot))[index];
++
++    if(cellId) deleteBlock(sharedRoot, cellId);
++  });
++  shiftIndexedData(table, COLUMN_DATA_KEYS, index, -1);
++}
++
++// Without a width the column falls back to the default width.
++export function setTableColumnWidth(table: YBlock, index: number, width?: number) {
++  const data = getTableData(table);
++  const widths = getColumnWidths(data);
++
++  if(width === undefined) {
++    delete widths[String(index)];
++  } else {
++    widths[String(index)] = Math.max(MIN_COLUMN_WIDTH, Math.round(width));
++  }
++
++  setTableData(table, { ...data, column_widths: widths });
++}
++
++// Gives every column the same width, keeping the table's total width.
++export function distributeTableColumns(sharedRoot: YSharedRoot, table: YBlock) {
++  const columnCount = getTableColumnCount(sharedRoot, table);
++
++  if(columnCount === 0) return;
++  const data = getTableData(table);
++  const widths = getColumnWidths(data);
++  const indexes = Array.from({ length: columnCount }, (_, i) => String(i));
++  const total = indexes.reduce((sum, i) => sum + (widths[i] || DEFAULT_COLUMN_WIDTH), 0);
++  const width = Math.max(MIN_COLUMN_WIDTH, Math.round(total / columnCount));
++
++  setTableData(table, {
++    ...data,
++    column_widths: Object.fromEntries(indexes.map((i) => [i, width])),
++  });
++}
+diff --git a/src/components/editor/components/blocks/simple-table/SimpleTable.hooks.ts b/src/components/editor/components/blocks/simple-table/SimpleTable.hooks.ts
+index 8a29ba7..9c97058 100644
+--- a/src/components/editor/components/blocks/simple-table/SimpleTable.hooks.ts
++++ b/src/components/editor/components/blocks/simple-table/SimpleTable.hooks.ts
+@@ -1,9 +1,10 @@
+ import { SimpleTableNode } from '@/components/editor/editor.type';
+-import { createHotkey, HOT_KEY_NAME } from '@/utils/hotkeys';
+ import { useEffect, useState } from 'react';
+ import { Editor, Path, Range } from 'slate';
+ import { ReactEditor, useSlateStatic } from 'slate-react';
+ 
++// Changed by the AppFlowy Home Assistant add-on: no longer swallows ArrowUp inside the table (the
++// cursor could not move up to the previous row), and returns whether the cursor is in the table.
+ export function useSimpleTable(node: SimpleTableNode) {
+   const editor = useSlateStatic();
+   const [inCurrentTable, setInCurrentTable] = useState(false);
+@@ -31,30 +32,8 @@ export function useSimpleTable(node: SimpleTableNode) {
+     };
+   }, [editor, node]);
+ 
+-  useEffect(() => {
+-    const editorDom = ReactEditor.toDOMNode(editor, editor);
+-
+-    const handleKeydown = (event: KeyboardEvent) => {
+-      if (!inCurrentTable) return;
+-
+-      switch (true) {
+-        case createHotkey(HOT_KEY_NAME.UP)(event): {
+-          event.stopPropagation();
+-          event.preventDefault();
+-        }
+-
+-      }
+-
+-    };
+-
+-    editorDom.addEventListener('keydown', handleKeydown);
+-
+-    return () => {
+-      editorDom.removeEventListener('keydown', handleKeydown);
+-    };
+-  }, [editor, inCurrentTable]);
+-
+   return {
+     isIntersection,
++    inCurrentTable,
+   };
+-}
+\ No newline at end of file
++}
+diff --git a/src/components/editor/components/blocks/simple-table/SimpleTable.tsx b/src/components/editor/components/blocks/simple-table/SimpleTable.tsx
+index 4c75ca1..9153ba8 100644
+--- a/src/components/editor/components/blocks/simple-table/SimpleTable.tsx
++++ b/src/components/editor/components/blocks/simple-table/SimpleTable.tsx
+@@ -1,12 +1,17 @@
++import { YjsEditor } from '@/application/slate-yjs';
++import { CustomEditor } from '@/application/slate-yjs/command';
++import { ReactComponent as PlusIcon } from '@/assets/icons/plus.svg';
+ import { useSimpleTable } from '@/components/editor/components/blocks/simple-table/SimpleTable.hooks';
+ import { EditorElementProps, SimpleTableNode, SimpleTableRowNode } from '@/components/editor/editor.type';
+ import { useEditorContext } from '@/components/editor/EditorContext';
+ import TableContainer from '@/components/editor/components/table-container/TableContainer';
++import { Tooltip } from '@mui/material';
+ import isEqual from 'lodash-es/isEqual';
+ import React, { forwardRef, memo, useMemo } from 'react';
++import { useTranslation } from 'react-i18next';
+ import './simple-table.scss';
+ import { MIN_WIDTH } from '@/components/editor/components/blocks/simple-table/const';
+-// import { useReadOnly } from 'slate-react';
++import { useReadOnly, useSlateStatic } from 'slate-react';
+ 
+ const SimpleTable = memo(
+   forwardRef<HTMLDivElement, EditorElementProps<SimpleTableNode>>(({
+@@ -47,10 +52,23 @@ const SimpleTable = memo(
+         ))}
+       </colgroup>;
+     }, [columns]);
+-    const { isIntersection } = useSimpleTable(node);
++    const { isIntersection, inCurrentTable } = useSimpleTable(node);
++    // Changed by the AppFlowy Home Assistant add-on: editable unless the whole editor is read-only
++    // (upstream always rendered tables read-only), with buttons to add a row or a column.
++    const { t } = useTranslation();
++    const editor = useSlateStatic() as YjsEditor;
++    const readOnly = useReadOnly() || !!readSummary;
+ 
+     const className = useMemo(() => {
+-      const classList = ['simple-table', 'appflowy-scroller', 'select-none'];
++      const classList = ['simple-table', 'appflowy-scroller'];
++
++      if (readOnly) {
++        classList.push('select-none');
++      }
++
++      if (inCurrentTable) {
++        classList.push('in-table');
++      }
+ 
+       if (classNameProp) {
+         classList.push(classNameProp);
+@@ -69,27 +87,61 @@ const SimpleTable = memo(
+       }
+ 
+       return classList.join(' ');
+-    }, [classNameProp, enable_header_column, enable_header_row, isIntersection]);
++    }, [classNameProp, enable_header_column, enable_header_row, isIntersection, readOnly, inCurrentTable]);
+ 
+-    // const readOnly = useReadOnly();
++    const table = (
++      <table>
++        {colGroup}
++        <tbody>
++        {children}
++        </tbody>
++      </table>
++    );
+ 
+     return (
+       <div
+         ref={ref}
+         {...attributes}
+         className={className}
+-        contentEditable={false}
++        contentEditable={readOnly ? false : undefined}
+       >
+         <TableContainer
+           blockId={blockId}
+           readSummary={readSummary}
+         >
+-          <table>
+-            {colGroup}
+-            <tbody>
+-            {children}
+-            </tbody>
+-          </table>
++          {readOnly ? table : (
++            <div className={'inline-flex flex-col'}>
++              <div className={'flex'}>
++                {table}
++                <Tooltip disableInteractive={true} title={t('document.plugins.simpleTable.clickToAddNewColumn')} placement={'right'}>
++                  <div
++                    contentEditable={false}
++                    data-testid={'simple-table-add-column'}
++                    className={'simple-table-add ml-1 flex w-5 cursor-pointer select-none items-center justify-center rounded-[4px] text-text-caption hover:bg-fill-list-hover'}
++                    onMouseDown={(e) => {
++                      e.preventDefault();
++                      CustomEditor.appendToSimpleTable(editor, blockId, 'column');
++                    }}
++                  >
++                    <PlusIcon className={'h-4 w-4'} />
++                  </div>
++                </Tooltip>
++              </div>
++              <Tooltip disableInteractive={true} title={t('document.plugins.simpleTable.clickToAddNewRow')} placement={'bottom'}>
++                <div
++                  contentEditable={false}
++                  data-testid={'simple-table-add-row'}
++                  className={'simple-table-add mr-6 mt-1 flex h-5 cursor-pointer select-none items-center justify-center rounded-[4px] text-text-caption hover:bg-fill-list-hover'}
++                  onMouseDown={(e) => {
++                    e.preventDefault();
++                    CustomEditor.appendToSimpleTable(editor, blockId, 'row');
++                  }}
++                >
++                  <PlusIcon className={'h-4 w-4'} />
++                </div>
++              </Tooltip>
++            </div>
++          )}
+         </TableContainer>
+       </div>
+     );
+diff --git a/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx b/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx
+index 1fc1513..a15e150 100644
+--- a/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx
++++ b/src/components/editor/components/blocks/simple-table/SimpleTableCell.tsx
+@@ -2,9 +2,11 @@ import { BlockType } from '@/application/types';
+ import { EditorElementProps, SimpleTableCellBlockNode, SimpleTableNode } from '@/components/editor/editor.type';
+ import { renderColor } from '@/utils/color';
+ import React, { forwardRef, useMemo } from 'react';
+-import { Editor, Element, NodeEntry } from 'slate';
+-import { ReactEditor, useSlate } from 'slate-react';
++import { Editor, Element, NodeEntry, Path } from 'slate';
++import { ReactEditor, useReadOnly, useSlate } from 'slate-react';
+ import { MIN_WIDTH } from '@/components/editor/components/blocks/simple-table/const';
++import SimpleTableCellMenu from '@/components/editor/components/blocks/simple-table/SimpleTableCellMenu';
++import SimpleTableColumnResizer from '@/components/editor/components/blocks/simple-table/SimpleTableColumnResizer';
+ 
+ const SimpleTableCell =
+   forwardRef<HTMLTableCellElement, EditorElementProps<SimpleTableCellBlockNode>>(({
+@@ -71,11 +73,20 @@ const SimpleTableCell =
+         };
+       }, [colIndex, row, table]);
+ 
++      // Added by the AppFlowy Home Assistant add-on: row and column menu and the column-width handle
++      // of an editable table
++      const readOnly = useReadOnly();
++      const tableId = table?.[0].blockId;
++      const focused = !!editor.selection && Path.isAncestor(path, editor.selection.anchor.path);
++      const rowCount = table ? (table[0].children as Element[]).length : 0;
++      const columnCount = row ? (row[0].children as Element[]).length : 0;
++
+       return (
+         <td
+           data-block-type={node.type}
+           data-block-cell={blockId}
+           data-cell-index={colIndex}
++          data-cell-focused={focused ? 'true' : undefined}
+           ref={ref}
+           {...attributes}
+           rowSpan={1}
+@@ -93,6 +104,12 @@ const SimpleTableCell =
+           >
+             {children}
+           </div>
++          {!readOnly && blockId && (
++            <SimpleTableCellMenu cellId={blockId} canDeleteRow={rowCount > 1} canDeleteColumn={columnCount > 1} />
++          )}
++          {!readOnly && blockId && tableId && (
++            <SimpleTableColumnResizer tableId={tableId} cellId={blockId} columnIndex={colIndex} width={width ?? MIN_WIDTH} />
++          )}
+         </td>
+       );
+     },
+diff --git a/src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx b/src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx
+new file mode 100644
+index 0000000..fbd69e5
+--- /dev/null
++++ b/src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx
+@@ -0,0 +1,95 @@
++// Added by the AppFlowy Home Assistant add-on: the row and column menu of a table cell, opened with
++// the button in the cell's corner (shown while the cell is hovered or holds the cursor).
++import { YjsEditor } from '@/application/slate-yjs';
++import { CustomEditor, SimpleTableAction } from '@/application/slate-yjs/command';
++import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
++import { Popover } from '@/components/_shared/popover';
++import { Button, Divider } from '@mui/material';
++import React, { useMemo, useState } from 'react';
++import { useTranslation } from 'react-i18next';
++import { useSlateStatic } from 'slate-react';
++
++export function SimpleTableCellMenu({ cellId, canDeleteRow, canDeleteColumn }: {
++  cellId: string;
++  canDeleteRow: boolean;
++  canDeleteColumn: boolean;
++}) {
++  const { t } = useTranslation();
++  const editor = useSlateStatic() as YjsEditor;
++  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
++
++  const groups = useMemo(() => {
++    const groups: { action: SimpleTableAction; label: string; disabled?: boolean }[][] = [
++      [
++        { action: 'insertRowAbove', label: t('web.tableInsertRowAbove') },
++        { action: 'insertRowBelow', label: t('web.tableInsertRowBelow') },
++        { action: 'deleteRow', label: t('web.tableDeleteRow'), disabled: !canDeleteRow },
++      ],
++      [
++        { action: 'insertColumnLeft', label: t('web.tableInsertColumnLeft') },
++        { action: 'insertColumnRight', label: t('web.tableInsertColumnRight') },
++        { action: 'deleteColumn', label: t('web.tableDeleteColumn'), disabled: !canDeleteColumn },
++      ],
++      [
++        { action: 'resetColumnWidth', label: t('web.tableResetColumnWidth') },
++        { action: 'distributeColumns', label: t('web.tableDistributeColumns') },
++      ],
++    ];
++
++    return groups;
++  }, [t, canDeleteRow, canDeleteColumn]);
++
++  return (
++    <div contentEditable={false} className={'simple-table-cell-menu absolute right-1.5 top-0.5 select-none'}>
++      <button
++        type={'button'}
++        data-testid={'simple-table-cell-menu'}
++        className={'flex h-5 w-5 items-center justify-center rounded-[4px] bg-bg-body text-text-caption hover:bg-fill-list-hover'}
++        onMouseDown={(e) => {
++          e.preventDefault();
++          e.stopPropagation();
++          setAnchorEl(e.currentTarget);
++        }}
++      >
++        <MoreIcon className={'h-4 w-4'} />
++      </button>
++      <Popover
++        open={Boolean(anchorEl)}
++        anchorEl={anchorEl}
++        onClose={() => setAnchorEl(null)}
++        disableRestoreFocus={true}
++        disableAutoFocus={true}
++        disableEnforceFocus={true}
++        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
++        transformOrigin={{ vertical: -4, horizontal: 'right' }}
++      >
++        <div data-testid={'simple-table-cell-menu-options'} className={'flex flex-col gap-1 p-2'}>
++          {groups.map((group, index) => (
++            <React.Fragment key={index}>
++              {index > 0 && <Divider className={'my-1'} />}
++              {group.map((option) => (
++                <Button
++                  key={option.action}
++                  data-testid={`simple-table-${option.action}`}
++                  size={'small'}
++                  color={'inherit'}
++                  className={'justify-start'}
++                  disabled={option.disabled}
++                  onMouseDown={(e) => e.preventDefault()}
++                  onClick={() => {
++                    setAnchorEl(null);
++                    CustomEditor.editSimpleTable(editor, cellId, option.action);
++                  }}
++                >
++                  {option.label}
++                </Button>
++              ))}
++            </React.Fragment>
++          ))}
++        </div>
++      </Popover>
++    </div>
++  );
++}
++
++export default SimpleTableCellMenu;
+diff --git a/src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx b/src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx
+new file mode 100644
+index 0000000..751ff30
+--- /dev/null
++++ b/src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx
+@@ -0,0 +1,73 @@
++// Added by the AppFlowy Home Assistant add-on: drag handle on a cell's right edge that changes the
++// column width. While dragging only the DOM is resized; the width is stored once on release, so
++// collaborators don't get an update per mouse move. Double-click resets the column width.
++import { YjsEditor } from '@/application/slate-yjs';
++import { CustomEditor } from '@/application/slate-yjs/command';
++import { MIN_COLUMN_WIDTH } from '@/application/slate-yjs/utils/simpleTable';
++import React, { useCallback } from 'react';
++import { useSlateStatic } from 'slate-react';
++
++function resizeColumnInDom(table: HTMLTableElement, columnIndex: number, width: number) {
++  const col = table.querySelectorAll('col')[columnIndex];
++
++  if(col) col.style.width = `${width}px`;
++  table.querySelectorAll<HTMLElement>(`td[data-cell-index="${columnIndex}"]`).forEach((cell) => {
++    cell.style.width = `${width}px`;
++    cell.style.minWidth = `${width}px`;
++  });
++}
++
++export function SimpleTableColumnResizer({ tableId, cellId, columnIndex, width }: {
++  tableId: string;
++  cellId: string;
++  columnIndex: number;
++  width: number;
++}) {
++  const editor = useSlateStatic() as YjsEditor;
++
++  const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
++    e.preventDefault();
++    e.stopPropagation();
++    const table = e.currentTarget.closest('table');
++
++    if(!table) return;
++    const handle = e.currentTarget;
++    const startX = e.clientX;
++    let newWidth = width;
++
++    const onMouseMove = (event: MouseEvent) => {
++      newWidth = Math.max(MIN_COLUMN_WIDTH, Math.round(width + event.clientX - startX));
++      resizeColumnInDom(table, columnIndex, newWidth);
++    };
++
++    const onMouseUp = () => {
++      document.removeEventListener('mousemove', onMouseMove);
++      document.removeEventListener('mouseup', onMouseUp);
++      document.body.style.cursor = '';
++      handle.removeAttribute('data-resizing');
++      if(newWidth !== width) {
++        CustomEditor.setSimpleTableColumnWidth(editor, tableId, columnIndex, newWidth);
++      }
++    };
++
++    document.body.style.cursor = 'col-resize';
++    handle.setAttribute('data-resizing', 'true');
++    document.addEventListener('mousemove', onMouseMove);
++    document.addEventListener('mouseup', onMouseUp);
++  }, [editor, tableId, columnIndex, width]);
++
++  return (
++    <div
++      contentEditable={false}
++      data-testid={'simple-table-column-resizer'}
++      className={'simple-table-column-resizer absolute right-0 top-0 z-[1] h-full w-[5px] cursor-col-resize select-none'}
++      onMouseDown={onMouseDown}
++      onDoubleClick={(e) => {
++        e.preventDefault();
++        CustomEditor.editSimpleTable(editor, cellId, 'resetColumnWidth');
++      }}
++    />
++  );
++}
++
++export default SimpleTableColumnResizer;
+diff --git a/src/components/editor/components/blocks/simple-table/simple-table.scss b/src/components/editor/components/blocks/simple-table/simple-table.scss
+index 0c92476..b6721a9 100644
+--- a/src/components/editor/components/blocks/simple-table/simple-table.scss
++++ b/src/components/editor/components/blocks/simple-table/simple-table.scss
+@@ -23,8 +23,29 @@
+     @apply border-t border-line-divider;
+   }
+ 
++  // Added by the AppFlowy Home Assistant add-on: add-row/add-column bars and the cell menu button
++  // show while the table is hovered or holds the cursor (the button: that cell only).
++  .simple-table-add,
++  .simple-table-cell-menu {
++    opacity: 0;
++    transition: opacity 150ms;
++  }
++
++  &:hover .simple-table-add,
++  &.in-table .simple-table-add,
++  td:hover > .simple-table-cell-menu,
++  td[data-cell-focused="true"] > .simple-table-cell-menu {
++    opacity: 1;
++  }
++
++  // The column-width handle on a cell's right edge: highlighted on hover and while dragging.
++  .simple-table-column-resizer:hover,
++  .simple-table-column-resizer[data-resizing="true"] {
++    @apply bg-fill-default;
++  }
++
+   td[data-block-type="simple_table_cell"] {
+-    @apply border-r border-b border-line-divider overflow-hidden whitespace-pre-wrap;
++    @apply relative border-r border-b border-line-divider overflow-hidden whitespace-pre-wrap;
+     .cell-children {
+       .block-element {
+         margin: 0 !important;
+diff --git a/src/components/editor/components/panels/slash-panel/SlashPanel.tsx b/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
+index 644788f..f0b03a5 100644
+--- a/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
++++ b/src/components/editor/components/panels/slash-panel/SlashPanel.tsx
+@@ -1,7 +1,7 @@
+ import { YjsEditor } from '@/application/slate-yjs';
+ import { CustomEditor } from '@/application/slate-yjs/command';
+ import { isEmbedBlockTypes } from '@/application/slate-yjs/command/const';
+-import { findSlateEntryByBlockId, getBlockEntry } from '@/application/slate-yjs/utils/editor';
++import { findSlateEntryByBlockId, getBlockEntry, getTableCellId } from '@/application/slate-yjs/utils/editor';
+ import {
+   AlignType,
+   BlockData,
+@@ -22,6 +22,7 @@ import { ReactComponent as TemplateIcon } from '@/assets/icons/template.svg';
+ import { ReactComponent as BulletedListIcon } from '@/assets/icons/bulleted_list.svg';
+ import { ReactComponent as CalloutIcon } from '@/assets/icons/callout.svg';
+ import { ReactComponent as BorderedBoxIcon } from '@/assets/icons/bordered_box.svg';
++import { ReactComponent as TableIcon } from '@/assets/icons/table.svg';
+ import { ReactComponent as TodoListIcon } from '@/assets/icons/todo.svg';
+ import { ReactComponent as CodeIcon } from '@/assets/icons/inline_code.svg';
+ import { ReactComponent as DividerIcon } from '@/assets/icons/divider.svg';
+@@ -190,6 +191,20 @@ export function SlashPanel({
+ 
+   const { openPanel } = usePanelContext();
+ 
++  // Added by the AppFlowy Home Assistant add-on: /table (a simple table, like on desktop; not
++  // offered inside a table cell, nested tables are not supported).
++  const inTableCell = useMemo(() => {
++    if (!open || !editor.selection) return false;
++    return !!getTableCellId(editor, editor.selection.anchor.path);
++  }, [open, editor]);
++
++  const addSimpleTable = useCallback(() => {
++    const [current] = getBlockEntry(editor);
++
++    if (!current.blockId) return;
++    CustomEditor.insertSimpleTable(editor, current.blockId);
++  }, [editor]);
++
+   // Added by the AppFlowy Home Assistant add-on: /grid, /kanban, /calendar.
+   const addDatabase = useCallback(async (layout: ViewLayout, blockType: BlockType, name: string) => {
+     if (!viewId || !addPage) return;
+@@ -383,6 +398,14 @@ export function SlashPanel({
+           turnInto(BlockType.QuoteBlock, {});
+         },
+       },
++      {
++        label: t('document.slashMenu.name.table'),
++        key: 'table',
++        icon: <TableIcon />,
++        keywords: ['table', 'tabelle'],
++        disabled: inTableCell,
++        onClick: addSimpleTable,
++      },
+       {
+         label: t('document.slashMenu.name.linkedDoc'),
+         key: 'linkedDoc',
+@@ -604,6 +627,8 @@ export function SlashPanel({
+     addBorderedBox,
+     templates,
+     addFromTemplate,
++    inTableCell,
++    addSimpleTable,
+   ]);
+ 
+   const resultLength = options.length;
+diff --git a/src/components/editor/plugins/withElement.ts b/src/components/editor/plugins/withElement.ts
+index c89ab90..a04e10f 100644
+--- a/src/components/editor/plugins/withElement.ts
++++ b/src/components/editor/plugins/withElement.ts
+@@ -25,7 +25,8 @@ export const withElement = (editor: ReactEditor) => {
+         depth: 2,
+       }) as NodeEntry<Element>;
+ 
+-      const readOnlyTypes = [BlockType.SimpleTableBlock, BlockType.TableBlock];
++      // Changed by the AppFlowy Home Assistant add-on: simple tables are editable (upstream: read-only)
++      const readOnlyTypes = [BlockType.TableBlock];
+ 
+       if (readOnlyTypes.includes(parent[0].type as BlockType)) {
+         return true;
+diff --git a/src/components/editor/shortcut.hooks.ts b/src/components/editor/shortcut.hooks.ts
+index c048d94..8e6eb7b 100644
+--- a/src/components/editor/shortcut.hooks.ts
++++ b/src/components/editor/shortcut.hooks.ts
+@@ -237,6 +237,8 @@ export function useShortcuts(editor: ReactEditor) {
+             break;
+           }
+ 
++          // Added by the AppFlowy Home Assistant add-on: Tab in a table moves to the next cell
++          if (CustomEditor.moveToSiblingTableCell(yjsEditor, false)) break;
+           CustomEditor.tabEvent(yjsEditor, e);
+           break;
+         /**
+@@ -251,6 +253,8 @@ export function useShortcuts(editor: ReactEditor) {
+             break;
+           }
+ 
++          // Added by the AppFlowy Home Assistant add-on: Shift+Tab in a table moves to the previous cell
++          if (CustomEditor.moveToSiblingTableCell(yjsEditor, true)) break;
+           CustomEditor.tabEvent(yjsEditor, e);
+           break;
+         /**
