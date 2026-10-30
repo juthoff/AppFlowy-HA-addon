@@ -94,13 +94,18 @@ WORKDIR /app
 # (the endpoint returns no id), renamed back and moved; inline databases,
 # sub-page blocks and page mentions in copied documents are pointed at the
 # copies. Upstream's Template Center needs appflowy.com and published pages.
-# patches/appflowy-web-simple-tables.patch (applied last) adds /table: it inserts a
+# patches/appflowy-web-simple-tables.patch (applied ninth) adds /table: it inserts a
 # simple table in the desktop app's block shape (simple_table > simple_table_row >
 # simple_table_cell > paragraph) and makes simple tables editable (upstream renders
 # them read-only): typing in cells, Tab between cells, add/insert/delete rows and
 # columns, column widths (drag a cell's edge; stored as doubles like 160.0, the
 # format the desktop app writes; it reads them as a map of doubles). Backspace, Delete and range deletes never merge text across cells, and the
 # Yjs-to-Slate sync no longer assumes every parent block starts with a text node.
+# patches/appflowy-web-code-tabs.patch (applied last) adds tabs to code blocks: each tab has
+# its own code, language and optional name (unnamed tabs show the language). The block stays
+# a plain `code` block whose text and `language` are the selected tab's; the other tabs are
+# stored in the block data (`tabs`, `active_tab`), so the desktop app shows the selected tab
+# as an ordinary code block.
 COPY patches/appflowy-web-password-login.patch /tmp/appflowy-web-password-login.patch
 COPY patches/appflowy-web-references.patch /tmp/appflowy-web-references.patch
 COPY patches/appflowy-web-mobile-edit.patch /tmp/appflowy-web-mobile-edit.patch
@@ -110,6 +115,7 @@ COPY patches/appflowy-web-box.patch /tmp/appflowy-web-box.patch
 COPY patches/appflowy-web-custom-icons.patch /tmp/appflowy-web-custom-icons.patch
 COPY patches/appflowy-web-templates.patch /tmp/appflowy-web-templates.patch
 COPY patches/appflowy-web-simple-tables.patch /tmp/appflowy-web-simple-tables.patch
+COPY patches/appflowy-web-code-tabs.patch /tmp/appflowy-web-code-tabs.patch
 RUN npm install -g pnpm@8.5.0 \
     && git clone --depth 1 --branch ${APPFLOWY_WEB_REF} https://github.com/AppFlowy-IO/AppFlowy-Web.git . \
     && sed -i 's|https://test.appflowy.cloud||g' src/components/main/app.hooks.ts \
@@ -122,6 +128,7 @@ RUN npm install -g pnpm@8.5.0 \
     && git apply --verbose /tmp/appflowy-web-custom-icons.patch \
     && git apply --verbose /tmp/appflowy-web-templates.patch \
     && git apply --verbose /tmp/appflowy-web-simple-tables.patch \
+    && git apply --verbose /tmp/appflowy-web-code-tabs.patch \
     && pnpm install --frozen-lockfile \
     && pnpm run build
 

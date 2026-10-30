@@ -1,0 +1,551 @@
+diff --git a/src/@types/translations/de-DE.json b/src/@types/translations/de-DE.json
+index 96adf92..e52a075 100644
+--- a/src/@types/translations/de-DE.json
++++ b/src/@types/translations/de-DE.json
+@@ -2702,6 +2702,10 @@
+     "tableDeleteColumn": "Spalte löschen",
+     "tableResetColumnWidth": "Spaltenbreite zurücksetzen",
+     "tableDistributeColumns": "Spalten gleich breit machen",
++    "codeTabAdd": "Tab hinzufügen",
++    "codeTabRename": "Tab umbenennen",
++    "codeTabDelete": "Tab löschen",
++    "codeTabNamePlaceholder": "Tab-Name (leer: Sprache)",
+     "newPageType": "Seitentyp",
+     "template": "Vorlage",
+     "templates": "Vorlagen",
+diff --git a/src/@types/translations/en.json b/src/@types/translations/en.json
+index 402fb1a..3e9694a 100644
+--- a/src/@types/translations/en.json
++++ b/src/@types/translations/en.json
+@@ -2683,6 +2683,10 @@
+     "tableDeleteColumn": "Delete column",
+     "tableResetColumnWidth": "Reset column width",
+     "tableDistributeColumns": "Distribute columns evenly",
++    "codeTabAdd": "Add tab",
++    "codeTabRename": "Rename tab",
++    "codeTabDelete": "Delete tab",
++    "codeTabNamePlaceholder": "Tab name (empty: language)",
+     "newPageType": "Page type",
+     "template": "Template",
+     "templates": "Templates",
+diff --git a/src/application/slate-yjs/command/index.ts b/src/application/slate-yjs/command/index.ts
+index a0e9779..c5a13dd 100644
+--- a/src/application/slate-yjs/command/index.ts
++++ b/src/application/slate-yjs/command/index.ts
+@@ -54,6 +54,7 @@ import {
+   insertTableRow,
+   setTableColumnWidth,
+ } from '@/application/slate-yjs/utils/simpleTable';
++import { addCodeTab, deleteCodeTab, renameCodeTab, selectCodeTab } from '@/application/slate-yjs/utils/codeTabs';
+ 
+ // Added by the AppFlowy Home Assistant add-on
+ export type SimpleTableAction = 'insertRowAbove' | 'insertRowBelow' | 'insertColumnLeft' | 'insertColumnRight' | 'deleteRow' | 'deleteColumn' | 'resetColumnWidth' | 'distributeColumns';
+@@ -808,6 +809,39 @@ export const CustomEditor = {
+     return true;
+   },
+ 
++  // Added by the AppFlowy Home Assistant add-on: tabs of a code block (see utils/codeTabs.ts).
++  // Replacing the block text would leave a cursor inside it past the new end, so it moves to the
++  // block start first.
++  editCodeTabs(editor: YjsEditor, blockId: string, action: { type: 'add' } | { type: 'select' | 'delete'; index: number } | { type: 'rename'; index: number; name: string }) {
++    const sharedRoot = getSharedRoot(editor);
++    const block = getBlock(blockId, sharedRoot);
++    const entry = findSlateEntryByBlockId(editor, blockId);
++
++    if(!block || !entry) return;
++    const { selection } = editor;
++
++    if(action.type !== 'rename' && selection && Path.isAncestor(entry[1], selection.anchor.path)) {
++      Transforms.select(editor, Editor.start(editor, entry[1]));
++    }
++
++    executeOperations(sharedRoot, [() => {
++      switch(action.type) {
++        case 'add':
++          addCodeTab(sharedRoot, block);
++          break;
++        case 'select':
++          selectCodeTab(sharedRoot, block, action.index);
++          break;
++        case 'delete':
++          deleteCodeTab(sharedRoot, block, action.index);
++          break;
++        case 'rename':
++          renameCodeTab(block, action.index, action.name);
++          break;
++      }
++    }], 'editCodeTabs');
++  },
++
+   pastedText(editor: YjsEditor, text: string) {
+     if(!beforePasted(editor))
+       return;
+diff --git a/src/application/slate-yjs/utils/codeTabs.ts b/src/application/slate-yjs/utils/codeTabs.ts
+new file mode 100644
+index 0000000..762b5ff
+--- /dev/null
++++ b/src/application/slate-yjs/utils/codeTabs.ts
+@@ -0,0 +1,113 @@
++// Added by the AppFlowy Home Assistant add-on: tabs of a code block. The block stays a plain
++// `code` block: its text and `language` are those of the active tab, the other tabs live in
++// `data.tabs` (see CodeBlockData). Selecting a tab stores the block text into the old tab and
++// replaces it with the new tab's code.
++import { CodeBlockData, CodeTab, YBlock, YjsEditorKey, YSharedRoot } from '@/application/types';
++import { dataStringTOJson, getText } from '@/application/slate-yjs/utils/yjs';
++
++function getCodeData(block: YBlock) {
++  return dataStringTOJson(block.get(YjsEditorKey.block_data)) as CodeBlockData;
++}
++
++function setCodeData(block: YBlock, data: CodeBlockData) {
++  block.set(YjsEditorKey.block_data, JSON.stringify(data));
++}
++
++function getBlockYText(sharedRoot: YSharedRoot, block: YBlock) {
++  return getText(block.get(YjsEditorKey.block_external_id), sharedRoot);
++}
++
++function getActiveIndex(data: CodeBlockData) {
++  const tabs = data.tabs ?? [];
++  const index = data.active_tab ?? 0;
++
++  return Math.min(Math.max(index, 0), Math.max(tabs.length - 1, 0));
++}
++
++// The tabs with the active one brought up to date from the block text and language.
++function currentTabs(sharedRoot: YSharedRoot, block: YBlock, data: CodeBlockData): CodeTab[] {
++  const code = getBlockYText(sharedRoot, block)?.toString() ?? '';
++  const tabs = data.tabs?.length ? data.tabs.map((tab) => ({ ...tab })) : [{ language: data.language ?? '', code }];
++  const active = getActiveIndex(data);
++
++  tabs[active] = { ...tabs[active], language: data.language ?? '', code };
++  return tabs;
++}
++
++function showTab(sharedRoot: YSharedRoot, block: YBlock, data: CodeBlockData, tabs: CodeTab[], index: number) {
++  const yText = getBlockYText(sharedRoot, block);
++
++  if(yText) {
++    yText.delete(0, yText.length);
++    yText.insert(0, tabs[index].code);
++  }
++
++  setCodeData(block, { ...data, language: tabs[index].language, tabs, active_tab: index });
++}
++
++export function addCodeTab(sharedRoot: YSharedRoot, block: YBlock) {
++  const data = getCodeData(block);
++  const tabs = currentTabs(sharedRoot, block, data);
++
++  tabs.push({ language: data.language ?? '', code: '' });
++  showTab(sharedRoot, block, data, tabs, tabs.length - 1);
++}
++
++export function selectCodeTab(sharedRoot: YSharedRoot, block: YBlock, index: number) {
++  const data = getCodeData(block);
++
++  if(!data.tabs || index === getActiveIndex(data) || !data.tabs[index]) return;
++  showTab(sharedRoot, block, data, currentTabs(sharedRoot, block, data), index);
++}
++
++export function renameCodeTab(block: YBlock, index: number, name: string) {
++  const data = getCodeData(block);
++
++  if(!data.tabs?.[index]) return;
++  const tabs = data.tabs.map((tab, i) => {
++    if(i !== index) return tab;
++    const renamed: CodeTab = { language: tab.language, code: tab.code };
++
++    if(name.trim()) renamed.name = name.trim();
++    return renamed;
++  });
++
++  setCodeData(block, { ...data, tabs });
++}
++
++// Deleting down to one tab turns the block back into a plain code block (no `tabs`).
++export function deleteCodeTab(sharedRoot: YSharedRoot, block: YBlock, index: number) {
++  const data = getCodeData(block);
++
++  if(!data.tabs?.[index]) return;
++  const active = getActiveIndex(data);
++  const tabs = currentTabs(sharedRoot, block, data);
++
++  tabs.splice(index, 1);
++  const nextActive = index < active || active >= tabs.length ? Math.max(active - 1, 0) : active;
++
++  if(tabs.length > 1) {
++    if(index === active) {
++      showTab(sharedRoot, block, data, tabs, nextActive);
++    } else {
++      setCodeData(block, { ...data, tabs, active_tab: nextActive });
++    }
++
++    return;
++  }
++
++  const rest: CodeBlockData = { ...data };
++
++  delete rest.tabs;
++  delete rest.active_tab;
++  if(index === active) {
++    const yText = getBlockYText(sharedRoot, block);
++
++    if(yText) {
++      yText.delete(0, yText.length);
++      yText.insert(0, tabs[0].code);
++    }
++  }
++
++  setCodeData(block, { ...rest, language: tabs[0].language });
++}
+diff --git a/src/application/types.ts b/src/application/types.ts
+index fdc0c3e..6f9a764 100644
+--- a/src/application/types.ts
++++ b/src/application/types.ts
+@@ -85,8 +85,20 @@ export interface ToggleListBlockData extends BlockData {
+   level?: number;
+ }
+ 
++// Added by the AppFlowy Home Assistant add-on: one tab of a code block with several snippets.
++export interface CodeTab {
++  name?: string;
++  language: string;
++  code: string;
++}
++
+ export interface CodeBlockData extends BlockData {
+   language: string;
++  // Added by the AppFlowy Home Assistant add-on: the block text and `language` belong to the
++  // active tab, so clients without tabs show it as a plain code block. `tabs[active_tab].code`
++  // is only refreshed when another tab is selected.
++  tabs?: CodeTab[];
++  active_tab?: number;
+ }
+ 
+ export interface CalloutBlockData extends BlockData {
+diff --git a/src/components/editor/components/blocks/code/Code.tsx b/src/components/editor/components/blocks/code/Code.tsx
+index f938ff8..70c5c5e 100644
+--- a/src/components/editor/components/blocks/code/Code.tsx
++++ b/src/components/editor/components/blocks/code/Code.tsx
+@@ -1,10 +1,12 @@
+ import { useCodeBlock } from '@/components/editor/components/blocks/code/Code.hooks';
+ import CodeToolbar from './CodeToolbar';
+ import { CodeNode, EditorElementProps } from '@/components/editor/editor.type';
+-import React, { forwardRef, useState, lazy, Suspense } from 'react';
++import React, { forwardRef, useState, lazy, Suspense, useMemo } from 'react';
+ import { ReactEditor, useReadOnly, useSlateStatic } from 'slate-react';
+ import LanguageSelect from './SelectLanguage';
++import { AddCodeTabButton, CodeTabs } from './CodeTabs';
+ import { Element } from 'slate';
++import Prism from 'prismjs';
+ 
+ const MermaidChat = lazy(() => import('./MermaidChat'));
+ 
+@@ -16,6 +18,20 @@ export const CodeBlock =
+     const editor = useSlateStatic();
+     const readOnly = useReadOnly() || editor.isElementReadOnly(node as unknown as Element);
+ 
++    // Added by the AppFlowy Home Assistant add-on: tabs. Read-only viewers pick a tab locally;
++    // a tab other than the stored active one is shown from its saved code instead of the block text.
++    const tabs = node.data.tabs;
++    const activeTab = node.data.active_tab ?? 0;
++    const [localTab, setLocalTab] = useState<number | null>(null);
++    const shownTab = readOnly && localTab !== null && tabs?.[localTab] ? localTab : activeTab;
++    const staticTab = tabs && shownTab !== activeTab ? tabs[shownTab] : undefined;
++    const staticHtml = useMemo(() => {
++      if(!staticTab) return null;
++      const grammar = Prism.languages[staticTab.language?.toLowerCase()];
++
++      return grammar ? Prism.highlight(staticTab.code, grammar, staticTab.language.toLowerCase()) : null;
++    }, [staticTab]);
++
+     return (
+       <div
+         className={'relative w-full my-0.5'}
+@@ -26,23 +42,34 @@ export const CodeBlock =
+       >
+         {<div
+           contentEditable={false}
+-          style={{
+-            visibility: showToolbar ? 'visible' : 'hidden',
+-          }}
+-          className={'absolute flex h-12 w-full select-none items-center px-2'}
++          className={'absolute flex h-12 w-full select-none items-center gap-1 px-2 pr-12'}
+         >
+-          <LanguageSelect
++          {tabs && tabs.length > 0 && <CodeTabs
++            node={node}
+             readOnly={readOnly}
+-            language={language}
+-            onChangeLanguage={handleChangeLanguage}
+-            onClose={() => {
+-              window.getSelection()?.removeAllRanges();
+-              ReactEditor.focus(editor);
+-              const path = ReactEditor.findPath(editor, node);
+-
+-              editor.select(editor.start(path));
++            shownIndex={shownTab}
++            onShow={setLocalTab}
++          />}
++          <div
++            className={'flex shrink-0 items-center gap-1'}
++            style={{
++              visibility: showToolbar ? 'visible' : 'hidden',
+             }}
+-          />
++          >
++            {!staticTab && <LanguageSelect
++              readOnly={readOnly}
++              language={language}
++              onChangeLanguage={handleChangeLanguage}
++              onClose={() => {
++                window.getSelection()?.removeAllRanges();
++                ReactEditor.focus(editor);
++                const path = ReactEditor.findPath(editor, node);
++
++                editor.select(editor.start(path));
++              }}
++            />}
++            {!readOnly && !tabs?.length && <AddCodeTabButton blockId={node.blockId} />}
++          </div>
+         </div>}
+ 
+         <div
+@@ -52,6 +79,7 @@ export const CodeBlock =
+         >
+           <pre
+             spellCheck={false}
++            style={staticTab ? { display: 'none' } : undefined}
+             className={`flex w-full flex-col overflow-auto rounded-[8px]  appflowy-scroller border border-line-divider bg-fill-list-active p-5 pt-12`}
+           >
+             <code>{children}</code>
+@@ -59,9 +87,16 @@ export const CodeBlock =
+               node={node}
+             /></Suspense>}
+           </pre>
++          {staticTab && <pre
++            contentEditable={false}
++            spellCheck={false}
++            className={`flex w-full flex-col overflow-auto rounded-[8px]  appflowy-scroller border border-line-divider bg-fill-list-active p-5 pt-12`}
++          >
++            {staticHtml !== null ? <code dangerouslySetInnerHTML={{ __html: staticHtml }} /> : <code>{staticTab.code}</code>}
++          </pre>}
+         </div>
+ 
+-        {showToolbar && <CodeToolbar node={node} />}
++        {showToolbar && <CodeToolbar node={node} text={staticTab?.code} />}
+       </div>
+     );
+   });
+diff --git a/src/components/editor/components/blocks/code/CodeTabs.tsx b/src/components/editor/components/blocks/code/CodeTabs.tsx
+new file mode 100644
+index 0000000..1bb7e8d
+--- /dev/null
++++ b/src/components/editor/components/blocks/code/CodeTabs.tsx
+@@ -0,0 +1,182 @@
++// Added by the AppFlowy Home Assistant add-on: the tab bar of a code block with several snippets.
++// A tab shows its name, or its language when it has none. Double-click a tab (or use its menu) to
++// rename it. In read-only pages, selecting a tab only changes what this viewer sees.
++import { YjsEditor } from '@/application/slate-yjs';
++import { CustomEditor } from '@/application/slate-yjs/command';
++import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
++import { ReactComponent as PlusIcon } from '@/assets/icons/plus.svg';
++import { Popover } from '@/components/_shared/popover';
++import { supportLanguages } from '@/components/editor/components/blocks/code/constants';
++import { CodeNode } from '@/components/editor/editor.type';
++import { Button, Tooltip } from '@mui/material';
++import React, { useState } from 'react';
++import { useTranslation } from 'react-i18next';
++import { useSlateStatic } from 'slate-react';
++
++export function getLanguageTitle(language?: string) {
++  return supportLanguages.find((item) => item.id === language?.toLowerCase())?.title || 'Auto';
++}
++
++export function AddCodeTabButton({ blockId }: { blockId: string }) {
++  const { t } = useTranslation();
++  const editor = useSlateStatic() as YjsEditor;
++
++  return (
++    <Tooltip disableInteractive={true} title={t('web.codeTabAdd')}>
++      <button
++        type={'button'}
++        data-testid={'code-tab-add'}
++        className={'flex h-6 w-6 shrink-0 items-center justify-center rounded-[4px] text-text-caption hover:bg-fill-list-hover'}
++        onMouseDown={(e) => e.preventDefault()}
++        onClick={() => CustomEditor.editCodeTabs(editor, blockId, { type: 'add' })}
++      >
++        <PlusIcon className={'h-4 w-4'} />
++      </button>
++    </Tooltip>
++  );
++}
++
++export function CodeTabs({ node, readOnly, shownIndex, onShow }: {
++  node: CodeNode;
++  readOnly: boolean;
++  shownIndex: number;
++  onShow: (index: number) => void;
++}) {
++  const { t } = useTranslation();
++  const editor = useSlateStatic() as YjsEditor;
++  const { blockId, data } = node;
++  const tabs = data.tabs ?? [];
++  const active = data.active_tab ?? 0;
++  const [editingIndex, setEditingIndex] = useState<number | null>(null);
++  const [draft, setDraft] = useState('');
++  const [menu, setMenu] = useState<{ anchorEl: HTMLElement; index: number } | null>(null);
++
++  // The active tab's language is `data.language`; `tabs[active].language` is only saved on switch.
++  const label = (index: number) => tabs[index].name || getLanguageTitle(index === active ? data.language : tabs[index].language);
++
++  const startRename = (index: number) => {
++    if(readOnly) return;
++    setDraft(tabs[index].name ?? '');
++    setEditingIndex(index);
++  };
++
++  const commitRename = () => {
++    if(editingIndex === null) return;
++    if(draft.trim() !== (tabs[editingIndex]?.name ?? '')) {
++      CustomEditor.editCodeTabs(editor, blockId, { type: 'rename', index: editingIndex, name: draft });
++    }
++
++    setEditingIndex(null);
++  };
++
++  return (
++    <div className={'flex min-w-0 items-center gap-1 overflow-x-auto'}>
++      {tabs.map((_, index) => {
++        const shown = index === shownIndex;
++
++        if(index === editingIndex) {
++          return (
++            <input
++              key={index}
++              autoFocus={true}
++              value={draft}
++              data-testid={'code-tab-name-input'}
++              placeholder={t('web.codeTabNamePlaceholder') || ''}
++              className={'h-7 w-40 shrink-0 rounded-[6px] border border-line-divider bg-bg-body px-2 text-sm outline-none'}
++              onChange={(e) => setDraft(e.target.value)}
++              onBlur={commitRename}
++              onKeyDown={(e) => {
++                e.stopPropagation();
++                if(e.key === 'Enter') {
++                  e.preventDefault();
++                  commitRename();
++                } else if(e.key === 'Escape') {
++                  e.preventDefault();
++                  setEditingIndex(null);
++                }
++              }}
++            />
++          );
++        }
++
++        return (
++          <div
++            key={index}
++            className={`flex h-7 shrink-0 items-center rounded-[6px] text-sm ${shown ? 'bg-fill-list-hover font-medium text-text-title' : 'text-text-caption hover:bg-fill-list-hover'}`}
++          >
++            <button
++              type={'button'}
++              data-testid={'code-tab'}
++              className={'h-full max-w-[200px] truncate px-2'}
++              onMouseDown={(e) => e.preventDefault()}
++              onClick={() => {
++                if(shown) return;
++                if(readOnly) {
++                  onShow(index);
++                } else {
++                  CustomEditor.editCodeTabs(editor, blockId, { type: 'select', index });
++                }
++              }}
++              onDoubleClick={() => startRename(index)}
++            >
++              {label(index)}
++            </button>
++            {shown && !readOnly && (
++              <button
++                type={'button'}
++                data-testid={'code-tab-menu'}
++                className={'mr-1 flex h-5 w-5 items-center justify-center rounded-[4px] hover:bg-fill-list-active'}
++                onMouseDown={(e) => {
++                  e.preventDefault();
++                  setMenu({ anchorEl: e.currentTarget, index });
++                }}
++              >
++                <MoreIcon className={'h-4 w-4'} />
++              </button>
++            )}
++          </div>
++        );
++      })}
++
++      {!readOnly && <AddCodeTabButton blockId={blockId} />}
++
++      <Popover
++        open={Boolean(menu)}
++        anchorEl={menu?.anchorEl}
++        onClose={() => setMenu(null)}
++        disableRestoreFocus={true}
++        disableAutoFocus={true}
++        disableEnforceFocus={true}
++      >
++        <div className={'flex flex-col gap-1 p-2'}>
++          <Button
++            size={'small'}
++            color={'inherit'}
++            className={'justify-start'}
++            onMouseDown={(e) => e.preventDefault()}
++            onClick={() => {
++              if(menu) startRename(menu.index);
++              setMenu(null);
++            }}
++          >
++            {t('web.codeTabRename')}
++          </Button>
++          <Button
++            size={'small'}
++            color={'inherit'}
++            className={'justify-start'}
++            onMouseDown={(e) => e.preventDefault()}
++            onClick={() => {
++              if(menu) CustomEditor.editCodeTabs(editor, blockId, { type: 'delete', index: menu.index });
++              setMenu(null);
++            }}
++          >
++            {t('web.codeTabDelete')}
++          </Button>
++        </div>
++      </Popover>
++    </div>
++  );
++}
++
++export default CodeTabs;
+diff --git a/src/components/editor/components/blocks/code/CodeToolbar.tsx b/src/components/editor/components/blocks/code/CodeToolbar.tsx
+index aa0611c..15597cb 100644
+--- a/src/components/editor/components/blocks/code/CodeToolbar.tsx
++++ b/src/components/editor/components/blocks/code/CodeToolbar.tsx
+@@ -7,14 +7,16 @@ import { useTranslation } from 'react-i18next';
+ import { ReactEditor, useSlateStatic } from 'slate-react';
+ import { ReactComponent as CopyIcon } from '@/assets/icons/copy.svg';
+ 
+-function CodeToolbar({ node }: {
++function CodeToolbar({ node, text: shownText }: {
+   node: CodeNode
++  // Added by the AppFlowy Home Assistant add-on: code of a tab shown instead of the block text.
++  text?: string
+ }) {
+   const { t } = useTranslation();
+   const editor = useSlateStatic();
+   const onCopy = async() => {
+     const at = ReactEditor.findPath(editor, node);
+-    const text = editor.string(at);
++    const text = shownText ?? editor.string(at);
+ 
+     await copyTextToClipboard(text);
+     notify.success(t('publish.copy.codeBlock'));

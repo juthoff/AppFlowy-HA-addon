@@ -194,6 +194,29 @@ reinen Text speichert:
 - **Nur in der Desktop-App:** Spaltenbreiten ziehen, Kopfzeile/-spalte, Farben und Ausrichtung.
   In der Desktop-App gesetzte Einstellungen bleiben erhalten und werden in Web angezeigt.
 
+## Code-Blöcke mit Tabs (AppFlowy Web)
+
+- Ein Code-Block kann mehrere Code-Schnipsel enthalten, je einen pro Tab, jeder mit eigener
+  Sprache (z. B. dasselbe Beispiel in Python, JavaScript und Bash).
+- **Tab hinzufügen:** mit der Maus über den Code-Block fahren und "+" neben der Sprachauswahl
+  klicken. Der bisherige Code wird zum ersten Tab, der neue Tab ist leer und übernimmt die
+  Sprache. Sobald es Tabs gibt, steht die Tab-Leiste immer oben im Block.
+- **Sprache:** die Sprachauswahl gilt für den gerade gezeigten Tab.
+- **Name:** ein Tab zeigt seinen Namen, oder die Sprache, wenn er keinen hat. Doppelklick auf den
+  Tab oder ··· am gezeigten Tab → "Tab umbenennen"; Enter übernimmt, Esc bricht ab. Ein leerer
+  Name zeigt wieder die Sprache.
+- **Löschen:** ··· am gezeigten Tab → "Tab löschen". Bleibt nur ein Tab übrig, ist der Block
+  wieder ein normaler Code-Block ohne Tab-Leiste.
+- Der gewählte Tab wird im Dokument gespeichert, andere Bearbeiter sehen den Wechsel. Auf nur
+  lesbaren Seiten wechselt man Tabs nur für sich selbst. Der Kopieren-Knopf kopiert den
+  gezeigten Tab.
+- **Desktop- und Handy-Apps:** sie kennen keine Tabs und zeigen den Block als normalen Code-Block
+  mit dem zuletzt in Web gewählten Tab; dort Bearbeitetes bleibt beim nächsten Tab-Wechsel in
+  Web erhalten. Die übrigen Tabs stehen in den Blockdaten (`tabs`, `active_tab`).
+- Nicht gleichzeitig zu zweit im selben Block Tabs wechseln und schreiben: Der Wechsel gilt für
+  alle, und Eingaben, die sich mit einem Wechsel überschneiden, können im falschen Tab landen
+  oder verloren gehen.
+
 ## Vorlagen in AppFlowy Web
 
 - **Vorlage speichern:** bei einer beliebigen Seite (Dokument, Tabelle, Board, Kalender) im

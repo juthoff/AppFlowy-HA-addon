@@ -460,3 +460,21 @@
   dadurch eine Position zu weit hinten gelandet.
 - Umgesetzt als neunter Patch `patches/appflowy-web-simple-tables.patch` auf AppFlowy Web
   `v0.1.18`.
+
+## 0.9.64.22
+
+- **Versionsschema:** Add-on-Revision jetzt mit Punkt statt Bindestrich (`0.9.64.22` statt
+  `0.9.64-22`). Home Assistant hielt `0.9.64-22` nicht für neuer als `0.9.64-21` (zweistellige
+  Suffixe sind für AwesomeVersion nicht vergleichbar) und sperrte deshalb den Update-Button in
+  der Weboberfläche; nur `ha apps update` funktionierte.
+
+- **Code-Blöcke mit Tabs in AppFlowy Web:** "+" neben der Sprachauswahl eines Code-Blocks fügt
+  einen Tab hinzu; jeder Tab hat seinen eigenen Code und seine eigene Sprache. Tabs lassen sich
+  benennen (Doppelklick oder ···-Menü am Tab), ohne Namen zeigt der Tab seine Sprache. Löschen
+  über das ···-Menü; mit nur noch einem Tab ist der Block wieder ein normaler Code-Block.
+- Der Block bleibt ein normaler Code-Block (`code`): Text und Sprache gehören zum gewählten Tab,
+  die anderen Tabs stehen in den Blockdaten (`tabs`, `active_tab`). Desktop- und Handy-Apps
+  zeigen dadurch den zuletzt gewählten Tab als gewöhnlichen Code-Block an.
+- Auf nur lesbaren Seiten wechselt jeder Betrachter die Tabs für sich; der Kopieren-Knopf
+  kopiert den gezeigten Tab.
+- Umgesetzt als zehnter Patch `patches/appflowy-web-code-tabs.patch` auf AppFlowy Web `v0.1.18`.

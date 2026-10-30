@@ -43,7 +43,11 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
   bearbeiten). Fügt `src/application/slate-yjs/utils/simpleTable.ts`,
   `src/components/editor/components/blocks/simple-table/SimpleTableCellMenu.tsx` und
   `src/components/editor/components/blocks/simple-table/SimpleTableColumnResizer.tsx` hinzu;
-  geänderte Dateien tragen denselben Vermerk.
+  geänderte Dateien tragen denselben Vermerk. Seit `0.9.64.22` zusätzlich
+  `patches/appflowy-web-code-tabs.patch` (Code-Blöcke mit mehreren Tabs). Fügt
+  `src/application/slate-yjs/utils/codeTabs.ts` und
+  `src/components/editor/components/blocks/code/CodeTabs.tsx` hinzu; geänderte Dateien tragen
+  denselben Vermerk.
 - `gotrue`: `Secure`-Flag des Session-Cookies deaktiviert (siehe Dockerfile), MIT-Lizenz.
 
 | Komponente | Quelle | Referenz | Lizenz |
@@ -53,7 +57,7 @@ deren Quellcode nicht (nur Konfiguration/Orchestrierung), mit folgenden Ausnahme
 | appflowy_worker | `appflowyinc/appflowy_worker` (Docker Hub) | Digest `sha256:e9bcb9f712b2fb75318674fa874c0ef460d7b3b7487c99560f2b5ce5564991d2` (amd64) / `sha256:7986e875e4fc825c73de0bad7a58f464ae81019c6c6bdb2c3c0c5790df69b4f5` (arm64), gepusht 2025-07-04 | AGPL-3.0 |
 | Quellcode (appflowy_cloud/admin_frontend/appflowy_worker) | https://github.com/AppFlowy-IO/AppFlowy-Cloud | Git-Tag `0.9.64` | AGPL-3.0 |
 | gotrue (Auth) | https://github.com/AppFlowy-IO/auth | Branch/Tag `0.8.0`, aus Quellcode gebaut | MIT |
-| AppFlowy Web | https://github.com/AppFlowy-IO/AppFlowy-Web | Tag `v0.1.18`, aus Quellcode gebaut, mit `patches/appflowy-web-password-login.patch`, `patches/appflowy-web-references.patch`, `patches/appflowy-web-mobile-edit.patch`, `patches/appflowy-web-databases.patch`, `patches/appflowy-web-properties.patch`, `patches/appflowy-web-box.patch`, `patches/appflowy-web-custom-icons.patch`, `patches/appflowy-web-templates.patch` und `patches/appflowy-web-simple-tables.patch` (s. o.) | AGPL-3.0 |
+| AppFlowy Web | https://github.com/AppFlowy-IO/AppFlowy-Web | Tag `v0.1.18`, aus Quellcode gebaut, mit `patches/appflowy-web-password-login.patch`, `patches/appflowy-web-references.patch`, `patches/appflowy-web-mobile-edit.patch`, `patches/appflowy-web-databases.patch`, `patches/appflowy-web-properties.patch`, `patches/appflowy-web-box.patch`, `patches/appflowy-web-custom-icons.patch`, `patches/appflowy-web-templates.patch`, `patches/appflowy-web-simple-tables.patch` und `patches/appflowy-web-code-tabs.patch` (s. o.) | AGPL-3.0 |
 | PostgreSQL | Debian-Paket `postgresql-16` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | pgvector | Debian-Paket `postgresql-16-pgvector` | apt.postgresql.org (PGDG) | PostgreSQL-Lizenz |
 | Redis | Debian-Paket `redis-server` | Debian bookworm | RSALv2/SSPLv1/AGPL-3.0 (je Version) |
